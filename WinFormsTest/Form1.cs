@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Glib.WinForms.Shapes;
+using Glib.WinForms.Controls;
+using Glib.WinForms;
+
+namespace WinFormsTest
+{
+    public partial class Form1 : Form
+    {
+        Graphics gfx;
+        FormValidator valid;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            valid = new FormValidator(this);
+            gfx = this.CreateGraphics();
+            Triangle t = new Triangle(new Point(3,3), new Point(40,40), new Point(3,56), Color.Black);
+            t.Draw(gfx);
+        }
+
+        private void requiredTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            valid.ValidateForm(errorProvider1);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            requiredTextBox1.FieldValidation = new System.Predicate<string>(delegate(string str) { return str == "John Smith"; });
+        }
+    }
+}
