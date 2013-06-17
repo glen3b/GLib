@@ -12,6 +12,8 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class Screen : IPositionable
     {
+        private static int screenNum = 1;
+
         /// <summary>
         /// Gets or sets a boolean representing whether or not this Screen is visible.
         /// </summary>
@@ -76,6 +78,18 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private string _name = "Screen";
+
+        /// <summary>
+        /// Gets or sets the name of the Screen.
+        /// </summary>
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        
+
         /// <summary>
         /// The color to tint this screen as.
         /// </summary>
@@ -103,6 +117,8 @@ namespace Glib.XNA.SpriteLib
             this.Sprites = allSprites;
             this.Target = target;
             this.Graphics = target.GraphicsDevice;
+            _name += Screen.screenNum.ToString();
+            Screen.screenNum++;
         }
 
         /// <summary>
@@ -241,6 +257,15 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Update all the Screen's sprites.
         /// </summary>
+        /// <param name="gt">The active GameTime.</param>
+        public void Update(GameTime gt)
+        {
+            Update(false, gt);
+        }
+
+        /// <summary>
+        /// Update all the Screen's sprites.
+        /// </summary>
         /// <param name="updateInvisible">Whether or not to update invisible screens.</param>
         /// <param name="gt">The active GameTime.</param>
         public void Update(bool updateInvisible, GameTime gt)
@@ -315,6 +340,39 @@ namespace Glib.XNA.SpriteLib
             get
             {
                 return _allScreens[index];
+            }
+        }
+
+        /// <summary>
+        /// Gets the Screen with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the screen.</param>
+        /// <exception cref="InvalidOperationException">If multiple Screens with the specified name exist.</exception>
+        /// <exception cref="IndexOutOfRangeException">If no Screens with the specified name exist.</exception>
+        /// <returns>The screen with the specified name.</returns>
+        public Screen this[string name]
+        {
+            get
+            {
+                int? index = null;
+                int numFound = 0;
+                for (int i = 0; i < Count; i++)
+                {
+                    if (this[i].Name == name)
+                    {
+                        index = i;
+                        numFound++;
+                    }
+                }
+                if (numFound > 1)
+                {
+                    throw new InvalidOperationException("Requested Screen is ambiguous between the "+numFound+" Screens with the specified name.");
+                }
+                else if (numFound == 1)
+                {
+                    return this[index.Value];
+                }
+                throw new IndexOutOfRangeException("A Screen with the specified name was not found in this ScreenManager.");
             }
         }
 
