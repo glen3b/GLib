@@ -114,6 +114,20 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Set the speed of this Sprite.
+        /// </summary>
+        /// <param name="xspeed">The speed in X.</param>
+        /// <param name="yspeed">The speed in Y.</param>
+        /// <returns>This SpriteBuilder.</returns>
+        public SpriteBuilder SetSpeed(float xspeed, float yspeed)
+        {
+            _constructing.UpdateParams.UpdateX = true;
+            _constructing.UpdateParams.UpdateY = true;
+            _constructing.Speed = new Vector2(xspeed, yspeed);
+            return this;
+        }
+
+        /// <summary>
         /// Register an event for when the Sprite is drawn.
         /// </summary>
         /// <param name="drawEvent">The SpriteEventHandler for the Drawn event.</param>
@@ -139,9 +153,21 @@ namespace Glib.XNA.SpriteLib
         /// Return the Sprite under construction.
         /// </summary>
         /// <returns>The Sprite under construction.</returns>
+        [Obsolete("Use the Built property instead.")]
         public Sprite Build()
         {
             return _constructing;
+        }
+
+        /// <summary>
+        /// Gets the Sprite under construction.
+        /// </summary>
+        public Sprite Built
+        {
+            get
+            {
+                return _constructing;
+            }
         }
 
         /// <summary>
