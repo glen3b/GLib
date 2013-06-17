@@ -146,6 +146,26 @@ namespace Glib.XNA.SpriteLib
                 spr.Update();
             }
         }
+
+        /// <summary>
+        /// Update all Sprites on this Screen.
+        /// </summary>
+        /// <param name="game">The active game time.</param>
+        public void Update(GameTime game)
+        {
+            Sprites.Update(game);
+            foreach (ISprite spr in AdditionalSprites)
+            {
+                if (spr.GetType().Implements(typeof(ITimerSprite)))
+                {
+                    spr.Cast<ITimerSprite>().Update(game);
+                }
+                else
+                {
+                    spr.Update();
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -193,11 +213,28 @@ namespace Glib.XNA.SpriteLib
         /// <param name="updateInvisible">Whether or not to update invisible screens.</param>
         public void Update(bool updateInvisible)
         {
+            Update(updateInvisible, null);
+        }
+
+        /// <summary>
+        /// Update all the Screen's sprites.
+        /// </summary>
+        /// <param name="updateInvisible">Whether or not to update invisible screens.</param>
+        /// <param name="gt">The active GameTime.</param>
+        public void Update(bool updateInvisible, GameTime gt)
+        {
             foreach (Screen s in _allScreens)
             {
                 if (s.Visible || updateInvisible)
                 {
-                    s.Update();
+                    if (gt != null)
+                    {
+                        s.Update(gt);
+                    }
+                    else
+                    {
+                        s.Update();
+                    }
                 }
             }
         }
