@@ -253,6 +253,78 @@ namespace Glib
         }
 
         /// <summary>
+        /// The character K.
+        /// </summary>
+        public static bool[,] K
+        {
+            get
+            {
+                return new bool[5, 5]
+                {
+                    /* &   &
+                     * & &
+                     * &&
+                     * & &
+                     * &   &
+                     */
+                    { true, false, false, false, true },
+                    { true, false, true, false, false },
+                    { true, true, false, false, false },
+                    { true,false, true, false, false },
+                    { true, false, false, false, true }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character L.
+        /// </summary>
+        public static bool[,] L
+        {
+            get
+            {
+                return new bool[5, 5]
+                {
+                    /* ^
+                     * ^
+                     * ^
+                     * ^
+                     * ^^^^^
+                     */
+                    { true, false, false, false, false },
+                    { true, false, false, false, false },
+                    { true, false, false, false, false },
+                    { true, false, false, false, false },
+                    { true, true, true, true, true }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character M.
+        /// </summary>
+        public static bool[,] M
+        {
+            get
+            {
+                return new bool[5, 9]
+                {
+                    /* ^       ^
+                     * ^^     ^^
+                     * ^ ^   ^ ^
+                     * ^  ^ ^  ^
+                     * ^   ^   ^
+                     */
+                    { true, false, false, false, false,false,false,false,true },
+                    { true, true, false, false, false,false,false,true,true },
+                    { true, false, true, false, false, false, true,false,true },
+                    { true, false, false, true, false,true,false,false,true },
+                    { true, false, false, false, true,false,false,false,true }
+                };
+            }
+        }
+
+        /// <summary>
         /// A space character.
         /// </summary>
         public static bool[,] Space
@@ -260,7 +332,7 @@ namespace Glib
             get
             {
                 // All false
-                return new bool[5, 5];
+                return new bool[5, 4];
             }
         }
 
@@ -485,6 +557,121 @@ namespace Glib
         }
 
         /// <summary>
+        /// The number six.
+        /// </summary>
+        public static bool[,] Six
+        {
+            get
+            {
+                /* |    %
+                 * |  %
+                 * | %%% 
+                 * | %  %
+                 * |  %%
+                 */
+                return new bool[5, 4]{
+                    { false,false,false,true },
+                    { false,true,false,false },
+                    { true,true,true,false },
+                    { true,false,false,true },
+                    { false,true,true,false }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The number seven.
+        /// </summary>
+        public static bool[,] Seven
+        {
+            get
+            {
+                /* |*****
+                 * |   *
+                 * |  *
+                 * | *
+                 * |*
+                 */
+                return new bool[5, 5]{
+                    { true,true,true,true,true },
+                    { false,false,false,true,false },
+                    { false,false,true,false,false },
+                    { false,true,false,false,false },
+                    { true,false,false,false,false }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The number eight.
+        /// </summary>
+        public static bool[,] Eight
+        {
+            get
+            {
+                /* | *** 
+                 * |*   *
+                 * | *** 
+                 * |*   *
+                 * | ***
+                 */
+                return new bool[5, 5]{
+                    { false,true,true,true,false },
+                    { true,false,false,false,true },
+                    { false,true,true,true,false },
+                    { true,false,false,false,true },
+                    { false,true,true,true,false }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The number nine.
+        /// </summary>
+        public static bool[,] Nine
+        {
+            get
+            {
+                /* |*****
+                 * |*   *
+                 * |*****
+                 * |    *
+                 * |    *
+                 */
+                return new bool[5, 5]{
+                    { true,true,true,true,true },
+                    { true,false,false,false,true },
+                    { true,true,true,true,true },
+                    { false,false,false,false,true },
+                    { false,false,false,false,true }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The number zero.
+        /// </summary>
+        public static bool[,] Zero
+        {
+            get
+            {
+                /* | *** 
+                 * |*   *
+                 * |*   *
+                 * |*   *
+                 * | ***
+                 */
+                return new bool[5, 5]{
+                    { false,true,true,true,false },
+                    { true,false,false,false,true },
+                    { true,false,false,false,true },
+                    { true,false,false,false,true },
+                    { false,true,true,true,false }
+                };
+            }
+        }
+
+        /// <summary>
         /// The character S.
         /// </summary>
         public static bool[,] S
@@ -555,8 +742,20 @@ namespace Glib
                     case "J":
                         printArray = J;
                         break;
+                    case "K":
+                        printArray = K;
+                        break;
+                    case "L":
+                        printArray = L;
+                        break;
+                    case "M":
+                        printArray = M;
+                        break;
                     case "S":
                         printArray = S;
+                        break;
+                    case "0":
+                        printArray = Zero;
                         break;
                     case "1":
                         printArray = One;
@@ -572,6 +771,18 @@ namespace Glib
                         break;
                     case "5":
                         printArray = Five;
+                        break;
+                    case "6":
+                        printArray = Six;
+                        break;
+                    case "7":
+                        printArray = Seven;
+                        break;
+                    case "8":
+                        printArray = Eight;
+                        break;
+                    case "9":
+                        printArray = Nine;
                         break;
                     case "(":
                         printArray = LeftParentheses;
@@ -600,7 +811,7 @@ namespace Glib
                                 break;
                             }
                         }
-                        throw new NotSupportedException("The specified word contains an unsupported character.");
+                        throw new NotSupportedException("The specified word contains an unsupported character '"+letter.ToString().ToUpper()+"'.");
                 }
 
                 for (int row = 0; row < printArray.GetLength(0); row++)

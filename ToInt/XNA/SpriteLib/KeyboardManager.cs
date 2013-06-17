@@ -7,45 +7,50 @@ using Microsoft.Xna.Framework.Input;
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
-    /// A class calling keyboard related events when updated.
+    /// A static class calling keyboard related events when updated.
     /// </summary>
-    public class KeyboardManager
+    public static class KeyboardManager
     {
+        private static List<Keys> _knownDownKeys = new List<Keys>();
+
         /// <summary>
-        /// Create a new KeyboardManager.
+        /// Gets the last known state of the keyboard.
         /// </summary>
-        public KeyboardManager()
+        /// <remarks>
+        /// Current when accessed after Update().
+        /// </remarks>
+        public static KeyboardState State
         {
-
+            get
+            {
+                return _lastState;
+            }
         }
-
-
-        private List<Keys> _knownDownKeys = new List<Keys>();
 
         /// <summary>
         /// An event called when a new key is pressed down.
         /// </summary>
-        public event SingleKeyEventHandler KeyDown;
+        public static event SingleKeyEventHandler KeyDown;
 
         /// <summary>
         /// An event called when a key is lifted.
         /// </summary>
-        public event SingleKeyEventHandler KeyUp;
+        public static event SingleKeyEventHandler KeyUp;
 
         /// <summary>
         /// An event called when a key is pressed and released.
         /// </summary>
-        public event SingleKeyEventHandler KeyPressed;
+        public static event SingleKeyEventHandler KeyPressed;
 
         /// <summary>
         /// The last known state of the keyboard.
         /// </summary>
-        protected KeyboardState _lastState = new KeyboardState();
+        protected static KeyboardState _lastState = new KeyboardState();
 
         /// <summary>
         /// Update the KeyboardManager, calling the appropriate events.
         /// </summary>
-        public virtual void Update()
+        public static virtual void Update()
         {
             KeyboardState current = Keyboard.GetState();
 
@@ -56,7 +61,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     if (_lastState.IsKeyUp(k))
                     {
-                        KeyDown(this, new SingleKeyEventArgs(k));
+                        KeyDown(null, new SingleKeyEventArgs(k));
                     }
                 }
             }
@@ -68,7 +73,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     if (current.IsKeyUp(k))
                     {
-                        KeyUp(this, new SingleKeyEventArgs(k));
+                        KeyUp(null, new SingleKeyEventArgs(k));
                     }
                 }
             }
@@ -89,7 +94,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     if (current.IsKeyUp(k))
                     {
-                        KeyPressed(this, new SingleKeyEventArgs(k));
+                        KeyPressed(null, new SingleKeyEventArgs(k));
                         rm.Add(k);
                     }
                 }

@@ -11,7 +11,9 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             //new AlphabetPrinter('▀').Print("1-(123)-j");
-            new AlphabetPrinter('╔').Print("5ss55sss5");
+            Console.BufferWidth = 150;
+            //new AlphabetPrinter('╔').Print("1-(818)-360-2428");
+            new AlphabetPrinter('←').Print("0123456789");
             Console.ReadKey(true);
             
         }

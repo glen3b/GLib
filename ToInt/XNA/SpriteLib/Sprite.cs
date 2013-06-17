@@ -486,19 +486,19 @@ namespace Glib.XNA.SpriteLib
             }
             List<Direction> allEdges = new List<Direction>();
 
-            if (X <= Width)
+            if (X < 0)
             {
                 allEdges.Add(Direction.Left);
             }
-            if (Y <= 0)
+            if (Y < 0)
             {
                 allEdges.Add(Direction.Top);
             }
-            if (X >= vp.Width)
+            if (X + Width > vp.Width)
             {
                 allEdges.Add(Direction.Right);
             }
-            if (Y + Height >= vp.Height)
+            if (Y + Height > vp.Height)
             {
                 allEdges.Add(Direction.Bottom);
             }

@@ -117,6 +117,28 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Create a new Screen with no Sprites by default.
+        /// </summary>
+        /// <param name="sb">The SpriteBatch to draw.</param>
+        /// <param name="c">The color of the Screen.</param>
+        public Screen(SpriteBatch sb, Color c) : this(new SpriteManager(sb), c)
+        {
+
+        }
+
+        /// <summary>
+        /// Create a new Screen with a background image.
+        /// </summary>
+        /// <param name="sb">The SpriteBatch to draw.</param>
+        /// <param name="c">The color of the Screen.</param>
+        /// <param name="back">The background image of the Screen.</param>
+        public Screen(SpriteBatch sb, Color c, Texture2D back)
+            : this(new SpriteManager(sb), c)
+        {
+            Sprites.AddNewSprite(Vector2.Zero, back);
+        }
+
+        /// <summary>
         /// Create a new screen.
         /// </summary>
         /// <param name="color">The color to clear the Screen as before Sprite drawing.</param>
