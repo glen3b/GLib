@@ -181,7 +181,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Update all Sprites on this Screen.
         /// </summary>
-        public void Update()
+        public virtual void Update()
         {
             if (BackgroundSprite != null)
             {
@@ -198,7 +198,7 @@ namespace Glib.XNA.SpriteLib
         /// Update all Sprites on this Screen.
         /// </summary>
         /// <param name="game">The active game time.</param>
-        public void Update(GameTime game)
+        public virtual void Update(GameTime game)
         {
             if (BackgroundSprite != null)
             {
