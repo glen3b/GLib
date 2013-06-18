@@ -156,6 +156,19 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Create a new TextBoxSprite using a white background.
+        /// </summary>
+        /// <param name="pos">The position of the TextBoxSprite.</param>
+        /// <param name="font">The SpriteFont to draw the text with.</param>
+        /// <param name="sb">The SpriteBatch to draw to.</param>
+        public TextBoxSprite(Vector2 pos, SpriteBatch sb, SpriteFont font)
+            : this(new WhitePixel2D(sb.GraphicsDevice), pos, Color.White, sb, new UpdateParamaters(), font)
+        {
+        }
+
+
+
+        /// <summary>
         /// Create a new TextBoxSprite.
         /// </summary>
         public TextBoxSprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, SpriteFont font)
@@ -166,7 +179,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new TextBoxSprite.
         /// </summary>
-        /// <param name="texture">The texture to show beneath the text.</param>
+        /// <param name="texture">The texture to show beneath the text (must be scalable).</param>
         /// <param name="color">The color to tint the texture under the text.</param>
         /// <param name="pos">The position of the TextBoxSprite.</param>
         /// <param name="font">The SpriteFont to draw the text with.</param>
