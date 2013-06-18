@@ -151,8 +151,13 @@ namespace Glib.XNA.SpriteLib
         public Screen(SpriteBatch sb, Color c, Texture2D back)
             : this(new SpriteManager(sb), c)
         {
-            Sprites.AddNewSprite(Vector2.Zero, back);
+            BackgroundSprite = new Sprite(back, Vector2.Zero, sb);
         }
+
+        /// <summary>
+        /// If set, the Sprite to use as the background.
+        /// </summary>
+        public Sprite BackgroundSprite = null;
 
         /// <summary>
         /// Create a new screen.
@@ -178,6 +183,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void Update()
         {
+            if (BackgroundSprite != null)
+            {
+                BackgroundSprite.Update();
+            }
             Sprites.Update();
             foreach (ISprite spr in AdditionalSprites)
             {
@@ -191,6 +200,17 @@ namespace Glib.XNA.SpriteLib
         /// <param name="game">The active game time.</param>
         public void Update(GameTime game)
         {
+            if (BackgroundSprite != null)
+            {
+                if (BackgroundSprite.GetType().Implements(typeof(ITimerSprite)))
+                {
+                    BackgroundSprite.Cast<ITimerSprite>().Update(game);
+                }
+                else
+                {
+                    BackgroundSprite.Update();
+                }
+            }
             Sprites.Update(game);
             foreach (ISprite spr in AdditionalSprites)
             {
@@ -304,6 +324,10 @@ namespace Glib.XNA.SpriteLib
                 Graphics.SetRenderTarget(s.Target);
                 Graphics.Clear(s.ClearColor);
                 SpriteBatch.Begin();
+                if (s.BackgroundSprite != null)
+                {
+                    s.BackgroundSprite.DrawNonAuto();
+                }
                 s.Sprites.DrawNonAuto();
                 foreach(ISprite spr in s.AdditionalSprites){
                     if (spr.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
