@@ -90,6 +90,10 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        /// <summary>
+        /// Whether or not to call Clicked events for keypresses of Enter.
+        /// </summary>
+        public bool CallKeyboardClickEvent = true;
 
         /// <summary>
         /// The color to use when hovering over the TextSprite, if hovering is enabled.
@@ -149,7 +153,7 @@ namespace Glib.XNA.SpriteLib
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
-            if (_isHoverable && _isManualSelectable && _isSelected && e.Key == Keys.Enter && Clicked != null)
+            if (_isHoverable && CallKeyboardClickEvent && _isSelected && e.Key == Keys.Enter && Clicked != null)
             {
                 Clicked(this, EventArgs.Empty);
             }
