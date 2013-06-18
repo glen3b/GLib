@@ -11,7 +11,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// An ISprite representing text.
     /// </summary>
-    public class TextSprite : ISprite, IPositionable
+    public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
         /// <summary>
         /// An event fired after every click of this TextSprite.

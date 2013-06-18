@@ -17,6 +17,31 @@ namespace Glib.XNA
         void Draw();
     }
 
+
+    /// <summary>
+    /// Represents a sizable object.
+    /// </summary>
+    public interface ISizable
+    {
+        /// <summary>
+        /// The width of the object.
+        /// </summary>
+        float Width { get; }
+
+        /// <summary>
+        /// The height of the object.
+        /// </summary>
+        float Height { get; }
+    }
+
+    /// <summary>
+    /// Represents a sizable, positionalble, screen object.
+    /// </summary>
+    public interface ISizedScreenObject : ISizable, IPositionable
+    {
+
+    }
+
     /// <summary>
     /// An interface representing a gravity source.
     /// </summary>

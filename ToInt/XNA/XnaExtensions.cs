@@ -34,6 +34,25 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Get the position which would be required to center the specified sizable object to the specified Viewport.
+        /// </summary>
+        /// <param name="obj">The sizable object to center.</param>
+        /// <param name="centerToViewport">The viewport to center the ISizable to.</param>
+        /// <param name="centerIsOrigin">Whether or not the center of the specified ISizable is the origin.</param>
+        /// <returns>The position which would be required to center the specified sizable object.</returns>
+        public static Vector2 GetCenterPosition(this ISizable obj, Viewport centerToViewport, bool centerIsOrigin = false)
+        {
+            Vector2 centerOfViewport = new Vector2(centerToViewport.Width / 2, centerToViewport.Height / 2);
+            if (!centerIsOrigin)
+            {
+                centerOfViewport.X -= obj.Width / 2;
+                centerOfViewport.Y -= obj.Height / 2;
+            }
+            
+            return centerOfViewport;
+        }
+
+        /// <summary>
         /// Convert a vector to a rotation angle in radians.
         /// </summary>
         /// <param name="vector">Vector2 to translate to rotation angle.</param>
