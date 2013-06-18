@@ -16,8 +16,11 @@ namespace Glib.XNA.SpriteLib
         private EventHandler movementInternal;
 
         /// <summary>
-        /// An EventHandler called after the successful movement of this Sprite.
+        /// An EventHandler called after the successful movement of this TextBoxSprite.
         /// </summary>
+        /// <remarks>
+        /// The superclass implementation is hidden to prevent removal of internally used event handlers.
+        /// </remarks>
         public new event EventHandler Moved
         {
             add
