@@ -20,6 +20,30 @@ namespace Glib.XNA.SpriteLib
 
         private MouseState _lastMouseState = new MouseState();
 
+        private bool _isSelected;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this is a selected TextSprite.
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { _isSelected = value; }
+        }
+
+        private bool _isManualSelectable;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this TextSprite will be selected by ways other than the mouse cursor.
+        /// If this is true, the mouse cursor will be ignored.
+        /// </summary>
+        public bool IsManuallySelectable
+        {
+            get { return _isManualSelectable; }
+            set { _isManualSelectable = value; }
+        }
+        
+
         /// <summary>
         /// Update the TextSprite. Just calls the Updated event by default.
         /// </summary>
@@ -32,7 +56,7 @@ namespace Glib.XNA.SpriteLib
             }
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
-            if (Clicked != null && msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)
+            if (Clicked != null && ( ( msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed )))
             {
                 Clicked(this, new EventArgs());
             }
@@ -42,15 +66,23 @@ namespace Glib.XNA.SpriteLib
                 {
                     throw new InvalidOperationException("The hovering colors must be set to enable hovering.");
                 }
-                if (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)
+                if (IsManuallySelectable)
                 {
-                    //Intersecting.
-                    Color = HoverColor.Value;
+                    Color = IsSelected ? HoverColor.Value : NonHoverColor.Value;
                 }
                 else
                 {
-                    //Not intersecting.
-                    Color = NonHoverColor.Value;
+                    if (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)
+                    {
+                        //Intersecting.
+                        IsSelected = true;
+                        Color = HoverColor.Value;
+                    }
+                    else
+                    {
+                        //Not intersecting.
+                        Color = NonHoverColor.Value;
+                    }
                 }
             }
             _lastMouseState = currentMouseState;
@@ -110,6 +142,15 @@ namespace Glib.XNA.SpriteLib
             SpriteBatch = sb;
             Font = font;
             Text = text;
+            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
+        }
+
+        void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
+        {
+            if (_isHoverable && _isManualSelectable && _isSelected && e.Key == Keys.Enter && Clicked != null)
+            {
+                Clicked(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>

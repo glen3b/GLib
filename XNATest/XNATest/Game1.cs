@@ -58,13 +58,24 @@ namespace XNATest
             spr = new Sprite(Content.Load<Texture2D>("Jellyfish"), Vector2.Zero, spriteBatch);
             spr.UseCenterAsOrigin = false;
             spr.Scale = new Vector2(.175f);
+            
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;
-            menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
+            menuTxt.IsManuallySelectable = true;
+            menuTxt.IsSelected = true;
+            //menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
+
+            menuTxtTwo = new TextSprite(spriteBatch, new Vector2(250,0), Content.Load<SpriteFont>("SpriteFont1"), "Selectable", Color.Black);
+            menuTxtTwo.IsHoverable = true;
+            menuTxtTwo.IsManuallySelectable = true;
+            //menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
             //menuTxt.HoverColor = Color.Red;
+
+            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
             
             menu = new Screen(new SpriteManager(spriteBatch), Color.Red);
             menu.AdditionalSprites.Add(menuTxt);
+            menu.AdditionalSprites.Add(menuTxtTwo);
             menu.Visible = true;
 
             menuTwo = new Screen(new SpriteManager(spriteBatch), Color.Gray);
@@ -72,6 +83,17 @@ namespace XNATest
 
             menus = new ScreenManager(spriteBatch, Color.Pink, menu, menuTwo);
             // TODO: use this.Content to load your game content here
+        }
+
+        TextSprite menuTxtTwo;
+
+        void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
+        {
+            if (e.Key == Keys.Left || e.Key == Keys.Right)
+            {
+                menuTxt.IsSelected = !menuTxt.IsSelected;
+                menuTxtTwo.IsSelected = !menuTxtTwo.IsSelected;
+            }
         }
 
         void menuTxt_Clicked(object sender, EventArgs e)
@@ -100,6 +122,7 @@ namespace XNATest
                 this.Exit();
 
             menuTwo.Visible = Keyboard.GetState().IsKeyDown(Keys.LeftAlt);
+            KeyboardManager.Update();
             menuTxt.Update();
             spr.Update();
             menus.Update();
