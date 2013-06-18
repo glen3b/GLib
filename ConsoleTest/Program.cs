@@ -10,10 +10,8 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            //new AlphabetPrinter('▀').Print("1-(123)-j");
             Console.BufferWidth = 150;
-            //new AlphabetPrinter('╔').Print("1-(818)-360-2428");
-            new AlphabetPrinter('←').Print("0123456789");
+            new AlphabetPrinter('%').Print("vickie!");
             Console.ReadKey(true);
             
         }

@@ -325,6 +325,220 @@ namespace Glib
         }
 
         /// <summary>
+        /// The character N.
+        /// </summary>
+        public static bool[,] N
+        {
+            get
+            {
+                return new bool[5, 5]
+                {
+                    /* ^   ^
+                     * ^^  ^
+                     * ^ ^ ^
+                     * ^  ^^
+                     * ^   ^
+                     */
+                    {true,false,false,false,true},
+                    {true,true,false,false,true},
+                    {true,false,true,false,true},
+                    {true,false,false,true,true},
+                    {true,false,false,false,true}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character O.
+        /// </summary>
+        public static bool[,] O
+        {
+            get
+            {
+                return new bool[5, 7]
+                {
+                    /*  ^^^^^
+                     * ^     ^
+                     * ^     ^
+                     * ^     ^
+                     *  ^^^^^
+                     */
+                    {false,true,true,true,true,true,false},
+                    {true,false,false,false,false,false,true},
+                    {true,false,false,false,false,false,true},
+                    {true,false,false,false,false,false,true},
+                    {false,true,true,true,true,true,false}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character P.
+        /// </summary>
+        public static bool[,] P
+        {
+            get
+            {
+                return new bool[5, 5]
+                {
+                    /* ^^^^^
+                     * ^   ^
+                     * ^^^^^
+                     * ^
+                     * ^
+                     */
+                    {true,true,true,true,true},
+                    {true,false,false,false,true},
+                    {true,true,true,true,true},
+                    {true,false,false,false,false},
+                    {true,false,false,false,false}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character Q.
+        /// </summary>
+        public static bool[,] Q
+        {
+            get
+            {
+                return new bool[5, 7]
+                {
+                    /*  ^^^^^
+                     * ^     ^
+                     * ^   ^ ^
+                     *  ^^^^^
+                     *       ^
+                     */
+                    {false,true,true,true,true,true,false},
+                    {true,false,false,false,false,false,true},
+                    {true,false,false,false,true,false,true},
+                    {false,true,true,true,true,true,false},
+                    {false,false,false,false,false,false,true}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character R.
+        /// </summary>
+        public static bool[,] R
+        {
+            get
+            {
+                return new bool[5, 5]
+                {
+                    /* ^^^^^
+                     * ^   ^
+                     * ^^^^^
+                     * ^  ^
+                     * ^   ^
+                     */
+                    {true,true,true,true,true},
+                    {true,false,false,false,true},
+                    {true,true,true,true,true},
+                    {true,false,false,true,false},
+                    {true,false,false,false,true}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character S.
+        /// </summary>
+        public static bool[,] S
+        {
+            get
+            {
+                /* | ****
+                 * |*    
+                 * | *** 
+                 * |    *
+                 * |****
+                 */
+                return new bool[5, 5]{
+                    { false,true,true,true,true },
+                    { true,false,false,false,false },
+                    { false,true,true,true,false },
+                    { false,false,false,false,true },
+                    { true,true,true,true,false }
+                };
+            }
+        }
+
+        
+        
+        /// <summary>
+        /// The character T.
+        /// </summary>
+        public static bool[,] T
+        {
+            get
+            {
+                /* |^^^^^
+                 * |  ^  
+                 * |  ^  
+                 * |  ^  
+                 * |  ^  
+                 */
+                return new bool[5, 5]{
+                    { true,true,true,true,true },
+                    { false,false,true,false,false },
+                    { false,false,true,false,false },
+                    { false,false,true,false,false },
+                    { false,false,true,false,false }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character U.
+        /// </summary>
+        public static bool[,] U
+        {
+            get
+            {
+                /* |^   ^
+                 * |^   ^
+                 * |^   ^
+                 * |^   ^
+                 * | ^^^ 
+                 */
+                return new bool[5, 5]{
+                    { true,false,false,false,true },
+                    { true,false,false,false,true },
+                    { true,false,false,false,true },
+                    { true,false,false,false,true },
+                    { false,true,true,true,false }
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character V.
+        /// </summary>
+        public static bool[,] V
+        {
+            get
+            {
+                /* |^       ^
+                 * | ^     ^
+                 * |  ^   ^
+                 * |   ^ ^
+                 * |    ^
+                 */
+                return new bool[5, 9]{
+                    { true,false,false,false,false,false,false,false,true },
+                    { false,true,false,false,false,false,false,true,false },
+                    { false,false,true,false,false,false,true,false,false },
+                    { false,false,false,true,false,true,false,false,false },
+                    { false,false,false,false,true,false,false,false,false }
+                };
+            }
+        }
+
+        /// <summary>
         /// A space character.
         /// </summary>
         public static bool[,] Space
@@ -672,29 +886,6 @@ namespace Glib
         }
 
         /// <summary>
-        /// The character S.
-        /// </summary>
-        public static bool[,] S
-        {
-            get
-            {
-                /* | ****
-                 * |*    
-                 * | *** 
-                 * |    *
-                 * |****
-                 */
-                return new bool[5, 5]{
-                    { false,true,true,true,true },
-                    { true,false,false,false,false },
-                    { false,true,true,true,false },
-                    { false,false,false,false,true },
-                    { true,true,true,true,false }
-                };
-            }
-        }
-
-        /// <summary>
         /// Get the large alphabet string for the specified word.
         /// </summary>
         /// <param name="word">The word.</param>
@@ -751,8 +942,32 @@ namespace Glib
                     case "M":
                         printArray = M;
                         break;
+                    case "N":
+                        printArray = N;
+                        break;
+                    case "O":
+                        printArray = O;
+                        break;
+                    case "P":
+                        printArray = P;
+                        break;
+                    case "Q":
+                        printArray = Q;
+                        break;
+                    case "R":
+                        printArray = R;
+                        break;
                     case "S":
                         printArray = S;
+                        break;
+                    case "T":
+                        printArray = T;
+                        break;
+                    case "U":
+                        printArray = U;
+                        break;
+                    case "V":
+                        printArray = V;
                         break;
                     case "0":
                         printArray = Zero;
