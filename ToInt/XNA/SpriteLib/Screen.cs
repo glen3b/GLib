@@ -321,25 +321,29 @@ namespace Glib.XNA.SpriteLib
         {
             foreach (Screen s in this)
             {
-                Graphics.SetRenderTarget(s.Target);
-                Graphics.Clear(s.ClearColor);
-                SpriteBatch.Begin();
-                if (s.BackgroundSprite != null)
+                if (s.Visible)
                 {
-                    s.BackgroundSprite.DrawNonAuto();
-                }
-                s.Sprites.DrawNonAuto();
-                foreach(ISprite spr in s.AdditionalSprites){
-                    if (spr.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                    Graphics.SetRenderTarget(s.Target);
+                    Graphics.Clear(s.ClearColor);
+                    SpriteBatch.Begin();
+                    if (s.BackgroundSprite != null)
                     {
-                        spr.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
+                        s.BackgroundSprite.DrawNonAuto();
                     }
-                    else
+                    s.Sprites.DrawNonAuto();
+                    foreach (ISprite spr in s.AdditionalSprites)
                     {
-                        spr.Draw();
+                        if (spr.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                        {
+                            spr.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
+                        }
+                        else
+                        {
+                            spr.Draw();
+                        }
                     }
+                    SpriteBatch.End();
                 }
-                SpriteBatch.End();
             }
             Graphics.SetRenderTarget(null);
             Graphics.Clear(Background);
