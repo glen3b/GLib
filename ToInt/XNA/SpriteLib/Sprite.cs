@@ -330,7 +330,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
         /// </summary>
-        public UpdateParamaters UpdateParams = new UpdateParamaters();
+        public UpdateParamaters UpdateParams = new UpdateParamaters(true,true);
 
         /// <summary>
         /// Create a new Sprite.
