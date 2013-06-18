@@ -12,7 +12,7 @@ namespace Glib.XNA.SpriteLib
     public class SpriteRotation
     {
         /// <summary>
-        /// The rotation of the sprite in degrees.
+        /// Gets or sets the rotation of the sprite in degrees.
         /// </summary>
         public float Degrees{
             get
@@ -159,7 +159,22 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// The rotation of the sprite in radians.
+        /// Gets or sets the rotation of the Sprite in gradians (AKA gons, grads, or grades).
+        /// </summary>
+        public float Gradians
+        {
+            get
+            {
+                return .9f * _degrees;
+            }
+            set
+            {
+                _degrees = value / .9f;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets he rotation of the sprite in radians.
         /// </summary>
         public float Radians
         {
