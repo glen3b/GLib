@@ -18,10 +18,20 @@ namespace Glib.XNA.SpriteLib
         /// Convert the specified Sprite to a rectangle.
         /// </summary>
         /// <param name="spr">The Sprite to convert to a Rectangle.</param>
-        /// <returns>The REctangle representing the area of the Sprite.</returns>
+        /// <returns>The Rectangle representing the area of the Sprite.</returns>
         static public implicit operator Rectangle(Sprite spr)
         {
             return spr.Rectangle;
+        }
+
+        /// <summary>
+        /// Convert the specified Sprite to a texture.
+        /// </summary>
+        /// <param name="spr">The Sprite to convert to a Texture2D.</param>
+        /// <returns>The texture of the Sprite.</returns>
+        static public implicit operator Texture2D(Sprite spr)
+        {
+            return spr.Texture;
         }
 
         /// <summary>
