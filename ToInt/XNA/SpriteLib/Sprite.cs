@@ -417,7 +417,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void DrawNonAuto()
         {
-            SpriteBatch.Draw(Texture, Position + Origin, DrawRegion, Color, Rotation.Radians, Origin, Scale, _effect, 0f);
+            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, _effect, 0f);
             if (Drawn != null)
             {
                 Drawn(this, new EventArgs());
