@@ -149,6 +149,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The scale-sensitive center of the sprite.
         /// Setting this property is experimental.
+        /// This property will break with UseCenterAsOrigin.
         /// </summary>
         public virtual Vector2 Center
         {
@@ -382,19 +383,18 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// An approximate Rectangle representing the area covered by this Sprite.
+        /// Gets an approximate Rectangle representing the area covered by this Sprite.
         /// </summary>
         public Rectangle Rectangle
         {
             get
             {
-                return new Rectangle(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
-            }
-            set
-            {
-                Position = new Vector2(value.X, value.Y);
-                Width = value.Width;
-                Height = value.Height;
+                Vector2 usedPos = Position;
+                if (UseCenterAsOrigin)
+                {
+                    usedPos -= Origin;
+                }
+                return new Rectangle(Convert.ToInt32(usedPos.X), Convert.ToInt32(usedPos.Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
             }
         }
 
@@ -450,7 +450,15 @@ namespace Glib.XNA.SpriteLib
         /// <returns></returns>
         public bool Intersects(Vector2 pos)
         {
-            return pos.X <= this.X + Width && pos.X >= this.X && pos.Y >= this.Y && pos.Y <= this.Y + Height;
+            float realX = X;
+            float realY = Y;
+            if (UseCenterAsOrigin)
+            {
+                realX -= Origin.X;
+                realY -= Origin.Y;
+            }
+
+            return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
         }
 
         /// <summary>
@@ -495,20 +503,26 @@ namespace Glib.XNA.SpriteLib
                 vp = UsedViewport.Value;
             }
             List<Direction> allEdges = new List<Direction>();
-
-            if (X < 0)
+            float realX = X;
+            float realY = Y;
+            if (UseCenterAsOrigin)
+            {
+                realX -= Origin.X;
+                realY -= Origin.Y;
+            }
+            if (realX < 0)
             {
                 allEdges.Add(Direction.Left);
             }
-            if (Y < 0)
+            if (realY < 0)
             {
                 allEdges.Add(Direction.Top);
             }
-            if (X + Width > vp.Width)
+            if (realX + Width > vp.Width)
             {
                 allEdges.Add(Direction.Right);
             }
-            if (Y + Height > vp.Height)
+            if (realY + Height > vp.Height)
             {
                 allEdges.Add(Direction.Bottom);
             }
