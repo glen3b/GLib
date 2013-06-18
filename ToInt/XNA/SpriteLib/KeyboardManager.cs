@@ -45,12 +45,12 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The last known state of the keyboard.
         /// </summary>
-        protected static KeyboardState _lastState = new KeyboardState();
+        private static KeyboardState _lastState = new KeyboardState();
 
         /// <summary>
         /// Update the KeyboardManager, calling the appropriate events.
         /// </summary>
-        public static virtual void Update()
+        public static void Update()
         {
             KeyboardState current = Keyboard.GetState();
 
