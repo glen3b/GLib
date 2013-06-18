@@ -11,8 +11,17 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public enum AngleType
     {
+        /// <summary>
+        /// An angle in radians.
+        /// </summary>
         Radians,
+        /// <summary>
+        /// An angle in degrees.
+        /// </summary>
         Degrees,
+        /// <summary>
+        /// An angle in gradians.
+        /// </summary>
         Gradians
     }
 
