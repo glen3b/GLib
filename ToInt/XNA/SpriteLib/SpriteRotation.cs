@@ -7,6 +7,16 @@ using Microsoft.Xna.Framework;
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
+    /// An enum representing a type of an angle measurement.
+    /// </summary>
+    public enum AngleType
+    {
+        Radians,
+        Degrees,
+        Gradians
+    }
+
+    /// <summary>
     /// A class representing the rotation of a sprite.
     /// </summary>
     public class SpriteRotation
@@ -145,16 +155,20 @@ namespace Glib.XNA.SpriteLib
         /// Initialize a new SpriteRotation with the specified value using the specified unit.
         /// </summary>
         /// <param name="value">The value to initialize this SpriteRotation to.</param>
-        /// <param name="useRadians">Whether or not to interpret value as radians.</param>
-        public SpriteRotation(float value, bool useRadians)
+        /// <param name="measurementType">The type of angle that value represents.</param>
+        public SpriteRotation(float value, AngleType measurementType)
         {
-            if (useRadians)
+            if (measurementType == AngleType.Radians)
             {
                 Radians = value;
             }
-            else
+            else if(measurementType == AngleType.Degrees)
             {
                 Degrees = value;
+            }
+            else if (measurementType == AngleType.Gradians)
+            {
+                Gradians = value;
             }
         }
 
