@@ -67,6 +67,7 @@
     <Compile Include="WinForms\FormValidator.cs" />
     <Compile Include="WinForms\Shapes\Triangle.cs" />
     <Compile Include="XNA\EventArgs.cs" />
+    <Compile Include="XNA\GameTimer.cs" />
     <Compile Include="XNA\SpriteLib\2DWhitePixel.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />
     <Compile Include="XNA\SpriteLib\KeyboardManager.cs" />
