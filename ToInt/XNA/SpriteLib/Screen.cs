@@ -155,9 +155,9 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// If set, the Sprite to use as the background.
+        /// If set, the ISprite to use as the background.
         /// </summary>
-        public Sprite BackgroundSprite = null;
+        public ISprite BackgroundSprite = null;
 
         /// <summary>
         /// Create a new screen.
@@ -328,7 +328,14 @@ namespace Glib.XNA.SpriteLib
                     SpriteBatch.Begin();
                     if (s.BackgroundSprite != null)
                     {
-                        s.BackgroundSprite.DrawNonAuto();
+                        if (s.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                        {
+                            s.BackgroundSprite.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
+                        }
+                        else
+                        {
+                            s.BackgroundSprite.Draw();
+                        }
                     }
                     s.Sprites.DrawNonAuto();
                     foreach (ISprite spr in s.AdditionalSprites)
