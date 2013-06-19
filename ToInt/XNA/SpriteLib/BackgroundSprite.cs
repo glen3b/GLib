@@ -14,6 +14,48 @@ namespace Glib.XNA.SpriteLib
     {
         private bool _showStitches = false;
 
+        private int _horizontalCount;
+
+        /// <summary>
+        /// Gets the count of background image tiles horizontally.
+        /// </summary>
+        public int HorizontalCount
+        {
+            get { return _horizontalCount; }
+        }
+
+        private int _verticalCount;
+
+        /// <summary>
+        /// Gets the count of background image tiles vertiacally.
+        /// </summary>
+        public int VerticalCount
+        {
+            get { return _verticalCount; }
+        }
+
+        /// <summary>
+        /// Gets the total width of the background.
+        /// </summary>
+        public float TotalWidth
+        {
+            get
+            {
+                return Width * _horizontalCount;
+            }
+        }
+
+        /// <summary>
+        /// Gets the total height of the background.
+        /// </summary>
+        public float TotalHeight
+        {
+            get
+            {
+                return Height * _verticalCount;
+            }
+        }
+
         /// <summary>
         /// Gets or sets a boolean indicating whether or not to show stitches.
         /// </summary>
@@ -36,6 +78,8 @@ namespace Glib.XNA.SpriteLib
         public BackgroundSprite(Texture2D texture, SpriteBatch sb, int height, int width)
             : base(texture, Vector2.Zero, sb)
         {
+            _horizontalCount = width;
+            _verticalCount = height;
             _bgList = new List<KeyValuePair<Vector2, SpriteEffects>>();
             //Create background matrix
             for (int row = 0; row < height; row++)
