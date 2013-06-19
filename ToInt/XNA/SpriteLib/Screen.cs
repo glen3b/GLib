@@ -341,7 +341,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     Graphics.SetRenderTarget(s.Target);
                     Graphics.Clear(s.ClearColor);
-                    SpriteBatch.Begin();
+                    s.OpenSpriteBatch(ref SpriteBatch);
                     if (s.BackgroundSprite != null)
                     {
                         if (s.BackgroundSprite.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
