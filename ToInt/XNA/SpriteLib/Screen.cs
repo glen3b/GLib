@@ -203,6 +203,14 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Open the specified SpriteBatch with the settings required for drawing this Screen.
+        /// </summary>
+        public virtual void OpenSpriteBatch(ref SpriteBatch sb)
+        {
+            sb.Begin();
+        }
+
+        /// <summary>
         /// Update all Sprites on this Screen.
         /// </summary>
         /// <param name="game">The active game time.</param>
