@@ -175,20 +175,21 @@ namespace SpritePreviewer
                     try
                     {
                         Texture2D droppedImage = Texture2D.FromStream(GraphicsDevice, stream);
-                        arrows[0].Texture = droppedImage;
+                        Color tint = arrows[0].Color;
+                        Vector2 scale = new Vector2(Convert.ToSingle(this.scale));
+                        //arrows[0].Texture = droppedImage;
+                        isSelecting = false;
+                        arrows.Sprites.RemoveRange(0, arrows.Sprites.Count);
+                        arrows.AddNewSprite(new Vector2(25), droppedImage);
+                        arrows[0].Updated += new EventHandler(arrow_Updated);
+                        arrows[0].UseCenterAsOrigin = true;
+                        arrows[0].Scale = scale;
+                        arrows[0].Color = tint;
                         if (MessageBox.Show("Is this a sprite sheet?", "Sprite Sheet?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
 
                             relativeSelectStart = null;
                             isSelecting = true;
-                        }
-                        else
-                        {
-                            isSelecting = false;
-                            arrows.Sprites.RemoveRange(0, arrows.Sprites.Count);
-                            arrows.AddNewSprite(new Vector2(25), droppedImage);
-                            arrows[0].Updated += new EventHandler(arrow_Updated);
-                            arrows[0].UseCenterAsOrigin = true;
                         }
                     }
                     catch

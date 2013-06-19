@@ -165,7 +165,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="font">The SpriteFont to draw the text with.</param>
         /// <param name="sb">The SpriteBatch to draw to.</param>
         public TextBoxSprite(Vector2 pos, SpriteBatch sb, SpriteFont font)
-            : this(new WhitePixel2D(sb.GraphicsDevice), pos, Color.White, sb, new UpdateParamaters(), font)
+            : this(new PlainTexture2D(sb.GraphicsDevice), pos, Color.White, sb, new UpdateParamaters(), font)
         {
         }
 
