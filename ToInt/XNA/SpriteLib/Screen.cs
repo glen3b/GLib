@@ -328,7 +328,7 @@ namespace Glib.XNA.SpriteLib
                     SpriteBatch.Begin();
                     if (s.BackgroundSprite != null)
                     {
-                        if (s.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                        if (s.BackgroundSprite.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
                         {
                             s.BackgroundSprite.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
                         }
