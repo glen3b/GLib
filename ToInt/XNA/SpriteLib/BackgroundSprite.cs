@@ -12,7 +12,7 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class BackgroundSprite : Sprite, ISpriteBatchManagerSprite
     {
-        private bool _showStitches;
+        private bool _showStitches = false;
 
         /// <summary>
         /// Gets or sets a boolean indicating whether or not to show stitches.

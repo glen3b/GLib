@@ -80,7 +80,7 @@ namespace Glib.XNA
         /// <param name="sprToDraw">The sprite to draw.</param>
         public static void Draw(this SpriteBatch sb, Glib.XNA.SpriteLib.Sprite sprToDraw)
         {
-            sb.Draw(sprToDraw.Texture, sprToDraw.Position+sprToDraw.Origin, sprToDraw.DrawRegion, sprToDraw.Color, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, 0f);
+            sb.Draw(sprToDraw.Texture, sprToDraw.Position, sprToDraw.DrawRegion, sprToDraw.Color, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, 0f);
         }
 
         /// <summary>
