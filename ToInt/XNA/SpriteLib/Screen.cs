@@ -195,6 +195,14 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// If overriden in a subclass, performs miscellaneous processing logic while the RenderTarget2D is the active RenderTarget.
+        /// </summary>
+        public virtual void MiscellaneousProcessing()
+        {
+
+        }
+
+        /// <summary>
         /// Update all Sprites on this Screen.
         /// </summary>
         /// <param name="game">The active game time.</param>
@@ -350,6 +358,7 @@ namespace Glib.XNA.SpriteLib
                         }
                     }
                     SpriteBatch.End();
+                    s.MiscellaneousProcessing();
                 }
             }
             Graphics.SetRenderTarget(null);
