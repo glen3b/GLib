@@ -36,7 +36,7 @@ namespace WinFormsTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            requiredTextBox1.FieldValidation = new System.Predicate<string>(delegate(string str) { return str == "John Smith"; });
+            requiredTextBox1.FieldValidation = new Predicate<string>(delegate(string str) { return str == "John Smith"; });
         }
     }
 }
