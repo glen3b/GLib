@@ -425,6 +425,14 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Call the drawn event after drawing of the Sprite.
+        /// </summary>
+        protected void CallDrawn()
+        {
+            Drawn(this, new EventArgs());
+        }
+
+        /// <summary>
         /// Checks whether the user is clicking on the sprite.
         /// </summary>
         /// <param name="ms">The current MouseState</param>

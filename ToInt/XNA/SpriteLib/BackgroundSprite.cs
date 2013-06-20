@@ -118,6 +118,7 @@ namespace Glib.XNA.SpriteLib
                 SpriteBatch.Draw(Texture, bgItem.Key, null, Color, 0f, Vector2.Zero, Scale, bgItem.Value, 0f);
                 //base.Draw(spriteBatch, bgItem.Key, bgItem.Value);
             }
+            CallDrawn();
         }
 
         /// <summary>
