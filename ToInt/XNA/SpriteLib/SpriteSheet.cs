@@ -268,7 +268,7 @@ namespace Glib.XNA.SpriteLib
         public event EventHandler AnimationCompleted;
 
         /// <summary>
-        /// Get the effective origin of the Sprite.
+        /// Gets the effective origin of the Sprite.
         /// </summary>
         public override Vector2 Origin
         {

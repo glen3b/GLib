@@ -400,7 +400,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the origin of the Sprite.
         /// </summary>
-        public Vector2 Origin
+        public virtual Vector2 Origin
         {
             get { return _origin; }
             set {
