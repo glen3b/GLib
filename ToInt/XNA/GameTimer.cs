@@ -9,7 +9,7 @@ namespace Glib.XNA
     /// <summary>
     /// A timer firing events at set intervals during the game.
     /// </summary>
-    public class GameTimer
+    public class GameTimer : GameComponent
     {
         private bool _isRepeating;
 
@@ -29,8 +29,9 @@ namespace Glib.XNA
         /// <summary>
         /// Create a new GameTimer with the specified interval.
         /// </summary>
+        /// <param name="associatedGame">The Game to attach this GameTimer to.</param>
         /// <param name="timePassing">The interval between calls to Elapsed.</param>
-        public GameTimer(TimeSpan timePassing)
+        public GameTimer(Game associatedGame, TimeSpan timePassing) : base(associatedGame)
         {
             _time = timePassing;
         }
@@ -46,7 +47,7 @@ namespace Glib.XNA
         /// Update the GameTimer, calling the Elapsed event if neccesary.
         /// </summary>
         /// <param name="gt">The current GameTime.</param>
-        public void Update(GameTime gt)
+        public override void Update(GameTime gt)
         {
             _elapsedTime += gt.ElapsedGameTime;
             if (_elapsedTime >= _time)
@@ -70,9 +71,10 @@ namespace Glib.XNA
         /// <summary>
         /// Create a new GameTimer with the specified interval.
         /// </summary>
+        /// <param name="associatedGame">The Game to attach this GameTimer to.</param>
         /// <param name="msTimePassing">The interval (in milliseconds) between calls to Elapsed.</param>
-        public GameTimer(int msTimePassing)
-            : this(TimeSpan.FromMilliseconds(msTimePassing))
+        public GameTimer(Game associatedGame, int msTimePassing)
+            : this(associatedGame, TimeSpan.FromMilliseconds(msTimePassing))
         {
 
         }
