@@ -390,22 +390,50 @@ namespace Glib.XNA.SpriteLib
             get
             {
                 Vector2 usedPos = Position;
-                if (UseCenterAsOrigin)
-                {
-                    usedPos -= Origin;
-                }
+                usedPos -= Origin;
                 return new Rectangle(Convert.ToInt32(usedPos.X), Convert.ToInt32(usedPos.Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
             }
         }
 
+        private Vector2 _origin = Vector2.Zero;
+
         /// <summary>
-        /// Get the effective origin of the Sprite.
+        /// Gets or sets the origin of the Sprite.
         /// </summary>
-        public virtual Vector2 Origin
+        public Vector2 Origin
+        {
+            get { return _origin; }
+            set {
+                _origin = value;
+                if (value == new Vector2(Texture.Width / 2, Texture.Height / 2))
+                {
+                    _useCenterAsOrigin = true;
+                }
+            }
+        }
+
+        private bool _useCenterAsOrigin = false;
+
+        /// <summary>
+        /// Gets or sets whether or not to use the center of the Sprite as the origin.
+        /// </summary>
+        /// <remarks>
+        /// When Origin is set, it will only affect this value if set precisely to the center of the Sprite (no scale accounting).
+        /// If this is set to false, the Origin will not be changed.
+        /// </remarks>
+        public bool UseCenterAsOrigin
         {
             get
             {
-                return (UseCenterAsOrigin ? new Vector2(Texture.Width / 2, Texture.Height / 2) : Vector2.Zero);
+                return _useCenterAsOrigin;
+            }
+            set
+            {
+                _useCenterAsOrigin = value;
+                if (value)
+                {
+                    Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+                }
             }
         }
 
@@ -460,11 +488,8 @@ namespace Glib.XNA.SpriteLib
         {
             float realX = X;
             float realY = Y;
-            if (UseCenterAsOrigin)
-            {
-                realX -= Origin.X;
-                realY -= Origin.Y;
-            }
+            realX -= Origin.X;
+            realY -= Origin.Y;
 
             return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
         }
@@ -513,11 +538,8 @@ namespace Glib.XNA.SpriteLib
             List<Direction> allEdges = new List<Direction>();
             float realX = X;
             float realY = Y;
-            if (UseCenterAsOrigin)
-            {
-                realX -= Origin.X;
-                realY -= Origin.Y;
-            }
+            realX -= Origin.X;
+            realY -= Origin.Y;
             if (realX < 0)
             {
                 allEdges.Add(Direction.Left);
@@ -551,10 +573,6 @@ namespace Glib.XNA.SpriteLib
             SpriteManager.RemoveSelf(this);
         }
 
-        /// <summary>
-        /// Whether or not to use the center of the Sprite as the origin.
-        /// </summary>
-        public bool UseCenterAsOrigin = false;
 
         /// <summary>
         /// Follow the mouse pointer.
