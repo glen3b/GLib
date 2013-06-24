@@ -28,7 +28,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A class representing the rotation of a sprite.
     /// </summary>
-    public class SpriteRotation
+    public class SpriteRotation : ICloneable
     {
         /// <summary>
         /// Gets or sets the rotation of the sprite in degrees.
@@ -196,6 +196,8 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+
+
         /// <summary>
         /// Gets or sets he rotation of the sprite in radians.
         /// </summary>
@@ -209,6 +211,15 @@ namespace Glib.XNA.SpriteLib
             {
                 Degrees = MathHelper.ToDegrees(value);
             }
+        }
+
+        /// <summary>
+        /// Clone this SpriteRotation into a new SpriteRotation of equivalent value.
+        /// </summary>
+        /// <returns>A new SpriteRotation with the same value as this one.</returns>
+        public object Clone()
+        {
+            return new SpriteRotation(Degrees);
         }
     }
 }
