@@ -26,9 +26,9 @@ namespace Glib.XNA.SpriteLib
     }
 
     /// <summary>
-    /// A class representing the rotation of a sprite.
+    /// A structure representing the rotation of a sprite.
     /// </summary>
-    public class SpriteRotation : ICloneable
+    public struct SpriteRotation
     {
         /// <summary>
         /// Gets or sets the rotation of the sprite in degrees.
@@ -141,15 +141,7 @@ namespace Glib.XNA.SpriteLib
             return new SpriteRotation(x.Degrees - y.Degrees);
         }
 
-        private float _degrees = 0f;
-
-        /// <summary>
-        /// Initialiaze a new SpriteRotation with a value of 0 degrees.
-        /// </summary>
-        public SpriteRotation()
-        {
-            
-        }
+        private float _degrees;
 
         /// <summary>
         /// Initialize a new SpriteRotation with the specified value of degrees.
@@ -157,7 +149,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="degrees">The number of degrees to initialize this SpriteRotation to</param>
         public SpriteRotation(float degrees)
         {
-            Degrees = degrees;
+            _degrees = degrees % 360;
         }
 
         /// <summary>
@@ -169,15 +161,19 @@ namespace Glib.XNA.SpriteLib
         {
             if (measurementType == AngleType.Radians)
             {
-                Radians = value;
+                _degrees = MathHelper.ToDegrees(value);
             }
             else if(measurementType == AngleType.Degrees)
             {
-                Degrees = value;
+                _degrees = value % 360;
             }
             else if (measurementType == AngleType.Gradians)
             {
-                Gradians = value;
+                _degrees = value / .9f;
+            }
+            else
+            {
+                throw new NotImplementedException("The specified AngleType has not been implemented.");
             }
         }
 
@@ -211,15 +207,6 @@ namespace Glib.XNA.SpriteLib
             {
                 Degrees = MathHelper.ToDegrees(value);
             }
-        }
-
-        /// <summary>
-        /// Clone this SpriteRotation into a new SpriteRotation of equivalent value.
-        /// </summary>
-        /// <returns>A new SpriteRotation with the same value as this one.</returns>
-        public object Clone()
-        {
-            return new SpriteRotation(Degrees);
         }
     }
 }
