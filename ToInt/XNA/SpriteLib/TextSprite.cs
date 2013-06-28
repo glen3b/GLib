@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Glib.XNA.InputLib;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -93,6 +94,9 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Whether or not to call Clicked events for keypresses of Enter.
         /// </summary>
+        /// <remarks>
+        /// For this to take effect, KeyboardManager must be updated.
+        /// </remarks>
         public bool CallKeyboardClickEvent = true;
 
         /// <summary>

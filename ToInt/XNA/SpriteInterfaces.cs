@@ -35,7 +35,7 @@ namespace Glib.XNA
     }
 
     /// <summary>
-    /// Represents a sizable, positionalble, screen object.
+    /// Represents a sizable, positionable, screen object.
     /// </summary>
     public interface ISizedScreenObject : ISizable, IPositionable
     {

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Glib;
 using Glib.XNA;
 using Glib.XNA.SpriteLib;
+using Glib.XNA.InputLib;
 
 namespace XNATest
 {
@@ -42,6 +43,7 @@ namespace XNATest
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
+            Components.Add(new InputManagerComponent(this));
             base.Initialize();
         }
 
@@ -122,7 +124,6 @@ namespace XNATest
                 this.Exit();
 
             menuTwo.Visible = Keyboard.GetState().IsKeyDown(Keys.LeftAlt);
-            KeyboardManager.Update();
             menuTxt.Update();
             spr.Update();
             menus.Update();

@@ -101,7 +101,7 @@
     <Compile Include="XNA\SpriteInterfaces.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />
-    <Compile Include="XNA\SpriteLib\KeyboardManager.cs" />
+    <Compile Include="XNA\KeyboardManager.cs" />
     <Compile Include="XNA\SpriteLib\Position.cs" />
     <Compile Include="XNA\SpriteLib\Screen.cs" />
     <Compile Include="XNA\SpriteLib\Sprite.cs" />

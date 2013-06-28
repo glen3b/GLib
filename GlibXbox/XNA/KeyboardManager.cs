@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 
-namespace Glib.XNA.SpriteLib
+namespace Glib.XNA
 {
     /// <summary>
     /// A static class calling keyboard related events when updated.

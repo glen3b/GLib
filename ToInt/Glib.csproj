@@ -68,10 +68,13 @@
     <Compile Include="WinForms\Shapes\Triangle.cs" />
     <Compile Include="XNA\EventArgs.cs" />
     <Compile Include="XNA\GameTimer.cs" />
+    <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
+    <Compile Include="XNA\InputLib\Mouse\MouseManager.cs" />
+    <Compile Include="XNA\InputLib\Mouse\ScreenRegion.cs" />
     <Compile Include="XNA\PlainTexture2D.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />
-    <Compile Include="XNA\SpriteLib\KeyboardManager.cs" />
+    <Compile Include="XNA\InputLib\KeyboardManager.cs" />
     <Compile Include="XNA\SpriteLib\Position.cs" />
     <Compile Include="XNA\SpriteLib\Screen.cs" />
     <Compile Include="XNA\SpriteLib\Sprite.cs" />

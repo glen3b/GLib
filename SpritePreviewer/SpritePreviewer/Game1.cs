@@ -84,6 +84,8 @@ namespace SpritePreviewer
         {
             // TODO: Add your initialization logic here
 
+            Components.Add(new Glib.XNA.InputLib.InputManagerComponent(this));
+
             base.Initialize();
         }
 

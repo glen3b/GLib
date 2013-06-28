@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.ComponentModel;
+using Glib.XNA.InputLib.Mouse;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -22,6 +23,16 @@ namespace Glib.XNA.SpriteLib
         static public implicit operator Rectangle(Sprite spr)
         {
             return spr.Rectangle;
+        }
+
+        /// <summary>
+        /// Convert the specified Sprite to a screen region.
+        /// </summary>
+        /// <param name="spr">The Sprite to convert to a screen region.</param>
+        /// <returns>The screen region representing the area of the Sprite (scale sensitive).</returns>
+        static public implicit operator ScreenRegion(Sprite spr)
+        {
+            return new ScreenRegion(spr.Position, new Vector2(spr.Width, spr.Height));
         }
 
         /// <summary>
