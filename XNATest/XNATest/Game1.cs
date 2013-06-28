@@ -62,10 +62,13 @@ namespace XNATest
             spr.Scale = new Vector2(.175f);
 
             ProgressBar progBar = new ProgressBar(new Vector2(55), Color.White, Color.Black, spriteBatch);
-            //progBar.Scale = new Vector2(10);
-            progBar.Value = progBar.Denominator;
-            progBar.WidthScale = 25;
-            progBar.HeightScale = 25;
+            progBar.Scale = new Vector2(.25f);
+            progBar.Denominator = 1024;
+            progBar.ProgressBarFilled += new EventHandler(progBar_ProgressBarFilled);
+            progBar.Value = 0;
+            progBar.Updated += new EventHandler(progBar_Updated);
+            progBar.WidthScale = 2;
+            progBar.HeightScale = 5;
 
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;
@@ -92,6 +95,19 @@ namespace XNATest
 
             menus = new ScreenManager(spriteBatch, Color.Pink, menu, menuTwo);
             // TODO: use this.Content to load your game content here
+        }
+
+        void progBar_ProgressBarFilled(object sender, EventArgs e)
+        {
+            menu.Visible = false;
+            menuTwo.Visible = false;
+        }
+
+        void progBar_Updated(object sender, EventArgs e)
+        {
+            ProgressBar pb = sender.Cast<ProgressBar>();
+
+            pb.Value += pb.Value == pb.Denominator ? 0 : 1;
         }
 
         TextSprite menuTxtTwo;

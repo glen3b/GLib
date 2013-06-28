@@ -95,6 +95,10 @@ namespace Glib.XNA.SpriteLib
                 {
                     throw new ArgumentException("The value cannot be greater than the denominator.");
                 }
+                if (ProgressBarFilled != null && value == Denominator)
+                {
+                    ProgressBarFilled(this, EventArgs.Empty);
+                }
                 _value = value;
             }
         }
@@ -103,6 +107,11 @@ namespace Glib.XNA.SpriteLib
         /// The color to show for portions of the progress bar that are full.
         /// </summary>
         public Color FillColor;
+
+        /// <summary>
+        /// An event fired when the progress bar is filled (value is set to denominator).
+        /// </summary>
+        public event EventHandler ProgressBarFilled;
 
         /// <summary>
         /// Gets a representation of the texture to use for the progress bar.
