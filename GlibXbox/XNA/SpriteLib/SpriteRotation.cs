@@ -45,12 +45,21 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Convert this rotation to a Vector2 through XnaExtensions.
+        /// Gets or sets a vector representing this angle.
         /// </summary>
-        /// <returns>This rotation as a Vector2.</returns>
-        public Vector2 AsVector()
+        /// <remarks>
+        /// All logic of this is handled by XnaExtensions.
+        /// </remarks>
+        public Vector2 Vector
         {
-            return Radians.AngleToVector();
+            get
+            {
+                return Radians.AngleToVector();
+            }
+            set
+            {
+                Radians = value.ToAngle();
+            }
         }
 
         /// <summary>
