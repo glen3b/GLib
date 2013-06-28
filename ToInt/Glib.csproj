@@ -76,6 +76,7 @@
     <Compile Include="XNA\SpriteLib\Direction.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />
     <Compile Include="XNA\SpriteLib\Position.cs" />
+    <Compile Include="XNA\SpriteLib\ProgressBar.cs" />
     <Compile Include="XNA\SpriteLib\Screen.cs" />
     <Compile Include="XNA\SpriteLib\Sprite.cs" />
     <Compile Include="XNA\SpriteLib\SpriteEvents.cs" />

@@ -60,7 +60,13 @@ namespace XNATest
             spr = new Sprite(Content.Load<Texture2D>("Jellyfish"), Vector2.Zero, spriteBatch);
             spr.UseCenterAsOrigin = false;
             spr.Scale = new Vector2(.175f);
-            
+
+            ProgressBar progBar = new ProgressBar(new Vector2(55), Color.White, Color.Black, spriteBatch);
+            //progBar.Scale = new Vector2(10);
+            progBar.Value = progBar.Denominator;
+            progBar.WidthScale = 25;
+            progBar.HeightScale = 25;
+
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;
             menuTxt.IsManuallySelectable = true;
@@ -76,6 +82,7 @@ namespace XNATest
             KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
             
             menu = new Screen(new SpriteManager(spriteBatch), Color.Red);
+            menu.Sprites.Add(progBar);
             menu.AdditionalSprites.Add(menuTxt);
             menu.AdditionalSprites.Add(menuTxtTwo);
             menu.Visible = true;
