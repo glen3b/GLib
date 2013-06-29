@@ -95,6 +95,10 @@ namespace Glib.XNA.SpriteLib
                 {
                     throw new ArgumentException("The value cannot be greater than the denominator.");
                 }
+                if (ProgressBarFilled != null && value == Denominator)
+                {
+                    ProgressBarFilled(this, EventArgs.Empty);
+                }
                 _value = value;
             }
         }
@@ -103,6 +107,11 @@ namespace Glib.XNA.SpriteLib
         /// The color to show for portions of the progress bar that are full.
         /// </summary>
         public Color FillColor;
+
+        /// <summary>
+        /// An event fired when the progress bar is filled (value is set to denominator).
+        /// </summary>
+        public event EventHandler ProgressBarFilled;
 
         /// <summary>
         /// Gets a representation of the texture to use for the progress bar.
@@ -133,8 +142,53 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if(value != null){
-                throw new NotImplementedException("You cannot set the texture of a progress bar.");
+                if (value != null)
+                {
+                    Color[] textureData = new Color[value.Width * value.Height];
+                    if (textureData.Length == 0)
+                    {
+                        throw new ArgumentException("The texture must have a size greater than zero in both dimensions.");
+                    }
+                    value.GetData<Color>(textureData);
+                    if (textureData.Distinct().ToArray().Length > 2)
+                    {
+                        throw new ArgumentException("The texture must have less than or equal to 2 colors.");
+                    }
+                    if (textureData.Distinct().ToArray().Length == 1)
+                    {
+                        //0% or 100%, let's check the data against our colors to see if full (we assume not inverted)
+                        Denominator = value.Width / _widthScale;
+                        Value = textureData[0] == FillColor ? Denominator : 0;
+                    }
+                    else
+                    {
+                        Color colorOnLeft = textureData[0];
+
+                        int progBarValue = 0;
+
+                        //This is scale accounted
+                        int progBarDenom = textureData.Length / value.Height / _widthScale;
+                        //Begin parsing, we know color on left is value
+                        for (int i = 0; i < progBarDenom; i++)
+                        {
+                            //We only need first row
+                            if (textureData[i] == colorOnLeft)
+                            {
+                                progBarValue++;
+                            }
+                        }
+
+                        //Account for current scale, assign variables
+                        Denominator = progBarDenom;
+                        Value = progBarValue / _widthScale;
+                    }
+                    //throw new NotImplementedException("You cannot set the texture of a progress bar.");
+                }
+                else
+                {
+                    FillColor = Color.Transparent;
+
+                    EmptyColor = Color.Transparent;
                 }
             }
         }
