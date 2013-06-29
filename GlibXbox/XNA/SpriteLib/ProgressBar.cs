@@ -114,8 +114,14 @@ namespace Glib.XNA.SpriteLib
         public event EventHandler ProgressBarFilled;
 
         /// <summary>
-        /// Gets a representation of the texture to use for the progress bar.
+        /// Gets or sets a representation of the texture to use for the progress bar.
         /// </summary>
+        /// <remarks>
+        /// Setting this texture will result in (slow) image processing to create data.
+        /// It does not assume the same color scheme, but it does assume the same scale.
+        /// If the bar is one color, the program will parse it as 0% unless the color is the FillColor of this ProgressBar.
+        /// If the color scheme is inverted in the texture you are setting this ProgressBar to, you should be aware of this.
+        /// </remarks>
         public override Texture2D Texture
         {
             get
