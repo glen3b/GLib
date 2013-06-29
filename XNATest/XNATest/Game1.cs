@@ -64,11 +64,12 @@ namespace XNATest
             ProgressBar progBar = new ProgressBar(new Vector2(55), Color.White, Color.Black, spriteBatch);
             progBar.Scale = new Vector2(.25f);
             progBar.Denominator = 1024;
+            progBar.WidthScale = 2;
+            progBar.HeightScale = 5;
             progBar.ProgressBarFilled += new EventHandler(progBar_ProgressBarFilled);
             progBar.Value = 0;
             progBar.Updated += new EventHandler(progBar_Updated);
-            progBar.WidthScale = 2;
-            progBar.HeightScale = 5;
+            
 
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;

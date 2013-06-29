@@ -164,9 +164,10 @@ namespace Glib.XNA.SpriteLib
                     {
                         Color colorOnLeft = textureData[0];
 
-                        //Assuming scale of 1
                         int progBarValue = 0;
-                        int progBarDenom = textureData.Length / value.Height;
+
+                        //This is scale accounted
+                        int progBarDenom = textureData.Length / value.Height / _widthScale;
                         //Begin parsing, we know color on left is value
                         for (int i = 0; i < progBarDenom; i++)
                         {
@@ -178,7 +179,7 @@ namespace Glib.XNA.SpriteLib
                         }
 
                         //Account for current scale, assign variables
-                        Denominator = progBarDenom / _widthScale;
+                        Denominator = progBarDenom;
                         Value = progBarValue / _widthScale;
                     }
                     //throw new NotImplementedException("You cannot set the texture of a progress bar.");
