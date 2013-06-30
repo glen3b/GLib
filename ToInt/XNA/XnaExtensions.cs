@@ -53,6 +53,33 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Create a 2-color Texture2D on the specified graphics device of the specified size.
+        /// </summary>
+        /// <param name="graphics">The GraphicsDevice to create the Texture2D on.</param>
+        /// <param name="colorDetermine">The predicate to use for determining the color of every individual pixel in the texture.</param>
+        /// <param name="trueColor">The color to set a pixel to when the predicate returns true.</param>
+        /// <param name="falseColor">The color to set a pixel to when the predicate returns false.</param>
+        /// <param name="width">The width of the texture.</param>
+        /// <param name="height">The height of the texture.</param>
+        /// <returns>A 2-color Texture2D of the specified size.</returns>
+        public static Texture2D CreateTexture(this GraphicsDevice graphics, Predicate<Point> colorDetermine, Color trueColor, Color falseColor, int width, int height)
+        {
+            Texture2D returnValue = new Texture2D(graphics, width, height);
+            Color[] data = new Color[width * height];
+            for (int w_en = 0; w_en < width; w_en++)
+            {
+                for (int h_en = 0; h_en < height; h_en++)
+                {
+                    data[h_en * width + w_en] = colorDetermine.Invoke(new Point(w_en, h_en)) ? trueColor : falseColor;
+                }
+            }
+
+            returnValue.SetData<Color>(data);
+
+            return returnValue;
+        }
+
+        /// <summary>
         /// Convert a vector to a rotation angle in radians.
         /// </summary>
         /// <param name="vector">Vector2 to translate to rotation angle.</param>
