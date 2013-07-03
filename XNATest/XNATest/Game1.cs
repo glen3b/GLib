@@ -108,7 +108,7 @@ namespace XNATest
         {
             ProgressBar pb = sender.Cast<ProgressBar>();
 
-            pb.Value += pb.Value == pb.Denominator ? 0 : 1;
+            //pb.Value += pb.Value == pb.Denominator ? 0 : 1;
         }
 
         TextSprite menuTxtTwo;

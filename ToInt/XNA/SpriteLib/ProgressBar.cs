@@ -21,14 +21,18 @@ namespace Glib.XNA.SpriteLib
         {
             get { return _denominator; }
             set {
-                if (value <= 0)
+                if (value != _denominator)
                 {
-                    throw new ArgumentException("The denominator must be greater than zero.");
-                }
-                _denominator = value;
-                if (_denominator > Value)
-                {
-                    Value = _denominator;
+                    if (value <= 0)
+                    {
+                        throw new ArgumentException("The denominator must be greater than zero.");
+                    }
+                    _denominator = value;
+                    if (_denominator > Value)
+                    {
+                        Value = _denominator;
+                    }
+                    _textureNeedsCalculation = true;
                 }
             }
         }
@@ -57,7 +61,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                _heightScale = value;
+                if (_heightScale != value)
+                {
+                    _heightScale = value;
+                    _textureNeedsCalculation = true;
+                }
             }
         }
 
@@ -69,7 +77,13 @@ namespace Glib.XNA.SpriteLib
         public int WidthScale
         {
             get { return _widthScale; }
-            set { _widthScale = value; }
+            set{
+                if (_widthScale != value)
+                {
+                    _widthScale = value;
+                    _textureNeedsCalculation = true;
+                }
+           }
         }
         
 
@@ -84,6 +98,9 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private bool _textureNeedsCalculation = true;
+        private Texture2D _cachedTexture = null;
+
         /// <summary>
         /// Gets or sets the numerator (value) of the progress bar.
         /// </summary>
@@ -91,15 +108,19 @@ namespace Glib.XNA.SpriteLib
         {
             get { return _value; }
             set {
-                if (value > Denominator)
+                if (value != _value)
                 {
-                    throw new ArgumentException("The value cannot be greater than the denominator.");
+                    if (value > Denominator)
+                    {
+                        throw new ArgumentException("The value cannot be greater than the denominator.");
+                    }
+                    if (ProgressBarFilled != null && value == Denominator)
+                    {
+                        ProgressBarFilled(this, EventArgs.Empty);
+                    }
+                    _value = value;
+                    _textureNeedsCalculation = true;
                 }
-                if (ProgressBarFilled != null && value == Denominator)
-                {
-                    ProgressBarFilled(this, EventArgs.Empty);
-                }
-                _value = value;
             }
         }
 
@@ -126,6 +147,10 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
+                if (_cachedTexture != null && !_textureNeedsCalculation)
+                {
+                    return _cachedTexture;
+                }
                 Texture2D returnValue = new Texture2D(SpriteBatch.GraphicsDevice, Denominator * _widthScale, _heightScale);
 
                 Color[] data = new Color[returnValue.Width*returnValue.Height];
@@ -143,7 +168,8 @@ namespace Glib.XNA.SpriteLib
                 }
 
                 returnValue.SetData<Color>(data);
-
+                _cachedTexture = returnValue;
+                _textureNeedsCalculation = false;
                 return returnValue;
             }
             set
