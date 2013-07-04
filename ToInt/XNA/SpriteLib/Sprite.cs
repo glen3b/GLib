@@ -482,11 +482,11 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Checks whether the user is clicking on the sprite, using the default MouseState.
+        /// Checks whether the user is clicking on the sprite, using the MouseState of InputLib.Mouse.MouseManager.
         /// </summary>
         public bool ClickCheck()
         {
-            return ClickCheck(Mouse.GetState());
+            return ClickCheck(InputLib.Mouse.MouseManager.CurrentMouseState);
         }
             
 
@@ -588,11 +588,14 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Follow the mouse pointer.
         /// </summary>
+        /// <remarks>
+        /// Uses the InputLib.Mouse.MouseManager.CurrentMouseState.
+        /// </remarks>
         /// <param name="initialRotation">The offset rotation to use in adjusting the Sprite's rotation towards the mouse.</param>
         /// <param name="speed">The speed of following.</param>
         public void FollowMouse(SpriteRotation initialRotation, float speed = .1f)
         {
-            MouseState mouse = Mouse.GetState();
+            MouseState mouse = InputLib.Mouse.MouseManager.CurrentMouseState;
             Vector2 target = new Vector2(mouse.X, mouse.Y);
 
             Vector2 direction = target - Position;
@@ -660,7 +663,7 @@ namespace Glib.XNA.SpriteLib
                 }
             }
             */
-            MouseState current = Mouse.GetState();
+            MouseState current = InputLib.Mouse.MouseManager.CurrentMouseState;
 
             if (MouseEnter != null && Intersects(current) && !Intersects(_lastMouseState))
             {

@@ -165,11 +165,12 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <remarks>
         /// Does not call Update(GameTime) on subclasses of Sprite implementing ITimerSprite.
+        /// The MouseState for click checking is InputLib.Mouse.MouseManager.CurrentMouseState.
         /// </remarks>
         public void Update()
         {
             callKeyboardEvents();
-            MouseState ms = Mouse.GetState();
+            MouseState ms = InputLib.Mouse.MouseManager.CurrentMouseState;
             for (_i = 0; _i < Sprites.Count; _i++ )
             {
                 
@@ -186,8 +187,11 @@ namespace Glib.XNA.SpriteLib
 
         /// <summary>
         /// Update all Sprites managed by this SpriteManager, calling Update(GameTime) on ITimerSprites where neccesary.
-        /// THIS WILL NOT CALL KEYBOARD OR MOSUE EVENTS IF gameTime.IsRunningSlowly IS TRUE.
+        /// THIS WILL NOT CALL KEYBOARD OR MOUSE EVENTS IF gameTime.IsRunningSlowly IS TRUE.
         /// </summary>
+        /// <remarks>
+        /// Uses InputLib.Mouse.MouseManager.CurrentMouseState.
+        /// </remarks>
         /// <param name="gameTime">The current game time.</param>
         public void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
@@ -195,7 +199,7 @@ namespace Glib.XNA.SpriteLib
             if (!gameTime.IsRunningSlowly)
             {
                 callKeyboardEvents();
-                ms = Mouse.GetState();
+                ms = InputLib.Mouse.MouseManager.CurrentMouseState;
             }
             for (_i = 0; _i < Sprites.Count; _i++)
             {

@@ -48,9 +48,12 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Update the TextSprite. Just calls the Updated event by default.
         /// </summary>
+        /// <remarks>
+        /// Uses the InputLib.Mouse.MouseManager.CurrentMouseState for mouse data.
+        /// </remarks>
         public virtual void Update()
         {
-            MouseState currentMouseState = Mouse.GetState();
+            MouseState currentMouseState = InputLib.Mouse.MouseManager.CurrentMouseState;
             
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
