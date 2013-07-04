@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.ComponentModel;
 
 namespace Glib.XNA.SpriteLib
@@ -437,8 +436,6 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
-        private MouseState _lastMouseState = new MouseState();
-
         /// <summary>
         /// Draws the sprite.
         /// Requires you to begin the SpriteBatch before you draw the sprite, and to end the SpriteBatch after you draw the sprite.
@@ -460,24 +457,6 @@ namespace Glib.XNA.SpriteLib
             Drawn(this, new EventArgs());
         }
 
-        /// <summary>
-        /// Checks whether the user is clicking on the sprite.
-        /// </summary>
-        /// <param name="ms">The current MouseState</param>
-        /// <returns></returns>
-        public bool ClickCheck(MouseState ms)
-        {
-            return ms.LeftButton == ButtonState.Pressed && Intersects(new Vector2(ms.X, ms.Y));
-        }
-
-        /// <summary>
-        /// Checks whether the user is clicking on the sprite, using the default MouseState.
-        /// </summary>
-        public bool ClickCheck()
-        {
-            return ClickCheck(Mouse.GetState());
-        }
-            
 
         /// <summary>
         /// Checks whether the given point intersects with the sprite.
@@ -492,16 +471,6 @@ namespace Glib.XNA.SpriteLib
             realY -= Origin.Y;
 
             return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
-        }
-
-        /// <summary>
-        /// Checks whether the specified MouseState's pointer intersects with this sprite.
-        /// </summary>
-        /// <param name="ms">The MouseState to check intersection against.</param>
-        /// <returns></returns>
-        public bool Intersects(MouseState ms)
-        {
-            return Intersects(new Vector2(ms.X, ms.Y));
         }
 
         /// <summary>
@@ -574,56 +543,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Follow the mouse pointer.
-        /// </summary>
-        /// <param name="initialRotation">The offset rotation to use in adjusting the Sprite's rotation towards the mouse.</param>
-        public void FollowMouse(SpriteRotation initialRotation)
-        {
-            FollowMouse(initialRotation, .1f);
-        }
-
-        /// <summary>
-        /// Follow the mouse pointer.
-        /// </summary>
-        /// <param name="initialRotation">The offset rotation to use in adjusting the Sprite's rotation towards the mouse.</param>
-        /// <param name="speed">The speed of following.</param>
-        public void FollowMouse(SpriteRotation initialRotation, float speed)
-        {
-            MouseState mouse = Mouse.GetState();
-            Vector2 target = new Vector2(mouse.X, mouse.Y);
-
-            Vector2 direction = target - Position;
-            float acceleration = direction.Length() / 10;
-
-            if (direction.LengthSquared() > 1)
-            {
-                direction.Normalize();
-
-                direction += new Vector2(speed, speed);
-                direction *= acceleration;
-                Position += direction;
-                Rotation.Radians = direction.ToAngle(initialRotation.Radians);
-            }
-        }
-
-        /// <summary>
-        /// Follow the mouse pointer.
-        /// </summary>
-        /// <param name="speed">The speed of following.</param>
-        public void FollowMouse(float speed)
-        {
-            FollowMouse(new SpriteRotation(), speed);
-        }
-
-        /// <summary>
-        /// Follow the mouse pointer.
-        /// </summary>
-        public void FollowMouse()
-        {
-            FollowMouse(.1f);
-        }
-
-        /// <summary>
         /// Logically update this sprite. This can also be done in the Updated event.
         /// </summary>
         public virtual void Update()
@@ -665,25 +584,11 @@ namespace Glib.XNA.SpriteLib
                 }
             }
             */
-            MouseState current = Mouse.GetState();
-
-            if (MouseEnter != null && Intersects(current) && !Intersects(_lastMouseState))
-            {
-                MouseEnter(this, new EventArgs());
-            }
-
-            if (MouseLeave != null && !Intersects(current) && Intersects(_lastMouseState))
-            {
-                MouseLeave(this, new EventArgs());
-            }
 
             if (Updated != null)
             {
                 Updated(this, new EventArgs());
             }
-
-
-            _lastMouseState = current;
         }
     }
 }
