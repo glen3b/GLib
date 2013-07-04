@@ -319,15 +319,6 @@ namespace Glib.XNA.SpriteLib
         public Color Color = Color.White;
 
         /// <summary>
-        /// An event called when the mouse enters the area of the Sprite.
-        /// </summary>
-        public event EventHandler MouseEnter;
-        /// <summary>
-        /// An event called when the mouse leaves the area of the Sprite.
-        /// </summary>
-        public event EventHandler MouseLeave;
-
-        /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
         /// </summary>
         public UpdateParamaters UpdateParams = new UpdateParamaters(true,true);

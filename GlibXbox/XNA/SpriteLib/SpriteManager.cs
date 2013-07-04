@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -28,16 +27,6 @@ namespace Glib.XNA.SpriteLib
                 return _sb;
             }
         }
-
-        /// <summary>
-        /// An event called when a sprite is clicked on.
-        /// </summary>
-        public event SpriteClickEventHandler SpriteClick = null;
-
-        /// <summary>
-        /// An event called when a key is down.
-        /// </summary>
-        public event KeyEventHandler KeyDown = null;
 
         private int _i = 0;
         
@@ -146,21 +135,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Call KeyPress events.
-        /// </summary>
-        private void callKeyboardEvents()
-        {
-            if (KeyDown != null)
-            {
-                List<Keys> pressed = Keyboard.GetState().GetPressedKeys().ToList();
-                if (pressed.Count > 0)
-                {
-                    KeyDown(this, new KeyEventArgs(pressed));
-                }
-            }
-        }
-
-        /// <summary>
         /// Update all sprites managed by this SpriteManager.
         /// </summary>
         /// <remarks>
@@ -168,19 +142,10 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public void Update()
         {
-            callKeyboardEvents();
-            MouseState ms = Mouse.GetState();
             for (_i = 0; _i < Sprites.Count; _i++ )
             {
                 
                     this[_i].Update();
-                    if (this[_i] != null)
-                    {
-                    if (this[_i].ClickCheck(ms) && SpriteClick != null)
-                    {
-                        SpriteClick(this, new SpriteClickEventArgs(this[_i], ms.X, ms.Y, true));
-                    }
-                }
             }
         }
 
@@ -191,12 +156,6 @@ namespace Glib.XNA.SpriteLib
         /// <param name="gameTime">The current game time.</param>
         public void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            MouseState? ms = null;
-            if (!gameTime.IsRunningSlowly)
-            {
-                callKeyboardEvents();
-                ms = Mouse.GetState();
-            }
             for (_i = 0; _i < Sprites.Count; _i++)
             {
                 if (this[_i].GetType().GetInterfaces().Contains(typeof(ITimerSprite)))
@@ -206,16 +165,6 @@ namespace Glib.XNA.SpriteLib
                 else
                 {
                     this[_i].Update();
-                }
-                if (!gameTime.IsRunningSlowly && ms.HasValue)
-                {
-                    if (this[_i] != null)
-                    {
-                        if (this[_i].ClickCheck(ms.Value) && SpriteClick != null)
-                        {
-                            SpriteClick(this, new SpriteClickEventArgs(this[_i], ms.Value.X, ms.Value.Y, true));
-                        }
-                    }
                 }
             }
         }

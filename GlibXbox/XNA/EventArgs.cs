@@ -49,47 +49,6 @@ namespace Glib.XNA
     }
 
     /// <summary>
-    /// Event arguments for a sprite click.
-    /// </summary>
-    public class SpriteClickEventArgs : EventArgs
-    {
-        /// <summary>
-        /// The X coordinate of the click on the screen.
-        /// </summary>
-        public readonly int X;
-
-        /// <summary>
-        /// Whether or not this event is being called by a SpriteManager.
-        /// </summary>
-        public readonly bool CalledByManager;
-
-        /// <summary>
-        /// The Y coordinate of the click on the screen.
-        /// </summary>
-        public readonly int Y;
-
-        /// <summary>
-        /// The sprite that was clicked on.
-        /// </summary>
-        public readonly Glib.XNA.SpriteLib.Sprite Sprite;
-
-        /// <summary>
-        /// Create a new SpriteClickEventArgs, specifying a position and sprite.
-        /// </summary>
-        /// <param name="x">The X position of the click.</param>
-        /// <param name="y">The Y position of the click.</param>
-        /// <param name="spr">The sprite that was clicked on.</param>
-        /// <param name="manager">Whether or not this event is being called by a SpriteManager.</param>
-        public SpriteClickEventArgs(Glib.XNA.SpriteLib.Sprite spr, int x, int y, bool manager)
-        {
-            this.Sprite = spr;
-            this.X = x;
-            this.CalledByManager = manager;
-            this.Y = y;
-        }
-    }
-
-    /// <summary>
     /// Event arguments for a key event.
     /// </summary>
     public class KeyEventArgs : EventArgs

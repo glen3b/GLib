@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -13,12 +12,6 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
-        /// <summary>
-        /// An event fired after every click of this TextSprite.
-        /// </summary>
-        public event EventHandler Clicked;
-
-        private MouseState _lastMouseState = new MouseState();
 
         private bool _isSelected;
 
@@ -49,14 +42,6 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void Update()
         {
-            MouseState currentMouseState = Mouse.GetState();
-            
-            Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
-            Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
-            if (Clicked != null && ( ( msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed )))
-            {
-                Clicked(this, new EventArgs());
-            }
             if (_isHoverable)
             {
                 if (!HoverColor.HasValue || !NonHoverColor.HasValue)
@@ -69,21 +54,9 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)
-                    {
-                        //Intersecting.
-                        IsSelected = true;
-                        Color = HoverColor.Value;
-                    }
-                    else
-                    {
-                        //Not intersecting.
-                        IsSelected = false;
-                        Color = NonHoverColor.Value;
-                    }
+                    throw new NotImplementedException("Mouse selection is not implemented on XBOX 360 systems.");
                 }
             }
-            _lastMouseState = currentMouseState;
             if (Updated != null)
             {
                 Updated(this, new EventArgs());
@@ -148,15 +121,6 @@ namespace Glib.XNA.SpriteLib
             SpriteBatch = sb;
             Font = font;
             Text = text;
-            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
-        }
-
-        void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
-        {
-            if (_isHoverable && CallKeyboardClickEvent && _isSelected && e.Key == Keys.Enter && Clicked != null)
-            {
-                Clicked(this, EventArgs.Empty);
-            }
         }
 
         /// <summary>
