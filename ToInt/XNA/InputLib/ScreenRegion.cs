@@ -102,7 +102,7 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// Update this ScreenRegion, calling mouse events.
         /// </summary>
-        public void Update()
+        internal void Update()
         {
             bool isMouseInCurrent = false;
             bool isMouseInPast = false;

@@ -39,7 +39,7 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// Update the MouseManager.
         /// </summary>
-        public static void Update()
+        internal static void Update()
         {
             _currentMs = Microsoft.Xna.Framework.Input.Mouse.GetState();
 

@@ -50,7 +50,7 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// Update the KeyboardManager, calling the appropriate events.
         /// </summary>
-        public static void Update()
+        internal static void Update()
         {
             KeyboardState current = Keyboard.GetState();
 

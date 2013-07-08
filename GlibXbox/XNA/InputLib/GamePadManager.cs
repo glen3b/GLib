@@ -161,7 +161,7 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// Update the GamePadManager.
         /// </summary>
-        public void Update()
+        internal void Update()
         {
             _currentGamepadState = GamePad.GetState(_player);
             if (LeftJoystickMoved != null && _currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
