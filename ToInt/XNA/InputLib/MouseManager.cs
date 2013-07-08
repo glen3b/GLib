@@ -26,6 +26,11 @@ namespace Glib.XNA.InputLib
         /// </summary>
         public static MouseState LastMouseState { get; private set; }
 
+        /// <summary>
+        /// An event fired after the update of the MouseManager, but before the assignment of LastMouseState.
+        /// </summary>
+        public static event EventHandler Updated;
+
         private static List<ScreenRegion> _allRegions = new List<ScreenRegion>();
 
         /// <summary>
@@ -46,6 +51,11 @@ namespace Glib.XNA.InputLib
             foreach (ScreenRegion s in _allRegions)
             {
                 s.Update();
+            }
+
+            if (Updated != null)
+            {
+                Updated(null, EventArgs.Empty);
             }
 
             LastMouseState = _currentMs;
