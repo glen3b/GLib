@@ -32,6 +32,10 @@ namespace Glib.XNA.InputLib
         {
             base.Update(gameTime);
             KeyboardManager.Update();
+            GamePadManager.One.Update();
+            GamePadManager.Two.Update();
+            GamePadManager.Three.Update();
+            GamePadManager.Four.Update();
         }
     }
 }
