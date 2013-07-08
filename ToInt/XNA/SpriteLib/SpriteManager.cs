@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Glib.XNA.InputLib;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -170,7 +171,7 @@ namespace Glib.XNA.SpriteLib
         public void Update()
         {
             callKeyboardEvents();
-            MouseState ms = InputLib.Mouse.MouseManager.CurrentMouseState;
+            MouseState ms = MouseManager.CurrentMouseState;
             for (_i = 0; _i < Sprites.Count; _i++ )
             {
                 
@@ -199,7 +200,7 @@ namespace Glib.XNA.SpriteLib
             if (!gameTime.IsRunningSlowly)
             {
                 callKeyboardEvents();
-                ms = InputLib.Mouse.MouseManager.CurrentMouseState;
+                ms = MouseManager.CurrentMouseState;
             }
             for (_i = 0; _i < Sprites.Count; _i++)
             {

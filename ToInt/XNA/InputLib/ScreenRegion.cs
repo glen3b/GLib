@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Glib.XNA.InputLib.Mouse
+namespace Glib.XNA.InputLib
 {
     /// <summary>
     /// Represents a region on screen which can call mouse events.

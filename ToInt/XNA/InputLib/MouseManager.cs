@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 
-namespace Glib.XNA.InputLib.Mouse
+namespace Glib.XNA.InputLib
 {
     /// <summary>
     /// Represents a manager of mouse events and data.

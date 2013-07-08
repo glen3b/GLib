@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Glib.XNA
 {
@@ -39,7 +35,7 @@ namespace Glib.XNA
     /// </summary>
     public interface ISizedScreenObject : ISizable, IPositionable
     {
-
+        
     }
 
     /// <summary>

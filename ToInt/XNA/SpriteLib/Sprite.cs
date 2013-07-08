@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.ComponentModel;
-using Glib.XNA.InputLib.Mouse;
+using Glib.XNA.InputLib;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -486,7 +486,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public bool ClickCheck()
         {
-            return ClickCheck(InputLib.Mouse.MouseManager.CurrentMouseState);
+            return ClickCheck(MouseManager.CurrentMouseState);
         }
             
 
@@ -595,7 +595,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="speed">The speed of following.</param>
         public void FollowMouse(SpriteRotation initialRotation, float speed = .1f)
         {
-            MouseState mouse = InputLib.Mouse.MouseManager.CurrentMouseState;
+            MouseState mouse = MouseManager.CurrentMouseState;
             Vector2 target = new Vector2(mouse.X, mouse.Y);
 
             Vector2 direction = target - Position;
@@ -611,6 +611,7 @@ namespace Glib.XNA.SpriteLib
                 Rotation.Radians = direction.ToAngle(initialRotation.Radians);
             }
         }
+
 
         /// <summary>
         /// Follow the mouse pointer.
@@ -663,7 +664,7 @@ namespace Glib.XNA.SpriteLib
                 }
             }
             */
-            MouseState current = InputLib.Mouse.MouseManager.CurrentMouseState;
+            MouseState current = MouseManager.CurrentMouseState;
 
             if (MouseEnter != null && Intersects(current) && !Intersects(_lastMouseState))
             {

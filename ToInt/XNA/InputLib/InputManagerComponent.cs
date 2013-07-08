@@ -32,7 +32,7 @@ namespace Glib.XNA.InputLib
         {
             base.Update(gameTime);
             KeyboardManager.Update();
-            Mouse.MouseManager.Update();
+            MouseManager.Update();
         }
     }
 }

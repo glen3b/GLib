@@ -53,7 +53,7 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public virtual void Update()
         {
-            MouseState currentMouseState = InputLib.Mouse.MouseManager.CurrentMouseState;
+            MouseState currentMouseState = MouseManager.CurrentMouseState;
             
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
