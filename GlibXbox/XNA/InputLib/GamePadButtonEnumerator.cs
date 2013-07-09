@@ -128,6 +128,16 @@ namespace Glib.XNA.InputLib
         public SoundEffect SelectionSound = null;
 
         /// <summary>
+        /// Creates a new GamePadButtonEnumerator with the specified buttons and input type, using an axis difference of 0.6, a delay of 250 milliseconds, player one's GamePad, and the A button.
+        /// </summary>
+        /// <param name="allButtons">All of the buttons to include in the GamePadButtonEnumerator.</param>
+        /// <param name="inputType">The type of input to accept for GamePad-based button enumeration.</param>
+        public GamePadButtonEnumerator(TextSprite[,] allButtons, InputType inputType) : this(allButtons, inputType, 0.6f, TimeSpan.FromMilliseconds(250), Buttons.A, PlayerIndex.One)
+        {
+            
+        }
+
+        /// <summary>
         /// Creates a new GamePadButtonEnumerator with the specified buttons and parameters.
         /// </summary>
         /// <param name="allButtons">All of the buttons to include in the GamePadButtonEnumerator.</param>
