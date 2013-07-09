@@ -218,7 +218,6 @@ namespace Glib.XNA.InputLib
         protected void MoveSelection(Direction dir)
         {
             _allButtons[_rowCurrent, _columnCurrent].IsSelected = false;
-            //TODO: Change selection
             switch (dir)
             {
                 case Direction.Top:
@@ -262,6 +261,10 @@ namespace Glib.XNA.InputLib
                     break;
             }
             _allButtons[_rowCurrent, _columnCurrent].IsSelected = true;
+            if (SelectionSound != null)
+            {
+                SelectionSound.Play();
+            }
         }
 
         /// <summary>
