@@ -151,7 +151,6 @@ namespace Glib.XNA.SpriteLib
 
         /// <summary>
         /// Update all Sprites managed by this SpriteManager, calling Update(GameTime) on ITimerSprites where neccesary.
-        /// THIS WILL NOT CALL KEYBOARD OR MOSUE EVENTS IF gameTime.IsRunningSlowly IS TRUE.
         /// </summary>
         /// <param name="gameTime">The current game time.</param>
         public void Update(Microsoft.Xna.Framework.GameTime gameTime)
