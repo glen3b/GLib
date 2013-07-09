@@ -336,7 +336,7 @@ namespace Glib.XNA.InputLib
                     MoveSelection(Direction.Bottom);
                 }
             }
-            if (_lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
+            if (ButtonPress != null && _lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
             {
                 ButtonPress(_allButtons[_rowCurrent, _columnCurrent], EventArgs.Empty);
             }
