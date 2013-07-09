@@ -174,8 +174,11 @@ namespace Glib.XNA.InputLib
             }
             foreach (TextSprite ts in allButtons)
             {
-                ts.IsManuallySelectable = true;
-                ts.IsSelected = false;
+                if (ts != null)
+                {
+                    ts.IsManuallySelectable = true;
+                    ts.IsSelected = false;
+                }
             }
             for (int i = 0; i < allButtons.GetLength(1); i++)
             {
