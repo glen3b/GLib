@@ -89,18 +89,14 @@ namespace Glib.XNA.InputLib
                     }
                 }
 
-                List<Keys> rm = new List<Keys>();
-                foreach (Keys k in _knownDownKeys)
+                for (int i = 0; i < _knownDownKeys.Count; i++ )
                 {
-                    if (current.IsKeyUp(k))
+                    if (current.IsKeyUp(_knownDownKeys[i]))
                     {
-                        KeyPressed(null, new SingleKeyEventArgs(k));
-                        rm.Add(k);
+                        KeyPressed(null, new SingleKeyEventArgs(_knownDownKeys[i]));
+                        _knownDownKeys.RemoveAt(i);
+                        i--;
                     }
-                }
-                foreach (Keys rk in rm)
-                {
-                    _knownDownKeys.Remove(rk);
                 }
             }
 
