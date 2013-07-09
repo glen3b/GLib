@@ -75,7 +75,7 @@ namespace XNATest
             menuTxt.IsHoverable = true;
             menuTxt.IsManuallySelectable = true;
             menuTxt.IsSelected = true;
-            //menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
+            menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
 
             menuTxtTwo = new TextSprite(spriteBatch, new Vector2(250,0), Content.Load<SpriteFont>("SpriteFont1"), "Selectable", Color.Black);
             menuTxtTwo.IsHoverable = true;

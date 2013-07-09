@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Glib.XNA.SpriteLib;
 using System.IO;
 using System.Windows.Forms;
+using Glib.XNA.InputLib;
 
 namespace SpritePreviewer
 {
@@ -84,7 +85,7 @@ namespace SpritePreviewer
         {
             // TODO: Add your initialization logic here
 
-            Components.Add(new Glib.XNA.InputLib.InputManagerComponent(this));
+            Components.Add(new InputManagerComponent(this));
 
             base.Initialize();
         }
@@ -108,7 +109,6 @@ namespace SpritePreviewer
             arrows[0].Rotation = new SpriteRotation(90);
             arrows[0].UseCenterAsOrigin = true;
             //arrows[0].Center = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
-            arrows.KeyDown += new Glib.XNA.KeyEventHandler(arrows_KeyDown);
             //Enable drag-n-drop support
 
             System.Windows.Forms.Form underlyingForm = (System.Windows.Forms.Form)System.Windows.Forms.Form.FromHandle(Window.Handle);
@@ -118,21 +118,6 @@ namespace SpritePreviewer
             //base.Initialize();
             InitializeComponent(ref underlyingForm);
             IsMouseVisible = true;
-        }
-
-        void arrows_KeyDown(object source, Glib.XNA.KeyEventArgs e)
-        {
-            if (e.KeyIsPressed(Microsoft.Xna.Framework.Input.Keys.Up) && keyPressLimiter.TotalMilliseconds >= 75)
-                {
-                    scale += e.Shift ? 0.5m : 0.05m;
-                    keyPressLimiter = new TimeSpan();
-                }
-            if (e.KeyIsPressed(Microsoft.Xna.Framework.Input.Keys.Down) && keyPressLimiter.TotalMilliseconds >= 75)
-                {
-                    scale -= e.Shift ? 0.5m : 0.05m;
-                    keyPressLimiter = new TimeSpan();
-                }
-
         }
 
         TextSprite ts;
@@ -274,6 +259,7 @@ namespace SpritePreviewer
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             keyPressLimiter += gameTime.ElapsedGameTime;
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
@@ -281,8 +267,21 @@ namespace SpritePreviewer
 
             arrows.Update(gameTime);
 
+            KeyboardState current = KeyboardManager.State;
+
+            if (current.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Up) && keyPressLimiter.TotalMilliseconds >= 75)
+            {
+                scale += current.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift) || current.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift) ? 0.5m : 0.05m;
+                keyPressLimiter = new TimeSpan();
+            }
+            if (current.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Down) && keyPressLimiter.TotalMilliseconds >= 75)
+            {
+                scale -= current.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift) ? 0.5m : 0.05m;
+                keyPressLimiter = new TimeSpan();
+            }
+
             // TODO: Add your update logic here
-            base.Update(gameTime);
+            
         }
 
         /// <summary>

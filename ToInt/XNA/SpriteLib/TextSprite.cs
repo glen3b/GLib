@@ -57,7 +57,7 @@ namespace Glib.XNA.SpriteLib
             
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
-            if (Clicked != null && ( ( msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed )))
+            if (Clicked != null && IsSelected && ( ( msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed )))
             {
                 Clicked(this, new EventArgs());
             }

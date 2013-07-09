@@ -97,6 +97,7 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="XNA\EventArgs.cs" />
     <Compile Include="XNA\GameTimer.cs" />
+    <Compile Include="XNA\InputLib\GamePadButtonEnumerator.cs" />
     <Compile Include="XNA\InputLib\GamePadManager.cs" />
     <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />
