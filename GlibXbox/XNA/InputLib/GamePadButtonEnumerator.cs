@@ -172,6 +172,25 @@ namespace Glib.XNA.InputLib
             {
                 throw new ArgumentException("submitButton must be a non-DPad button.");
             }
+            foreach (TextSprite ts in allButtons)
+            {
+                ts.IsManuallySelectable = true;
+                ts.IsSelected = false;
+            }
+            for (int i = 0; i < allButtons.GetLength(1); i++)
+            {
+                if (allButtons[0, i] != null)
+                {
+                    allButtons[0, i].IsSelected = true;
+                    _rowCurrent = 0;
+                    _columnCurrent = i;
+                    break;
+                }
+                if (i == allButtons.GetLength(1) - 1)
+                {
+                    throw new ArgumentException("The allButtons array must contain at least one non-null button in each row and column.");
+                }
+            }
             _delay = delay;
             _allButtons = allButtons;
             _axisDifference = axisDifference;
@@ -198,7 +217,51 @@ namespace Glib.XNA.InputLib
         /// </summary>
         protected void MoveSelection(Direction dir)
         {
-
+            _allButtons[_rowCurrent, _columnCurrent].IsSelected = false;
+            //TODO: Change selection
+            switch (dir)
+            {
+                case Direction.Top:
+                    do
+                    {
+                        _rowCurrent--;
+                        if (_rowCurrent < 0)
+                        {
+                            _rowCurrent = _allButtons.GetLength(0) - 1;
+                        }
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    break;
+                case Direction.Bottom:
+                    do
+                    {
+                        _rowCurrent++;
+                        if (_rowCurrent >= _allButtons.GetLength(0))
+                        {
+                            _rowCurrent = 0;
+                        }
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    break;
+                case Direction.Left:
+                    do{
+                        _columnCurrent--;
+                        if (_columnCurrent < 0)
+                        {
+                            _columnCurrent = _allButtons.GetLength(1) - 1;
+                        }
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    break;
+                case Direction.Right:
+                    do
+                    {
+                        _columnCurrent++;
+                        if (_columnCurrent >= _allButtons.GetLength(1))
+                        {
+                            _columnCurrent = 0;
+                        }
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    break;
+            }
+            _allButtons[_rowCurrent, _columnCurrent].IsSelected = true;
         }
 
         /// <summary>
