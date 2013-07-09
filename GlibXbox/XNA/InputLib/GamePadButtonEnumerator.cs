@@ -197,6 +197,7 @@ namespace Glib.XNA.InputLib
             _submitButton = submitButton;
             this.Player = player;
             Input = inputType;
+            _lastState = new GamePadState(new GamePadThumbSticks(), new GamePadTriggers(), new GamePadButtons(_submitButton), new GamePadDPad(ButtonState.Pressed, ButtonState.Pressed, ButtonState.Pressed, ButtonState.Pressed));
         }
 
         /// <summary>
