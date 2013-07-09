@@ -15,12 +15,86 @@ namespace Glib.XNA.InputLib
     {
         internal DPadEvents()
         {
-
         }
+
+        /// <summary>
+        /// An event fired when the left DPad key is pressed.
+        /// </summary>
+        public event EventHandler LeftArrowPressed;
+
+        /// <summary>
+        /// An event fired when the left DPad key is released.
+        /// </summary>
+        public event EventHandler LeftArrowReleased;
+
+        /// <summary>
+        /// An event fired when the right DPad key is pressed.
+        /// </summary>
+        public event EventHandler RightArrowPressed;
+
+        /// <summary>
+        /// An event fired when the right DPad key is released.
+        /// </summary>
+        public event EventHandler RightArrowReleased;
+
+        /// <summary>
+        /// An event fired when the up DPad key is pressed.
+        /// </summary>
+        public event EventHandler UpArrowPressed;
+
+        /// <summary>
+        /// An event fired when the up DPad key is released.
+        /// </summary>
+        public event EventHandler UpArrowReleased;
+
+        /// <summary>
+        /// An event fired when the down DPad key is pressed.
+        /// </summary>
+        public event EventHandler DownArrowPressed;
+
+        /// <summary>
+        /// An event fired when the down DPad key is released.
+        /// </summary>
+        public event EventHandler DownArrowReleased;
 
         internal void FireEvents(GamePadDPad currentButtonState, GamePadDPad lastButtonState)
         {
-            //TODO
+            if (LeftArrowPressed != null && currentButtonState.Left == ButtonState.Pressed && lastButtonState.Left == ButtonState.Released)
+            {
+                LeftArrowPressed(this, EventArgs.Empty);
+            }
+            else if (LeftArrowReleased != null && lastButtonState.Left == ButtonState.Pressed && currentButtonState.Left == ButtonState.Released)
+            {
+                LeftArrowReleased(this, EventArgs.Empty);
+            }
+
+            if (RightArrowPressed != null && currentButtonState.Right == ButtonState.Pressed && lastButtonState.Right == ButtonState.Released)
+            {
+                RightArrowPressed(this, EventArgs.Empty);
+            }
+            else if (RightArrowReleased != null && lastButtonState.Right == ButtonState.Pressed && currentButtonState.Right == ButtonState.Released)
+            {
+                RightArrowReleased(this, EventArgs.Empty);
+            }
+
+            if (UpArrowPressed != null && currentButtonState.Up == ButtonState.Pressed && lastButtonState.Up == ButtonState.Released)
+            {
+                UpArrowPressed(this, EventArgs.Empty);
+            }
+            else if (UpArrowReleased != null && lastButtonState.Up == ButtonState.Pressed && currentButtonState.Up == ButtonState.Released)
+            {
+                UpArrowReleased(this, EventArgs.Empty);
+            }
+
+            if (DownArrowPressed != null && currentButtonState.Down == ButtonState.Pressed && lastButtonState.Down == ButtonState.Released)
+            {
+                DownArrowPressed(this, EventArgs.Empty);
+            }
+            else if (DownArrowReleased != null && lastButtonState.Down == ButtonState.Pressed && currentButtonState.Down == ButtonState.Released)
+            {
+                DownArrowReleased(this, EventArgs.Empty);
+            }
+
         }
     }
 
