@@ -95,9 +95,14 @@ namespace Glib.XNA.InputLib
         public event EventHandler MouseLeave;
 
         /// <summary>
-        /// An event called when there is a mouse click in this region.
+        /// An event called when there is a left mouse click in this region.
         /// </summary>
-        public event EventHandler MouseClick;
+        public event EventHandler LeftMouseClick;
+
+        /// <summary>
+        /// An event called when there is a right mouse click (AKA a right click) in this region.
+        /// </summary>
+        public event EventHandler RightMouseClick;
 
         /// <summary>
         /// Update this ScreenRegion, calling mouse events.
@@ -107,15 +112,15 @@ namespace Glib.XNA.InputLib
             bool isMouseInCurrent = false;
             bool isMouseInPast = false;
             isMouseInCurrent =
-                MouseManager.CurrentMouseState.X >= Position.X &&
-                MouseManager.CurrentMouseState.X <= Position.X + Width &&
-                MouseManager.CurrentMouseState.Y >= Position.Y &&
-                MouseManager.CurrentMouseState.Y <= Position.Y + Height;
+                MouseManager.CurrentMouseState.X >= _position.X &&
+                MouseManager.CurrentMouseState.X <= _position.X + _size.X &&
+                MouseManager.CurrentMouseState.Y >= _position.Y &&
+                MouseManager.CurrentMouseState.Y <= _position.Y + _size.Y;
             isMouseInPast =
-                MouseManager.LastMouseState.X >= Position.X &&
-                MouseManager.LastMouseState.X <= Position.X + Width &&
-                MouseManager.LastMouseState.Y >= Position.Y &&
-                MouseManager.LastMouseState.Y <= Position.Y + Height;
+                MouseManager.LastMouseState.X >= _position.X &&
+                MouseManager.LastMouseState.X <= _position.X + _size.X &&
+                MouseManager.LastMouseState.Y >= _position.Y &&
+                MouseManager.LastMouseState.Y <= _position.Y + _size.Y;
 
             if (!isMouseInPast && isMouseInCurrent && MouseEnter != null)
             {
@@ -125,13 +130,23 @@ namespace Glib.XNA.InputLib
             {
                 MouseLeave(this, EventArgs.Empty);
             }
-            if (MouseClick != null &&
+
+            if (LeftMouseClick != null &&
                 isMouseInCurrent &&
                 MouseManager.CurrentMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
                 && MouseManager.LastMouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released)
             {
-                MouseClick(this, EventArgs.Empty);
+                LeftMouseClick(this, EventArgs.Empty);
             }
+
+            if (RightMouseClick != null &&
+                isMouseInCurrent &&
+                MouseManager.CurrentMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed
+                && MouseManager.LastMouseState.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Released)
+            {
+                RightMouseClick(this, EventArgs.Empty);
+            }
+
         }
     }
 }
