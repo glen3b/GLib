@@ -64,11 +64,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Whether or not to call Clicked events for keypresses of Enter.
-        /// </summary>
-        public bool CallKeyboardClickEvent = true;
-
-        /// <summary>
         /// The color to use when hovering over the TextSprite, if hovering is enabled.
         /// </summary>
         public Color? HoverColor;
