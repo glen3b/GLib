@@ -132,6 +132,28 @@ namespace Glib.XNA.InputLib
             get { return _playerOne; }
         }
 
+        /// <summary>
+        /// Gets the GamePadManager for the specified player's controller.
+        /// </summary>
+        /// <param name="player">The PlayerIndex of the player to retrieve a GamePadManager for.</param>
+        /// <returns>The GamePadManager of the specified player's controller.</returns>
+        public static GamePadManager GetManager(PlayerIndex player)
+        {
+            switch (player)
+            {
+                case PlayerIndex.One:
+                    return One;
+                case PlayerIndex.Two:
+                    return Two;
+                case PlayerIndex.Three:
+                    return Three;
+                case PlayerIndex.Four:
+                    return Four;
+                default:
+                    throw new NotImplementedException("Support for the specified player is not implemented.");
+            }
+        }
+
         private static GamePadManager _playerTwo = new GamePadManager(PlayerIndex.Two);
 
         /// <summary>
