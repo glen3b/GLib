@@ -66,7 +66,11 @@ namespace Glib.XNA.SpriteLib
                         value.Moved += _parentSprMoved;
                         Position = new Vector2(value.X + (value.Width / 2 - Width / 2), value.Y + (value.Height / 2 - Height / 2));
                     }
-                    _parentSprite.Moved -= _parentSprMoved;
+
+                    if (_parentSprite != null)
+                    {
+                        _parentSprite.Moved -= _parentSprMoved;
+                    }
 
                     _parentSprite = value;
                 }
