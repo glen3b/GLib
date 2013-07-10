@@ -109,9 +109,84 @@ namespace Glib.XNA.InputLib
 
         }
 
+        /// <summary>
+        /// An event fired when the A button is pressed.
+        /// </summary>
+        public event EventHandler AButtonPressed;
+
+        /// <summary>
+        /// An event fired when the B button is pressed.
+        /// </summary>
+        public event EventHandler BButtonPressed;
+
+        /// <summary>
+        /// An event fired when the B button is released.
+        /// </summary>
+        public event EventHandler BButtonReleased;
+
+        /// <summary>
+        /// An event fired when the A button is released.
+        /// </summary>
+        public event EventHandler AButtonReleased;
+
+        /// <summary>
+        /// An event fired when the left shoulder is pressed.
+        /// </summary>
+        public event EventHandler LeftShoulderPressed;
+
+        /// <summary>
+        /// An event fired when the right shoulder is pressed.
+        /// </summary>
+        public event EventHandler RightShoulderPressed;
+
+        /// <summary>
+        /// An event fired when the left shoulder is released.
+        /// </summary>
+        public event EventHandler LeftShoulderReleased;
+
+        /// <summary>
+        /// An event fired when the right shoulder is released.
+        /// </summary>
+        public event EventHandler RightShoulderReleased;
+
         internal void FireEvents(GamePadButtons currentButtonState, GamePadButtons lastButtonState)
         {
             //TODO
+            if (AButtonPressed != null && currentButtonState.A == ButtonState.Pressed && lastButtonState.A == ButtonState.Released)
+            {
+                AButtonPressed(this, EventArgs.Empty);
+            }
+            else if (AButtonReleased != null && currentButtonState.A == ButtonState.Released && lastButtonState.A == ButtonState.Pressed)
+            {
+                AButtonReleased(this, EventArgs.Empty);
+            }
+
+            if (BButtonPressed != null && currentButtonState.B == ButtonState.Pressed && lastButtonState.B == ButtonState.Released)
+            {
+                BButtonPressed(this, EventArgs.Empty);
+            }
+            else if (BButtonReleased != null && currentButtonState.B == ButtonState.Released && lastButtonState.B == ButtonState.Pressed)
+            {
+                BButtonReleased(this, EventArgs.Empty);
+            }
+
+            if (LeftShoulderPressed != null && currentButtonState.LeftShoulder == ButtonState.Pressed && lastButtonState.LeftShoulder == ButtonState.Released)
+            {
+                LeftShoulderPressed(this, EventArgs.Empty);
+            }
+            else if (LeftShoulderReleased != null && currentButtonState.LeftShoulder == ButtonState.Released && lastButtonState.LeftShoulder == ButtonState.Pressed)
+            {
+                LeftShoulderReleased(this, EventArgs.Empty);
+            }
+
+            if (RightShoulderPressed != null && currentButtonState.RightShoulder == ButtonState.Pressed && lastButtonState.RightShoulder == ButtonState.Released)
+            {
+                RightShoulderPressed(this, EventArgs.Empty);
+            }
+            else if (RightShoulderReleased != null && currentButtonState.RightShoulder == ButtonState.Released && lastButtonState.RightShoulder == ButtonState.Pressed)
+            {
+                RightShoulderReleased(this, EventArgs.Empty);
+            }
         }
     }
 
