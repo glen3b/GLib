@@ -43,13 +43,42 @@ namespace Glib.XNA.SpriteLib
             get { return _isManualSelectable; }
             set { _isManualSelectable = value; }
         }
+
+        private Sprite _parentSprite = null;
+
+        /// <summary>
+        /// Gets or sets the parent sprite (such as a button image) of this TextSprite.
+        /// If not null, all selection, click, and positioning logic logic will be performed relative to this Sprite.
+        /// This includes centering this TextSprite to the specified ParentSprite upon set.
+        /// </summary>
+        public Sprite ParentSprite
+        {
+            get { return _parentSprite; }
+            set {
+                if (value != _parentSprite)
+                {
+                    if (value == null)
+                    {
+                        Position = _parentSprite.Position;
+                    }
+                    else
+                    {
+                        value.Moved += _parentSprMoved;
+                        Position = new Vector2(value.X + (value.Width / 2 - Width / 2), value.Y + (value.Height / 2 - Height / 2));
+                    }
+                    _parentSprite.Moved -= _parentSprMoved;
+
+                    _parentSprite = value;
+                }
+            }
+        }
         
 
         /// <summary>
         /// Update the TextSprite. Just calls the Updated event by default.
         /// </summary>
         /// <remarks>
-        /// Uses the InputLib.Mouse.MouseManager.CurrentMouseState for mouse data.
+        /// Uses the InputLib.MouseManager.CurrentMouseState for mouse data.
         /// </remarks>
         public virtual void Update()
         {
@@ -57,7 +86,20 @@ namespace Glib.XNA.SpriteLib
             
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
-            if (Clicked != null && IsSelected && ( ( msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height && oldMsPos.X >= X && oldMsPos.X <= X + Width && oldMsPos.Y >= Y && oldMsPos.Y <= Y + Height && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed )))
+
+            float actualX = X;
+            float actualY = Y;
+            float actualW = Width;
+            float actualH = Height;
+            if (_parentSprite != null)
+            {
+                actualX = _parentSprite.X = _parentSprite.Origin.X;
+                actualY = _parentSprite.Y = _parentSprite.Origin.Y;
+                actualW = _parentSprite.Width;
+                actualH = _parentSprite.Height;
+            }
+
+            if (Clicked != null && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
             {
                 Clicked(this, new EventArgs());
             }
@@ -73,7 +115,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)
+                    if ( _parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)  )
                     {
                         //Intersecting.
                         IsSelected = true;
@@ -155,6 +197,17 @@ namespace Glib.XNA.SpriteLib
             SpriteBatch = sb;
             Font = font;
             Text = text;
+            
+            _parentSprMoved = new EventHandler(
+            delegate(object src, EventArgs e)
+            {
+                if (_parentSprite != null)
+                {
+                    Position = new Vector2(_parentSprite.X + (_parentSprite.Width / 2 - Width / 2), _parentSprite.Y + (_parentSprite.Height / 2 - Height / 2));
+                }
+            }
+            );
+
             KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
         }
 
@@ -187,6 +240,8 @@ namespace Glib.XNA.SpriteLib
                 return Font.MeasureString(Text).Y;
             }
         }
+
+        private EventHandler _parentSprMoved;
 
         /// <summary>
         /// Construct a new TextSprite.
