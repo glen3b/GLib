@@ -135,6 +135,26 @@ namespace Glib.XNA.InputLib
         public event EventHandler LeftShoulderPressed;
 
         /// <summary>
+        /// An event fired when the Y button is pressed.
+        /// </summary>
+        public event EventHandler YButtonPressed;
+
+        /// <summary>
+        /// An event fired when the Y button is released.
+        /// </summary>
+        public event EventHandler YButtonReleased;
+
+        /// <summary>
+        /// An event fired when the X button is pressed.
+        /// </summary>
+        public event EventHandler XButtonPressed;
+
+        /// <summary>
+        /// An event fired when the X button is released.
+        /// </summary>
+        public event EventHandler XButtonReleased;
+
+        /// <summary>
         /// An event fired when the right shoulder is pressed.
         /// </summary>
         public event EventHandler RightShoulderPressed;
@@ -168,6 +188,24 @@ namespace Glib.XNA.InputLib
             else if (BButtonReleased != null && currentButtonState.B == ButtonState.Released && lastButtonState.B == ButtonState.Pressed)
             {
                 BButtonReleased(this, EventArgs.Empty);
+            }
+
+            if (YButtonPressed != null && currentButtonState.Y == ButtonState.Pressed && lastButtonState.Y == ButtonState.Released)
+            {
+                YButtonPressed(this, EventArgs.Empty);
+            }
+            else if (YButtonReleased != null && currentButtonState.Y == ButtonState.Released && lastButtonState.Y == ButtonState.Pressed)
+            {
+                YButtonReleased(this, EventArgs.Empty);
+            }
+
+            if (XButtonPressed != null && currentButtonState.X == ButtonState.Pressed && lastButtonState.X == ButtonState.Released)
+            {
+                XButtonPressed(this, EventArgs.Empty);
+            }
+            else if (XButtonReleased != null && currentButtonState.X == ButtonState.Released && lastButtonState.X == ButtonState.Pressed)
+            {
+                XButtonReleased(this, EventArgs.Empty);
             }
 
             if (LeftShoulderPressed != null && currentButtonState.LeftShoulder == ButtonState.Pressed && lastButtonState.LeftShoulder == ButtonState.Released)
