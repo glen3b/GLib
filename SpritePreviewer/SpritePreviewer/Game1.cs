@@ -22,6 +22,8 @@ namespace SpritePreviewer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        //Not a good name
         SpriteManager arrows;
 
         public Game1()
