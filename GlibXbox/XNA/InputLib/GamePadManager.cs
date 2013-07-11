@@ -171,7 +171,7 @@ namespace Glib.XNA.InputLib
 
         internal void FireEvents(GamePadButtons currentButtonState, GamePadButtons lastButtonState)
         {
-            //TODO
+            //TODO: Finish
             if (AButtonPressed != null && currentButtonState.A == ButtonState.Pressed && lastButtonState.A == ButtonState.Released)
             {
                 AButtonPressed(this, EventArgs.Empty);
