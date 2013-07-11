@@ -15,6 +15,42 @@ namespace Glib.XNA.SpriteLib
 
         private bool _isSelected;
 
+        private Sprite _parentSprite = null;
+
+        private EventHandler _parentSprMoved;
+
+        /// <summary>
+        /// Gets or sets the parent sprite (such as a button image) of this TextSprite.
+        /// If not null, all  positioning logic logic will be performed relative to this Sprite.
+        /// This includes centering this TextSprite to the specified ParentSprite upon set.
+        /// </summary>
+        public Sprite ParentSprite
+        {
+            get { return _parentSprite; }
+            set
+            {
+                if (value != _parentSprite)
+                {
+                    if (value == null)
+                    {
+                        Position = _parentSprite.Position;
+                    }
+                    else
+                    {
+                        value.Moved += _parentSprMoved;
+                        Position = new Vector2(value.X + (value.Width / 2 - Width / 2), value.Y + (value.Height / 2 - Height / 2));
+                    }
+
+                    if (_parentSprite != null)
+                    {
+                        _parentSprite.Moved -= _parentSprMoved;
+                    }
+
+                    _parentSprite = value;
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets a boolean indicating whether or not this is a selected TextSprite.
         /// </summary>
@@ -116,6 +152,16 @@ namespace Glib.XNA.SpriteLib
             SpriteBatch = sb;
             Font = font;
             Text = text;
+
+            _parentSprMoved = new EventHandler(
+            delegate(object src, EventArgs e)
+            {
+                if (_parentSprite != null)
+                {
+                    Position = new Vector2(_parentSprite.X + (_parentSprite.Width / 2 - Width / 2), _parentSprite.Y + (_parentSprite.Height / 2 - Height / 2));
+                }
+            }
+            );
         }
 
         /// <summary>
