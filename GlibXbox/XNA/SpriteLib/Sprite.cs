@@ -449,11 +449,12 @@ namespace Glib.XNA.SpriteLib
         }
 
 
+        #region Intersection checks
         /// <summary>
         /// Checks whether the given point intersects with the sprite.
         /// </summary>
-        /// <param name="pos">The position to check</param>
-        /// <returns></returns>
+        /// <param name="pos">The position to check.</param>
+        /// <returns>Whether or not the specified position intersects with this Sprite.</returns>
         public bool Intersects(Vector2 pos)
         {
             float realX = X;
@@ -465,24 +466,35 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Checks whether the specified MouseState's pointer intersects with this sprite.
+        /// </summary>
+        /// <param name="ms">The MouseState to check intersection against.</param>
+        /// <returns>Whether or not the specified mouse position intersects with this Sprite.</returns>
+        public bool Intersects(MouseState ms)
+        {
+            return Intersects(new Vector2(ms.X, ms.Y));
+        }
+
+        /// <summary>
         /// Checks whether the given rectangle intersects with this sprite.
         /// </summary>
         /// <param name="r">The rectangle to check intersection against</param>
-        /// <returns></returns>
+        /// <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
         public bool Intersects(Rectangle r)
         {
             return Rectangle.Intersects(r);
         }
 
         /// <summary>
-        /// Checks whether the given sprte intersects with this sprite.
+        /// Checks whether the given sprite intersects with this sprite.
         /// </summary>
-        /// <param name="s">The sprite to check intersection against</param>
-        /// <returns></returns>
+        /// <param name="s">The sprite to check intersection against.</param>
+        /// <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
         public bool Intersects(Sprite s)
         {
             return Intersects(s.Rectangle);
         }
+        #endregion
 
         /// <summary>
         /// Determines the edges which this sprite has points past, if any.
