@@ -97,8 +97,8 @@ namespace Glib.XNA.SpriteLib
             float actualH = Height;
             if (_parentSprite != null)
             {
-                actualX = _parentSprite.X - _parentSprite.Origin.X;
-                actualY = _parentSprite.Y - _parentSprite.Origin.Y;
+                actualX = _parentSprite.X - ( _parentSprite.Origin.X / Scale.X );
+                actualY = _parentSprite.Y - ( _parentSprite.Origin.Y / Scale.Y );
                 actualW = _parentSprite.Width;
                 actualH = _parentSprite.Height;
             }
