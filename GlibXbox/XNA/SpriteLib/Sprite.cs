@@ -466,16 +466,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Checks whether the specified MouseState's pointer intersects with this sprite.
-        /// </summary>
-        /// <param name="ms">The MouseState to check intersection against.</param>
-        /// <returns>Whether or not the specified mouse position intersects with this Sprite.</returns>
-        public bool Intersects(MouseState ms)
-        {
-            return Intersects(new Vector2(ms.X, ms.Y));
-        }
-
-        /// <summary>
         /// Checks whether the given rectangle intersects with this sprite.
         /// </summary>
         /// <param name="r">The rectangle to check intersection against</param>
