@@ -380,7 +380,7 @@ namespace Glib.XNA.SpriteLib
             get
             {
                 Vector2 usedPos = Position;
-                usedPos -= Origin / Scale;
+                usedPos -= Origin * Scale;
                 return new Rectangle(Convert.ToInt32(usedPos.X), Convert.ToInt32(usedPos.Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
             }
         }
@@ -459,8 +459,8 @@ namespace Glib.XNA.SpriteLib
         {
             float realX = X;
             float realY = Y;
-            realX -= Origin.X / Scale.X;
-            realY -= Origin.Y / Scale.Y;
+            realX -= Origin.X * Scale.X;
+            realY -= Origin.Y * Scale.Y;
 
             return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
         }
@@ -500,8 +500,8 @@ namespace Glib.XNA.SpriteLib
             List<Direction> allEdges = new List<Direction>();
             float realX = X;
             float realY = Y;
-            realX -= Origin.X / Scale.X;
-            realY -= Origin.Y / Scale.Y;
+            realX -= Origin.X * Scale.X;
+            realY -= Origin.Y * Scale.Y;
             if (realX < 0)
             {
                 allEdges.Add(Direction.Left);

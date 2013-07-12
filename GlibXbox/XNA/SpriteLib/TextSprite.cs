@@ -38,7 +38,7 @@ namespace Glib.XNA.SpriteLib
                     else
                     {
                         value.Moved += _parentSprMoved;
-                        Position = new Vector2( (value.X - (value.Origin.X / value.Scale.X)) + (value.Width / 2 - Width / 2), (value.Y - (value.Origin.Y / value.Scale.Y)) + (value.Height / 2 - Height / 2));
+                        Position = new Vector2( (value.X - (value.Origin.X * value.Scale.X)) + (value.Width / 2 - Width / 2), (value.Y - (value.Origin.Y * value.Scale.Y)) + (value.Height / 2 - Height / 2));
                     }
 
                     if (_parentSprite != null)
@@ -158,7 +158,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (_parentSprite != null)
                 {
-                    Position = new Vector2((_parentSprite.X - (_parentSprite.Origin.X / _parentSprite.Scale.X)) + (_parentSprite.Width / 2 - Width / 2), (_parentSprite.Y - (_parentSprite.Origin.Y / _parentSprite.Scale.Y)) + (_parentSprite.Height / 2 - Height / 2));
+                    Position = new Vector2((_parentSprite.X - (_parentSprite.Origin.X * _parentSprite.Scale.X)) + (_parentSprite.Width / 2 - Width / 2), (_parentSprite.Y - (_parentSprite.Origin.Y * _parentSprite.Scale.Y)) + (_parentSprite.Height / 2 - Height / 2));
                 }
             }
             );
