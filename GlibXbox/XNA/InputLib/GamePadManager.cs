@@ -373,43 +373,45 @@ namespace Glib.XNA.InputLib
         internal void Update()
         {
             _currentGamepadState = GamePad.GetState(_player);
-            if (LeftJoystickMoved != null && _currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
+            if (_currentGamepadState.PacketNumber != _lastGamepadState.PacketNumber)
             {
-                LeftJoystickMoved(this, EventArgs.Empty);
-            }
+                if (LeftJoystickMoved != null && _currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
+                {
+                    LeftJoystickMoved(this, EventArgs.Empty);
+                }
 
-            if (RightJoystickMoved != null && _currentGamepadState.ThumbSticks.Right != _lastGamepadState.ThumbSticks.Right)
-            {
-                RightJoystickMoved(this, EventArgs.Empty);
-            }
+                if (RightJoystickMoved != null && _currentGamepadState.ThumbSticks.Right != _lastGamepadState.ThumbSticks.Right)
+                {
+                    RightJoystickMoved(this, EventArgs.Empty);
+                }
 
-            if (GamePadConnected != null && _currentGamepadState.IsConnected && !_lastGamepadState.IsConnected)
-            {
-                GamePadConnected(this, EventArgs.Empty);
-            }
-            else if (GamePadDisconnected != null && _lastGamepadState.IsConnected && !_currentGamepadState.IsConnected)
-            {
-                GamePadDisconnected(this, EventArgs.Empty);
-            }
+                if (GamePadConnected != null && _currentGamepadState.IsConnected && !_lastGamepadState.IsConnected)
+                {
+                    GamePadConnected(this, EventArgs.Empty);
+                }
+                else if (GamePadDisconnected != null && _lastGamepadState.IsConnected && !_currentGamepadState.IsConnected)
+                {
+                    GamePadDisconnected(this, EventArgs.Empty);
+                }
 
-            if (LeftTriggerMoved != null && _currentGamepadState.Triggers.Left != _lastGamepadState.Triggers.Left)
-            {
-                LeftTriggerMoved(this, EventArgs.Empty);
+                if (LeftTriggerMoved != null && _currentGamepadState.Triggers.Left != _lastGamepadState.Triggers.Left)
+                {
+                    LeftTriggerMoved(this, EventArgs.Empty);
+                }
+
+                if (RightTriggerMoved != null && _currentGamepadState.Triggers.Right != _lastGamepadState.Triggers.Right)
+                {
+                    RightTriggerMoved(this, EventArgs.Empty);
+                }
+
+                _dpad.FireEvents(_currentGamepadState.DPad, _lastGamepadState.DPad);
+                _buttons.FireEvents(_currentGamepadState.Buttons, _lastGamepadState.Buttons);
+
+                if (Updated != null)
+                {
+                    Updated(this, EventArgs.Empty);
+                }
             }
-
-            if (RightTriggerMoved != null && _currentGamepadState.Triggers.Right != _lastGamepadState.Triggers.Right)
-            {
-                RightTriggerMoved(this, EventArgs.Empty);
-            }
-
-            _dpad.FireEvents(_currentGamepadState.DPad, _lastGamepadState.DPad);
-            _buttons.FireEvents(_currentGamepadState.Buttons, _lastGamepadState.Buttons);
-
-            if (Updated != null)
-            {
-                Updated(this, EventArgs.Empty);
-            }
-
             _lastGamepadState = _currentGamepadState;
         }
 
