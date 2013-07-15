@@ -155,6 +155,26 @@ namespace Glib.XNA.InputLib
         public event EventHandler XButtonReleased;
 
         /// <summary>
+        /// An event fired when the start button is pressed.
+        /// </summary>
+        public event EventHandler StartButtonPressed;
+
+        /// <summary>
+        /// An event fired when the start button is released.
+        /// </summary>
+        public event EventHandler StartButtonReleased;
+
+        /// <summary>
+        /// An event fired when the back button is pressed.
+        /// </summary>
+        public event EventHandler BackButtonPressed;
+
+        /// <summary>
+        /// An event fired when the back button is released.
+        /// </summary>
+        public event EventHandler BackButtonReleased;
+
+        /// <summary>
         /// An event fired when the right shoulder is pressed.
         /// </summary>
         public event EventHandler RightShoulderPressed;
@@ -224,6 +244,24 @@ namespace Glib.XNA.InputLib
             else if (RightShoulderReleased != null && currentButtonState.RightShoulder == ButtonState.Released && lastButtonState.RightShoulder == ButtonState.Pressed)
             {
                 RightShoulderReleased(this, EventArgs.Empty);
+            }
+
+            if (StartButtonPressed != null && currentButtonState.Start == ButtonState.Pressed && lastButtonState.Start == ButtonState.Released)
+            {
+                StartButtonPressed(this, EventArgs.Empty);
+            }
+            else if (StartButtonReleased != null && currentButtonState.Start == ButtonState.Released && lastButtonState.Start == ButtonState.Pressed)
+            {
+                StartButtonReleased(this, EventArgs.Empty);
+            }
+
+            if (BackButtonPressed != null && currentButtonState.Back == ButtonState.Pressed && lastButtonState.Back == ButtonState.Released)
+            {
+                BackButtonPressed(this, EventArgs.Empty);
+            }
+            else if (BackButtonReleased != null && currentButtonState.Back == ButtonState.Released && lastButtonState.Back == ButtonState.Pressed)
+            {
+                BackButtonReleased(this, EventArgs.Empty);
             }
         }
     }
