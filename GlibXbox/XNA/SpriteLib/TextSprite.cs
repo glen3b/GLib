@@ -12,6 +12,18 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        internal void FireClicked()
+        {
+            if (Pressed != null)
+            {
+                Pressed(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// If this button is in a GamePadButtonEnumerator, an event fired when the TextSprite is pressed.
+        /// </summary>
+        public event EventHandler Pressed;
 
         private bool _isSelected;
 

@@ -39,6 +39,11 @@ namespace Glib.XNA.InputLib
         private TextSprite[,] _allButtons;
 
         /// <summary>
+        /// If this boolean is true, instead of firing ButtonPress, the GamePadButtonEnumerator will fire Pressed on the TextSprite selected at the time of button press.
+        /// </summary>
+        public bool FireTextSpritePressed = false;
+
+        /// <summary>
         /// Gets a two-dimensional array of all of the buttons to enumerate through.
         /// </summary>
         /// <remarks>
@@ -340,9 +345,17 @@ namespace Glib.XNA.InputLib
                     MoveSelection(Direction.Bottom);
                 }
             }
-            if (ButtonPress != null && _lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
+            if (_lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
             {
-                ButtonPress(_allButtons[_rowCurrent, _columnCurrent], EventArgs.Empty);
+                
+                if (this.FireTextSpritePressed)
+                {
+                    _allButtons[_rowCurrent, _columnCurrent].FireClicked();
+                }
+                else if (ButtonPress != null)
+                {
+                    ButtonPress(_allButtons[_rowCurrent, _columnCurrent], EventArgs.Empty);
+                }
             }
 
             _lastState = current;

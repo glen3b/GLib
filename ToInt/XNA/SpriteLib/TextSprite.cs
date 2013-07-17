@@ -14,6 +14,14 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        internal void FireClicked()
+        {
+            if (Clicked != null)
+            {
+                Clicked(this, EventArgs.Empty);
+            }
+        }
+
         /// <summary>
         /// An event fired after every click of this TextSprite.
         /// </summary>

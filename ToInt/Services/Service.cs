@@ -53,7 +53,7 @@ namespace Glib.Services
         }
 
         /// <summary>
-        /// The main service code. that runs repeatedly every tick of ServiceTimer.
+        /// The main service code, that runs repeatedly every tick of ServiceTimer.
         /// </summary>
         protected abstract void Main();
 
