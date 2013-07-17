@@ -466,12 +466,9 @@ namespace Glib.XNA.SpriteLib
                 {
                     _originType = SpriteOriginType.Center;
                 }
-                else if (_originType != SpriteOriginType.Custom)
-                {
-                    throw new InvalidOperationException("The OriginType of this Sprite must be Custom to set the origin to a user-specified value.");
-                }
                 else
                 {
+                    _originType = SpriteOriginType.Custom;
                     _customOrigin = value;
                 }
             }
