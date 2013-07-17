@@ -102,7 +102,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    throw new NotImplementedException("Mouse selection is not implemented on XBOX 360 systems.");
+                    throw new NotImplementedException("Mouse selection is not implemented on XBOX 360 systems. You may want a GamePadButtonEnumerator.");
                 }
             }
             if (Updated != null)

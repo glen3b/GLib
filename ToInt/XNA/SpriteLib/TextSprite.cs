@@ -16,16 +16,32 @@ namespace Glib.XNA.SpriteLib
     {
         internal void FireClicked()
         {
-            if (Clicked != null)
+            if (Pressed != null)
             {
-                Clicked(this, EventArgs.Empty);
+                Pressed(this, EventArgs.Empty);
             }
         }
 
         /// <summary>
         /// An event fired after every click of this TextSprite.
         /// </summary>
-        public event EventHandler Clicked;
+        [Obsolete("Please use Pressed instead, it is a more general name that exists on Xbox.")]
+        public event EventHandler Clicked
+        {
+            add
+            {
+                Pressed += value;
+            }
+            remove
+            {
+                Pressed -= value;
+            }
+        }
+
+        /// <summary>
+        /// An event fired after every click or keyboard selection of this TextSprite.
+        /// </summary>
+        public event EventHandler Pressed;
 
         private MouseState _lastMouseState = new MouseState();
 
@@ -111,9 +127,9 @@ namespace Glib.XNA.SpriteLib
                 actualH = _parentSprite.Height;
             }
 
-            if (Clicked != null && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
+            if (Pressed != null && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
             {
-                Clicked(this, new EventArgs());
+                Pressed(this, new EventArgs());
             }
             if (_isHoverable)
             {
@@ -225,9 +241,9 @@ namespace Glib.XNA.SpriteLib
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
-            if (_isHoverable && CallKeyboardClickEvent && _isSelected && e.Key == Keys.Enter && Clicked != null)
+            if (_isHoverable && CallKeyboardClickEvent && _isSelected && e.Key == Keys.Enter && Pressed != null)
             {
-                Clicked(this, EventArgs.Empty);
+                Pressed(this, EventArgs.Empty);
             }
         }
 
