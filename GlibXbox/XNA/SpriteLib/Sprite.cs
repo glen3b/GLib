@@ -9,6 +9,25 @@ using System.ComponentModel;
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
+    /// An enum indicating the origin type of a Sprite.
+    /// </summary>
+    public enum SpriteOriginType
+    {
+        /// <summary>
+        /// The origin is located at 0,0 relative to the Sprite. This is the default.
+        /// </summary>
+        Zero,
+        /// <summary>
+        /// The origin is located at the center of the Sprite.
+        /// </summary>
+        Center,
+        /// <summary>
+        /// The origin is a user-specified value.
+        /// </summary>
+        Custom
+    }
+
+    /// <summary>
     /// An implementation of ISprite with many features, such as updated, drawn, and moved events, an easily accessible position, configurable position changes per update, center-point support, and scale support.
     /// </summary>
     public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
@@ -143,7 +162,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The scale at which to render the sprite.
         /// </summary>
-        public Vector2 Scale = new Vector2(1, 1);
+        public Vector2 Scale = Vector2.One;
 
         /// <summary>
         /// The scale-sensitive center of the sprite.
@@ -385,24 +404,57 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
-        private Vector2 _origin = Vector2.Zero;
+        #region Origin settings
+        private Vector2 _customOrigin = Vector2.Zero;
+
+        private SpriteOriginType _originType = SpriteOriginType.Zero;
+
+        /// <summary>
+        /// Gets or sets an enum representing the type of the origin of this Sprite.
+        /// </summary>
+        public SpriteOriginType OriginType
+        {
+            get { return _originType; }
+            set { _originType = value; }
+        }
+
 
         /// <summary>
         /// Gets or sets the origin of the Sprite.
         /// </summary>
         public virtual Vector2 Origin
         {
-            get { return _origin; }
-            set {
-                _origin = value;
-                if (value == new Vector2(Texture.Width / 2, Texture.Height / 2))
+            get
+            {
+                if (_originType == SpriteOriginType.Custom)
                 {
-                    _useCenterAsOrigin = true;
+                    return _customOrigin;
+                }
+                else
+                {
+                    return _originType == SpriteOriginType.Center ? new Vector2(Texture.Width / 2, Texture.Height / 2) : Vector2.Zero;
+                }
+            }
+            set
+            {
+                if (value == Vector2.Zero)
+                {
+                    _originType = SpriteOriginType.Zero;
+                }
+                else if (value == new Vector2(Texture.Width / 2, Texture.Height / 2))
+                {
+                    _originType = SpriteOriginType.Center;
+                }
+                else if (_originType != SpriteOriginType.Center)
+                {
+                    throw new InvalidOperationException("The OriginType of this Sprite must be Custom to set the origin to a user-specified value.");
+                }
+                else
+                {
+                    _customOrigin = value;
                 }
             }
         }
-
-        private bool _useCenterAsOrigin = false;
 
         /// <summary>
         /// Gets or sets whether or not to use the center of the Sprite as the origin.
@@ -415,17 +467,14 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return _useCenterAsOrigin;
+                return _originType == SpriteOriginType.Center;
             }
             set
             {
-                _useCenterAsOrigin = value;
-                if (value)
-                {
-                    Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
-                }
+                _originType = value ? SpriteOriginType.Center : (_originType == SpriteOriginType.Center ? SpriteOriginType.Zero : _originType);
             }
         }
+        #endregion
 
         /// <summary>
         /// Draws the sprite.
