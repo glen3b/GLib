@@ -129,7 +129,7 @@ namespace Glib.XNA.SpriteLib
 
             if (Pressed != null && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
             {
-                Pressed(this, new EventArgs());
+                Pressed(this, EventArgs.Empty);
             }
             if (_isHoverable)
             {
@@ -160,7 +160,7 @@ namespace Glib.XNA.SpriteLib
             _lastMouseState = currentMouseState;
             if (Updated != null)
             {
-                Updated(this, new EventArgs());
+                Updated(this, EventArgs.Empty);
             }
         }
 

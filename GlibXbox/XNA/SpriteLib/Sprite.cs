@@ -581,6 +581,8 @@ namespace Glib.XNA.SpriteLib
             SpriteManager.RemoveSelf(this);
         }
 
+        private Direction[] _pastDirections;
+
         /// <summary>
         /// Logically update this sprite. This can also be done in the Updated event.
         /// </summary>
@@ -596,10 +598,12 @@ namespace Glib.XNA.SpriteLib
             }
             if (UpdateParams.FixEdgeOff)
             {
-                Direction[] past = EdgesPast();
-                if(past.Contains(Direction.Left) || past.Contains(Direction.Right)){
+                _pastDirections = EdgesPast();
+                if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
+                {
                         XSpeed *= -1;
-                }if(past.Contains(Direction.Top) || past.Contains(Direction.Bottom)){
+                } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
+                {
                         YSpeed *= -1;
                 }
             }
@@ -626,7 +630,7 @@ namespace Glib.XNA.SpriteLib
 
             if (Updated != null)
             {
-                Updated(this, new EventArgs());
+                Updated(this, EventArgs.Empty);
             }
         }
     }

@@ -47,17 +47,19 @@ namespace Glib.XNA.InputLib
         /// </summary>
         private static KeyboardState _lastState = new KeyboardState();
 
+        private static KeyboardState _currentState;
+
         /// <summary>
         /// Update the KeyboardManager, calling the appropriate events.
         /// </summary>
         internal static void Update()
         {
-            KeyboardState current = Keyboard.GetState();
+            _currentState = Keyboard.GetState();
 
             //Key down
             if (KeyDown != null)
             {
-                foreach (Keys k in current.GetPressedKeys())
+                foreach (Keys k in _currentState.GetPressedKeys())
                 {
                     if (_lastState.IsKeyUp(k))
                     {
@@ -71,7 +73,7 @@ namespace Glib.XNA.InputLib
             {
                 foreach (Keys k in _lastState.GetPressedKeys())
                 {
-                    if (current.IsKeyUp(k))
+                    if (_currentState.IsKeyUp(k))
                     {
                         KeyUp(null, new SingleKeyEventArgs(k));
                     }
@@ -81,7 +83,7 @@ namespace Glib.XNA.InputLib
             //Key press
             if (KeyPressed != null)
             {
-                foreach (Keys s in current.GetPressedKeys())
+                foreach (Keys s in _currentState.GetPressedKeys())
                 {
                     if (!_knownDownKeys.Contains(s))
                     {
@@ -91,7 +93,7 @@ namespace Glib.XNA.InputLib
 
                 for (int i = 0; i < _knownDownKeys.Count; i++ )
                 {
-                    if (current.IsKeyUp(_knownDownKeys[i]))
+                    if (_currentState.IsKeyUp(_knownDownKeys[i]))
                     {
                         KeyPressed(null, new SingleKeyEventArgs(_knownDownKeys[i]));
                         _knownDownKeys.RemoveAt(i);
@@ -100,7 +102,7 @@ namespace Glib.XNA.InputLib
                 }
             }
 
-            _lastState = current;
+            _lastState = _currentState;
         }
     }
 }

@@ -235,6 +235,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public static readonly Keys[] IgnoredKeys = new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
 
+        private Keys[] _pressedKeys;
+        private bool _shift;
+
+
         /// <summary>
         /// Update this TextBoxSprite.
         /// This includes processing keypresses and calling events.
@@ -251,9 +255,9 @@ namespace Glib.XNA.SpriteLib
                 _elapsedKeyPressTime = new TimeSpan();
                 if (Focused)
                 {
-                    Keys[] pressed = Keyboard.GetState().GetPressedKeys();
-                    bool shift = pressed.Contains(Keys.LeftShift) || pressed.Contains(Keys.RightShift);
-                    foreach (Keys k in pressed)
+                    _pressedKeys = Keyboard.GetState().GetPressedKeys();
+                    _shift = _pressedKeys.Contains(Keys.LeftShift) || _pressedKeys.Contains(Keys.RightShift);
+                    foreach (Keys k in _pressedKeys)
                     {
                         if (IgnoredKeys.Contains(k))
                         {
@@ -276,67 +280,58 @@ namespace Glib.XNA.SpriteLib
                         }
                         else if (k == Keys.OemPeriod)
                         {
-                            _realTxt += shift ? ">" : ".";
+                            _realTxt += _shift ? ">" : ".";
                         }
                         else if (k == Keys.OemMinus)
                         {
-                            _realTxt += shift ? "_" : "-";
+                            _realTxt += _shift ? "_" : "-";
                         }
                         else if (k == Keys.D1 || k == Keys.NumPad1)
                         {
-                            _realTxt += shift ? "!" : "1";
+                            _realTxt += _shift ? "!" : "1";
                         }
                         else if (k == Keys.D2 || k == Keys.NumPad2)
                         {
-                            _realTxt += shift ? "@" : "2";
+                            _realTxt += _shift ? "@" : "2";
                         }
                         else if (k == Keys.D3 || k == Keys.NumPad3)
                         {
-                            _realTxt += shift ? "#" : "3";
+                            _realTxt += _shift ? "#" : "3";
                         }
                         else if (k == Keys.D4 || k == Keys.NumPad4)
                         {
-                            _realTxt += shift ? "$" : "4";
+                            _realTxt += _shift ? "$" : "4";
                         }
                         else if (k == Keys.D5 || k == Keys.NumPad5)
                         {
-                            _realTxt += shift ? "%" : "5";
+                            _realTxt += _shift ? "%" : "5";
                         }
                         else if (k == Keys.D6 || k == Keys.NumPad6)
                         {
-                            _realTxt += shift ? "^" : "6";
+                            _realTxt += _shift ? "^" : "6";
                         }
                         else if (k == Keys.D7 || k == Keys.NumPad7)
                         {
-                            _realTxt += shift ? "&" : "7";
+                            _realTxt += _shift ? "&" : "7";
                         }
                         else if (k == Keys.D8 || k == Keys.NumPad8)
                         {
-                            _realTxt += shift ? "*" : "8";
+                            _realTxt += _shift ? "*" : "8";
 
                         }
                         else if (k == Keys.D9 || k == Keys.NumPad9)
                         {
-                            _realTxt += shift ? "(" : "9";
+                            _realTxt += _shift ? "(" : "9";
 
                         }
                         else if (k == Keys.D0 || k == Keys.NumPad0)
                         {
-                            _realTxt += shift ? ")" : "0";
+                            _realTxt += _shift ? ")" : "0";
 
                         }
                         else if (k != Keys.LeftShift && k != Keys.RightShift)
                         {
-                            string keyStr = k.ToString();
-                            if (shift)
-                            {
-                                keyStr = keyStr.ToUpper();
-                            }
-                            else
-                            {
-                                keyStr = keyStr.ToLower();
-                            }
-                            _realTxt += k.ToString();
+                            _realTxt += _shift ? k.ToString().ToUpper() : k.ToString().ToLower();
                         }
                     }
                 }
@@ -344,7 +339,6 @@ namespace Glib.XNA.SpriteLib
                 if (_realTxt.Length > 0)
                 {
                     _firstVisible = 0;
-                    string truePwdFieldTxt = null;
                     if (IsPassword)
                     {
                         truePwdFieldTxt = new string(_realTxt.ToCharArray());
@@ -370,6 +364,8 @@ namespace Glib.XNA.SpriteLib
                 base.UseCenterAsOrigin = false;
             }
         }
+
+        private string truePwdFieldTxt;
 
         /// <summary>
         /// Update this TextBoxSprite, ticking the keypress delay.

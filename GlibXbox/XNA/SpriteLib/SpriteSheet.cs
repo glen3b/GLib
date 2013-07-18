@@ -238,7 +238,7 @@ namespace Glib.XNA.SpriteLib
 
         }
 
-        private TimeSpan elapsedTime = new TimeSpan();
+        private TimeSpan elapsedTime = TimeSpan.Zero;
 
         /// <summary>
         /// The current drawing region of the SpriteSheet.
@@ -290,7 +290,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (elapsedTime.TotalMilliseconds >= AnimationDelay.Value.TotalMilliseconds)
                 {
-                    elapsedTime = new TimeSpan();
+                    elapsedTime = TimeSpan.Zero;
                     CurrentColumn++;
                     if (CurrentColumn >= Columns)
                     {
@@ -300,7 +300,7 @@ namespace Glib.XNA.SpriteLib
                         {
                             if (AnimationCompleted != null && _fireCompletionEvent)
                             {
-                                AnimationCompleted(this, new EventArgs());
+                                AnimationCompleted(this, EventArgs.Empty);
 
                             }
                             CurrentRow = 0;
@@ -311,7 +311,7 @@ namespace Glib.XNA.SpriteLib
                             IsComplete = true;
                             if (AnimationCompleted != null && _fireCompletionEvent)
                             {
-                                AnimationCompleted(this, new EventArgs());
+                                AnimationCompleted(this, EventArgs.Empty);
                                 _fireCompletionEvent = false;
                             }
                         }

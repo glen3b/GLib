@@ -107,7 +107,7 @@ namespace Glib.XNA.SpriteLib
             }
             if (Updated != null)
             {
-                Updated(this, new EventArgs());
+                Updated(this, EventArgs.Empty);
             }
         }
 
