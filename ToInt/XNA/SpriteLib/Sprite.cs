@@ -692,26 +692,11 @@ namespace Glib.XNA.SpriteLib
                         YSpeed *= -1;
                 }
             }
-            /*
-            if (UpdateParams.FollowMouse)
+            if (UpdateParams.MouseFollow.DoesFollow)
             {
-                MouseState mouse = Mouse.GetState();
-                Vector2 target = new Vector2(mouse.X, mouse.Y);
-
-                Vector2 direction = target - Position;
-                float acceleration = direction.Length() / 10;
-
-                if (direction.LengthSquared() > 1)
-                {
-                    direction.Normalize();
-
-                    direction += new Vector2(UpdateParams.MouseFollowSpeed);
-                    direction *= acceleration;
-                    Position += direction;
-                    Rotation.Radians = VectorToAngle(direction, Rotation.Radians);
-                }
+                FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
             }
-            */
+
             MouseState current = MouseManager.CurrentMouseState;
 
             if (MouseEnter != null && Intersects(current) && !Intersects(_lastMouseState))
