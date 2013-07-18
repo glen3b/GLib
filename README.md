@@ -1,5 +1,4 @@
-Glib
+Glen Library
 ====
 
-A simple general purpose C# library covering windows forms, XNA, extension methods, and more.
-Non-XNA portions partially written at GMR.
+Glib is a simple, general purpose C# library covering windows forms, XNA, extension methods, and more.
