@@ -36,11 +36,11 @@ namespace Glib.XNA.SpriteLib
         public float Degrees{
             get
             {
-                return _degrees;
+                return MathHelper.ToDegrees(Radians);
             }
             set
             {
-                _degrees = value % 360;
+                _radians = MathHelper.ToRadians(value);
             }
         }
 
@@ -147,18 +147,17 @@ namespace Glib.XNA.SpriteLib
         /// <returns>A SpriteRotation representing x.Degrees - y.Degrees.</returns>
         public static SpriteRotation operator -(SpriteRotation x, SpriteRotation y)
         {
-            return new SpriteRotation(x.Degrees - y.Degrees);
+            return new SpriteRotation(x.Degrees - y.Degrees, AngleType.Degrees);
         }
 
-        private float _degrees;
+        private float _radians;
 
         /// <summary>
         /// Initialize a new SpriteRotation with the specified value of degrees.
         /// </summary>
         /// <param name="degrees">The number of degrees to initialize this SpriteRotation to</param>
-        public SpriteRotation(float degrees)
+        public SpriteRotation(float degrees) : this(degrees, AngleType.Degrees)
         {
-            _degrees = degrees % 360;
         }
 
         /// <summary>
@@ -170,15 +169,15 @@ namespace Glib.XNA.SpriteLib
         {
             if (measurementType == AngleType.Radians)
             {
-                _degrees = MathHelper.ToDegrees(value);
+                _radians = value;
             }
             else if(measurementType == AngleType.Degrees)
             {
-                _degrees = value % 360;
+                _radians = MathHelper.ToRadians(value);
             }
             else if (measurementType == AngleType.Gradians)
             {
-                _degrees = value / .9f;
+                _radians = MathHelper.ToRadians(value / .9f);
             }
             else
             {
@@ -193,28 +192,28 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return .9f * _degrees;
+                return .9f * Degrees;
             }
             set
             {
-                _degrees = value / .9f;
+                Degrees = value / .9f;
             }
         }
 
 
 
         /// <summary>
-        /// Gets or sets he rotation of the sprite in radians.
+        /// Gets or sets the rotation of the sprite in radians.
         /// </summary>
         public float Radians
         {
             get
             {
-                return MathHelper.ToRadians(Degrees);
+                return _radians;
             }
             set
             {
-                Degrees = MathHelper.ToDegrees(value);
+                _radians = value;
             }
         }
     }
