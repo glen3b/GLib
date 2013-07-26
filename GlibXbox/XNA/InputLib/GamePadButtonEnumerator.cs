@@ -187,7 +187,7 @@ namespace Glib.XNA.InputLib
             }
             for (int i = 0; i < allButtons.GetLength(1); i++)
             {
-                if (allButtons[0, i] != null)
+                if (allButtons[0, i] != null && allButtons[0,i].Visible)
                 {
                     allButtons[0, i].IsSelected = true;
                     _rowCurrent = 0;
@@ -196,7 +196,7 @@ namespace Glib.XNA.InputLib
                 }
                 if (i == allButtons.GetLength(1) - 1)
                 {
-                    throw new ArgumentException("The allButtons array must contain at least one non-null button in each row and column.");
+                    throw new ArgumentException("The allButtons array must contain at least one non-null, visible button in each row and column.");
                 }
             }
             _delay = delay;
@@ -237,7 +237,7 @@ namespace Glib.XNA.InputLib
                         {
                             _rowCurrent = _allButtons.GetLength(0) - 1;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
                     break;
                 case Direction.Bottom:
                     do
@@ -247,7 +247,7 @@ namespace Glib.XNA.InputLib
                         {
                             _rowCurrent = 0;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
                     break;
                 case Direction.Left:
                     do{
@@ -256,7 +256,7 @@ namespace Glib.XNA.InputLib
                         {
                             _columnCurrent = _allButtons.GetLength(1) - 1;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
                     break;
                 case Direction.Right:
                     do
@@ -266,7 +266,7 @@ namespace Glib.XNA.InputLib
                         {
                             _columnCurrent = 0;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
                     break;
             }
             _allButtons[_rowCurrent, _columnCurrent].IsSelected = true;

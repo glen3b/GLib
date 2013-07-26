@@ -24,6 +24,18 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private bool _visible = true;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this TextSprite is visible.
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set { _visible = value; }
+        }
+        
+
         /// <summary>
         /// An event fired after every click of this TextSprite.
         /// </summary>
@@ -129,9 +141,9 @@ namespace Glib.XNA.SpriteLib
                 actualH = _parentSprite.Height;
             }
 
-            if (Pressed != null && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
+            if (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
             {
-                Pressed(this, EventArgs.Empty);
+                FireClicked();
             }
             if (_isHoverable)
             {
@@ -141,7 +153,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 if (IsManuallySelectable)
                 {
-                    Color = IsSelected ? HoverColor.Value : NonHoverColor.Value;
+                    Color = (IsSelected ? HoverColor.Value : NonHoverColor.Value);
                 }
                 else
                 {
@@ -243,7 +255,7 @@ namespace Glib.XNA.SpriteLib
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
-            if (_isHoverable && CallKeyboardClickEvent && _isSelected && e.Key == Keys.Enter && Pressed != null)
+            if (_isHoverable && CallKeyboardClickEvent && Visible && _isSelected && e.Key == Keys.Enter && Pressed != null)
             {
                 Pressed(this, EventArgs.Empty);
             }
@@ -380,7 +392,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void Draw()
         {
-            SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            if (Visible)
+            {
+                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            }
         }
     }
 }

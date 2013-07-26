@@ -22,6 +22,17 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private bool _visible = true;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this TextSprite is visible.
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set { _visible = value; }
+        }
+
         /// <summary>
         /// If this button is in a GamePadButtonEnumerator, an event fired when the TextSprite is pressed.
         /// </summary>
@@ -307,7 +318,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void Draw()
         {
-            SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            if (Visible)
+            {
+                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            }
         }
     }
 }
