@@ -5,12 +5,14 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// A Sprite which accepts Text as input.
     /// </summary>
+    [DebuggerDisplay("Text = {Text}")]
     public class TextBoxSprite : Sprite, ITimerSprite
     {
         private EventHandler movementInternal;

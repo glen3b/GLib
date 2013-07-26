@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Glib.XNA
 {
@@ -17,6 +18,7 @@ namespace Glib.XNA
     /// <summary>
     /// Represents a sizable object.
     /// </summary>
+    [DebuggerDisplay("Width = {Width}, Height = {Height}")]
     public interface ISizable
     {
         /// <summary>
@@ -33,6 +35,7 @@ namespace Glib.XNA
     /// <summary>
     /// Represents a sizable, positionable, screen object.
     /// </summary>
+    [DebuggerDisplay("Position = {Position}, Width = {Width}, Height = {Height}")]
     public interface ISizedScreenObject : ISizable, IPositionable
     {
         
@@ -71,6 +74,7 @@ namespace Glib.XNA
     /// <summary>
     /// A basic component which has a position.
     /// </summary>
+    [DebuggerDisplay("Position = {Position}")]
     public interface IPositionable
     {
         /// <summary>
