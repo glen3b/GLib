@@ -46,7 +46,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Returns a SpriteRotation representing the specified value in degrees.
         /// </summary>
-        /// <param name="radians">The number of degrees to represent in the new SpriteRotation.</param>
+        /// <param name="degrees">The number of degrees to represent in the new SpriteRotation.</param>
         /// <returns>A new SpriteRotation representing the specified value in degrees.</returns>
         public static SpriteRotation FromDegrees(float degrees)
         {
