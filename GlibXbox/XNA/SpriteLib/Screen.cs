@@ -11,7 +11,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// Represents a RenderTarget2D which is a screen.
     /// </summary>
-    [DebuggerDisplay("SpriteCount = {SpriteCount}")]
+    [DebuggerDisplay("Name = {Name}")]
     public class Screen : IPositionable
     {
         private static int screenNum = 1;
