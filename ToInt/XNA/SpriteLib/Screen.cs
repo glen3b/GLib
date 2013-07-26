@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// Represents a RenderTarget2D which is a screen.
     /// </summary>
+    [DebuggerDisplay("SpriteCount = {SpriteCount}")]
     public class Screen : IPositionable
     {
         private static int screenNum = 1;
@@ -18,6 +20,17 @@ namespace Glib.XNA.SpriteLib
         /// Gets or sets a boolean representing whether or not this Screen is visible.
         /// </summary>
         public bool Visible { get; set; }
+
+        /// <summary>
+        /// Gets the total count of ISprites in this Screen.
+        /// </summary>
+        public int SpriteCount
+        {
+            get
+            {
+                return (Sprites == null ? 0 : Sprites.Sprites.Count) + (AdditionalSprites == null ? 0 : AdditionalSprites.Count);
+            }
+        }
 
         /// <summary>
         /// All the Sprites to draw to this Screen.

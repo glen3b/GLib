@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.ComponentModel;
 using Glib.XNA.InputLib;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -32,6 +33,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// An implementation of ISprite with many features, such as updated, drawn, and moved events, an easily accessible position, configurable position changes per update, center-point support, and scale support.
     /// </summary>
+    [DebuggerDisplay("Position = {Position}")]
     public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
     {
         /// <summary>

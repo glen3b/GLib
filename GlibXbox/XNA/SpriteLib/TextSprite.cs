@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// An ISprite representing text.
     /// </summary>
+    [DebuggerDisplay("Text = {Text}")]
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
         internal void FireClicked()
