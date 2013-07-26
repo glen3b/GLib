@@ -28,7 +28,7 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return (Sprites == null ? 0 : Sprites.Sprites.Count) + (AdditionalSprites == null ? 0 : AdditionalSprites.Count);
+                return (Sprites == null ? 0 : Sprites.Count) + (AdditionalSprites == null ? 0 : AdditionalSprites.Count);
             }
         }
 

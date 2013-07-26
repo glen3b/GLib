@@ -3,22 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Glib.XNA.InputLib;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// Manages multiple <seealso cref="Sprite"/> objects on the same SpriteBatch.
     /// </summary>
-    public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite
+    [DebuggerDisplay("Count = {Count}")]
+    public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite, ICollection<Sprite>
     {
         /// <summary>
-        /// The list of sprites managed by this SpriteManager.
+        /// Gets the list of <seealso cref="Sprite"/>s managed by this SpriteManager.
         /// </summary>
-        public List<Sprite> Sprites = new List<Sprite>();
+        [Obsolete("SpriteManager now implements ICollection, please use that instead.")]
+        public List<Sprite> Sprites
+        {
+            get
+            {
+                return _sprites;
+            }
+        }
+
+
+        private List<Sprite> _sprites = new List<Sprite>();
         private SpriteBatch _sb = null;
 
         /// <summary>
-        /// Gets the SpriteBatch drawn to.
+        /// Gets the <seealso cref="SpriteBatch"/> drawn to.
         /// </summary>
         public SpriteBatch SpriteBatch
         {
@@ -29,22 +43,22 @@ namespace Glib.XNA.SpriteLib
         }
 
         private int _i = 0;
-        
+
         /// <summary>
-        /// Get or set the sprite with the specified index in the Sprites list.
+        /// Get or set the <seealso cref="Sprite"/> with the specified index in the Sprites list.
         /// </summary>
         /// <remarks>
-        /// Returns null if the index is out of bounds of the array.
+        /// Returns null if the index is out of bounds of the array, instead of throwing an exception.
         /// </remarks>
         /// <param name="index">The index in the Sprites list.</param>
-        /// <returns>The sprite with the specified index in the Sprites list.</returns>
+        /// <returns>The <seealso cref="Sprite"/> with the specified index in the Sprites list.</returns>
         public Sprite this[int index]
         {
             get
             {
-                if (index < Sprites.Count)
+                if (index < Count)
                 {
-                    return Sprites[index];
+                    return _sprites[index];
                 }
                 else
                 {
@@ -53,25 +67,25 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                Sprites[index] = value;
+                _sprites[index] = value;
             }
         }
 
         /// <summary>
-        /// Add a new sprite with the specified position and texture.
+        /// Add a new <seealso cref="Sprite"/> with the specified position and texture.
         /// </summary>
-        /// <param name="position">The position of the new Sprite.</param>
-        /// <param name="texture">The texture of the new sprite.</param>
+        /// <param name="position">The position of the new <seealso cref="Sprite"/>.</param>
+        /// <param name="texture">The texture of the new <seealso cref="Sprite"/>.</param>
         public void AddNewSprite(Microsoft.Xna.Framework.Vector2 position, Texture2D texture)
         {
             Add(new Sprite(texture, position, _sb));
         }
 
         /// <summary>
-        /// Remove a sprite from this SpriteManager.
+        /// Remove a <seealso cref="Sprite"/> from this SpriteManager.
         /// Safe to call during Update() or Draw() (or from their corresponding events).
         /// </summary>
-        /// <param name="spr">The sprite to remove</param>
+        /// <param name="spr">The <seealso cref="Sprite"/> to remove.</param>
         internal void RemoveSelf(Sprite spr)
         {
             Remove(spr);
@@ -79,29 +93,29 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Add a sprite to this SpriteManager.
+        /// Add a <seealso cref="Sprite"/> to this SpriteManager.
         /// </summary>
-        /// <param name="spr">The sprite to add</param>
+        /// <param name="spr">The <seealso cref="Sprite"/> to add.</param>
         public void Add(Sprite spr)
         {
             spr.SpriteManager = this;
-            Sprites.Add(spr);
+            _sprites.Add(spr);
         }
 
         /// <summary>
-        /// Remove a given sprite, that is NOT the sprite being updated.
+        /// Remove a given <seealso cref="Sprite"/>, that is NOT the <seealso cref="Sprite"/> being updated.
         /// </summary>
-        /// <param name="spr">The sprite to remove</param>
-        public void Remove(Sprite spr)
+        /// <param name="spr">The <seealso cref="Sprite"/> to remove.</param>
+        public bool Remove(Sprite spr)
         {
-            Sprites.Remove(spr);
+            return _sprites.Remove(spr);
         }
 
         /// <summary>
         /// Construct a new SpriteManager.
         /// </summary>
         /// <param name="sb">The SpriteBatch to use.</param>
-        /// <param name="sprites">The sprites to add to the SpriteManager.</param>
+        /// <param name="sprites">The <seealso cref="Sprite"/>s to add to the SpriteManager.</param>
         public SpriteManager(SpriteBatch sb, params Sprite[] sprites)
         {
             _sb = sb;
@@ -109,12 +123,12 @@ namespace Glib.XNA.SpriteLib
             {
                 s.SpriteBatch = sb;
                 s.SpriteManager = this;
-                Sprites.Add(s);
+                _sprites.Add(s);
             }
         }
 
         /// <summary>
-        /// Draw all sprites managed by this SpriteManager.
+        /// Draw all <seealso cref="Sprite"/>s managed by this SpriteManager.
         /// </summary>
         public void Draw()
         {
@@ -124,48 +138,116 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Draw all sprites managed by this SpriteManager, without opening or closing the SpriteBatch.
+        /// Draw all <seealso cref="Sprite"/>s managed by this SpriteManager, without opening or closing the SpriteBatch.
         /// </summary>
         public void DrawNonAuto()
         {
-            for (_i = 0; _i < Sprites.Count; _i++)
+            for (_i = 0; _i < _sprites.Count; _i++)
             {
-                Sprites[_i].DrawNonAuto();
+                _sprites[_i].DrawNonAuto();
             }
         }
 
         /// <summary>
-        /// Update all sprites managed by this SpriteManager.
+        /// Update all <seealso cref="Sprite"/>s managed by this <seealso cref="SpriteManager"/>.
         /// </summary>
         /// <remarks>
         /// Does not call Update(GameTime) on subclasses of Sprite implementing ITimerSprite.
+        /// The MouseState for click checking is InputLib.Mouse.MouseManager.CurrentMouseState.
         /// </remarks>
         public void Update()
         {
-            for (_i = 0; _i < Sprites.Count; _i++ )
+            for (_i = 0; _i < _sprites.Count; _i++)
             {
-                
-                    this[_i].Update();
+                this[_i].Update();
             }
         }
 
         /// <summary>
-        /// Update all Sprites managed by this SpriteManager, calling Update(GameTime) on ITimerSprites where neccesary.
+        /// Update all <seealso cref="Sprite"/>s managed by this <seealso cref="SpriteManager"/>, calling Update(GameTime) on ITimerSprites where neccesary.
         /// </summary>
+        /// <remarks>
+        /// Uses InputLib.Mouse.MouseManager.CurrentMouseState.
+        /// </remarks>
         /// <param name="gameTime">The current game time.</param>
         public void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            for (_i = 0; _i < Sprites.Count; _i++)
+            for (_i = 0; _i < _sprites.Count; _i++)
             {
-                if (this[_i].GetType().GetInterfaces().Contains(typeof(ITimerSprite)))
+                if (this[_i].GetType().Implements(typeof(ITimerSprite)))
                 {
-                    ((ITimerSprite)this[_i]).Update(gameTime);
+                    this[_i].Cast<ITimerSprite>().Update(gameTime);
                 }
                 else
                 {
                     this[_i].Update();
                 }
             }
+        }
+
+        /// <summary>
+        /// Removes all Sprites from this <seealso cref="SpriteManager"/>.
+        /// </summary>
+        public void Clear()
+        {
+            _sprites.Clear();
+        }
+
+        /// <summary>
+        /// Determines whether the specified <seealso cref="Sprite"/> is in this <seealso cref="SpriteManager"/>.
+        /// </summary>
+        /// <param name="item">The <seealso cref="Sprite"/> to locate in this <seealso cref="SpriteManager"/>.</param>
+        /// <returns>Whether or not this <seealso cref="SpriteManager"/> contains the specified <seealso cref="Sprite"/>.</returns>
+        public bool Contains(Sprite item)
+        {
+            return _sprites.Contains(item);
+        }
+
+        /// <summary>
+        /// Copies the entire <seealso cref="SpriteManager"/> into the specified array, beginning at the specified index.
+        /// </summary>
+        /// <param name="array">The one-dimensional array of <seealso cref="Sprite"/>s to copy into.</param>
+        /// <param name="arrayIndex">The zero-based index in the array at which copying begins.</param>
+        public void CopyTo(Sprite[] array, int arrayIndex)
+        {
+            _sprites.CopyTo(array, arrayIndex);
+        }
+
+        /// <summary>
+        /// Gets the number of <seealso cref="Sprite"/>s in this <seealso cref="SpriteManager"/>.
+        /// </summary>
+        public int Count
+        {
+            get { return _sprites.Count; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether or not this <seealso cref="SpriteManager"/> is read-only.
+        /// </summary>
+        /// <remarks>
+        /// For a <seealso cref="SpriteManager"/>, this value is always false.
+        /// </remarks>
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through this <seealso cref="SpriteManager"/>.
+        /// </summary>
+        /// <returns>An enumerator that iterates through this <seealso cref="SpriteManager"/>.</returns>
+        public IEnumerator<Sprite> GetEnumerator()
+        {
+            return _sprites.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through this <seealso cref="SpriteManager"/>.
+        /// </summary>
+        /// <returns>An enumerator that iterates through this <seealso cref="SpriteManager"/>.</returns>
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return _sprites.GetEnumerator();
         }
     }
 }

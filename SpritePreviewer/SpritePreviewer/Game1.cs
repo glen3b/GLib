@@ -168,7 +168,7 @@ namespace SpritePreviewer
                         Vector2 scale = new Vector2(Convert.ToSingle(this.scale));
                         //arrows[0].Texture = droppedImage;
                         isSelecting = false;
-                        arrows.Sprites.RemoveRange(0, arrows.Sprites.Count);
+                        arrows.Clear();
                         arrows.AddNewSprite(new Vector2(25), droppedImage);
                         arrows[0].Updated += new EventHandler(arrow_Updated);
                         arrows[0].UseCenterAsOrigin = true;
@@ -229,7 +229,7 @@ namespace SpritePreviewer
                 if (active.Intersects(mousePos) && relativeSelectStart.HasValue && old.Value.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && current.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released)
                 {
                     Texture2D use = arrows[0].Texture;
-                    arrows.Sprites.RemoveRange(0, arrows.Sprites.Count);
+                    arrows.Clear();
                     arrows.Add(new SpriteSheet(use, new Rectangle(0, 0, Convert.ToInt32(mousePos.X - relativeSelectStart.Value.X), Convert.ToInt32(mousePos.Y - relativeSelectStart.Value.Y)), new Vector2(25), spriteBatch));
                     arrows[0].Updated += new EventHandler(arrow_Updated);
                     ((SpriteSheet)arrows[0]).IsAnimated = true;
