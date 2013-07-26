@@ -30,6 +30,27 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public struct SpriteRotation
     {
+
+        /// <summary>
+        /// Returns a SpriteRotation representing the specified value in radians.
+        /// </summary>
+        /// <param name="radians">The number of radians to represent in the new SpriteRotation.</param>
+        /// <returns>A new SpriteRotation representing the specified value in radians.</returns>
+        public static SpriteRotation FromRadians(float radians)
+        {
+            return new SpriteRotation(radians, AngleType.Radians);
+        }
+
+        /// <summary>
+        /// Returns a SpriteRotation representing the specified value in degrees.
+        /// </summary>
+        /// <param name="radians">The number of degrees to represent in the new SpriteRotation.</param>
+        /// <returns>A new SpriteRotation representing the specified value in degrees.</returns>
+        public static SpriteRotation FromDegrees(float degrees)
+        {
+            return new SpriteRotation(degrees, AngleType.Degrees);
+        }
+
         /// <summary>
         /// Gets or sets the rotation of the sprite in degrees.
         /// </summary>
