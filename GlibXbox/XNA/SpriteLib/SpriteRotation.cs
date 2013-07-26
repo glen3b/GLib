@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -28,6 +29,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A structure representing the rotation of a sprite.
     /// </summary>
+    [DebuggerDisplay("Radians = {Radians}")]
     public struct SpriteRotation
     {
 
