@@ -1,5 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Glib.XNA
 {
@@ -18,7 +21,6 @@ namespace Glib.XNA
     /// <summary>
     /// Represents a sizable object.
     /// </summary>
-    [DebuggerDisplay("Width = {Width}, Height = {Height}")]
     public interface ISizable
     {
         /// <summary>
@@ -33,9 +35,8 @@ namespace Glib.XNA
     }
 
     /// <summary>
-    /// Represents a sizable, positionable, screen object.
+    /// Represents a sizable, positionalble, screen object.
     /// </summary>
-    [DebuggerDisplay("Position = {Position}, Width = {Width}, Height = {Height}")]
     public interface ISizedScreenObject : ISizable, IPositionable
     {
 
@@ -57,7 +58,7 @@ namespace Glib.XNA
         /// <param name="attracted">The object that is being attracted to this gravity source.</param>
         /// <returns>The amount to pull the object, in the X and Y axis, towards the gravity source.</returns>
         Vector2 GetAttraction(IPositionable attracted);
-
+        
     }
 
     /// <summary>
@@ -74,7 +75,6 @@ namespace Glib.XNA
     /// <summary>
     /// A basic component which has a position.
     /// </summary>
-    [DebuggerDisplay("Position = {Position}")]
     public interface IPositionable
     {
         /// <summary>
