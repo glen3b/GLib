@@ -344,9 +344,9 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Draws all the visible screens.
+        /// Prepares to draw all the Screens.
         /// </summary>
-        public void Draw()
+        public void BeginDraw()
         {
             foreach (Screen s in this)
             {
@@ -385,6 +385,13 @@ namespace Glib.XNA.SpriteLib
             Graphics.SetRenderTarget(null);
             Graphics.Clear(Background);
             SpriteBatch.Begin();
+        }
+
+        /// <summary>
+        /// Draws all the visible screens.
+        /// </summary>
+        public void Draw()
+        {
             foreach (Screen s in _allScreens)
             {
                 if (s.Visible)
@@ -392,6 +399,13 @@ namespace Glib.XNA.SpriteLib
                     SpriteBatch.Draw(s.Target, s.Position, null, s.TintColor, 0f, (s.CenterOrigin ? new Vector2(s.Width / 2, s.Height / 2): Vector2.Zero), Vector2.One, SpriteEffects.None, 0f);
                 }
             }
+        }
+
+        /// <summary>
+        /// Ends drawing of all Screens.
+        /// </summary>
+        public void EndDraw()
+        {
             SpriteBatch.End();
         }
 
