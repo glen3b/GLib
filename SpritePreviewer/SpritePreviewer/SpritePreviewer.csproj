@@ -123,8 +123,9 @@
       <Name>Glib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpritePreviewerContent\SpritePreviewerContent.contentproj">
-      <Name>SpritePreviewerContent</Name>
+      <Name>SpritePreviewerContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{F0E9F98D-4FFD-4B99-AD78-631FCCD4F85A}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
