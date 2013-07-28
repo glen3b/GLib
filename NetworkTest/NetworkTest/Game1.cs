@@ -102,7 +102,7 @@ namespace NetworkTest
         null);
                 allScreens["listSessions"].Visible = true;
                 allScreens["titleScreen"].Visible = false;
-                allScreens["listSessions"].AdditionalSprites.RemoveAll(ts => ts.GetType() != typeof(TextSprite) || ts.Cast<TextSprite>().HoverColor != Color.LimeGreen);
+                allScreens["listSessions"].AdditionalSprites.RemoveAll(ts => !(ts is TextSprite) || ts.Cast<TextSprite>().HoverColor != Color.LimeGreen);
                 float y = 50;
                 float x = 100;
                 for (int sessionIndex = 0; sessionIndex < availableSessions.Count; sessionIndex++)

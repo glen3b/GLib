@@ -14,6 +14,54 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Text = {Text}")]
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        private bool _isShadowed = false;
+
+        /// <summary>
+        /// The color that, if applicable, this TextSprite should be shadowed with.
+        /// </summary>
+        public Color? ShadowColor = null;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this TextSprie is shadowed.
+        /// </summary>
+        public bool IsShadowed
+        {
+            get { return _isShadowed; }
+            set
+            {
+                if (value != _isShadowed)
+                {
+                    _isShadowed = value;
+                    if (!ShadowColor.HasValue)
+                    {
+                        Color mainColor = NonHoverColor.HasValue ? NonHoverColor.Value : Color;
+                        ShadowColor = new Color(255 - mainColor.R, 255 - mainColor.G, 255 - mainColor.B, mainColor.A);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw this text sprite to the SpriteBatch.
+        /// Does not begin or end the SpriteBatch.
+        /// </summary>
+        public void Draw()
+        {
+            if (Visible)
+            {
+                if (IsShadowed)
+                {
+                    if (!ShadowColor.HasValue)
+                    {
+                        throw new InvalidOperationException("ShadowColor must have a value to draw a shadow on this TextSprite.");
+                    }
+                    SpriteBatch.DrawString(Font, Text, Position + Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                }
+                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            }
+        }
+
+
         internal void FireClicked()
         {
             if (Pressed != null)
@@ -310,18 +358,5 @@ namespace Glib.XNA.SpriteLib
         /// The rotation of the TextSprite.
         /// </summary>
         public SpriteRotation Rotation = new SpriteRotation();
-
-
-        /// <summary>
-        /// Draw this text sprite to the SpriteBatch.
-        /// Does not begin or end the SpriteBatch.
-        /// </summary>
-        public void Draw()
-        {
-            if (Visible)
-            {
-                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
-            }
-        }
     }
 }

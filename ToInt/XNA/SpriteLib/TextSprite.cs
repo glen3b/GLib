@@ -16,6 +16,55 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Text = {Text}")]
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        private bool _isShadowed = false;
+
+        /// <summary>
+        /// The color that, if applicable, this TextSprite should be shadowed with.
+        /// </summary>
+        public Color? ShadowColor = null;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether or not this TextSprie is shadowed.
+        /// </summary>
+        public bool IsShadowed
+        {
+            get { return _isShadowed; }
+            set
+            {
+                if (value != _isShadowed)
+                {
+                    _isShadowed = value;
+                    if (!ShadowColor.HasValue)
+                    {
+                        Color mainColor = NonHoverColor.HasValue ? NonHoverColor.Value : Color;
+                        ShadowColor = new Color(255 - mainColor.R, 255 - mainColor.G, 255 - mainColor.B, mainColor.A);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw this text sprite to the SpriteBatch.
+        /// Does not begin or end the SpriteBatch.
+        /// </summary>
+        public void Draw()
+        {
+            if (Visible)
+            {
+                if (IsShadowed)
+                {
+                    if (!ShadowColor.HasValue)
+                    {
+                        throw new InvalidOperationException("ShadowColor must have a value to draw a shadow on this TextSprite.");
+                    }
+                    SpriteBatch.DrawString(Font, Text, Position+Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                }
+                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            }
+        }
+
+
+
         internal void FireClicked()
         {
             if (Pressed != null)
@@ -34,7 +83,7 @@ namespace Glib.XNA.SpriteLib
             get { return _visible; }
             set { _visible = value; }
         }
-        
+
 
         /// <summary>
         /// An event fired after every click of this TextSprite.
@@ -92,7 +141,8 @@ namespace Glib.XNA.SpriteLib
         public Sprite ParentSprite
         {
             get { return _parentSprite; }
-            set {
+            set
+            {
                 if (value != _parentSprite)
                 {
                     if (value == null)
@@ -102,7 +152,7 @@ namespace Glib.XNA.SpriteLib
                     else
                     {
                         value.Moved += _parentSprMoved;
-                        Position = new Vector2( (value.X - (value.Origin.X * value.Scale.X)) + (value.Width / 2 - Width / 2), (value.Y - (value.Origin.Y * value.Scale.Y)) + (value.Height / 2 - Height / 2));
+                        Position = new Vector2((value.X - (value.Origin.X * value.Scale.X)) + (value.Width / 2 - Width / 2), (value.Y - (value.Origin.Y * value.Scale.Y)) + (value.Height / 2 - Height / 2));
                     }
 
                     if (_parentSprite != null)
@@ -114,7 +164,7 @@ namespace Glib.XNA.SpriteLib
                 }
             }
         }
-        
+
 
         /// <summary>
         /// Update the TextSprite. Just calls the Updated event by default.
@@ -125,7 +175,7 @@ namespace Glib.XNA.SpriteLib
         public virtual void Update()
         {
             MouseState currentMouseState = MouseManager.CurrentMouseState;
-            
+
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
 
@@ -135,8 +185,8 @@ namespace Glib.XNA.SpriteLib
             float actualH = Height;
             if (_parentSprite != null)
             {
-                actualX = _parentSprite.X - ( _parentSprite.Origin.X * _parentSprite.Scale.X );
-                actualY = _parentSprite.Y - ( _parentSprite.Origin.Y * _parentSprite.Scale.Y );
+                actualX = _parentSprite.X - (_parentSprite.Origin.X * _parentSprite.Scale.X);
+                actualY = _parentSprite.Y - (_parentSprite.Origin.Y * _parentSprite.Scale.Y);
                 actualW = _parentSprite.Width;
                 actualH = _parentSprite.Height;
             }
@@ -157,7 +207,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if ( _parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height)  )
+                    if (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height))
                     {
                         //Intersecting.
                         IsSelected = true;
@@ -199,7 +249,8 @@ namespace Glib.XNA.SpriteLib
         public bool IsHoverable
         {
             get { return _isHoverable; }
-            set {
+            set
+            {
                 _isHoverable = value;
                 if (value)
                 {
@@ -212,14 +263,14 @@ namespace Glib.XNA.SpriteLib
                         NonHoverColor = Color.Black;
                     }
                 }
-                else if(!value)
+                else if (!value)
                 {
                     HoverColor = null;
                     NonHoverColor = null;
                 }
             }
         }
-        
+
 
         /// <summary>
         /// The color to use when not hovering over the TextSprite, if hovering is enabled.
@@ -288,7 +339,8 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Construct a new TextSprite.
         /// </summary>
-        public TextSprite(SpriteBatch sb, Vector2 pos, SpriteFont font, String text) : this(sb, font, text)
+        public TextSprite(SpriteBatch sb, Vector2 pos, SpriteFont font, String text)
+            : this(sb, font, text)
         {
             Position = pos;
         }
@@ -368,7 +420,7 @@ namespace Glib.XNA.SpriteLib
             get { return _position; }
             set { _position = value; }
         }
-        
+
 
         /// <summary>
         /// The SpriteBatch to draw this text sprite to.
@@ -384,18 +436,5 @@ namespace Glib.XNA.SpriteLib
         /// The rotation of the TextSprite.
         /// </summary>
         public SpriteRotation Rotation = new SpriteRotation();
-
-
-        /// <summary>
-        /// Draw this text sprite to the SpriteBatch.
-        /// Does not begin or end the SpriteBatch.
-        /// </summary>
-        public void Draw()
-        {
-            if (Visible)
-            {
-                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
-            }
-        }
     }
 }
