@@ -89,8 +89,23 @@ namespace NetworkTest
             refreshSessions.Pressed += new EventHandler(joinSession_Pressed);
             listSessions.AdditionalSprites.Add(refreshSessions);
 
-            allScreens = new ScreenManager(spriteBatch, Color.Red, title, waitForPlayers, listSessions);
+
+            Screen chatScreen = new Screen(spriteBatch, Color.CornflowerBlue);
+            TextBoxSprite tbs = new TextBoxSprite(new Vector2(0, GraphicsDevice.Viewport.Height-20), spriteBatch, font);
+            tbs.TextSubmitted += new EventHandler(tbs_TextSubmitted);
+            chatScreen.Name = "chatScreen";
+            chatScreen.Sprites.Add(tbs);
+
+            allScreens = new ScreenManager(spriteBatch, Color.Red, title, waitForPlayers, listSessions, chatScreen);
             // TODO: use this.Content to load your game content here
+        }
+
+        void tbs_TextSubmitted(object sender, EventArgs e)
+        {
+            string sentText = sender.Cast<TextBoxSprite>().RealText;
+            PacketWriter dataSender = new PacketWriter();
+            dataSender.Write(sentText);
+            session.LocalGamers[0].SendData(dataSender, SendDataOptions.ReliableInOrder);
         }
 
         void joinSession_Pressed(object sender, EventArgs e)
@@ -98,7 +113,7 @@ namespace NetworkTest
             if (!Guide.IsVisible)
             {
                 availableSessions = NetworkSession.Find(
-        NetworkSessionType.SystemLink, maximumLocalPlayers,
+        NetworkSessionType.SystemLink, 2,
         null);
                 allScreens["listSessions"].Visible = true;
                 allScreens["titleScreen"].Visible = false;
@@ -128,6 +143,9 @@ namespace NetworkTest
             {
                 AvailableNetworkSession asession = sender.Cast<SessionInfoDisplay>().Session;
                 this.session = NetworkSession.Join(asession);
+                session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
+                session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
+
             }
         }
 
@@ -141,10 +159,11 @@ namespace NetworkTest
         maximumLocalPlayers, maximumGamers, privateGamerSlots,
         null);
                 session.AllowJoinInProgress = true;
-
+                session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
+                session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
                 allScreens["titleScreen"].Visible = false;
                 allScreens["playerList"].Visible = true;
-                session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
+                
 
                 /*
                 Texture2D newGamerImage = Texture2D.FromStream(GraphicsDevice, Gamer.SignedInGamers[0].GetProfile().GetGamerPicture());
@@ -154,6 +173,14 @@ namespace NetworkTest
                 TextSprite gamerName = new TextSprite(spriteBatch, new Vector2(pos.X + gamerIcon.Width + 5, pos.Y), font, Gamer.SignedInGamers[0].DisplayName == null ? Gamer.SignedInGamers[0].Gamertag : Gamer.SignedInGamers[0].DisplayName);
                 allScreens["playerList"].AdditionalSprites.Add(gamerName);
                 */
+            }
+        }
+
+        void session_GameStarted(object sender, GameStartedEventArgs e)
+        {
+            foreach (Screen s in allScreens)
+            {
+                s.Visible = s.Name == "chatScreen";
             }
         }
 
@@ -168,12 +195,12 @@ namespace NetworkTest
             }
             Sprite gamerIcon = new Sprite(newGamerImage, pos, spriteBatch);
             playerList.Sprites.Add(gamerIcon);
-            TextSprite gamerName = new TextSprite(spriteBatch, new Vector2(pos.X + gamerIcon.Width + 5, pos.Y), font, e.Gamer.DisplayName == null ? e.Gamer.Gamertag : e.Gamer.DisplayName);
+            TextSprite gamerName = new TextSprite(spriteBatch, new Vector2(pos.X + gamerIcon.Width + 5, pos.Y), font, e.Gamer.Gamertag);
             allScreens["playerList"].AdditionalSprites.Add(gamerName);
             if (session.AllGamers.Count >= 2)
             {
-                //Todo
-                //session.StartGame();
+                //TODO
+                session.StartGame();
             }
         }
 
@@ -215,7 +242,7 @@ namespace NetworkTest
 
             if (Gamer.SignedInGamers.Count == 0 && !Guide.IsVisible && !hasSignedIn)
             {
-                Guide.ShowSignIn(2, true);
+                Guide.ShowSignIn(2, false);
                 hasSignedIn = true;
             }
             else if (!isAsyncingIn && Gamer.SignedInGamers.Count == 0 && !Guide.IsVisible)
