@@ -34,6 +34,17 @@ namespace Glib.XNA.SpriteLib
     {
 
         /// <summary>
+        /// Gets a SpriteRotation representing zero degrees.
+        /// </summary>
+        public static SpriteRotation Zero
+        {
+            get
+            {
+                return new SpriteRotation(0);
+            }
+        }
+
+        /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.
         /// </summary>
         /// <param name="radians">The number of radians to represent in the new SpriteRotation.</param>

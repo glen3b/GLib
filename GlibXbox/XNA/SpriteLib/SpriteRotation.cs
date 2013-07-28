@@ -32,6 +32,16 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Radians = {Radians}")]
     public struct SpriteRotation
     {
+        /// <summary>
+        /// Gets a SpriteRotation representing zero degrees.
+        /// </summary>
+        public static SpriteRotation Zero
+        {
+            get
+            {
+                return new SpriteRotation(0);
+            }
+        }
 
         /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.
