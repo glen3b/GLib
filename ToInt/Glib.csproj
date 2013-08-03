@@ -60,6 +60,7 @@
     <Compile Include="Services\Service.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WinForms\Controls\RequiredTextBoxes.cs">
       <SubType>Component</SubType>
@@ -71,7 +72,6 @@
     <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
     <Compile Include="XNA\InputLib\MouseManager.cs" />
     <Compile Include="XNA\InputLib\ScreenRegion.cs" />
-    <Compile Include="XNA\PlainTexture2D.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />

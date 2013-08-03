@@ -94,6 +94,7 @@
     <Compile Include="Conversions.cs" />
     <Compile Include="PrimeList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="XNA\EventArgs.cs" />
     <Compile Include="XNA\GameTimer.cs" />
@@ -101,7 +102,6 @@
     <Compile Include="XNA\InputLib\GamePadManager.cs" />
     <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />
-    <Compile Include="XNA\PlainTexture2D.cs" />
     <Compile Include="XNA\SpriteInterfaces.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />

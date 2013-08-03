@@ -129,9 +129,9 @@ namespace Glib.XNA.SpriteLib
                 return _focused;
             }
             set
-        {
-            Focused = _focused;
-        }
+            {
+                Focused = _focused;
+            }
         }
 
         /// <summary>
@@ -146,17 +146,20 @@ namespace Glib.XNA.SpriteLib
         /// Use the center as the origin.
         /// Always false for this Sprite implementation.
         /// </summary>
-        public new bool UseCenterAsOrigin{
-         get{
-             base.UseCenterAsOrigin = false;
-             return base.UseCenterAsOrigin;
-         }
+        public new bool UseCenterAsOrigin
+        {
+            get
+            {
+                base.UseCenterAsOrigin = false;
+                return base.UseCenterAsOrigin;
+            }
         }
 
         /// <summary>
         /// Create a new TextBoxSprite.
         /// </summary>
-        public TextBoxSprite(Texture2D texture, Vector2 pos, SpriteBatch sb, SpriteFont font): this(texture, pos, Color.White, sb, new UpdateParamaters(), font)
+        public TextBoxSprite(Texture2D texture, Vector2 pos, SpriteBatch sb, SpriteFont font)
+            : this(texture, pos, Color.White, sb, new UpdateParamaters(), font)
         {
         }
 
@@ -167,7 +170,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="font">The SpriteFont to draw the text with.</param>
         /// <param name="sb">The SpriteBatch to draw to.</param>
         public TextBoxSprite(Vector2 pos, SpriteBatch sb, SpriteFont font)
-            : this(new PlainTexture2D(sb.GraphicsDevice), pos, Color.White, sb, new UpdateParamaters(), font)
+            : this(new TextureFactory(sb.GraphicsDevice).WhitePixel, pos, Color.White, sb, new UpdateParamaters(), font)
         {
         }
 
@@ -220,7 +223,7 @@ namespace Glib.XNA.SpriteLib
             get { return _pwdChar; }
             set { _pwdChar = value; }
         }
-        
+
 
         /// <summary>
         /// Draws the sprite.
@@ -233,9 +236,15 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// All keys ignored for input.
+        /// Gets an array of all keys ignored for input.
         /// </summary>
-        public static readonly Keys[] IgnoredKeys = new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
+        public static Keys[] IgnoredKeys
+        {
+            get
+            {
+                return new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
+            }
+        }
 
         private Keys[] _pressedKeys;
         private bool _shift;

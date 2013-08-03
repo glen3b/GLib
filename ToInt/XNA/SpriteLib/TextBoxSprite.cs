@@ -167,7 +167,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="font">The SpriteFont to draw the text with.</param>
         /// <param name="sb">The SpriteBatch to draw to.</param>
         public TextBoxSprite(Vector2 pos, SpriteBatch sb, SpriteFont font)
-            : this(new PlainTexture2D(sb.GraphicsDevice), pos, Color.White, sb, new UpdateParamaters(), font)
+            : this(new TextureFactory(sb.GraphicsDevice).WhitePixel, pos, Color.White, sb, new UpdateParamaters(), font)
         {
         }
 
@@ -233,9 +233,15 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// All keys ignored for input.
+        /// Gets an array of all keys ignored for input.
         /// </summary>
-        public static readonly Keys[] IgnoredKeys = new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
+        public static Keys[] IgnoredKeys
+        {
+            get
+            {
+                return new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
+            }
+        }
 
         private Keys[] _pressedKeys;
         private bool _shift;
