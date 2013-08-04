@@ -33,6 +33,48 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Creates a texture using the specified function.
+        /// </summary>
+        /// <param name="width">The width of the new texture.</param>
+        /// <param name="height">The height of the new texture.</param>
+        /// <param name="colorDetermine">The function to use for determining the color of the specified point in the texture.</param>
+        /// <returns>A new texture with the specified colors at the specified points.</returns>
+        public Texture2D CreateTexture(int width, int height, Func<Point, Color> colorDetermine)
+        {
+            Texture2D retVal = new Texture2D(Graphics, width, height);
+            Color[] data = new Color[width * height];
+            for (int w_en = 0; w_en < width; w_en++)
+            {
+                for (int h_en = 0; h_en < height; h_en++)
+                {
+                    data[h_en * width + w_en] = colorDetermine.Invoke(new Point(w_en, h_en));
+                }
+            }
+            return retVal;
+        }
+
+        /// <summary>
+        /// Creates a white square of the specified size.
+        /// </summary>
+        /// <param name="size">The width and height of the square.</param>
+        /// <returns>A white texture which is a square of the specified size.</returns>
+        public Texture2D CreateSquare(int size)
+        {
+            return CreateSquare(size, Color.White);
+        }
+
+        /// <summary>
+        /// Creates a square of the specified size and color.
+        /// </summary>
+        /// <param name="size">The width and height of the square.</param>
+        /// <param name="color">The color of the square.</param>
+        /// <returns>A texture which is a square of the specified size and color.</returns>
+        public Texture2D CreateSquare(int size, Color color)
+        {
+            return CreateRectangle(size, size, color);
+        }
+
+        /// <summary>
         /// Creates a white rectangle of the specified size.
         /// </summary>
         /// <param name="width">The width of the new rectangular texture.</param>
@@ -53,7 +95,7 @@ namespace Glib.XNA
         {
             get
             {
-                return CreateRectangle(1, 1);
+                return CreateSquare(1);
             }
         }
 

@@ -59,6 +59,7 @@ namespace Glib.XNA
         /// <param name="width">The width of the texture.</param>
         /// <param name="height">The height of the texture.</param>
         /// <returns>A 2-color Texture2D of the specified size.</returns>
+        [Obsolete("Please use a TextureFactory instead.")]
         public static Texture2D CreateTexture(this GraphicsDevice graphics, Predicate<Point> colorDetermine, Color trueColor, Color falseColor, int width, int height)
         {
             Texture2D returnValue = new Texture2D(graphics, width, height);

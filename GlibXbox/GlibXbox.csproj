@@ -94,7 +94,6 @@
     <Compile Include="Conversions.cs" />
     <Compile Include="PrimeList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="XNA\EventArgs.cs" />
     <Compile Include="XNA\GameTimer.cs" />
@@ -121,6 +120,7 @@
     <Compile Include="XNA\SpriteLib\UpdateParamaters.cs" />
     <Compile Include="XNA\SpriteLib\Updater.cs" />
     <Compile Include="XNA\SpriteLib\Velocity.cs" />
+    <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="XNA\XnaExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
