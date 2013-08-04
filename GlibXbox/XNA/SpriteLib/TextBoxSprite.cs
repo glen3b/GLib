@@ -6,13 +6,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// A Sprite which accepts Text as input.
     /// </summary>
-    [DebuggerDisplay("Text = {Text}")]
+    /// <remarks>
+    /// Please do not forget to set the Width of this Sprite.
+    /// </remarks>
+    [DebuggerDisplay("RealText = {RealText}")]
+    [Obsolete("This class is not useful on XBOX 360 systems.")]
     public class TextBoxSprite : Sprite, ITimerSprite
     {
         private EventHandler movementInternal;
@@ -57,7 +62,7 @@ namespace Glib.XNA.SpriteLib
 
         void TextBoxSprite_Moved(object source, EventArgs e)
         {
-            _textView.Position = Position + new Vector2(1);
+            _textView.Position = Position + Vector2.One;
         }
 
         private TextSprite _textView;
@@ -130,7 +135,8 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                Focused = _focused;
+                _focused = value;
+
             }
         }
 
@@ -197,8 +203,8 @@ namespace Glib.XNA.SpriteLib
             : base(texture, pos, color, sb, up)
         {
             _textView = new TextSprite(SpriteBatch, font, "");
-            _textView.Position = Position + new Vector2(1);
-            Height = font.GetCharSize().Y + 2;
+            _textView.Position = Position + Vector2.One;
+            Height = font.LineSpacing + 1;
             Scale.X = 0;
             movementInternal = new EventHandler(this.TextBoxSprite_Moved);
             Moved += movementInternal;
@@ -236,15 +242,11 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Gets an array of all keys ignored for input.
+        /// A read-only collection of all keys ignored for input.
         /// </summary>
-        public static Keys[] IgnoredKeys
-        {
-            get
-            {
-                return new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt };
-            }
-        }
+        public static readonly ReadOnlyCollection<Keys> IgnoredKeys = new ReadOnlyCollection<Keys>(
+            new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt }
+);
 
         private Keys[] _pressedKeys;
         private bool _shift;
@@ -257,6 +259,7 @@ namespace Glib.XNA.SpriteLib
         /// <remarks>
         /// Doesn't tick elaspedKeyPressTime.
         /// Called internally by Update(GameTime) after incrementing elaspedKeyPressTime.
+        /// Requires an InputManagerComponent in your game.
         /// </remarks>
         public override void Update()
         {
@@ -266,7 +269,7 @@ namespace Glib.XNA.SpriteLib
                 _elapsedKeyPressTime = new TimeSpan();
                 if (Focused)
                 {
-                    _pressedKeys = Keyboard.GetState().GetPressedKeys();
+                    _pressedKeys = Glib.XNA.InputLib.KeyboardManager.State.GetPressedKeys();
                     _shift = _pressedKeys.Contains(Keys.LeftShift) || _pressedKeys.Contains(Keys.RightShift);
                     foreach (Keys k in _pressedKeys)
                     {
@@ -278,7 +281,7 @@ namespace Glib.XNA.SpriteLib
                         {
                             if (TextSubmitted != null)
                             {
-                                TextSubmitted(this, new EventArgs());
+                                TextSubmitted(this, EventArgs.Empty);
                             }
                             if (ResetOnSubmit)
                             {
@@ -340,9 +343,14 @@ namespace Glib.XNA.SpriteLib
                             _realTxt += _shift ? ")" : "0";
 
                         }
+                        else if (k == Keys.Space)
+                        {
+                            _realTxt += " ";
+
+                        }
                         else if (k != Keys.LeftShift && k != Keys.RightShift)
                         {
-                            _realTxt += _shift ? k.ToString().ToUpper() : k.ToString().ToLower();
+                            _realTxt += _shift || _pressedKeys.Contains(Keys.CapsLock) ? k.ToString().ToUpper() : k.ToString().ToLower();
                         }
                     }
                 }

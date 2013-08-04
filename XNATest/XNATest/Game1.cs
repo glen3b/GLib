@@ -23,6 +23,7 @@ namespace XNATest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         TextSprite menuTxt;
+        TextBoxSprite name;
         Sprite spr;
         Screen menu;
         Screen menuTwo;
@@ -76,7 +77,11 @@ namespace XNATest
             menuTxt.IsManuallySelectable = true;
             menuTxt.IsSelected = true;
             menuTxt.Pressed += new EventHandler(menuTxt_Clicked);
-
+            name = new TextBoxSprite(new Vector2(0, 50), spriteBatch, Content.Load<SpriteFont>("SpriteFont1"));
+            name.IsPassword = true;
+            name.Focused = true;
+            name.Width = 500;
+            name.TextSubmitted += new EventHandler(name_TextSubmitted);
             menuTxtTwo = new TextSprite(spriteBatch, new Vector2(250,0), Content.Load<SpriteFont>("SpriteFont1"), "Selectable", Color.Black);
             menuTxtTwo.IsHoverable = true;
             menuTxtTwo.IsManuallySelectable = true;
@@ -85,17 +90,20 @@ namespace XNATest
 
             KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
 
-            menu = new Screen(new SpriteManager(spriteBatch), Color.Red);
-            menu.Sprites.Add(progBar);
+            menu = new Screen(new SpriteManager(spriteBatch, progBar, name), Color.Red);
             menu.AdditionalSprites.Add(menuTxt);
             menu.AdditionalSprites.Add(menuTxtTwo);
             menu.Visible = true;
 
-            menuTwo = new Screen(new SpriteManager(spriteBatch), Color.Gray);
-            menuTwo.Sprites.Add(spr);
+            menuTwo = new Screen(new SpriteManager(spriteBatch, spr), Color.Gray);
 
             menus = new ScreenManager(spriteBatch, Color.Pink, menu, menuTwo);
             // TODO: use this.Content to load your game content here
+        }
+
+        void name_TextSubmitted(object sender, EventArgs e)
+        {
+            
         }
 
         void progBar_ProgressBarFilled(object sender, EventArgs e)
@@ -147,14 +155,24 @@ namespace XNATest
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            menuTwo.Visible = Keyboard.GetState().IsKeyDown(Keys.LeftAlt);
-            menuTxt.Update();
-            spr.Update();
-            menus.Update();
+            menuTwo.Visible = KeyboardManager.State.IsKeyDown(Keys.LeftAlt);
+            menus.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
+
+        protected override bool BeginDraw()
+        {
+            menus.BeginDraw();
+            return base.BeginDraw();
+        }
+
+        protected override void  EndDraw()
+{
+    menus.EndDraw();
+ 	 base.EndDraw();
+}
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -162,8 +180,6 @@ namespace XNATest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
             /*
             spriteBatch.Begin();
