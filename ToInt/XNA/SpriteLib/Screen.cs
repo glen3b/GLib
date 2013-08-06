@@ -231,9 +231,9 @@ namespace Glib.XNA.SpriteLib
         {
             if (BackgroundSprite != null)
             {
-                if (BackgroundSprite.GetType().Implements(typeof(ITimerSprite)))
+                if (BackgroundSprite is ITimerSprite)
                 {
-                    BackgroundSprite.Cast<ITimerSprite>().Update(game);
+                    (BackgroundSprite as ITimerSprite).Update(game);
                 }
                 else
                 {
@@ -243,9 +243,9 @@ namespace Glib.XNA.SpriteLib
             Sprites.Update(game);
             foreach (ISprite spr in AdditionalSprites)
             {
-                if (spr.GetType().Implements(typeof(ITimerSprite)))
+                if (spr is ITimerSprite)
                 {
-                    spr.Cast<ITimerSprite>().Update(game);
+                    (spr as ITimerSprite).Update(game);
                 }
                 else
                 {
@@ -357,7 +357,7 @@ namespace Glib.XNA.SpriteLib
                     s.OpenSpriteBatch(ref SpriteBatch);
                     if (s.BackgroundSprite != null)
                     {
-                        if (s.BackgroundSprite.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                        if (s.BackgroundSprite is ISpriteBatchManagerSprite)
                         {
                             s.BackgroundSprite.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
                         }
@@ -369,7 +369,7 @@ namespace Glib.XNA.SpriteLib
                     s.Sprites.DrawNonAuto();
                     foreach (ISprite spr in s.AdditionalSprites)
                     {
-                        if (spr.GetType().Implements(typeof(ISpriteBatchManagerSprite)))
+                        if (spr is ISpriteBatchManagerSprite)
                         {
                             spr.Cast<ISpriteBatchManagerSprite>().DrawNonAuto();
                         }

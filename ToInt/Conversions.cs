@@ -526,7 +526,7 @@ namespace Glib
                 return (T)(object)o.ToString();
             }
             */
-            if (o.GetType().Implements(typeof(IConvertible)))
+            if (o is IConvertible)
             {
                 return (T)Convert.ChangeType(o, typeof(T));
             }

@@ -63,7 +63,7 @@ namespace Glib.WinForms
         {
             foreach (Control c in _controls)
             {
-                if (c.GetType().Implements(typeof(IRequiredField)))
+                if (c is IRequiredField)
                 {
                     IRequiredField field = c.Cast<IRequiredField>();
                     if (!field.Completed)
@@ -88,7 +88,7 @@ namespace Glib.WinForms
             {
                 foreach (Control c in _controls)
                 {
-                    if (c.GetType().Implements(typeof(IRequiredField)))
+                    if (c is IRequiredField)
                     {
                         IRequiredField field = c.Cast<IRequiredField>();
                         if (!field.Completed)

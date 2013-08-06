@@ -174,7 +174,7 @@ namespace Glib.XNA.SpriteLib
         {
             for (_i = 0; _i < _sprites.Count; _i++)
             {
-                if (this[_i].GetType().Implements(typeof(ITimerSprite)))
+                if (this[_i] is ITimerSprite)
                 {
                     this[_i].Cast<ITimerSprite>().Update(gameTime);
                 }
