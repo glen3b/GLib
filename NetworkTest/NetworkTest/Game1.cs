@@ -187,7 +187,12 @@ namespace NetworkTest
         void session_GamerJoined(object sender, GamerJoinedEventArgs e)
         {
             Screen playerList = allScreens["playerList"];
-            Texture2D newGamerImage = Texture2D.FromStream(GraphicsDevice, e.Gamer.GetProfile().GetGamerPicture());
+            Texture2D newGamerImage = new TextureFactory(GraphicsDevice).CreateSquare(64, Color.Red);
+            try
+            {
+                newGamerImage = Texture2D.FromStream(GraphicsDevice, e.Gamer.GetProfile().GetGamerPicture());
+            }
+            catch { };
             Vector2 pos = new Vector2(100, 50);
             foreach (Sprite s in playerList.Sprites)
             {
@@ -258,7 +263,7 @@ namespace NetworkTest
             }
             else if (isAsyncingIn && !Guide.IsVisible)
             {
-                Guide.ShowSignIn(2, true);
+                Guide.ShowSignIn(2, false);
             }
 
             allScreens.Update(gameTime);
