@@ -112,9 +112,11 @@ namespace XNATest
             menuTwo.Visible = false;
         }
 
+        ProgressBar pb;
+
         void progBar_Updated(object sender, EventArgs e)
         {
-            ProgressBar pb = sender.Cast<ProgressBar>();
+            pb = sender.Cast<ProgressBar>();
 
             pb.Value += pb.Value == pb.Denominator ? 0 : 1;
         }

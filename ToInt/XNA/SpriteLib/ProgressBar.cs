@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace Glib.XNA.SpriteLib
 {
     /// <summary>
     /// Represents a progress bar.
     /// </summary>
+    [DebuggerDisplay("Value = {Value}")]
     public class ProgressBar : Sprite
     {
         private int _denominator = 10;

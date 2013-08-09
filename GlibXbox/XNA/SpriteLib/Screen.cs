@@ -19,7 +19,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets a boolean representing whether or not this Screen is visible.
         /// </summary>
-        public bool Visible { get; set; }
+        public virtual bool Visible { get; set; }
 
         /// <summary>
         /// Gets the total count of ISprites in this Screen.
@@ -42,17 +42,17 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets a value indicating whether or not to use the center of the Screen as the origin when drawing.
         /// </summary>
-        public bool CenterOrigin
+        public virtual bool CenterOrigin
         {
             get { return _centerOrigin; }
             set { _centerOrigin = value; }
         }
-        
+
 
         /// <summary>
-        /// Center the position of this Screen relative to the position of the specified 
+        /// Center the position of this Screen relative to the position of the specified Viewport.
         /// </summary>
-        /// <param name="v"></param>
+        /// <param name="v">The viewport to center to.</param>
         public void CenterToViewport(Viewport v)
         {
             _centerOrigin = true;
@@ -96,12 +96,12 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the name of the Screen.
         /// </summary>
-        public string Name
+        public virtual string Name
         {
             get { return _name; }
             set { _name = value; }
         }
-        
+
 
         /// <summary>
         /// The color to tint this screen as.
@@ -140,7 +140,8 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sizeOfTarget">The size and position of the RenderTarget.</param>
         /// <param name="color">The color to clear this Screen as before drawing.</param>
         /// <param name="allSprites">The SpriteManager containing the Sprites to draw.</param>
-        public Screen(Rectangle sizeOfTarget, Color color, SpriteManager allSprites) : this(new RenderTarget2D(allSprites.SpriteBatch.GraphicsDevice, sizeOfTarget.Width, sizeOfTarget.Height), color, allSprites)
+        public Screen(Rectangle sizeOfTarget, Color color, SpriteManager allSprites)
+            : this(new RenderTarget2D(allSprites.SpriteBatch.GraphicsDevice, sizeOfTarget.Width, sizeOfTarget.Height), color, allSprites)
         {
             Position = new Vector2(sizeOfTarget.X, sizeOfTarget.Y);
         }
@@ -150,7 +151,8 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="sb">The SpriteBatch to draw.</param>
         /// <param name="c">The color of the Screen.</param>
-        public Screen(SpriteBatch sb, Color c) : this(new SpriteManager(sb), c)
+        public Screen(SpriteBatch sb, Color c)
+            : this(new SpriteManager(sb), c)
         {
 
         }
@@ -223,6 +225,36 @@ namespace Glib.XNA.SpriteLib
             sb.Begin();
         }
 
+
+        /*
+        /// <summary>
+        /// Save a screenshot of this screen to the specified path.
+        /// </summary>
+        /// <param name="path">The path of the image.</param>
+        /// <param name="format">The format of the image.</param>
+        /// <param name="width">The width of the screenshot.</param>
+        /// <param name="height">The height of the screenshot.</param>
+        public void Screenshot(string path, ImageFormat format, int width, int height)
+        {
+            if (Target == null)
+            {
+                throw new InvalidOperationException("The RenderTarget must not be null.");
+            }
+            switch (format)
+            {
+                case ImageFormat.GIF:
+                    throw new NotImplementedException("Saving a screenshot as a GIF is not supported.");
+                case ImageFormat.JPEG:
+                    Target.SaveAsJpeg(new System.IO.StreamWriter(path).BaseStream, width, height);
+                    break;
+                case ImageFormat.PNG:
+                    Target.SaveAsPng(new System.IO.StreamWriter(path).BaseStream, width, height);
+                    break;
+
+            }
+        }
+        */
+
         /// <summary>
         /// Update all Sprites on this Screen.
         /// </summary>
@@ -233,7 +265,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (BackgroundSprite is ITimerSprite)
                 {
-                    BackgroundSprite.Cast<ITimerSprite>().Update(game);
+                    (BackgroundSprite as ITimerSprite).Update(game);
                 }
                 else
                 {
@@ -245,7 +277,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (spr is ITimerSprite)
                 {
-                    spr.Cast<ITimerSprite>().Update(game);
+                    (spr as ITimerSprite).Update(game);
                 }
                 else
                 {
@@ -445,7 +477,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 if (numFound > 1)
                 {
-                    throw new InvalidOperationException("Requested Screen is ambiguous between the " + numFound + " Screens with the specified name.");
+                    throw new InvalidOperationException(string.Format("Requested Screen is ambiguous between the {0} Screens with the specified name.", numFound));
                 }
                 else if (numFound == 1)
                 {

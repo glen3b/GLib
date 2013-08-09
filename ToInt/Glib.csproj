@@ -60,6 +60,7 @@
     <Compile Include="Services\Service.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="XNA\ImageFormat.cs" />
     <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WinForms\Controls\RequiredTextBoxes.cs">

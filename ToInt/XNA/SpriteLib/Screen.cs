@@ -19,7 +19,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets a boolean representing whether or not this Screen is visible.
         /// </summary>
-        public bool Visible { get; set; }
+        public virtual bool Visible { get; set; }
 
         /// <summary>
         /// Gets the total count of ISprites in this Screen.
@@ -42,7 +42,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets a value indicating whether or not to use the center of the Screen as the origin when drawing.
         /// </summary>
-        public bool CenterOrigin
+        public virtual bool CenterOrigin
         {
             get { return _centerOrigin; }
             set { _centerOrigin = value; }
@@ -50,9 +50,9 @@ namespace Glib.XNA.SpriteLib
         
 
         /// <summary>
-        /// Center the position of this Screen relative to the position of the specified 
+        /// Center the position of this Screen relative to the position of the specified Viewport.
         /// </summary>
-        /// <param name="v"></param>
+        /// <param name="v">The viewport to center to.</param>
         public void CenterToViewport(Viewport v)
         {
             _centerOrigin = true;
@@ -96,7 +96,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the name of the Screen.
         /// </summary>
-        public string Name
+        public virtual string Name
         {
             get { return _name; }
             set { _name = value; }
@@ -222,6 +222,36 @@ namespace Glib.XNA.SpriteLib
         {
             sb.Begin();
         }
+
+
+        /*
+        /// <summary>
+        /// Save a screenshot of this screen to the specified path.
+        /// </summary>
+        /// <param name="path">The path of the image.</param>
+        /// <param name="format">The format of the image.</param>
+        /// <param name="width">The width of the screenshot.</param>
+        /// <param name="height">The height of the screenshot.</param>
+        public void Screenshot(string path, ImageFormat format, int width, int height)
+        {
+            if (Target == null)
+            {
+                throw new InvalidOperationException("The RenderTarget must not be null.");
+            }
+            switch (format)
+            {
+                case ImageFormat.GIF:
+                    throw new NotImplementedException("Saving a screenshot as a GIF is not supported.");
+                case ImageFormat.JPEG:
+                    Target.SaveAsJpeg(new System.IO.StreamWriter(path).BaseStream, width, height);
+                    break;
+                case ImageFormat.PNG:
+                    Target.SaveAsPng(new System.IO.StreamWriter(path).BaseStream, width, height);
+                    break;
+
+            }
+        }
+        */
 
         /// <summary>
         /// Update all Sprites on this Screen.
@@ -445,7 +475,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 if (numFound > 1)
                 {
-                    throw new InvalidOperationException("Requested Screen is ambiguous between the "+numFound+" Screens with the specified name.");
+                    throw new InvalidOperationException(string.Format("Requested Screen is ambiguous between the {0} Screens with the specified name.", numFound));
                 }
                 else if (numFound == 1)
                 {
