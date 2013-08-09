@@ -34,12 +34,13 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Position = {Position}")]
     public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
     {
+        #region Operators
         /// <summary>
         /// Convert the specified Sprite to a rectangle.
         /// </summary>
         /// <param name="spr">The Sprite to convert to a Rectangle.</param>
         /// <returns>The Rectangle representing the area of the Sprite.</returns>
-        static public implicit operator Rectangle(Sprite spr)
+        static public explicit operator Rectangle(Sprite spr)
         {
             return spr.Rectangle;
         }
@@ -49,15 +50,16 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="spr">The Sprite to convert to a Texture2D.</param>
         /// <returns>The texture of the Sprite.</returns>
-        static public implicit operator Texture2D(Sprite spr)
+        static public explicit operator Texture2D(Sprite spr)
         {
             return spr.Texture;
         }
+        #endregion
 
         /// <summary>
         /// The speed of the sprite in X and Y.
         /// </summary>
-        public Vector2 Speed = new Vector2(0);
+        public Vector2 Speed = Vector2.Zero;
 
         private SpriteEffects _effect = SpriteEffects.None;
 
@@ -167,29 +169,24 @@ namespace Glib.XNA.SpriteLib
         public Vector2 Scale = Vector2.One;
 
         /// <summary>
-        /// The scale-sensitive center of the sprite.
-        /// Setting this property is experimental.
-        /// This property will break with UseCenterAsOrigin.
+        /// Gets the scale-sensitive center of the sprite.
+        /// Setting this property will break with OriginType as Center or Custom.
         /// </summary>
-        public virtual Vector2 Center
+        public Vector2 Center
         {
             get
             {
-                return new Vector2(X + (Width / 2), Y + (Height / 2));
+                return new Vector2((X - (Origin.X * Scale.X)) + (Width / 2), (Y - (Origin.Y * Scale.Y)) + (Height / 2));
                 //return new Vector2(Rectangle.Center.X, Rectangle.Center.Y);
             }
             set
             {
                 Vector2 proposition = new Vector2(value.X - Width / 2, value.Y - Height / 2);
-                if (!isMoveEventCanceled(proposition))
+                if (!IsMoveEventCanceled(proposition))
                 {
-                    _pos = proposition;
-                    if (Moved != null)
-                    {
-                        Moved(this, new EventArgs());
-                    }
+                    MoveSprite(proposition);
                 }
-                
+
             }
         }
         
@@ -204,7 +201,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (!isMoveEventCanceled(new Vector2(value, _pos.Y)))
+                if (!IsMoveEventCanceled(new Vector2(value, _pos.Y)))
                 {
                     _pos.X = value;
                     if (Moved != null)
@@ -226,7 +223,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (!isMoveEventCanceled(new Vector2(_pos.X, value)))
+                if (!IsMoveEventCanceled(new Vector2(_pos.X, value)))
                 {
                     _pos.Y = value;
                     if (Moved != null)
@@ -296,7 +293,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (!isMoveEventCanceled(value))
+                if (!IsMoveEventCanceled(value))
                 {
                     _pos = value;
                     if (Moved != null)
@@ -308,14 +305,27 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Move this Sprite to the specified position, calling the Moved event, but not Move.
+        /// </summary>
+        /// <param name="newPos">The new position of the Sprite.</param>
+        protected void MoveSprite(Vector2 newPos)
+        {
+            _pos = newPos;
+            if (Moved != null)
+            {
+                Moved(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
         /// Calls the Move event and returns whether or not it was canceled.
         /// </summary>
         /// <remarks>
         /// Calls an event; call only when neccesary.
         /// </remarks>
         /// <param name="newPos">The position to call the move event with.</param>
-        /// <returns>Whethjer or not the called move event was cancelled.</returns>
-        protected virtual bool isMoveEventCanceled(Vector2 newPos)
+        /// <returns>Whether or not the called move event was cancelled.</returns>
+        protected bool IsMoveEventCanceled(Vector2 newPos)
         {
             bool cancel = false;
             if (Move != null)
@@ -326,12 +336,8 @@ namespace Glib.XNA.SpriteLib
                     tmp(this, args);
                     cancel = args.Cancel;
                 }
-                return cancel;
             }
-            else
-            {
-                return false;
-            }
+            return cancel;
         }
 
         /// <summary>
@@ -382,7 +388,7 @@ namespace Glib.XNA.SpriteLib
         /// Draws the sprite.
         /// Automatically begins the SpriteBatch before you draw the sprite and ends the SpriteBatch after you draw the sprite.
         /// </summary>
-        public virtual void Draw()
+        public void Draw()
         {
             try
             {
@@ -482,10 +488,7 @@ namespace Glib.XNA.SpriteLib
         public virtual void DrawNonAuto()
         {
             SpriteBatch.Draw(this);
-            if (Drawn != null)
-            {
-                Drawn(this, new EventArgs());
-            }
+            CallDrawn();
         }
 
         /// <summary>
@@ -493,7 +496,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         protected void CallDrawn()
         {
-            Drawn(this, new EventArgs());
+            if (Drawn != null)
+            {
+                Drawn(this, EventArgs.Empty);
+            }
         }
 
 

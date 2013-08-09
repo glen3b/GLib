@@ -94,18 +94,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// The scale-sensitive center of the sprite.
-        /// </summary>
-        public override Vector2 Center
-        {
-            get
-            {
-                return new Vector2(X + (Width / 2), Y + (Height / 2));
-                //return new Vector2(Rectangle.Center.X, Rectangle.Center.Y);
-            }
-        }
-
-        /// <summary>
         /// The currently selected Sprite, where X is the zero-based column and Y is the zero-based row.
         /// </summary>
         public Point CurrentSprite = new Point(0,0);
