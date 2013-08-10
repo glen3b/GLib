@@ -585,11 +585,6 @@
             The SpriteFont to use.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.TextSprite.Text">
-            <summary>
-            The text of this text sprite.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.TextSprite.Color">
             <summary>
             The color to draw the text as.
@@ -608,6 +603,11 @@
         <member name="F:Glib.XNA.SpriteLib.TextSprite.Rotation">
             <summary>
             The rotation of the TextSprite.
+            </summary>
+        </member>
+        <member name="E:Glib.XNA.SpriteLib.TextSprite.TextChanged">
+            <summary>
+            An event fired when the text of this TextSprite changes.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.TextSprite.IsShadowed">
@@ -676,6 +676,11 @@
         <member name="P:Glib.XNA.SpriteLib.TextSprite.Y">
             <summary>
             The current Y coordinate of the sprite.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextSprite.Text">
+            <summary>
+            Gets or sets the text of this TextSprite.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.TextSprite.Position">
