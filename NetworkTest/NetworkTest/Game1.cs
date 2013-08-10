@@ -270,6 +270,11 @@ namespace NetworkTest
 
             // TODO: Add your update logic here
 
+            if (this.session != null)
+            {
+                session.Update();
+            }
+
             base.Update(gameTime);
         }
 
