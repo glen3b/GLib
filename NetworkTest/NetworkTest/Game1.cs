@@ -145,7 +145,7 @@ namespace NetworkTest
                 this.session = NetworkSession.Join(asession);
                 session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
                 session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
-
+                Services.AddService(session.GetType(), session);
             }
         }
 
@@ -163,7 +163,7 @@ namespace NetworkTest
                 session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
                 allScreens["titleScreen"].Visible = false;
                 allScreens["playerList"].Visible = true;
-                
+                Services.AddService(session.GetType(), session);
 
                 /*
                 Texture2D newGamerImage = Texture2D.FromStream(GraphicsDevice, Gamer.SignedInGamers[0].GetProfile().GetGamerPicture());
