@@ -67,7 +67,7 @@ namespace NetworkTest
             createSession.HoverColor = Color.White;
             createSession.Pressed += new EventHandler(createSession_Pressed);
             TextSprite joinSession = new TextSprite(spriteBatch, font, "Join session");
-            joinSession.Y += createSession.Font.LineSpacing;
+            joinSession.Y += createSession.Font.LineSpacing+1;
             joinSession.IsHoverable = true;
             joinSession.NonHoverColor = Color.Black;
             joinSession.HoverColor = Color.White;
