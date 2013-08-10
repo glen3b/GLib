@@ -14,6 +14,11 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Text = {Text}")]
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        /// <summary>
+        /// An event fired when the text of this TextSprite changes.
+        /// </summary>
+        public event EventHandler TextChanged;
+
         private bool _isShadowed = false;
 
         /// <summary>
@@ -322,10 +327,30 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public SpriteFont Font;
 
+        private string _text = "";
+
         /// <summary>
-        /// The text of this text sprite.
+        /// Gets or sets the text of this TextSprite.
         /// </summary>
-        public String Text = "";
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("The Text of this TextSprite must not be null.", null as Exception);
+                }
+                if (value != _text)
+                {
+                    _text = value;
+                    if (TextChanged != null)
+                    {
+                        TextChanged(this, EventArgs.Empty);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// The color to draw the text as.
