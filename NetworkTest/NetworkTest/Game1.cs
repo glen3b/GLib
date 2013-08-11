@@ -107,7 +107,7 @@ namespace NetworkTest
 
         void joinSession_Pressed(object sender, EventArgs e)
         {
-            if (!Guide.IsVisible)
+            if (!Guide.IsVisible && !allScreens["chatScreen"].Visible)
             {
                 availableSessions = NetworkSession.Find(
         NetworkSessionType.SystemLink, 2,
@@ -136,7 +136,7 @@ namespace NetworkTest
 
         void info_Pressed(object sender, EventArgs e)
         {
-            if (!Guide.IsVisible)
+            if (!Guide.IsVisible && !allScreens["chatScreen"].Visible)
             {
                 AvailableNetworkSession asession = sender.Cast<SessionInfoDisplay>().Session;
 
@@ -152,7 +152,7 @@ namespace NetworkTest
 
         void createSession_Pressed(object sender, EventArgs e)
         {
-            if (!Guide.IsVisible)
+            if (!Guide.IsVisible && !allScreens["chatScreen"].Visible)
             {
                 IAsyncResult beginCrSess = NetworkSession.BeginCreate(
         NetworkSessionType.SystemLink,
