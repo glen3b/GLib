@@ -294,7 +294,7 @@ namespace NetworkTest
                         // Read a single packet.
                         gamer.ReceiveData(packetReader, out sender);
                     }
-                    if (sender != null)
+                    if (sender != null && !sender.IsLocal)
                     {
                         string message = packetReader.ReadString();
                         if (!Guide.IsVisible)
