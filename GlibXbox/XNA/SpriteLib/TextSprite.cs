@@ -377,11 +377,11 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The scale of this TextSprite.
         /// </summary>
-        public Vector2 Scale = new Vector2(1);
+        public Vector2 Scale = Vector2.One;
 
         /// <summary>
         /// The rotation of the TextSprite.
         /// </summary>
-        public SpriteRotation Rotation = new SpriteRotation();
+        public SpriteRotation Rotation = SpriteRotation.Zero;
     }
 }

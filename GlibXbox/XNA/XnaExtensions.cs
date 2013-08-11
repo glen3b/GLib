@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace Glib.XNA
 {
@@ -12,6 +13,27 @@ namespace Glib.XNA
     /// </summary>
     public static class XnaExtensions
     {
+        /// <summary>
+        /// Gets a boolean indicating whether or not the GamerServices guide is visible.
+        /// </summary>
+        /// <remarks>
+        /// This property will return false in the case of lack of availability of gamer services.
+        /// </remarks>
+        public static bool IsGuideVisible
+        {
+            get
+            {
+                try
+                {
+                    return Guide.IsVisible;
+                }
+                catch (InvalidOperationException)
+                {
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// Create a 2-color Texture2D on the specified graphics device of the specified size.
         /// </summary>

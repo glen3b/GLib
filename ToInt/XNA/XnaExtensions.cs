@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace Glib.XNA
 {
@@ -9,6 +10,27 @@ namespace Glib.XNA
     /// </summary>
     public static class XnaExtensions
     {
+        /// <summary>
+        /// Gets a boolean indicating whether or not the GamerServices guide is visible.
+        /// </summary>
+        /// <remarks>
+        /// This property will return false in the case of lack of availability of gamer services.
+        /// </remarks>
+        public static bool IsGuideVisible
+        {
+            get
+            {
+                try
+                {
+                    return Guide.IsVisible;
+                }
+                catch (InvalidOperationException)
+                {
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// Get the average size per character for this SpriteFont.
         /// </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace Glib.XNA.InputLib
 {
@@ -112,11 +113,13 @@ namespace Glib.XNA.InputLib
             bool isMouseInCurrent = false;
             bool isMouseInPast = false;
             isMouseInCurrent =
+                !Guide.IsVisible &&
                 MouseManager.CurrentMouseState.X >= _position.X &&
                 MouseManager.CurrentMouseState.X <= _position.X + _size.X &&
                 MouseManager.CurrentMouseState.Y >= _position.Y &&
                 MouseManager.CurrentMouseState.Y <= _position.Y + _size.Y;
             isMouseInPast =
+                !Guide.IsVisible &&
                 MouseManager.LastMouseState.X >= _position.X &&
                 MouseManager.LastMouseState.X <= _position.X + _size.X &&
                 MouseManager.LastMouseState.Y >= _position.Y &&

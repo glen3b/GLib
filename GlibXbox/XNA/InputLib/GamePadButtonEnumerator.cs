@@ -282,6 +282,12 @@ namespace Glib.XNA.InputLib
         /// <param name="gt">The current GameTime.</param>
         public virtual void Update(GameTime gt)
         {
+            if (XnaExtensions.IsGuideVisible)
+            {
+                //Don't perform logic
+                return;
+            }
+
             GamePadState current = GamePadManager.GetManager(Player).Current;
             bool isJoystick = Input == InputType.LeftJoystick || Input == InputType.RightJoystick;
             if (isJoystick)

@@ -23,7 +23,6 @@ namespace XNATest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         TextSprite menuTxt;
-        TextBoxSprite name;
         Sprite spr;
         Screen menu;
         Screen menuTwo;
@@ -74,23 +73,18 @@ namespace XNATest
 
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;
-            menuTxt.IsManuallySelectable = true;
             menuTxt.IsSelected = true;
             menuTxt.Pressed += new EventHandler(menuTxt_Clicked);
-            name = new TextBoxSprite(new Vector2(0, 50), spriteBatch, Content.Load<SpriteFont>("SpriteFont1"));
-            name.IsPassword = true;
-            name.Focused = true;
-            name.Width = 500;
-            name.TextSubmitted += new EventHandler(name_TextSubmitted);
+            
             menuTxtTwo = new TextSprite(spriteBatch, new Vector2(250,0), Content.Load<SpriteFont>("SpriteFont1"), "Selectable", Color.Black);
             menuTxtTwo.IsHoverable = true;
-            menuTxtTwo.IsManuallySelectable = true;
+            //menuTxtTwo.IsManuallySelectable = true;
             //menuTxt.Clicked += new EventHandler(menuTxt_Clicked);
             //menuTxt.HoverColor = Color.Red;
 
-            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
+            //KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
 
-            menu = new Screen(new SpriteManager(spriteBatch, progBar, name), Color.Red);
+            menu = new Screen(new SpriteManager(spriteBatch, progBar), Color.Red);
             menu.AdditionalSprites.Add(menuTxt);
             menu.AdditionalSprites.Add(menuTxtTwo);
             menu.Visible = true;
@@ -99,11 +93,6 @@ namespace XNATest
 
             menus = new ScreenManager(spriteBatch, Color.Pink, menu, menuTwo);
             // TODO: use this.Content to load your game content here
-        }
-
-        void name_TextSubmitted(object sender, EventArgs e)
-        {
-            
         }
 
         void progBar_ProgressBarFilled(object sender, EventArgs e)
@@ -123,6 +112,7 @@ namespace XNATest
 
         TextSprite menuTxtTwo;
 
+        /*
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
             if (e.Key == Keys.Left || e.Key == Keys.Right)
@@ -131,6 +121,7 @@ namespace XNATest
                 menuTxtTwo.IsSelected = !menuTxtTwo.IsSelected;
             }
         }
+        */
 
         void menuTxt_Clicked(object sender, EventArgs e)
         {

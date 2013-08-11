@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Glib.XNA.InputLib;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -196,7 +197,7 @@ namespace Glib.XNA.SpriteLib
                 actualH = _parentSprite.Height;
             }
 
-            if (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)))
+            if (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)) && !XnaExtensions.IsGuideVisible)
             {
                 FireClicked();
             }
@@ -212,7 +213,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height))
+                    if (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && !XnaExtensions.IsGuideVisible)
                     {
                         //Intersecting.
                         IsSelected = true;
@@ -311,9 +312,9 @@ namespace Glib.XNA.SpriteLib
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
-            if (_isHoverable && CallKeyboardClickEvent && Visible && _isSelected && e.Key == Keys.Enter && Pressed != null)
+            if (_isHoverable && CallKeyboardClickEvent && Visible && _isSelected && e.Key == Keys.Enter && !XnaExtensions.IsGuideVisible)
             {
-                Pressed(this, EventArgs.Empty);
+                FireClicked();
             }
         }
 
@@ -455,11 +456,11 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The scale of this TextSprite.
         /// </summary>
-        public Vector2 Scale = new Vector2(1);
+        public Vector2 Scale = Vector2.One;
 
         /// <summary>
         /// The rotation of the TextSprite.
         /// </summary>
-        public SpriteRotation Rotation = new SpriteRotation();
+        public SpriteRotation Rotation = SpriteRotation.Zero;
     }
 }
