@@ -1855,6 +1855,14 @@
             <param name="triangle">The triangle to use when determining if this is a right triangle.</param>
             <returns>Whether or not the specified triangle is a right triangle.</returns>
         </member>
+        <member name="P:Glib.XNA.XnaExtensions.IsGuideVisible">
+            <summary>
+            Gets a boolean indicating whether or not the GamerServices guide is visible.
+            </summary>
+            <remarks>
+            This property will return false in the case of lack of availability of gamer services.
+            </remarks>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.TextBoxSprite">
             <summary>
             A Sprite which accepts Text as input.
