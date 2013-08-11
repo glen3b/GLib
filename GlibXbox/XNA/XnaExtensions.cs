@@ -13,6 +13,8 @@ namespace Glib.XNA
     /// </summary>
     public static class XnaExtensions
     {
+        private static bool? _gamerServicesAvailable = null;
+
         /// <summary>
         /// Gets a boolean indicating whether or not the GamerServices guide is visible.
         /// </summary>
@@ -23,13 +25,23 @@ namespace Glib.XNA
         {
             get
             {
-                try
+                if (_gamerServicesAvailable.HasValue)
                 {
-                    return Guide.IsVisible;
+                    return _gamerServicesAvailable.Value && Guide.IsVisible;
                 }
-                catch (InvalidOperationException)
+                else
                 {
-                    return false;
+                    try
+                    {
+                        bool guideVisible = Guide.IsVisible;
+                        _gamerServicesAvailable = true;
+                        return guideVisible;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        _gamerServicesAvailable = false;
+                        return false;
+                    }
                 }
             }
         }
