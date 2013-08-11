@@ -45,6 +45,8 @@ namespace NetworkTest
 
         SpriteFont font;
 
+        PacketReader packetReader;
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -94,6 +96,9 @@ namespace NetworkTest
             chatScreen.Sprites.Add(tbs);
 
             allScreens = new ScreenManager(spriteBatch, Color.Red, title, waitForPlayers, listSessions, chatScreen);
+
+            packetReader = new PacketReader();
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -275,6 +280,29 @@ namespace NetworkTest
             if (this.session != null)
             {
                 session.Update();
+            }
+
+            if (allScreens["chatScreen"].Visible)
+            {
+                foreach (LocalNetworkGamer gamer in session.LocalGamers)
+                {
+                    NetworkGamer sender = null;
+                    // Keep reading while packets are available.
+                    while (gamer.IsDataAvailable)
+                    {
+
+                        // Read a single packet.
+                        gamer.ReceiveData(packetReader, out sender);
+                    }
+                    if (sender != null)
+                    {
+                        string message = packetReader.ReadString();
+                        if (!Guide.IsVisible)
+                        {
+                            Guide.BeginShowMessageBox("Message received from "+sender.Gamertag, message, new string[]{"OK"}, 0, MessageBoxIcon.None, null, null);
+                        }
+                    }
+                }
             }
 
             base.Update(gameTime);
