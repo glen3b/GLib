@@ -197,7 +197,7 @@ namespace Glib.XNA.SpriteLib
                 actualH = _parentSprite.Height;
             }
 
-            if (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)) && !XnaExtensions.IsGuideVisible)
+            if ( (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)) ) && !XnaExtensions.IsGuideVisible)
             {
                 FireClicked();
             }
@@ -213,7 +213,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && !XnaExtensions.IsGuideVisible)
+                    if ( (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) ) && !XnaExtensions.IsGuideVisible)
                     {
                         //Intersecting.
                         IsSelected = true;
