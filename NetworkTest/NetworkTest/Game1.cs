@@ -202,7 +202,7 @@ namespace NetworkTest
             playerList.Sprites.Add(gamerIcon);
             TextSprite gamerName = new TextSprite(spriteBatch, new Vector2(pos.X + gamerIcon.Width + 5, pos.Y), font, e.Gamer.Gamertag);
             allScreens["playerList"].AdditionalSprites.Add(gamerName);
-            if (session.AllGamers.Count >= 2)
+            if (session.AllGamers.Count >= 2 && session.IsHost)
             {
                 //TODO
                 session.StartGame();
