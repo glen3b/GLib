@@ -203,8 +203,9 @@ namespace Glib.XNA.SpriteLib
                 BackgroundSprite.Update();
             }
             Sprites.Update();
-            foreach (ISprite spr in AdditionalSprites)
+            for (int i = 0; i < AdditionalSprites.Count; i++)
             {
+                ISprite spr = AdditionalSprites[i];
                 spr.Update();
             }
         }
@@ -273,8 +274,9 @@ namespace Glib.XNA.SpriteLib
                 }
             }
             Sprites.Update(game);
-            foreach (ISprite spr in AdditionalSprites)
+            for (int i = 0; i < AdditionalSprites.Count; i++)
             {
+                ISprite spr = AdditionalSprites[i];
                 if (spr is ITimerSprite)
                 {
                     (spr as ITimerSprite).Update(game);

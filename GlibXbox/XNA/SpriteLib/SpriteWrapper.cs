@@ -185,9 +185,10 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void DrawNonAuto()
         {
-            foreach (ISprite spr in _sprites)
+            for (int i = 0; i < _sprites.Count; i++)
             {
-                if (spr.GetType().GetInterfaces().Contains(typeof(ISpriteBatchManagerSprite)))
+                ISprite spr = _sprites[i];
+                if (spr is ISpriteBatchManagerSprite)
                 {
                     ((ISpriteBatchManagerSprite)spr).DrawNonAuto();
                 }
