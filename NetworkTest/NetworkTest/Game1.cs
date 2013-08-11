@@ -86,8 +86,10 @@ namespace NetworkTest
 
 
             Screen chatScreen = new Screen(spriteBatch, Color.CornflowerBlue);
-            TextBoxSprite tbs = new TextBoxSprite(new Vector2(0, GraphicsDevice.Viewport.Height-20), spriteBatch, font);
+            TextBoxSprite tbs = new TextBoxSprite(new Vector2(1, GraphicsDevice.Viewport.Height-20), spriteBatch, font);
             tbs.TextSubmitted += new EventHandler(tbs_TextSubmitted);
+            tbs.Width = GraphicsDevice.Viewport.Width-2;
+            tbs.Height = 19;
             chatScreen.Name = "chatScreen";
             chatScreen.Sprites.Add(tbs);
 
