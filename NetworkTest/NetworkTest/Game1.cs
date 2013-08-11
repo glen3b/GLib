@@ -137,10 +137,14 @@ namespace NetworkTest
             if (!Guide.IsVisible)
             {
                 AvailableNetworkSession asession = sender.Cast<SessionInfoDisplay>().Session;
-                this.session = NetworkSession.Join(asession);
+
+                IAsyncResult beginJoinSess = NetworkSession.BeginJoin(asession, null, null);
+                beginJoinSess.AsyncWaitHandle.WaitOne();
+                
+                this.session = NetworkSession.EndJoin(beginJoinSess);
                 session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
                 session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
-                Services.AddService(session.GetType(), session);
+                Services.AddService(typeof(NetworkSession), session);
             }
         }
 
@@ -148,17 +152,18 @@ namespace NetworkTest
         {
             if (!Guide.IsVisible)
             {
-
-                session = NetworkSession.Create(
+                IAsyncResult beginCrSess = NetworkSession.BeginCreate(
         NetworkSessionType.SystemLink,
-        maximumLocalPlayers, maximumGamers, privateGamerSlots,
+        maximumLocalPlayers, maximumGamers, null,
         null);
+                beginCrSess.AsyncWaitHandle.WaitOne();
+                session = NetworkSession.EndCreate(beginCrSess);
                 session.AllowJoinInProgress = true;
                 session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(session_GamerJoined);
                 session.GameStarted += new EventHandler<GameStartedEventArgs>(session_GameStarted);
                 allScreens["titleScreen"].Visible = false;
                 allScreens["playerList"].Visible = true;
-                Services.AddService(session.GetType(), session);
+                Services.AddService(typeof(NetworkSession), session);
 
                 /*
                 Texture2D newGamerImage = Texture2D.FromStream(GraphicsDevice, Gamer.SignedInGamers[0].GetProfile().GetGamerPicture());
@@ -207,7 +212,7 @@ namespace NetworkTest
         NetworkSession session;
 
         int maximumGamers = 2;
-        int privateGamerSlots = 1;
+
         int maximumLocalPlayers = 1;
 
         bool isAsyncingIn = false;
