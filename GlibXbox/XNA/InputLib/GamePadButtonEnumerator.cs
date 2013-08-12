@@ -237,7 +237,7 @@ namespace Glib.XNA.InputLib
                         {
                             _rowCurrent = _allButtons.GetLength(0) - 1;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible) );
                     break;
                 case Direction.Bottom:
                     do
@@ -247,7 +247,7 @@ namespace Glib.XNA.InputLib
                         {
                             _rowCurrent = 0;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible));
                     break;
                 case Direction.Left:
                     do{
@@ -256,7 +256,7 @@ namespace Glib.XNA.InputLib
                         {
                             _columnCurrent = _allButtons.GetLength(1) - 1;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible));
                     break;
                 case Direction.Right:
                     do
@@ -266,7 +266,7 @@ namespace Glib.XNA.InputLib
                         {
                             _columnCurrent = 0;
                         }
-                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible);
+                    } while (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible));
                     break;
             }
             _allButtons[_rowCurrent, _columnCurrent].IsSelected = true;

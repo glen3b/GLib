@@ -213,7 +213,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    if ( (_parentSprite != null ? _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) ) && !XnaExtensions.IsGuideVisible)
+                    if ((_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
                     {
                         //Intersecting.
                         IsSelected = true;
