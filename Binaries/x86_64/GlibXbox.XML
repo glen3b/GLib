@@ -418,6 +418,11 @@
             Logically update this sprite. This can also be done in the Updated event.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Visible">
+            <summary>
+            Gets or sets a boolean indicating whether the Sprite is visible.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Effect">
             <summary>
             The effect to apply to the Sprite when drawn.
@@ -770,11 +775,6 @@
             <summary>
             Call the Updated event of this SpriteSheet, WITHOUT ANIMATION TICKS.
             Will only animate if AnimationDelay is set to 0 milliseconds.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteSheet.DrawNonAuto">
-            <summary>
-            Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteSheet.RestartAnimation">
