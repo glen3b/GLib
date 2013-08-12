@@ -307,13 +307,5 @@ namespace Glib.XNA.SpriteLib
                 }
             }
         }
-
-        /// <summary>
-        /// Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
-        /// </summary>
-        public override void DrawNonAuto()
-        {
-            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, SpriteEffects.None, 0f);
-        }
     }
 }

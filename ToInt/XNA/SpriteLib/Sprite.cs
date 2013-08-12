@@ -75,6 +75,18 @@ namespace Glib.XNA.SpriteLib
 
         private SpriteEffects _effect = SpriteEffects.None;
 
+        private bool _visible = true;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether the Sprite is visible.
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set { _visible = value; }
+        }
+
+
         /// <summary>
         /// The effect to apply to the Sprite when drawn.
         /// </summary>
@@ -198,10 +210,10 @@ namespace Glib.XNA.SpriteLib
                 {
                     MoveSprite(proposition);
                 }
-                
+
             }
         }
-        
+
         /// <summary>
         /// The current X coordinate of the sprite.
         /// </summary>
@@ -291,7 +303,7 @@ namespace Glib.XNA.SpriteLib
             get { return _texture; }
             set { _texture = value; }
         }
-        
+
         private Vector2 _pos;
 
         /// <summary>
@@ -365,7 +377,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
         /// </summary>
-        public UpdateParamaters UpdateParams = new UpdateParamaters(true,true);
+        public UpdateParamaters UpdateParams = new UpdateParamaters(true, true);
 
         /// <summary>
         /// Create a new Sprite.
@@ -380,7 +392,8 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
-        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb) : this(texture, pos, sb)
+        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb)
+            : this(texture, pos, sb)
         {
             this.Color = color;
         }
@@ -388,7 +401,8 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
-        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, UpdateParamaters up) : this(texture, pos, color, sb)
+        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, UpdateParamaters up)
+            : this(texture, pos, color, sb)
         {
             this.UpdateParams = up;
         }
@@ -396,7 +410,8 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
-        public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb, UpdateParamaters up) : this(texture, pos, sb)
+        public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb, UpdateParamaters up)
+            : this(texture, pos, sb)
         {
             this.UpdateParams = up;
         }
@@ -442,7 +457,7 @@ namespace Glib.XNA.SpriteLib
             get { return _originType; }
             set { _originType = value; }
         }
-        
+
 
         /// <summary>
         /// Gets or sets the origin of the Sprite.
@@ -506,8 +521,11 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void DrawNonAuto()
         {
-            SpriteBatch.Draw(this);
-            CallDrawn();
+            if (Visible)
+            {
+                SpriteBatch.Draw(this);
+                CallDrawn();
+            }
         }
 
         /// <summary>
@@ -529,7 +547,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the mouse, based on the given MouseState, is clicking on this Sprite.</returns>
         public bool ClickCheck(MouseState ms)
         {
-            return ms.LeftButton == ButtonState.Pressed && Intersects(new Vector2(ms.X, ms.Y));
+            return Visible && ms.LeftButton == ButtonState.Pressed && Intersects(new Vector2(ms.X, ms.Y));
         }
 
         /// <summary>
@@ -540,7 +558,7 @@ namespace Glib.XNA.SpriteLib
         {
             return ClickCheck(MouseManager.CurrentMouseState);
         }
-            
+
 
         /// <summary>
         /// Checks whether the given point intersects with the sprite.
@@ -549,6 +567,10 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the specified position intersects with this Sprite.</returns>
         public bool Intersects(Vector2 pos)
         {
+            if (!Visible)
+            {
+                return false;
+            }
             float realX = X;
             float realY = Y;
             realX -= Origin.X * Scale.X;
@@ -574,7 +596,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
         public bool Intersects(Rectangle r)
         {
-            return Rectangle.Intersects(r);
+            return Visible && Rectangle.Intersects(r);
         }
 
         /// <summary>
@@ -584,7 +606,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
         public bool Intersects(Sprite s)
         {
-            return Intersects(s.Rectangle);
+            return Visible && s.Visible && Intersects(s.Rectangle);
         }
         #endregion
 
@@ -695,10 +717,10 @@ namespace Glib.XNA.SpriteLib
                 _pastDirections = EdgesPast();
                 if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
                 {
-                        XSpeed *= -1;
+                    XSpeed *= -1;
                 } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
                 {
-                        YSpeed *= -1;
+                    YSpeed *= -1;
                 }
             }
             if (UpdateParams.MouseFollow.DoesFollow)

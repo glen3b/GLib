@@ -56,6 +56,17 @@ namespace Glib.XNA.SpriteLib
         }
         #endregion
 
+        private bool _visible = true;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether the Sprite is visible.
+        /// </summary>
+        public bool Visible
+        {
+            get { return _visible; }
+            set { _visible = value; }
+        }
+
         /// <summary>
         /// The speed of the sprite in X and Y.
         /// </summary>
@@ -487,8 +498,11 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void DrawNonAuto()
         {
-            SpriteBatch.Draw(this);
-            CallDrawn();
+            if (Visible)
+            {
+                SpriteBatch.Draw(this);
+                CallDrawn();
+            }
         }
 
         /// <summary>
@@ -503,7 +517,7 @@ namespace Glib.XNA.SpriteLib
         }
 
 
-        #region Intersection checks
+        #region Intersection
         /// <summary>
         /// Checks whether the given point intersects with the sprite.
         /// </summary>
@@ -511,6 +525,10 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the specified position intersects with this Sprite.</returns>
         public bool Intersects(Vector2 pos)
         {
+            if (!Visible)
+            {
+                return false;
+            }
             float realX = X;
             float realY = Y;
             realX -= Origin.X * Scale.X;
@@ -526,7 +544,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
         public bool Intersects(Rectangle r)
         {
-            return Rectangle.Intersects(r);
+            return Visible && Rectangle.Intersects(r);
         }
 
         /// <summary>
@@ -536,7 +554,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
         public bool Intersects(Sprite s)
         {
-            return Intersects(s.Rectangle);
+            return Visible && s.Visible && Intersects(s.Rectangle);
         }
         #endregion
 
