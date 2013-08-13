@@ -3899,6 +3899,11 @@
             <param name="position">The initial position of this SpriteSheet.</param>
             <param name="sb">The SpriteBatch used for drawing.</param>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteSheet.DrawNonAuto">
+            <summary>
+            Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
+            </summary>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteSheet.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
             Call the Updated event of this SpriteSheet, and animate the SpriteSheet if applicable.

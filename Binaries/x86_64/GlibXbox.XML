@@ -708,6 +708,11 @@
             Set to 0 to update every call to Update().
             </summary>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteSheet.DrawNonAuto">
+            <summary>
+            Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
+            </summary>
+        </member>
         <member name="F:Glib.XNA.SpriteLib.SpriteSheet.CurrentSprite">
             <summary>
             The currently selected Sprite, where X is the zero-based column and Y is the zero-based row.
