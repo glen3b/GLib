@@ -24,6 +24,15 @@ namespace Glib.XNA.SpriteLib
             set { _restartAnimation = value; }
         }
 
+        /// <summary>
+        /// Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
+        /// </summary>
+        public override void DrawNonAuto()
+        {
+            //Overrode due to new DrawRegion
+            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, Effect, 0f);
+        }
+
         private bool _isComplete;
 
         /// <summary>

@@ -241,6 +241,15 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
+        /// </summary>
+        public override void DrawNonAuto()
+        {
+            //Overrode due to new DrawRegion
+            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, Effect, 0f);
+        }
+
+        /// <summary>
         /// Call the Updated event of this SpriteSheet, and animate the SpriteSheet if applicable.
         /// </summary>
         /// <param name="gt">The GameTime object passed to a Game's Update(GameTime) method.</param>
