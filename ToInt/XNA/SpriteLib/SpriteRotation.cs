@@ -32,7 +32,6 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Radians = {Radians}")]
     public struct SpriteRotation
     {
-
         /// <summary>
         /// Gets a SpriteRotation representing zero degrees.
         /// </summary>
@@ -43,6 +42,11 @@ namespace Glib.XNA.SpriteLib
                 return new SpriteRotation(0);
             }
         }
+
+        /// <summary>
+        /// An event fired when the rotation value of this <see cref="SpriteRotation"/> changes.
+        /// </summary>
+        public event EventHandler ValueChanged;
 
         /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.
@@ -67,14 +71,15 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the rotation of the sprite in degrees.
         /// </summary>
-        public float Degrees{
+        public float Degrees
+        {
             get
             {
                 return MathHelper.ToDegrees(Radians);
             }
             set
             {
-                _radians = MathHelper.ToRadians(value);
+                Radians = MathHelper.ToRadians(value);
             }
         }
 
@@ -102,7 +107,8 @@ namespace Glib.XNA.SpriteLib
         /// <param name="x">The first SpriteRotation to add.</param>
         /// <param name="y">The second SpriteRotation to add.</param>
         /// <returns>A SpriteRotation representing the combined rotation values of x any y.</returns>
-        public static SpriteRotation operator +(SpriteRotation x, SpriteRotation y){
+        public static SpriteRotation operator +(SpriteRotation x, SpriteRotation y)
+        {
             return new SpriteRotation(x.Degrees + y.Degrees);
         }
 
@@ -190,7 +196,8 @@ namespace Glib.XNA.SpriteLib
         /// Initialize a new SpriteRotation with the specified value of degrees.
         /// </summary>
         /// <param name="degrees">The number of degrees to initialize this SpriteRotation to</param>
-        public SpriteRotation(float degrees) : this(degrees, AngleType.Degrees)
+        public SpriteRotation(float degrees)
+            : this(degrees, AngleType.Degrees)
         {
         }
 
@@ -205,7 +212,7 @@ namespace Glib.XNA.SpriteLib
             {
                 _radians = value;
             }
-            else if(measurementType == AngleType.Degrees)
+            else if (measurementType == AngleType.Degrees)
             {
                 _radians = MathHelper.ToRadians(value);
             }
@@ -217,6 +224,7 @@ namespace Glib.XNA.SpriteLib
             {
                 throw new NotImplementedException("The specified AngleType has not been implemented.");
             }
+            ValueChanged = null;
         }
 
         /// <summary>
@@ -247,7 +255,14 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                _radians = value;
+                if (value != _radians)
+                {
+                    _radians = value;
+                    if (ValueChanged != null)
+                    {
+                        ValueChanged(this, EventArgs.Empty);
+                    }
+                }
             }
         }
     }

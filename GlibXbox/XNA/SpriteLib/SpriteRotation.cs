@@ -44,6 +44,11 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// An event fired when the rotation value of this <see cref="SpriteRotation"/> changes.
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.
         /// </summary>
         /// <param name="radians">The number of radians to represent in the new SpriteRotation.</param>
@@ -74,7 +79,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                _radians = MathHelper.ToRadians(value);
+                Radians = MathHelper.ToRadians(value);
             }
         }
 
@@ -219,6 +224,7 @@ namespace Glib.XNA.SpriteLib
             {
                 throw new NotImplementedException("The specified AngleType has not been implemented.");
             }
+            ValueChanged = null;
         }
 
         /// <summary>
@@ -249,7 +255,14 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                _radians = value;
+                if (value != _radians)
+                {
+                    _radians = value;
+                    if (ValueChanged != null)
+                    {
+                        ValueChanged(this, EventArgs.Empty);
+                    }
+                }
             }
         }
     }
