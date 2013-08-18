@@ -287,11 +287,6 @@
             The speed of the sprite in X and Y.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.DrawRegion">
-            <summary>
-            The selected region of the Sprite to draw. Set to null to draw the entire Sprite.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.SpriteManager">
             <summary>
             The SpriteManager associated with this sprite, if any.
@@ -436,6 +431,11 @@
         <member name="P:Glib.XNA.SpriteLib.Sprite.OnlyDrawRegion">
             <summary>
             A boolean representing whether or not to only draw a selected region of the sprite.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.DrawRegion">
+            <summary>
+            Gets or sets the selected region of the Sprite to draw. Set to null to draw the entire Sprite.
             </summary>
         </member>
         <member name="E:Glib.XNA.SpriteLib.Sprite.Moved">
@@ -708,11 +708,6 @@
             Set to 0 to update every call to Update().
             </summary>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteSheet.DrawNonAuto">
-            <summary>
-            Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.SpriteSheet.CurrentSprite">
             <summary>
             The currently selected Sprite, where X is the zero-based column and Y is the zero-based row.
@@ -830,17 +825,9 @@
             A boolean representing whether or not this SpriteSheet is automatically animated.
             </summary>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteSheet.OnlyDrawRegion">
-            <summary>
-            Whether or not to only draw the DrawRegion of the SpriteSheet.
-            </summary>
-            <remarks>
-            Always true.
-            </remarks>
-        </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteSheet.DrawRegion">
             <summary>
-            The current drawing region of the SpriteSheet.
+            Gets the current drawing region of the SpriteSheet.
             </summary>
         </member>
         <member name="E:Glib.XNA.SpriteLib.SpriteSheet.AnimationCompleted">
@@ -1721,6 +1708,11 @@
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Zero">
             <summary>
             Gets a SpriteRotation representing zero degrees.
+            </summary>
+        </member>
+        <member name="E:Glib.XNA.SpriteLib.SpriteRotation.ValueChanged">
+            <summary>
+            An event fired when the rotation value of this <see cref="T:Glib.XNA.SpriteLib.SpriteRotation"/> changes.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Degrees">

@@ -24,15 +24,6 @@ namespace Glib.XNA.SpriteLib
             set { _restartAnimation = value; }
         }
 
-        /// <summary>
-        /// Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
-        /// </summary>
-        public override void DrawNonAuto()
-        {
-            //Overrode due to new DrawRegion
-            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, Effect, 0f);
-        }
-
         private bool _isComplete;
 
         /// <summary>
@@ -226,7 +217,7 @@ namespace Glib.XNA.SpriteLib
         private TimeSpan elapsedTime = TimeSpan.Zero;
 
         /// <summary>
-        /// The current drawing region of the SpriteSheet.
+        /// Gets the current drawing region of the SpriteSheet.
         /// </summary>
         public override Rectangle? DrawRegion
         {
