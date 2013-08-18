@@ -123,10 +123,16 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private Rectangle? _drawRegion;
+
         /// <summary>
-        /// The selected region of the Sprite to draw. Set to null to draw the entire Sprite.
+        /// Gets or sets the selected region of the Sprite to draw. Set to null to draw the entire Sprite.
         /// </summary>
-        public Rectangle? DrawRegion = null;
+        public virtual Rectangle? DrawRegion
+        {
+            get { return _drawRegion; }
+            set { _drawRegion = value; }
+        }
 
         /// <summary>
         /// An EventHandler called after the successful movement of this Sprite.

@@ -200,20 +200,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Whether or not to only draw the DrawRegion of the SpriteSheet.
-        /// </summary>
-        /// <remarks>
-        /// Always true.
-        /// </remarks>
-        public new bool OnlyDrawRegion
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
         /// Construct a new SpriteSheet.
         /// </summary>
         /// <param name="manager">The ContentManager used to load the Texture2D of the ssprite sheet.</param>
@@ -230,23 +216,18 @@ namespace Glib.XNA.SpriteLib
         private TimeSpan elapsedTime = new TimeSpan();
 
         /// <summary>
-        /// The current drawing region of the SpriteSheet.
+        /// Gets the current drawing region of the SpriteSheet.
         /// </summary>
-        public new Rectangle DrawRegion
+        public override Rectangle? DrawRegion
         {
             get
             {
                 return GetDrawRegion(CurrentRow, CurrentColumn);
             }
-        }
-
-        /// <summary>
-        /// Draw this SpriteSheet's current region to the screen, without automatic SpriteBatch handling.
-        /// </summary>
-        public override void DrawNonAuto()
-        {
-            //Overrode due to new DrawRegion
-            SpriteBatch.Draw(Texture, Position, DrawRegion, Color, Rotation.Radians, Origin, Scale, Effect, 0f);
+            set
+            {
+                throw new InvalidOperationException("Cannot set the DrawRegion of a SpriteSheet.");
+            }
         }
 
         /// <summary>

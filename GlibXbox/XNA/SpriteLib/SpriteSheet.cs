@@ -46,7 +46,7 @@ namespace Glib.XNA.SpriteLib
             get { return _isComplete; }
             set { _isComplete = value; }
         }
-        
+
 
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The currently selected Sprite, where X is the zero-based column and Y is the zero-based row.
         /// </summary>
-        public Point CurrentSprite = new Point(0,0);
+        public Point CurrentSprite = new Point(0, 0);
 
         /// <summary>
         /// Get the region drawn relative to the upper left corner of this SpriteSheet based on the given row and column.
@@ -174,7 +174,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     AnimationDelay = TimeSpan.FromMilliseconds(DefaultAnimationDelay);
                 }
-                else if(!value)
+                else if (!value)
                 {
                     AnimationDelay = null;
                 }
@@ -188,7 +188,8 @@ namespace Glib.XNA.SpriteLib
         /// <param name="size">The size of one sprite (X and Y are ignored in this paramater).</param>
         /// <param name="position">The initial position of this SpriteSheet.</param>
         /// <param name="sb">The SpriteBatch used for drawing.</param>
-        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb) : base(sheet, position, sb)
+        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb)
+            : base(sheet, position, sb)
         {
             SpriteSize = size;
         }
@@ -202,23 +203,10 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sb">The SpriteBatch used for drawing.</param>
         /// <param name="rows">The number of rows.</param>
         /// <param name="columns">The number of columns.</param>
-        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb, int rows, int columns) : base(sheet, position, sb)
+        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb, int rows, int columns)
+            : base(sheet, position, sb)
         {
             SpriteSize = size;
-        }
-
-        /// <summary>
-        /// Whether or not to only draw the DrawRegion of the SpriteSheet.
-        /// </summary>
-        /// <remarks>
-        /// Always true.
-        /// </remarks>
-        public new bool OnlyDrawRegion
-        {
-            get
-            {
-                return true;
-            }
         }
 
         /// <summary>
@@ -240,11 +228,15 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The current drawing region of the SpriteSheet.
         /// </summary>
-        public new Rectangle DrawRegion
+        public override Rectangle? DrawRegion
         {
             get
             {
                 return GetDrawRegion(CurrentRow, CurrentColumn);
+            }
+            set
+            {
+                throw new InvalidOperationException("Cannot set the DrawRegion of a SpriteSheet.");
             }
         }
 
