@@ -60,6 +60,14 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sb">The SpriteBatch to use.</param>
         public SpriteWrapper(SpriteBatch sb, params ISprite[] spritestart)
         {
+            if (sb == null)
+            {
+                throw new ArgumentNullException("sb");
+            }
+            if (spritestart == null)
+            {
+                throw new ArgumentNullException("spritestart");
+            }
             _sb = sb;
             _sprites = (spritestart == null ? new List<ISprite>() : spritestart.ToList());
         }
@@ -72,6 +80,10 @@ namespace Glib.XNA.SpriteLib
         /// <param name="updates">The Updater to use for updating ISprite objects (in addition to the Update() method).</param>
         public SpriteWrapper(ICollection<ISprite> spritestart, SpriteBatch sb, Updater updates) : this(sb, spritestart.ToArray<ISprite>())
         {
+            if (updates == null)
+            {
+                throw new ArgumentNullException("updates");
+            }
             Updater = updates;
         }
 
