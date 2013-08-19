@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glib", "ToInt\Glib.csproj", "{A08A41C3-6014-41A6-B59B-A17AC077022D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{46FF88CD-0E09-4DE1-8F22-5B08FB05A100}"
@@ -19,9 +19,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXbox", "GlibXbox\GlibXb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTest", "NetworkTest\NetworkTest\NetworkTest.csproj", "{95557981-AF67-4568-B303-5C5A94793B10}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "NetworkTestContent", "NetworkTest\NetworkTestContent\NetworkTestContent.contentproj", "{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTestContent", "NetworkTest\NetworkTestContent\NetworkTestContent.contentproj", "{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F6FEDDF-B001-40F0-A474-12C83D245468}"
+	ProjectSection(SolutionItems) = preProject
+		GlenLibrary.vsmdi = GlenLibrary.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibUnitTests", "GlibUnitTests\GlibUnitTests.csproj", "{B330C39D-9E1A-4D8E-8601-46791D38692A}"
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GlenLibrary.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -145,6 +157,18 @@ Global
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|x86.ActiveCfg = Release|x86
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|Xbox 360.ActiveCfg = Release|x86
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

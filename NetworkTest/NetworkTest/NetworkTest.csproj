@@ -90,8 +90,9 @@
       <Name>Glib</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkTestContent\NetworkTestContent.contentproj">
-      <Name>NetworkTestContent</Name>
+      <Name>NetworkTestContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
