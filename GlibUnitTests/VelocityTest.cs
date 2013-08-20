@@ -1,6 +1,7 @@
 ﻿using Glib.XNA.SpriteLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace GlibUnitTests
 {
@@ -99,6 +100,31 @@ namespace GlibUnitTests
             Velocity target = new Velocity();
             Assert.IsNull(target.XVelocity);
             Assert.IsNull(target.YVelocity);
+        }
+
+        /// <summary>
+        ///A test for Vector
+        ///</summary>
+        [TestMethod()]
+        public void VectorTest1()
+        {
+            Velocity target = new Velocity(float.MaxValue, -34242); // TODO: Initialize to an appropriate value
+            Vector2 actual;
+            Vector2 targetVector = new Vector2(target.XVelocity.Value, target.YVelocity.Value);
+            actual = target.Vector;
+            Assert.AreEqual<Vector2>(targetVector, actual);
+        }
+
+        /// <summary>
+        ///A test for Vector
+        ///</summary>
+        [TestMethod()]
+        public void VectorTest()
+        {
+            Velocity target = new Velocity(); // TODO: Initialize to an appropriate value
+            Vector2 actual;
+            actual = target.Vector;
+            Assert.AreEqual<Vector2>(Vector2.Zero, actual);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -8,6 +9,17 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class Velocity
     {
+        /// <summary>
+        /// Gets a Vector2 representing this Velocity.
+        /// </summary>
+        public Vector2 Vector
+        {
+            get
+            {
+                return new Vector2(XVelocity.HasValue ? XVelocity.Value : 0, YVelocity.HasValue ? YVelocity.Value : 0);
+            }
+        }
+
         /// <summary>
         /// The velocity on the X axis (null means no change).
         /// </summary>
