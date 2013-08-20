@@ -1371,6 +1371,7 @@
             <summary>
             Open the specified SpriteBatch with the settings required for drawing this Screen.
             </summary>
+            <param name="sb">The SpriteBatch to open.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>

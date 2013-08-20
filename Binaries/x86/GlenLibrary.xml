@@ -208,6 +208,11 @@
             This operation is expensive, so make minimal calls to it.
             </remarks>
         </member>
+        <member name="T:Glib.WinForms.Shapes.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.WinForms.Shapes"/> namespace provides various shapes that can be drawn to a Windows Forms <see cref="T:System.Drawing.Graphics"/> object.
+            </summary>
+        </member>
         <member name="T:Glib.Services.Service">
             <summary>
             An abstract service class representing repeatedly executing code.
@@ -252,6 +257,11 @@
         <member name="P:Glib.Services.Service.Delay">
             <summary>
             The delay, in milliseconds, between executions of the service code.
+            </summary>
+        </member>
+        <member name="T:Glib.Exceptions.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.Exceptions"/> namespace provides various extensions not provided by the .NET framework.
             </summary>
         </member>
         <member name="T:Glib.XNA.XnaExtensions">
@@ -1049,6 +1059,11 @@
             </summary>
             <param name="index">The zero-based index in the list.</param>
             <returns>The number with the specified index in the list.</returns>
+        </member>
+        <member name="T:Glib.Networking.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.Networking"/> namespace provides various networking utilities.
+            </summary>
         </member>
         <member name="T:Glib.XNA.IGravitySource">
             <summary>
@@ -2437,6 +2452,16 @@
             Gets or sets a boolean indeicating whether or not this timer is repeating.
             </summary>
         </member>
+        <member name="T:Glib.WinForms.Controls.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.WinForms.Controls"/> namespace provides various Windows Forms controls.
+            </summary>
+        </member>
+        <member name="T:Glib.Services.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.Services"/> namespace provides a base service class.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.Velocity">
             <summary>
             Represents the velocity of a sprite.
@@ -2824,6 +2849,11 @@
             An edge representing the right side of a viewport.
             </summary>
         </member>
+        <member name="T:Glib.WinForms.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.WinForms"/> namespace provides various Windows Forms utilities.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.Screen">
             <summary>
             Represents a RenderTarget2D which is a screen.
@@ -2922,6 +2952,7 @@
             <summary>
             Open the specified SpriteBatch with the settings required for drawing this Screen.
             </summary>
+            <param name="sb">The SpriteBatch to open.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
@@ -3193,6 +3224,11 @@
             Gets or sets a string indicating the error message to display if the field is invalid.
             </summary>
         </member>
+        <member name="T:Glib.XNA.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA"/> namespace provides various XNA utilities and classes.
+            </summary>
+        </member>
         <member name="T:Glib.Cryptography.CryptoExtensions">
             <summary>
             A class providing cryptographic extensions on strings.
@@ -3202,6 +3238,9 @@
             <summary>
             Compute the hexadecimal MD5 hash of the specified string.
             </summary>
+            <remarks>
+            Uses a MD5CryptoServiceProvider and a BitConverter.
+            </remarks>
             <param name="s">The string to hash.</param>
             <returns>The MD5 hash of the input string.</returns>
         </member>
@@ -3209,8 +3248,11 @@
             <summary>
             Compute the hexadecimal SHA256 hash of the specified string.
             </summary>
+            <remarks>
+            Uses a SHA256CryptoServiceProvider and a BitConverter.
+            </remarks>
             <param name="s">The string to hash.</param>
-            <returns></returns>
+            <returns>The SHA256 hash of the input string.</returns>
         </member>
         <member name="M:Glib.Cryptography.CryptoExtensions.SHA1Hash(System.String)">
             <summary>
@@ -3223,8 +3265,21 @@
             <summary>
             Compute the hexadecimal SHA512 hash of the specified string.
             </summary>
+            <remarks>
+            Uses a SHA512CryptoServiceProvider and a BitConverter.
+            </remarks>
             <param name="s">The string to hash.</param>
             <returns>The hexadecimal SHA512 hash of the specified string.</returns>
+        </member>
+        <member name="T:Glib.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib"/> namespace provides various extension methods and miscellaneous utility class to make your life easier.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA.SpriteLib"/> namespace provides various sprite utilities for XNA.
+            </summary>
         </member>
         <member name="T:Glib.WinForms.Shapes.Circle">
             <summary>
@@ -3339,6 +3394,11 @@
         <member name="E:Glib.XNA.InputLib.KeyboardManager.KeyPressed">
             <summary>
             An event called when a key is pressed and released.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.InputLib.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA.InputLib"/> namespace provides various XNA input utilities.
             </summary>
         </member>
         <member name="T:Glib.XNA.ImageFormat">
@@ -3835,6 +3895,11 @@
             </summary>
             <param name="source">The SpriteManager that is managing this sprite, or, if this event is being called by the sprite itself, the sprite being clicked on.</param>
             <param name="e">The <seealso cref="T:Glib.XNA.SpriteMoveEventArgs">SpriteMoveEventArgs</seealso> for this event.</param>
+        </member>
+        <member name="T:Glib.Cryptography.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.Cryptography"/> namespace provides various cryptocraphic extension methods and utilities.
+            </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.SpriteSheet">
             <summary>
