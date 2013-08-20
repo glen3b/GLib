@@ -8,6 +8,14 @@ using System.Data;
 namespace Glib.SQL
 {
     /// <summary>
+    /// The <see cref="Glib.SQL"/> namespace provides various SQL tools.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+
+    /// <summary>
     /// Various SQL-related extensions.
     /// </summary>
     public static class SqlExtensions

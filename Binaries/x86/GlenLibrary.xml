@@ -790,6 +790,11 @@
             Gets an array of numerical types.
             </summary>
         </member>
+        <member name="T:Glib.SQL.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.SQL"/> namespace provides various SQL tools.
+            </summary>
+        </member>
         <member name="T:Glib.SQL.SqlExtensions">
             <summary>
             Various SQL-related extensions.
