@@ -27,8 +27,8 @@
     <CppCommentsFixup>False</CppCommentsFixup>
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
-      <DocumentationSource sourceFile="Binaries\x86\GlenLibrary.dll" xmlns="" />
-<DocumentationSource sourceFile="Binaries\x86\GlenLibrary.xml" xmlns="" /></DocumentationSources>
+      <DocumentationSource sourceFile="ToInt\Glib.csproj" />
+    </DocumentationSources>
     <SyntaxFilters>Standard</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
