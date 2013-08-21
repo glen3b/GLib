@@ -162,16 +162,24 @@ namespace GlibUnitTests
         [TestMethod()]
         public void CreateSquareTest1()
         {
-            Assert.Inconclusive("TODO: Write this test.");
-            GraphicsDevice device = null; // TODO: Initialize to an appropriate value
-            TextureFactory target = new TextureFactory(device); // TODO: Initialize to an appropriate value
-            int size = 0; // TODO: Initialize to an appropriate value
-            Color color = new Color(); // TODO: Initialize to an appropriate value
-            Texture2D expected = null; // TODO: Initialize to an appropriate value
+            GraphicsDevice device = MockDrawable.GraphicsDevice;
+            TextureFactory target = new TextureFactory(device);
+            int size = 6;
+            Color color = new Color(3.483243f, 199, 55);
             Texture2D actual;
             actual = target.CreateSquare(size, color);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Color[] actualData = new Color[size * size];
+            actual.GetData(actualData);
+            Color[] expected = Enumerable.Repeat(color, size * size).ToArray();
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], actualData[i]);
+            }
+        }
+
+        private Color CreateTexturetestDelegate(Point location)
+        {
+            return location.X % 2 == 0 && location.Y % 2 == 0 ? Color.Black : Color.White;
         }
 
         /// <summary>
@@ -181,15 +189,28 @@ namespace GlibUnitTests
         public void CreateTextureTest()
         {
             GraphicsDevice device = MockDrawable.GraphicsDevice; // TODO: Initialize to an appropriate value
-            Assert.Inconclusive("Write this this test method.");
-            TextureFactory target = new TextureFactory(device); // TODO: Initialize to an appropriate value
-            int width = 0; // TODO: Initialize to an appropriate value
-            int height = 0; // TODO: Initialize to an appropriate value
-            Func<Point, Color> colorDetermine = null; // TODO: Initialize to an appropriate value
-            Texture2D expected = null; // TODO: Initialize to an appropriate value
+            //Assert.Inconclusive("Write this this test method.");
+            TextureFactory target = new TextureFactory(device);
+            int width = 20;
+            int height = 35;
+            Func<Point, Color> colorDetermine = new Func<Point,Color>(CreateTexturetestDelegate); // TODO: Initialize to an appropriate value
+            Color[] expectedData = new Color[width * height];
             Texture2D actual;
+            Color[] actualData = new Color[width * height];
             actual = target.CreateTexture(width, height, colorDetermine);
-            Assert.AreEqual(expected, actual);
+            actual.GetData(actualData);
+            for (int w_en = 0; w_en < width; w_en++)
+            {
+                for (int h_en = 0; h_en < height; h_en++)
+                {
+                    expectedData[h_en * width + w_en] = CreateTexturetestDelegate(new Point(w_en, h_en));
+                }
+            }
+            Assert.AreEqual(expectedData.Length, actualData.Length);
+            for (int i = 0; i < expectedData.Length; i++)
+            {
+                Assert.AreEqual(expectedData[i], actualData[i]);
+            }
             
         }
 
@@ -203,7 +224,7 @@ namespace GlibUnitTests
             TextureFactory target = new TextureFactory(device); // TODO: Initialize to an appropriate value
             Texture2D actual;
             actual = target.WhitePixel;
-            Color[] data = new Color[] { Color.Black };
+            Color[] data = new Color[] { Color.Transparent };
             actual.GetData(data);
             Assert.AreEqual(Color.White, data[0]);
         }

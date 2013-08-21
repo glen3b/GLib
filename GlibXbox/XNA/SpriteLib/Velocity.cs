@@ -7,6 +7,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// Represents the velocity of a sprite.
     /// </summary>
+    [Obsolete("Please use a Vector2 instead.", false)]
     public class Velocity
     {
         /// <summary>

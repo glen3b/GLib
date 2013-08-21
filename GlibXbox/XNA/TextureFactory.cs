@@ -50,6 +50,7 @@ namespace Glib.XNA
                     data[h_en * width + w_en] = colorDetermine.Invoke(new Point(w_en, h_en));
                 }
             }
+            retVal.SetData(data);
             return retVal;
         }
 

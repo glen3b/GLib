@@ -100,6 +100,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="v">The new Sprite velocity.</param>
         /// <returns>This SpriteBuilder.</returns>
+        [Obsolete("Please use SetSpeed instead.", true)]
         public SpriteBuilder SetVelocity(Velocity v)
         {
             if (v.XVelocity.HasValue)
