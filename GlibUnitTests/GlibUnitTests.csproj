@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpriteRotationTest.cs" />
     <Compile Include="SpriteWrapperTest.cs" />
     <Compile Include="TestGame.cs" />
     <Compile Include="TextureFactoryTest.cs" />
