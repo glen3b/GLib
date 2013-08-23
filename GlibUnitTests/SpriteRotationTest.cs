@@ -109,12 +109,11 @@ namespace GlibUnitTests
         [TestMethod()]
         public void FromRadiansTest()
         {
-            float radians = 0F; // TODO: Initialize to an appropriate value
-            SpriteRotation expected = new SpriteRotation(); // TODO: Initialize to an appropriate value
+            float radians = MathHelper.PiOver2; // TODO: Initialize to an appropriate value
+            SpriteRotation expected = new SpriteRotation(90); // TODO: Initialize to an appropriate value
             SpriteRotation actual;
             actual = SpriteRotation.FromRadians(radians);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -123,13 +122,12 @@ namespace GlibUnitTests
         [TestMethod()]
         public void op_AdditionTest()
         {
-            SpriteRotation x = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            SpriteRotation y = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            SpriteRotation expected = new SpriteRotation(); // TODO: Initialize to an appropriate value
+            SpriteRotation x = new SpriteRotation(90); // TODO: Initialize to an appropriate value
+            SpriteRotation y = new SpriteRotation(MathHelper.Pi, AngleType.Radians); // TODO: Initialize to an appropriate value
+            SpriteRotation expected = new SpriteRotation(270); // TODO: Initialize to an appropriate value
             SpriteRotation actual;
             actual = (x + y);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
@@ -168,13 +166,17 @@ namespace GlibUnitTests
         [TestMethod()]
         public void op_GreaterThanOrEqualTest()
         {
-            SpriteRotation x = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            SpriteRotation y = new SpriteRotation(); // TODO: Initialize to an appropriate value
+            SpriteRotation x = new SpriteRotation(10); // TODO: Initialize to an appropriate value
+            SpriteRotation y = new SpriteRotation(10.5f); // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
+            bool expected2 = true;
+            bool actual2;
+            actual2 = (y >= x);
+            
             bool actual;
             actual = (x >= y);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(expected2, actual2);
         }
 
         /// <summary>
@@ -203,8 +205,9 @@ namespace GlibUnitTests
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
             actual = (x <= y);
-            Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(expected, actual);
+            
         }
 
         /// <summary>
@@ -258,13 +261,14 @@ namespace GlibUnitTests
         [TestMethod()]
         public void GradiansTest()
         {
-            SpriteRotation target = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            float expected = 0F; // TODO: Initialize to an appropriate value
+            SpriteRotation target = new SpriteRotation();
+            float expected = 323.1F;
             float actual;
             target.Gradians = expected;
             actual = target.Gradians;
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(target.Degrees, 359);
+            Assert.AreEqual(target.Radians, MathHelper.TwoPi-MathHelper.ToRadians(1));
         }
 
         /// <summary>
@@ -273,8 +277,8 @@ namespace GlibUnitTests
         [TestMethod()]
         public void RadiansTest()
         {
-            SpriteRotation target = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            float expected = 0F; // TODO: Initialize to an appropriate value
+            SpriteRotation target = new SpriteRotation();
+            float expected = 0F;
             float actual;
             target.Radians = expected;
             actual = target.Radians;
@@ -288,12 +292,14 @@ namespace GlibUnitTests
         [TestMethod()]
         public void VectorTest()
         {
-            SpriteRotation target = new SpriteRotation(); // TODO: Initialize to an appropriate value
+            /*
+            SpriteRotation target = new SpriteRotation(180); // TODO: Initialize to an appropriate value
             Vector2 expected = new Vector2(); // TODO: Initialize to an appropriate value
             Vector2 actual;
             target.Vector = expected;
             actual = target.Vector;
             Assert.AreEqual(expected, actual);
+            */
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -305,7 +311,10 @@ namespace GlibUnitTests
         {
             SpriteRotation actual;
             actual = SpriteRotation.Zero;
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(0f, actual.Degrees);
+            Assert.AreEqual(0f, actual.Radians);
+            Assert.AreEqual(0f, actual.Gradians);
+            Assert.AreEqual(new Vector2(0, -1), actual.Vector);
         }
     }
 }
