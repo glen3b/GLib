@@ -369,7 +369,7 @@ namespace Glib.XNA.InputLib
                     MoveSelection(Direction.Bottom);
                 }
             }
-            if (_lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
+            if (_allButtons[_rowCurrent, _columnCurrent].Visible && _lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
             {
                 
                 if (this.FireTextSpritePressed)
