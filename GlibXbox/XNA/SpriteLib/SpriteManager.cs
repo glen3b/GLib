@@ -32,7 +32,7 @@ namespace Glib.XNA.SpriteLib
         private SpriteBatch _sb = null;
 
         /// <summary>
-        /// Gets the <seealso cref="SpriteBatch"/> drawn to.
+        /// Gets the <seealso cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> drawn to.
         /// </summary>
         public SpriteBatch SpriteBatch
         {
@@ -72,13 +72,16 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Add a new <seealso cref="Sprite"/> with the specified position and texture.
+        /// Add a new <seealso cref="Sprite"/> with the specified position and texture, and returns it.
         /// </summary>
         /// <param name="position">The position of the new <seealso cref="Sprite"/>.</param>
         /// <param name="texture">The texture of the new <seealso cref="Sprite"/>.</param>
-        public void AddNewSprite(Microsoft.Xna.Framework.Vector2 position, Texture2D texture)
+        /// <returns>The created Sprite.</returns>
+        public Sprite AddNewSprite(Microsoft.Xna.Framework.Vector2 position, Texture2D texture)
         {
-            Add(new Sprite(texture, position, _sb));
+            Sprite sprToAdd = new Sprite(texture, position, _sb);
+            Add(sprToAdd);
+            return sprToAdd;
         }
 
         /// <summary>
