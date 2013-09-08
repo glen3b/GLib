@@ -2220,10 +2220,11 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.AddNewSprite(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
-            Add a new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> with the specified position and texture.
+            Add a new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> with the specified position and texture, and returns it.
             </summary>
             <param name="position">The position of the new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>.</param>
             <param name="texture">The texture of the new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>.</param>
+            <returns>The created Sprite.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.RemoveSelf(Glib.XNA.SpriteLib.Sprite)">
             <summary>
@@ -2317,7 +2318,7 @@
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteManager.SpriteBatch">
             <summary>
-            Gets the <seealso cref="P:Glib.XNA.SpriteLib.SpriteManager.SpriteBatch"/> drawn to.
+            Gets the <seealso cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> drawn to.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteManager.Item(System.Int32)">
@@ -2373,6 +2374,11 @@
         <member name="M:Glib.XNA.SpriteLib.Velocity.#ctor(System.Single,System.Single)">
             <summary>
             Construct a new velocity representing the passed in values of XSpeed and YSpeed.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Velocity.Vector">
+            <summary>
+            Gets a Vector2 representing this Velocity.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.Updater">
