@@ -38,6 +38,109 @@ namespace Glib.XNA.InputLib
     {
         private TextSprite[,] _allButtons;
 
+        /*
+        //*****************
+        //  TODO
+        // THIS CODE IS NONWORKING FOR MOST VALUES: TODO: FIX IT
+        //  TODO
+        //*****************
+
+        /// <summary>
+        /// Creates a GamePadButtonEnumerator with the default settings and the left joystick as the controller, inferring the rows and columns of the selectable labels based on their position.
+        /// </summary>
+        /// <remarks>
+        /// Every unique X coordinate results in a new column.
+        /// Every unique Y coordinate results in a new row.
+        /// </remarks>
+        /// <param name="textSprites">The TextSprites to create a GamePadButtonEnumerator from.</param>
+        /// <returns>A new GamePadButtonEnumerator containing the specified TextSprites.</returns>
+        public static GamePadButtonEnumerator InferFromPosition(params TextSprite[] textSprites)
+        {
+            if (textSprites == null)
+            {
+                throw new ArgumentNullException("textSprites");
+            }
+            List<float> yValues = new List<float>();
+
+            Dictionary<float, List<TextSprite>> columns = new Dictionary<float, List<TextSprite>>();
+
+
+
+            //Argument check, initialize dictionary and yValues.
+            for (int i = 0; i < textSprites.Length; i++)
+            {
+                if (textSprites[i] == null)
+                {
+                    throw new ArgumentException("The array textSprites must not contain any null elements.");
+                }
+                else if (!textSprites[i].IsHoverable)
+                {
+                    throw new ArgumentException("The array textSprites must not contain any TextSprites that are not selectable.");
+                }
+
+                if (!yValues.Contains(textSprites[i].Y))
+                {
+                    yValues.Add(textSprites[i].Y);
+                }
+
+                if (columns.ContainsKey(textSprites[i].X))
+                {
+                    columns[textSprites[i].X].Add(textSprites[i]);
+                }
+                else
+                {
+                    columns.Add(textSprites[i].X, new List<TextSprite>(new TextSprite[] { textSprites[i] }));
+                }
+            }
+
+            //Sort yValues
+
+            //float minimumValue = float.MaxValue;
+            List<float> rows = (from dbl in yValues
+                       orderby dbl ascending
+                       select dbl).ToList();
+
+            foreach (float key in columns.Keys)
+            {
+                columns[key] = (from ts in columns[key] orderby ts.Y ascending select ts).ToList();
+            }
+            
+            /*
+            for(int i = 0; i < yValues.Count; i++){
+                float f = yValues[i];
+                if (f < minimumValue || i == yValues.Count-1)
+                {
+                    minimumValue = f;
+                    rows.Add(f);
+
+                    yValues.RemoveAt(i);
+                    i = 0;
+                }
+            }
+            
+             */
+        // 
+        /*
+        //
+            var columnList = columns.ToList();
+
+            TextSprite[,] allTextSprites = new TextSprite[rows.Count, columnList.Count];
+
+            
+
+            for (int r = 0; r < rows.Count; r++)
+            {
+                for (int c = 0; c < columnList.Count; c++)
+                {
+                    allTextSprites[r, c] = columnList[c].Value[r];
+                }
+            }
+
+            return new GamePadButtonEnumerator(allTextSprites, InputType.LeftJoystick);
+        }
+*/
+
+
         /// <summary>
         /// If this boolean is true, instead of firing ButtonPress, the GamePadButtonEnumerator will fire Pressed on the TextSprite selected at the time of button press.
         /// </summary>
@@ -78,7 +181,8 @@ namespace Glib.XNA.InputLib
         public float AxisDifference
         {
             get { return _axisDifference; }
-            set {
+            set
+            {
                 if (value <= 0 || value > 1)
                 {
                     throw new ArgumentException("AxisDifference must be greater than zero and less than or equal to 1.");
@@ -95,7 +199,8 @@ namespace Glib.XNA.InputLib
         public TimeSpan Delay
         {
             get { return _delay; }
-            set {
+            set
+            {
                 if (value < TimeSpan.Zero)
                 {
                     throw new ArgumentException("Delay must be greater than zero.");
@@ -112,7 +217,8 @@ namespace Glib.XNA.InputLib
         public Buttons SubmitButton
         {
             get { return _submitButton; }
-            set {
+            set
+            {
                 if (value == Buttons.BigButton)
                 {
                     throw new ArgumentException("SubmitButton must not be the BigButton.");
@@ -125,7 +231,7 @@ namespace Glib.XNA.InputLib
                 _submitButton = value;
             }
         }
-        
+
 
         /// <summary>
         /// If not null, the sound to play when the button selection changes.
@@ -137,9 +243,10 @@ namespace Glib.XNA.InputLib
         /// </summary>
         /// <param name="allButtons">All of the buttons to include in the GamePadButtonEnumerator.</param>
         /// <param name="inputType">The type of input to accept for GamePad-based button enumeration.</param>
-        public GamePadButtonEnumerator(TextSprite[,] allButtons, InputType inputType) : this(allButtons, inputType, 0.6f, TimeSpan.FromMilliseconds(250), Buttons.A, PlayerIndex.One)
+        public GamePadButtonEnumerator(TextSprite[,] allButtons, InputType inputType)
+            : this(allButtons, inputType, 0.6f, TimeSpan.FromMilliseconds(250), Buttons.A, PlayerIndex.One)
         {
-            
+
         }
 
         /// <summary>
@@ -239,11 +346,11 @@ namespace Glib.XNA.InputLib
             _allButtons[_rowCurrent, _columnCurrent].IsSelected = false;
 
             int changedAmount = 0;
-            
+
             switch (dir)
             {
                 case Direction.Top:
-                    
+
                     do
                     {
                         changedAmount++;
@@ -263,17 +370,18 @@ namespace Glib.XNA.InputLib
                         {
                             _rowCurrent = 0;
                         }
-                    } while (changedAmount <= _allButtons.GetLength(0) && (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible)) );
+                    } while (changedAmount <= _allButtons.GetLength(0) && (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible)));
                     break;
                 case Direction.Left:
-                    do{
+                    do
+                    {
                         changedAmount++;
                         _columnCurrent--;
                         if (_columnCurrent < 0)
                         {
                             _columnCurrent = _allButtons.GetLength(1) - 1;
                         }
-                    } while (changedAmount <= _allButtons.GetLength(1) && ( _allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible)));
+                    } while (changedAmount <= _allButtons.GetLength(1) && (_allButtons[_rowCurrent, _columnCurrent] == null || !_allButtons[_rowCurrent, _columnCurrent].Visible || (_allButtons[_rowCurrent, _columnCurrent].ParentSprite != null && !_allButtons[_rowCurrent, _columnCurrent].ParentSprite.Visible)));
                     break;
                 case Direction.Right:
                     do
@@ -371,7 +479,7 @@ namespace Glib.XNA.InputLib
             }
             if (_allButtons[_rowCurrent, _columnCurrent].Visible && _lastState.IsButtonUp(_submitButton) && current.IsButtonDown(_submitButton))
             {
-                
+
                 if (this.FireTextSpritePressed)
                 {
                     _allButtons[_rowCurrent, _columnCurrent].FireClicked();
