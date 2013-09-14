@@ -71,10 +71,11 @@ namespace GlibUnitTests
         [TestMethod()]
         public void SpriteRotationConstructorTest0()
         {
-            float degrees = 360F; // TODO: Initialize to an appropriate value
+            float degrees = 360F;
             SpriteRotation target = new SpriteRotation(degrees);
             Assert.AreEqual(MathHelper.TwoPi, target.Radians);
-            Assert.AreEqual(324F, target.Gradians);
+            Assert.AreEqual(degrees, target.Degrees);
+            Assert.AreEqual(324.0f, target.Gradians, 0.075f);
         }
 
         /// <summary>
@@ -266,7 +267,7 @@ namespace GlibUnitTests
             float actual;
             target.Gradians = expected;
             actual = target.Gradians;
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual, 0.075F);
             Assert.AreEqual(target.Degrees, 359);
             Assert.AreEqual(target.Radians, MathHelper.TwoPi-MathHelper.ToRadians(1));
         }

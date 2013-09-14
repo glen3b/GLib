@@ -75,7 +75,7 @@ namespace GlibUnitTests
             Velocity target = new Velocity();
             target.YVelocity = YSpeed;
             Assert.IsNull(target.XVelocity);
-            Assert.Equals(target.YVelocity, YSpeed);
+            Assert.AreEqual(target.YVelocity, YSpeed);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace GlibUnitTests
             float XSpeed = 2423.53489F;
             float YSpeed = -35.48F;
             Velocity target = new Velocity(XSpeed, YSpeed);
-            Assert.Equals(target.XVelocity, XSpeed);
-            Assert.Equals(target.YVelocity, YSpeed);
+            Assert.AreEqual(target.XVelocity, XSpeed);
+            Assert.AreEqual(target.YVelocity, YSpeed);
         }
 
         /// <summary>
