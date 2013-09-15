@@ -49,6 +49,34 @@ namespace Glib.XNA.SpriteLib
         public event EventHandler ValueChanged;
 
         /// <summary>
+        /// Returns a value indicating whether two SpriteRotations are not equal.
+        /// </summary>
+        /// <param name="a">The first SpriteRotation to compare.</param>
+        /// <param name="b">The second SpriteRotation to compare.</param>
+        /// <returns>A value indicating whether the two SpriteRotations are not equal.</returns>
+        /// <remarks>
+        /// Doesn't compare events.
+        /// </remarks>
+        public static bool operator !=(SpriteRotation a, SpriteRotation b)
+        {
+            return a.Radians != b.Radians;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether two SpriteRotations are equal.
+        /// </summary>
+        /// <param name="a">The first SpriteRotation to compare.</param>
+        /// <param name="b">The second SpriteRotation to compare.</param>
+        /// <returns>A value indicating whether the two SpriteRotations are equal.</returns>
+        /// <remarks>
+        /// Doesn't compare events.
+        /// </remarks>
+        public static bool operator ==(SpriteRotation a, SpriteRotation b)
+        {
+            return a.Radians == b.Radians;
+        }
+
+        /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.
         /// </summary>
         /// <param name="radians">The number of radians to represent in the new SpriteRotation.</param>
