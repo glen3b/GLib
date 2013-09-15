@@ -103,6 +103,7 @@
     <Compile Include="XNA\InputLib\GamePadManager.cs" />
     <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />
+    <Compile Include="XNA\ScreenGame.cs" />
     <Compile Include="XNA\SpriteInterfaces.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />

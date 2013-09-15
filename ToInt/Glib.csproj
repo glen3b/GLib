@@ -72,6 +72,7 @@
     <Compile Include="XNA\ImageFormat.cs" />
     <Compile Include="XNA\InputLib\NamespaceDoc.cs" />
     <Compile Include="XNA\NamespaceDoc.cs" />
+    <Compile Include="XNA\ScreenGame.cs" />
     <Compile Include="XNA\SpriteLib\NamespaceDoc.cs" />
     <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
