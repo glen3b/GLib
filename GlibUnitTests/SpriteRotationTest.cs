@@ -201,14 +201,16 @@ namespace GlibUnitTests
         [TestMethod()]
         public void op_LessThanOrEqualTest()
         {
-            SpriteRotation x = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            SpriteRotation y = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
+            SpriteRotation x = new SpriteRotation(100); // TODO: Initialize to an appropriate value
+            SpriteRotation y = new SpriteRotation(100); // TODO: Initialize to an appropriate value
+            bool expected = true; // TODO: Initialize to an appropriate value
             bool actual;
             actual = (x <= y);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-            Assert.AreEqual(expected, actual);
             
+            Assert.AreEqual(expected, actual);
+
+
+            Assert.AreEqual(false, ((x + y) <= y));
         }
 
         /// <summary>
@@ -217,13 +219,12 @@ namespace GlibUnitTests
         [TestMethod()]
         public void op_SubtractionTest()
         {
-            SpriteRotation x = new SpriteRotation(); // TODO: Initialize to an appropriate value
-            float y = 0F; // TODO: Initialize to an appropriate value
-            SpriteRotation expected = new SpriteRotation(); // TODO: Initialize to an appropriate value
+            SpriteRotation x = new SpriteRotation(360); // TODO: Initialize to an appropriate value
+            float y = 180F; // TODO: Initialize to an appropriate value
+            SpriteRotation expected = new SpriteRotation(180); // TODO: Initialize to an appropriate value
             SpriteRotation actual;
             actual = (x - y);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            Assert.AreEqual(expected.Degrees, actual.Degrees, 0.075f);
         }
 
         /// <summary>
