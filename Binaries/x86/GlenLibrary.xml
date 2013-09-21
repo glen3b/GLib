@@ -764,15 +764,14 @@
             </summary>
             <typeparam name="T">The type to provide utilities of.</typeparam>
         </member>
-        <member name="M:Glib.TypeUtils`1.IsNumeric">
-            <summary>
-            Indicates whether the specified type is numeric.
-            </summary>
-            <returns>Whether or not the type parameter T is numeric.</returns>
-        </member>
         <member name="P:Glib.TypeUtils`1.TruePredicate">
             <summary>
             Gets a predicate that will always return a true value.
+            </summary>
+        </member>
+        <member name="P:Glib.TypeUtils`1.IsNumeric">
+            <summary>
+            Gets a value indicating whether the specified type is numeric.
             </summary>
         </member>
         <member name="P:Glib.TypeUtils`1.FalsePredicate">
@@ -2860,6 +2859,95 @@
             An edge representing the right side of a viewport.
             </summary>
         </member>
+        <member name="T:Glib.XNA.ScreenGame">
+            <summary>
+            A game that uses the <see cref="T:Glib.XNA.SpriteLib.ScreenManager"/> class.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.ScreenGame.Graphics">
+            <summary>
+            The GraphicsDeviceManager of this game.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.Initialize">
+            <summary>
+            Initializes the game, adding an InputManagerComponent.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.InitializeScreens">
+            <summary>
+            Initializes all of the Screens of the game.
+            </summary>
+            <remarks>
+            Called immediately after the initialization of the <see cref="T:Glib.XNA.SpriteLib.ScreenManager"/>, in <seealso cref="M:Glib.XNA.ScreenGame.LoadContent"/>.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.LoadContent">
+            <summary>
+            Loads game assets, and initializes the SpriteBatch.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the visible Screens on this Game.
+            </summary>
+            <param name="gameTime">The current GameTime.</param>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.BeginDraw">
+            <summary>
+            Begins drawing the frame.
+            </summary>
+            <returns>Whether or not to draw the frame.</returns>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.EndDraw">
+            <summary>
+            Ends drawing of the frame.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:Glib.XNA.ScreenGame.#ctor">
+            <summary>
+            Initializes the Game.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.ContentRootDirectory">
+            <summary>
+            Gets or sets the root directory for loading ContentManager assets.
+            </summary>
+            <remarks>
+            Defaults to "Content".
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.BackgroundColor">
+            <summary>
+            Gets the background color of this Game.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.Height">
+            <summary>
+            Gets or sets the desired height of the Game.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.Width">
+            <summary>
+            Gets or sets the desired width of the Game.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.SpriteBatch">
+            <summary>
+            Gets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> that is drawn to.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ScreenGame.AllScreens">
+            <summary>
+            Gets the collection of all existing <see cref="T:Glib.XNA.SpriteLib.Screen"/>s.
+            </summary>
+        </member>
         <member name="T:Glib.WinForms.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.WinForms"/> namespace provides various Windows Forms utilities.
@@ -3518,60 +3606,6 @@
             <param name="delimiter">The delimiter between elements.</param>
             <returns>All elements of the array delimited by delimiter in a string.</returns>
         </member>
-        <member name="M:Glib.ObjectExtensions.GetPrivatePropertyValue``1(System.Object,System.String)">
-            <summary>
-            Returns a private property Value from a given Object. Uses Reflection.
-            </summary>
-            <exception cref="T:System.ArgumentNullException">If obj is null.</exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">If the property is not found.</exception>
-            <typeparam name="T">Type of the Property</typeparam>
-            <param name="obj">Object from where the Property Value is returned</param>
-            <param name="propName">Propertyname as string.</param>
-            <returns>PropertyValue</returns>
-        </member>
-        <member name="M:Glib.ObjectExtensions.GetPrivateFieldValue``1(System.Object,System.String)">
-            <summary>
-            Returns a private field Value from a given Object. Uses Reflection.
-            Throws an ArgumentOutOfRangeException if the Property is not found.
-            </summary>
-            <typeparam name="T">Type of the Property</typeparam>
-            <param name="obj">Object from where the Property Value is returned</param>
-            <param name="propName">Propertyname as string.</param>
-            <returns>PropertyValue</returns>
-        </member>
-        <member name="M:Glib.ObjectExtensions.SetPrivatePropertyValue``1(System.Object,System.String,``0)">
-            <summary>
-            Sets a _private_ Property Value from a given Object. Uses Reflection.
-            Throws an ArgumentOutOfRangeException if the Property is not found.
-            </summary>
-            <typeparam name="T">Type of the Property</typeparam>
-            <param name="obj">Object from where the Property Value is set</param>
-            <param name="propName">Propertyname as string.</param>
-            <param name="val">Value to set.</param>
-            <returns>PropertyValue</returns>
-        </member>
-        <member name="M:Glib.ObjectExtensions.SetPrivateFieldValue``1(System.Object,System.String,``0)">
-            <summary>
-            Set a private Property Value on a given Object. Uses Reflection.
-            </summary>
-            <typeparam name="T">Type of the Property</typeparam>
-            <param name="obj">Object from where the Property Value is returned</param>
-            <param name="propName">Propertyname as string.</param>
-            <param name="val">the value to set</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">if the Property is not found</exception>
-        </member>
-        <member name="M:Glib.ObjectExtensions.CallPrivateMethod(System.Object,System.String,System.Object[])">
-            <summary>
-            Call a private method on an object through reflection.
-            </summary>
-            <remarks>
-            A public method will not be included in the method search.
-            </remarks>
-            <param name="objToCallOn">The object to call a method on.</param>
-            <param name="methodName">The name of the method.</param>
-            <param name="methodParams">The parameters to pass to the method.</param>
-            <returns>The result of the function.</returns>
-        </member>
         <member name="M:Glib.ObjectExtensions.Format(System.String,System.Object[])">
             <summary>
             Format the specified string, using String.Format(String, Object[]).
@@ -3768,6 +3802,28 @@
             <summary>
             A structure representing the rotation of a sprite.
             </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteRotation.op_Inequality(Glib.XNA.SpriteLib.SpriteRotation,Glib.XNA.SpriteLib.SpriteRotation)">
+            <summary>
+            Returns a value indicating whether two SpriteRotations are not equal.
+            </summary>
+            <param name="a">The first SpriteRotation to compare.</param>
+            <param name="b">The second SpriteRotation to compare.</param>
+            <returns>A value indicating whether the two SpriteRotations are not equal.</returns>
+            <remarks>
+            Doesn't compare events.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteRotation.op_Equality(Glib.XNA.SpriteLib.SpriteRotation,Glib.XNA.SpriteLib.SpriteRotation)">
+            <summary>
+            Returns a value indicating whether two SpriteRotations are equal.
+            </summary>
+            <param name="a">The first SpriteRotation to compare.</param>
+            <param name="b">The second SpriteRotation to compare.</param>
+            <returns>A value indicating whether the two SpriteRotations are equal.</returns>
+            <remarks>
+            Doesn't compare events.
+            </remarks>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteRotation.FromRadians(System.Single)">
             <summary>
@@ -4053,6 +4109,70 @@
         <member name="P:Glib.XNA.SpriteLib.SpriteSheet.Origin">
             <summary>
             Gets the effective origin of the Sprite.
+            </summary>
+        </member>
+        <member name="T:Glib.Reflection.ReflectionExtensions">
+            <summary>
+            A class providing various reflection-related extension methods.
+            </summary>
+        </member>
+        <member name="M:Glib.Reflection.ReflectionExtensions.GetPrivatePropertyValue``1(System.Object,System.String)">
+            <summary>
+            Returns a private property Value from a given Object. Uses Reflection.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">If obj is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the property is not found.</exception>
+            <typeparam name="T">Type of the Property</typeparam>
+            <param name="obj">Object from where the Property Value is returned</param>
+            <param name="propName">Propertyname as string.</param>
+            <returns>PropertyValue</returns>
+        </member>
+        <member name="M:Glib.Reflection.ReflectionExtensions.GetPrivateFieldValue``1(System.Object,System.String)">
+            <summary>
+            Returns a private field Value from a given Object. Uses Reflection.
+            Throws an ArgumentOutOfRangeException if the Property is not found.
+            </summary>
+            <typeparam name="T">Type of the Property</typeparam>
+            <param name="obj">Object from where the Property Value is returned</param>
+            <param name="propName">Propertyname as string.</param>
+            <returns>PropertyValue</returns>
+        </member>
+        <member name="M:Glib.Reflection.ReflectionExtensions.SetPrivatePropertyValue``1(System.Object,System.String,``0)">
+            <summary>
+            Sets a _private_ Property Value from a given Object. Uses Reflection.
+            Throws an ArgumentOutOfRangeException if the Property is not found.
+            </summary>
+            <typeparam name="T">Type of the Property</typeparam>
+            <param name="obj">Object from where the Property Value is set</param>
+            <param name="propName">Propertyname as string.</param>
+            <param name="val">Value to set.</param>
+            <returns>PropertyValue</returns>
+        </member>
+        <member name="M:Glib.Reflection.ReflectionExtensions.SetPrivateFieldValue``1(System.Object,System.String,``0)">
+            <summary>
+            Set a private Property Value on a given Object. Uses Reflection.
+            </summary>
+            <typeparam name="T">Type of the Property</typeparam>
+            <param name="obj">Object from where the Property Value is returned</param>
+            <param name="propName">Propertyname as string.</param>
+            <param name="val">the value to set</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">if the Property is not found</exception>
+        </member>
+        <member name="M:Glib.Reflection.ReflectionExtensions.CallPrivateMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Call a private method on an object through reflection.
+            </summary>
+            <remarks>
+            A public method will not be included in the method search.
+            </remarks>
+            <param name="objToCallOn">The object to call a method on.</param>
+            <param name="methodName">The name of the method.</param>
+            <param name="methodParams">The parameters to pass to the method.</param>
+            <returns>The result of the function.</returns>
+        </member>
+        <member name="T:Glib.Reflection.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.Reflection"/> namespace provides various extension methods and miscellaneous utility classes to access forbidden members of objects.
             </summary>
         </member>
     </members>
