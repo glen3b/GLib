@@ -23,12 +23,14 @@ namespace Glib
         }
 
         /// <summary>
-        /// Indicates whether the specified type is numeric.
+        /// Gets a value indicating whether the specified type is numeric.
         /// </summary>
-        /// <returns>Whether or not the type parameter T is numeric.</returns>
-        public static bool IsNumeric()
+        public static bool IsNumeric
         {
-            return Utils.NumericTypes.Contains(typeof(T));
+            get
+            {
+                return Utils.NumericTypes.Contains(typeof(T));
+            }
         }
 
         /// <summary>
@@ -58,17 +60,19 @@ namespace Glib
     /// </summary>
     public static class Utils
     {
-        
+
         /// <summary>
         /// Gets an array of numerical types.
         /// </summary>
-        public static Type[] NumericTypes{
-         get{
-             return new Type[] {
+        public static Type[] NumericTypes
+        {
+            get
+            {
+                return new Type[] {
             typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong),
             typeof(float), typeof(decimal), typeof(double), typeof(sbyte), typeof(byte)
         };
-         }
+            }
         }
     }
 }

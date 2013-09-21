@@ -23,12 +23,14 @@ namespace Glib
         }
 
         /// <summary>
-        /// Indicates whether the specified type is numeric.
+        /// Gets a value indicating whether the specified type is numeric.
         /// </summary>
-        /// <returns>Whether or not the type parameter T is numeric.</returns>
-        public static bool IsNumeric()
+        public static bool IsNumeric
         {
-            return Utils.NumericTypes.Contains(typeof(T));
+            get
+            {
+                return Utils.NumericTypes.Contains(typeof(T));
+            }
         }
 
         /// <summary>
