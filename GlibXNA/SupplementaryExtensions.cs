@@ -5,134 +5,11 @@ using System.Text;
 
 namespace Glib
 {
-
+#if XBOX
     /// <summary>
-    /// A random number generator generating only unique random numbers.
+    /// A class providing extension methods that are present in the core library, which cannot be used on Xbox projects.
     /// </summary>
-    public class UniqueRandom : Random
-    {
-        private List<int> _generatedNumber = new List<int>();
-        private List<double> _generatedDecimal = new List<double>();
-
-        /// <summary>
-        /// Create a new UniqueRandom random number generator.
-        /// </summary>
-        public UniqueRandom() : base()
-        {
-        }
-
-        /// <summary>
-        /// Create a new UniqueRandom random number generator with the specified seed.
-        /// </summary>
-        /// <param name="seed">The seed of the random number generator.</param>
-        public UniqueRandom(int seed)
-            : base(seed)
-        {
-        }
-
-
-        /// <summary>
-        /// Reset the list of generated numbers (integers, doubles, and bytes).
-        /// </summary>
-        public void Reset()
-        {
-            ResetInts();
-            ResetDoubles();
-        }
-
-        /// 
-        /// 
-        /// <summary>
-        /// Reset the list of generated integers.
-        /// </summary>
-        public void ResetInts()
-        {
-            this._generatedNumber.Clear();
-        }
-
-        /// <summary>
-        /// Reset the list of generated doubles.
-        /// </summary>
-        public void ResetDoubles()
-        {
-            _generatedDecimal.Clear();
-        }
-
-        /// <summary>
-        /// Generate a random unique number between the two specified values.
-        /// </summary>
-        /// <param name="minValue">The inclusive lower bound of the number to be generated.</param>
-        /// <param name="maxValue">The exclusive upper bound of the number to be generated.</param>
-        /// <returns>A random number, unique within this instance, between the two specified values.</returns>
-        public override int Next(int minValue, int maxValue)
-        {
-            bool flag;
-            int num = 0;
-            do
-            {
-                num = base.Next(minValue, maxValue);
-                flag = _generatedNumber.Contains(num);
-            }
-            while (flag);
-            this._generatedNumber.Add(num);
-            int num1 = num;
-            return num1;
-        }
-
-        /// <summary>
-        /// Generate a random unique number lower than the specified maximum.
-        /// </summary>
-        /// <param name="maxValue">The exclusive upper bound of the number to be generated.</param>
-        /// <returns>A random number, unique within this instance, less than the specified value.</returns>
-        public override int Next(int maxValue)
-        {
-            return Next(0, maxValue);
-        }
-
-        /// <summary>
-        /// Generate a random, unique number.
-        /// </summary>
-        /// <returns>A random, unique number to this instance.</returns>
-        public override int Next()
-        {
-            int num;
-            do
-            {
-                num = base.Next();
-            } while (_generatedNumber.Contains(num));
-            _generatedNumber.Add(num);
-            return num;
-        }
-
-        /// <summary>
-        /// Generate a random, unique double between 0.0 and 1.0.
-        /// </summary>
-        /// <returns>A random, unique double to this instance.</returns>
-        public override double NextDouble()
-        {
-            double num;
-            do
-            {
-                num = base.NextDouble();
-            } while (_generatedDecimal.Contains(num));
-            _generatedDecimal.Add(num);
-            return num;
-        }
-
-        /// <summary>
-        /// Fill the elements of a specified array with bytes of non-unique random numbers.
-        /// </summary>
-        /// <param name="buffer">An array of bytes to contain random numbers.</param>
-        public override void NextBytes(byte[] buffer)
-        {
-            base.NextBytes(buffer);
-        }
-    }
-
-    /// <summary>
-    /// Multiple type-to-type conversion methods acting as extensions on object.
-    /// </summary>
-    public static class ObjectExtensions
+    public static class SupplementaryExtensions
     {
         /// <summary>
         /// Convert the specified object to an integer.
@@ -145,12 +22,22 @@ namespace Glib
         }
 
         /// <summary>
+        /// Convert an array to a string, using space as a delimiter.
+        /// </summary>
+        /// <param name="array">The array to convert.</param>
+        /// <returns>All elements of the array delimited by delimiter in a string.</returns>
+        public static string ToArrayString(this Array array)
+        {
+            return array.ToArrayString(" ");
+        }
+
+        /// <summary>
         /// Convert an array to a string.
         /// </summary>
         /// <param name="array">The array to convert.</param>
         /// <param name="delimiter">The delimiter between elements.</param>
         /// <returns>All elements of the array delimited by delimiter in a string.</returns>
-        public static string ToArrayString(this Array array, string delimiter = " ")
+        public static string ToArrayString(this Array array, string delimiter)
         {
             StringBuilder builder = new StringBuilder();
             /*
@@ -184,13 +71,13 @@ namespace Glib
             else
             {
              */
-                foreach (object o in array)
-                {
-                    builder.AppendFormat("{0}{1}", o, delimiter);
-                }
-                return builder.ToString().Substring(0, builder.Length - delimiter.Length);
+            foreach (object o in array)
+            {
+                builder.AppendFormat("{0}{1}", o, delimiter);
+            }
+            return builder.ToString().Substring(0, builder.Length - delimiter.Length);
             //}
-            
+
         }
 
         /// <summary>
@@ -422,8 +309,6 @@ namespace Glib
         public static T Cast<T>(this object o)
         {
             if (o == null) return default(T);
-            //if (o is T) return (o as T?).Value;
-
             /*
             Type trueType = typeof(T);
             if (trueType == typeof(int))
@@ -435,14 +320,8 @@ namespace Glib
                 return (T)(object)o.ToString();
             }
             */
-            if (o is IConvertible)
-            {
-                return (T)Convert.ChangeType(o, typeof(T));
-            }
-            else
-            {
-                return (T)o;
-            }
+            return (T)o;
+
             //return (T)o;
         }
 
@@ -457,4 +336,5 @@ namespace Glib
             castedObj = o.Cast<T>();
         }
     }
+#endif
 }
