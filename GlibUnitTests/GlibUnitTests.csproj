@@ -66,13 +66,14 @@
     <Compile Include="VelocityTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GlibXNA\GlibXNA.csproj">
+      <Project>{CE0948B0-4DD8-4841-A163-BD79C03D52EB}</Project>
+      <Name>GlibXNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ToInt\Glib.csproj">
       <Project>{A08A41C3-6014-41A6-B59B-A17AC077022D}</Project>
       <Name>Glib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Shadow Include="Test References\GlenLibrary.accessor" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

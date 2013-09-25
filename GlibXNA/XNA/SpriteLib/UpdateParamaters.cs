@@ -116,6 +116,7 @@ namespace Glib.XNA.SpriteLib
             : this(UpdateXParam, UpdateYParam)
         {
             this.MouseFollow = followParams;
+        }
 #endif
         
 

@@ -33,6 +33,36 @@ namespace Glib.XNA.SpriteLib
     public struct SpriteRotation
     {
         /// <summary>
+        /// Determines whether this <see cref="SpriteRotation"/> equals the specified object.
+        /// </summary>
+        /// <param name="obj">The object to determine equivalence to.</param>
+        /// <returns>Whether or not the specified object is equal.</returns>
+        /// <remarks>
+        /// For all logical purposes, this method only compares rotation values.
+        /// This method will attempt to cast the specified object (note: this includes user conversions) to a SpriteRotation before comparing equality.
+        /// </remarks>
+        public override bool Equals(object obj)
+        {
+            SpriteRotation val;
+            if (!(obj is SpriteRotation))
+            {
+                try
+                {
+                    val = (SpriteRotation)obj;
+                }
+                catch (InvalidCastException)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                val = (SpriteRotation)obj;
+            }
+            return val.Degrees == this.Degrees;
+        }
+
+        /// <summary>
         /// Calculate a hash of this <see cref="SpriteRotation"/>.
         /// </summary>
         /// <returns>A hash code of this SpriteRotation.</returns>
@@ -77,7 +107,7 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public static bool operator !=(SpriteRotation a, SpriteRotation b)
         {
-            return a.Radians != b.Radians;
+            return !a.Equals(b);
         }
 
         /// <summary>
@@ -91,7 +121,7 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public static bool operator ==(SpriteRotation a, SpriteRotation b)
         {
-            return a.Radians == b.Radians;
+            return a.Equals(b);
         }
 
         /// <summary>

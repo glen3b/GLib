@@ -79,7 +79,7 @@ namespace Glib.XNA
         /// Get the position which would be required to center the specified sizable object to the specified Viewport, assuming is has an origin of (0, 0).
         /// </summary>
         /// <param name="obj">The sizable object to center.</param>
-        /// <param name="centerToViewport">The viewport to center the ISizable to.</param>
+        /// <param name="centerTo">The viewport to center the ISizable to.</param>
         /// <returns>The position which would be required to center the specified sizable object.</returns>
         public static Vector2 GetCenterPosition(this ISizable obj, Viewport centerTo)
         {
