@@ -46,7 +46,7 @@ local.properties
 TestResults/
 Help/
 [Dd]ebug/
-[Rr]elease/
+[Rr]elease/*
 x64/
 build/
 [Bb]in/
@@ -215,3 +215,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+#Custom
+!Binaries/
