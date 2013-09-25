@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Glib
 {
-#if XBOX
     /// <summary>
     /// A class providing extension methods that are present in the core library, which cannot be used on Xbox projects.
     /// </summary>
+    #if WINDOWS
+    internal static class SupplementaryExtensions
+#else
     public static class SupplementaryExtensions
+#endif
     {
         /// <summary>
         /// Convert the specified object to an integer.
@@ -336,5 +339,4 @@ namespace Glib
             castedObj = o.Cast<T>();
         }
     }
-#endif
 }
