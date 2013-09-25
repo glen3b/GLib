@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Glib.XNA.InputLib
 {
+#if WINDOWS
     /// <summary>
     /// Represents a manager of mouse events and data.
     /// </summary>
@@ -63,4 +64,5 @@ namespace Glib.XNA.InputLib
         
         
     }
+#endif
 }

@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GlibXbox")]
-[assembly: AssemblyProduct("GlibXbox")]
+[assembly: AssemblyTitle("GlibXNA")]
+[assembly: AssemblyProduct("GlibXNA")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // On Windows, the following GUID is for the ID of the typelib if this
 // project is exposed to COM. On other platforms, it unique identifies the
 // title storage container when deploying this assembly to the device.
-[assembly: Guid("25800866-0117-4625-8226-f86caf19ec99")]
+[assembly: Guid("9da7627f-1680-4905-b83f-5f3fc5af685b")]
 
 // Version information for an assembly consists of the following four values:
 //

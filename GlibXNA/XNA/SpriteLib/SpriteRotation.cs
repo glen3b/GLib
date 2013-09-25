@@ -33,6 +33,24 @@ namespace Glib.XNA.SpriteLib
     public struct SpriteRotation
     {
         /// <summary>
+        /// Calculate a hash of this <see cref="SpriteRotation"/>.
+        /// </summary>
+        /// <returns>A hash code of this SpriteRotation.</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+
+                //All point to same thing, just hash it all.
+                hash = hash * 23 + this.Degrees.GetHashCode();
+                hash = hash * 23 + this.Radians.GetHashCode();
+                hash = hash * 23 + this.Gradians.GetHashCode();
+                return hash;
+            }
+        }
+
+        /// <summary>
         /// Gets a SpriteRotation representing zero degrees.
         /// </summary>
         public static SpriteRotation Zero
@@ -47,6 +65,34 @@ namespace Glib.XNA.SpriteLib
         /// An event fired when the rotation value of this <see cref="SpriteRotation"/> changes.
         /// </summary>
         public event EventHandler ValueChanged;
+
+        /// <summary>
+        /// Returns a value indicating whether two SpriteRotations are not equal.
+        /// </summary>
+        /// <param name="a">The first SpriteRotation to compare.</param>
+        /// <param name="b">The second SpriteRotation to compare.</param>
+        /// <returns>A value indicating whether the two SpriteRotations are not equal.</returns>
+        /// <remarks>
+        /// Doesn't compare events.
+        /// </remarks>
+        public static bool operator !=(SpriteRotation a, SpriteRotation b)
+        {
+            return a.Radians != b.Radians;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether two SpriteRotations are equal.
+        /// </summary>
+        /// <param name="a">The first SpriteRotation to compare.</param>
+        /// <param name="b">The second SpriteRotation to compare.</param>
+        /// <returns>A value indicating whether the two SpriteRotations are equal.</returns>
+        /// <remarks>
+        /// Doesn't compare events.
+        /// </remarks>
+        public static bool operator ==(SpriteRotation a, SpriteRotation b)
+        {
+            return a.Radians == b.Radians;
+        }
 
         /// <summary>
         /// Returns a SpriteRotation representing the specified value in radians.

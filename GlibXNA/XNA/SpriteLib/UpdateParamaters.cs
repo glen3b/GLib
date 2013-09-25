@@ -5,16 +5,72 @@ using System.Text;
 
 namespace Glib.XNA.SpriteLib
 {
+#if WINDOWS
+    /// <summary>
+    /// The parameters to use for automatically following the mouse every update.
+    /// </summary>
+    public struct MouseFollowParams
+    {
+        /// <summary>
+        /// The speed of mouse following.
+        /// </summary>
+        public float MouseFollowSpeed;
+
+        /// <summary>
+        /// Gets a boolean indicating whether or not the mouse is being followed.
+        /// </summary>
+        public bool DoesFollow
+        {
+            get
+            {
+                return MouseFollowSpeed > 0;
+            }
+        }
+
+        /// <summary>
+        /// Creates a new MouseFollowParams.
+        /// </summary>
+        /// <param name="speed">The speed of mouse following.</param>
+        public MouseFollowParams(float speed)
+        {
+            MouseFollowSpeed = speed;
+            InitialRotation = new SpriteRotation();
+        }
+
+        /// <summary>
+        /// Creates a new MouseFollowParams.
+        /// </summary>
+        /// <param name="speed">The speed of mouse following.</param>
+        /// <param name="initialRotation">The initial rotation of the Sprite.</param>
+        public MouseFollowParams(float speed, SpriteRotation initialRotation)
+        {
+            MouseFollowSpeed = speed;
+            InitialRotation = initialRotation;
+        }
+
+        /// <summary>
+        /// The initial rotation of the Sprite.
+        /// </summary>
+        public SpriteRotation InitialRotation;
+    }
+#endif
+
     /// <summary>
     /// A structure representing things to automatically do when Update() is called on a Sprite.
     /// </summary>
     public struct UpdateParamaters
     {
         /// <summary>
-        /// Whether or not to acknowledge the XIncrease value.
+        /// Whether or not to acknowledge the XSpeed value.
         /// </summary>
         public bool UpdateX;
 
+#if WINDOWS
+        /// <summary>
+        /// The parameters for automatic mouse following.
+        /// </summary>
+        public MouseFollowParams MouseFollow;
+#endif
         
         /*
         /// <summary>
@@ -29,12 +85,12 @@ namespace Glib.XNA.SpriteLib
         */
 
         /// <summary>
-        /// Whether or not to acknowledge the YIncrease value.
+        /// Whether or not to acknowledge the YSpeed value.
         /// </summary>
         public bool UpdateY;
 
         /// <summary>
-        /// Whether or not to automatically fix the sprite from going off the edge based on XIncrease and YIncrease values.
+        /// Whether or not to automatically fix the sprite from going off the edge based on XSpeed and YSpeed values.
         /// </summary>
         public bool FixEdgeOff;
 
@@ -48,6 +104,20 @@ namespace Glib.XNA.SpriteLib
         {
             this.FixEdgeOff = FixEdgeOffParam;
         }
+
+#if WINDOWS
+        /// <summary>
+        /// Create a new UpdateParamaters with the values specified.
+        /// </summary>
+        /// <param name="UpdateXParam">Whether or not to acknowledge the XIncrease value.</param>
+        /// <param name="UpdateYParam">Whether or not to acknowledge the YIncrease value.</param>
+        /// <param name="followParams">The parameters for mouse following.</param>
+        public UpdateParamaters(bool UpdateXParam, bool UpdateYParam, MouseFollowParams followParams)
+            : this(UpdateXParam, UpdateYParam)
+        {
+            this.MouseFollow = followParams;
+#endif
+        
 
         
        /*
@@ -76,6 +146,9 @@ namespace Glib.XNA.SpriteLib
             this.UpdateX = UpdateXParam;
             this.UpdateY = UpdateYParam;
             this.FixEdgeOff = false;
+#if WINDOWS
+            MouseFollow = new MouseFollowParams(0);
+#endif
         }
 
     }

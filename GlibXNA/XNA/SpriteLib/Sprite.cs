@@ -372,6 +372,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public Color Color = Color.White;
 
+#if WINDOWS
         /// <summary>
         /// An event called when the mouse enters the area of the Sprite.
         /// </summary>
@@ -380,6 +381,7 @@ namespace Glib.XNA.SpriteLib
         /// An event called when the mouse leaves the area of the Sprite.
         /// </summary>
         public event EventHandler MouseLeave;
+#endif
 
         /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
@@ -520,7 +522,9 @@ namespace Glib.XNA.SpriteLib
         }
         #endregion
 
+#if WINDOWS
         private MouseState _lastMouseState = new MouseState();
+#endif
 
         /// <summary>
         /// Draws the sprite.
@@ -547,6 +551,7 @@ namespace Glib.XNA.SpriteLib
         }
 
         #region Intersection + Click checks
+#if WINDOWS
         /// <summary>
         /// Checks whether the user is clicking on the sprite.
         /// </summary>
@@ -565,6 +570,7 @@ namespace Glib.XNA.SpriteLib
         {
             return ClickCheck(MouseManager.CurrentMouseState);
         }
+#endif
 
 
         /// <summary>
@@ -586,6 +592,7 @@ namespace Glib.XNA.SpriteLib
             return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
         }
 
+#if WINDOWS
         /// <summary>
         /// Checks whether the specified MouseState's pointer intersects with this sprite.
         /// </summary>
@@ -595,6 +602,7 @@ namespace Glib.XNA.SpriteLib
         {
             return Intersects(new Vector2(ms.X, ms.Y));
         }
+#endif
 
         /// <summary>
         /// Checks whether the given rectangle intersects with this sprite.
@@ -666,7 +674,7 @@ namespace Glib.XNA.SpriteLib
             SpriteManager.RemoveSelf(this);
         }
 
-
+#if WINDOWS
         /// <summary>
         /// Follow the mouse pointer.
         /// </summary>
@@ -696,13 +704,22 @@ namespace Glib.XNA.SpriteLib
 
 
         /// <summary>
+        /// Follow the mouse pointer at .05 speed.
+        /// </summary>
+        public void FollowMouse()
+        {
+            FollowMouse(.05f);
+        }
+
+        /// <summary>
         /// Follow the mouse pointer.
         /// </summary>
         /// <param name="speed">The speed of following.</param>
-        public void FollowMouse(float speed = .05f)
+        public void FollowMouse(float speed)
         {
             FollowMouse(SpriteRotation.Zero, speed);
         }
+#endif
 
         private Direction[] _pastDirections;
 
@@ -730,6 +747,7 @@ namespace Glib.XNA.SpriteLib
                     YSpeed *= -1;
                 }
             }
+#if WINDOWS
             if (UpdateParams.MouseFollow.DoesFollow)
             {
                 FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
@@ -744,6 +762,7 @@ namespace Glib.XNA.SpriteLib
             {
                 MouseLeave(this, EventArgs.Empty);
             }
+#endif
 
             if (Updated != null)
             {
@@ -751,7 +770,9 @@ namespace Glib.XNA.SpriteLib
             }
 
 
+#if WINDOWS
             _lastMouseState = MouseManager.CurrentMouseState;
+#endif
         }
     }
 }

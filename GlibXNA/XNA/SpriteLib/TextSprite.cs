@@ -91,6 +91,7 @@ namespace Glib.XNA.SpriteLib
         }
 
 
+#if WINDOWS
         /// <summary>
         /// An event fired after every click of this TextSprite.
         /// </summary>
@@ -106,13 +107,16 @@ namespace Glib.XNA.SpriteLib
                 Pressed -= value;
             }
         }
+#endif
 
         /// <summary>
         /// An event fired after every click or keyboard selection of this TextSprite.
         /// </summary>
         public event EventHandler Pressed;
 
+#if WINDOWS
         private MouseState _lastMouseState = new MouseState();
+#endif
 
         private bool _isSelected;
 
@@ -180,10 +184,12 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public virtual void Update()
         {
+#if WINDOWS
             MouseState currentMouseState = MouseManager.CurrentMouseState;
 
             Vector2 msPos = new Vector2(currentMouseState.X, currentMouseState.Y);
             Vector2 oldMsPos = new Vector2(_lastMouseState.X, _lastMouseState.Y);
+#endif
 
             float actualX = X;
             float actualY = Y;
@@ -197,10 +203,13 @@ namespace Glib.XNA.SpriteLib
                 actualH = _parentSprite.Height;
             }
 
+#if WINDOWS
             if ( (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)) ) && !XnaExtensions.IsGuideVisible)
             {
                 FireClicked();
             }
+#endif
+
             if (_isHoverable)
             {
                 if (!HoverColor.HasValue || !NonHoverColor.HasValue)
@@ -213,6 +222,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
+#if WINDOWS
                     if ((_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
                     {
                         //Intersecting.
@@ -225,9 +235,14 @@ namespace Glib.XNA.SpriteLib
                         IsSelected = false;
                         Color = NonHoverColor.Value;
                     }
+#else
+                    throw new InvalidOperationException("It is impossible to select a TextSprite with a mouse on Xbox.");
+#endif
                 }
             }
+#if WINDOWS
             _lastMouseState = currentMouseState;
+#endif
             if (Updated != null)
             {
                 Updated(this, EventArgs.Empty);

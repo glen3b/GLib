@@ -273,6 +273,17 @@ namespace Glib.XNA.InputLib
     {
         #region Static Methods, properties, and access of class
 
+        /// <summary>
+        /// Updates all GamePadButtonEnumerator instances.
+        /// </summary>
+        internal static void UpdateAll()
+        {
+            GamePadManager.One.Update();
+            GamePadManager.Two.Update();
+            GamePadManager.Three.Update();
+            GamePadManager.Four.Update();
+        }
+
         private static GamePadManager _playerOne = new GamePadManager(PlayerIndex.One);
 
         /// <summary>

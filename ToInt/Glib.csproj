@@ -35,10 +35,6 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -71,43 +67,12 @@
     <Compile Include="WinForms\Controls\NamespaceDoc.cs" />
     <Compile Include="WinForms\NamespaceDoc.cs" />
     <Compile Include="WinForms\Shapes\NamespaceDoc.cs" />
-    <Compile Include="XNA\ImageFormat.cs" />
-    <Compile Include="XNA\InputLib\NamespaceDoc.cs" />
-    <Compile Include="XNA\NamespaceDoc.cs" />
-    <Compile Include="XNA\ScreenGame.cs" />
-    <Compile Include="XNA\SpriteLib\NamespaceDoc.cs" />
-    <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WinForms\Controls\RequiredTextBoxes.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WinForms\FormValidator.cs" />
     <Compile Include="WinForms\Shapes\Triangle.cs" />
-    <Compile Include="XNA\EventArgs.cs" />
-    <Compile Include="XNA\GameTimer.cs" />
-    <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
-    <Compile Include="XNA\InputLib\MouseManager.cs" />
-    <Compile Include="XNA\InputLib\ScreenRegion.cs" />
-    <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
-    <Compile Include="XNA\SpriteLib\Direction.cs" />
-    <Compile Include="XNA\InputLib\KeyboardManager.cs" />
-    <Compile Include="XNA\SpriteLib\Position.cs" />
-    <Compile Include="XNA\SpriteLib\ProgressBar.cs" />
-    <Compile Include="XNA\SpriteLib\Screen.cs" />
-    <Compile Include="XNA\SpriteLib\Sprite.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteEvents.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteFactory.cs" />
-    <Compile Include="XNA\SpriteInterfaces.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteManager.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteRotation.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteSheet.cs" />
-    <Compile Include="XNA\SpriteLib\SpriteWrapper.cs" />
-    <Compile Include="XNA\SpriteLib\SprPosMapping.cs" />
-    <Compile Include="XNA\SpriteLib\TextBoxSprite.cs" />
-    <Compile Include="XNA\SpriteLib\TextSprite.cs" />
-    <Compile Include="XNA\SpriteLib\UpdateParamaters.cs" />
-    <Compile Include="XNA\SpriteLib\Updater.cs" />
-    <Compile Include="XNA\SpriteLib\Velocity.cs" />
     <Compile Include="SqlStuff.cs" />
     <Compile Include="WinForms\IRequiredField.cs" />
     <Compile Include="WinForms\Shapes\Circle.cs" />
@@ -116,7 +81,6 @@
     <Compile Include="WinForms\Controls\SqlParameterTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="XNA\XnaExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

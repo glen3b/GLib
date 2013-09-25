@@ -13,6 +13,46 @@ namespace Glib.XNA.InputLib
     public class ScreenRegion : IPositionable, ISizable, ISizedScreenObject
     {
         /// <summary>
+        /// Determines whether the specified point is inside this <see cref="ScreenRegion"/>.
+        /// </summary>
+        /// <param name="point">The point to determine intersection.</param>
+        /// <returns>A value indicating whether the point intersects with this ScreenRegion.</returns>
+        public bool Intersects(Vector2 point)
+        {
+            return point.X >= this.X && point.X <= this.X + Width && point.Y >= Y && point.Y <= Y + Height;
+        }
+
+        /// <summary>
+        /// Gets or sets the X coordinate of this <see cref="ScreenRegion"/>.
+        /// </summary>
+        public float X
+        {
+            get
+            {
+                return Position.X;
+            }
+            set
+            {
+                Position = new Vector2(value, Position.Y);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the Y coordinate of this <see cref="ScreenRegion"/>.
+        /// </summary>
+        public float Y
+        {
+            get
+            {
+                return Position.Y;
+            }
+            set
+            {
+                Position = new Vector2(Position.X, value);
+            }
+        }
+
+        /// <summary>
         /// Convert the specified ScreenRegion to a rectangle.
         /// </summary>
         /// <param name="a">The ScreenRegion to convert.</param>
@@ -29,7 +69,8 @@ namespace Glib.XNA.InputLib
         /// Create a new ScreenRegion with the specified bounds and position.
         /// </summary>
         /// <param name="bounds">The bounds and position of the ScreenRegion.</param>
-        public ScreenRegion(Rectangle bounds) : this(new Vector2(bounds.X, bounds.Y), new Vector2(bounds.Width, bounds.Height))
+        public ScreenRegion(Rectangle bounds)
+            : this(new Vector2(bounds.X, bounds.Y), new Vector2(bounds.Width, bounds.Height))
         {
         }
 
@@ -54,7 +95,7 @@ namespace Glib.XNA.InputLib
             get { return _size; }
             set { _size = value; }
         }
-        
+
 
         private Vector2 _position;
 
@@ -85,6 +126,7 @@ namespace Glib.XNA.InputLib
             set { _size.Y = value; }
         }
 
+#if WINDOWS
         /// <summary>
         /// An event called when a mouse enters this ScreenRegion.
         /// </summary>
@@ -105,11 +147,13 @@ namespace Glib.XNA.InputLib
         /// </summary>
         public event EventHandler RightMouseClick;
 
+#endif
         /// <summary>
         /// Update this ScreenRegion, calling mouse events.
         /// </summary>
         internal void Update()
         {
+#if WINDOWS
             bool isMouseInCurrent = false;
             bool isMouseInPast = false;
             isMouseInCurrent =
@@ -149,6 +193,7 @@ namespace Glib.XNA.InputLib
             {
                 RightMouseClick(this, EventArgs.Empty);
             }
+#endif
 
         }
     }

@@ -1,103 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{28AF713F-102B-462F-A302-6C1E593692C3}</ProjectGuid>
+    <ProjectGuid>{442e51d1-79ae-4f9e-b368-f9da7a70ec39}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">Xbox 360</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GlibXbox</RootNamespace>
-    <AssemblyName>GlibXbox</AssemblyName>
+    <RootNamespace>Glib.XNA</RootNamespace>
+    <AssemblyName>GlibXNA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Xbox 360</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
-    <XnaCrossPlatformGroupID>d1dd9764-4ea1-46fb-bb5c-2ece18f956b1</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>0651756d-63c3-48a2-8122-975ada9953e8</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
+    <Thumbnail Condition="$(XnaOutputType)=='Game'">GameThumbnail.png</Thumbnail>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Xbox 360' ">
+    <OutputPath>bin\Xbox 360\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;XBOX;XBOX360</DefineConstants>
+    <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Xbox 360' ">
+    <OutputPath>bin\Xbox 360\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Xbox 360\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE;XBOX;XBOX360</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>true</NoStdLib>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
     <XnaCompressContent>true</XnaCompressContent>
-    <DocumentationFile>bin\Xbox 360\Debug\GlibXbox.XML</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Xbox 360' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Xbox 360\Release</OutputPath>
-    <DefineConstants>TRACE;XBOX;XBOX360</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>true</NoStdLib>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <XnaCompressContent>true</XnaCompressContent>
-    <DocumentationFile>bin\Xbox 360\Release\GlibXbox.XML</DocumentationFile>
-  </PropertyGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Game">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Graphics">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.GamerServices">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Xact">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Video">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Avatar">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Net">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Storage">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="mscorlib">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Net">
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Conversions.cs" />
-    <Compile Include="PrimeList.cs" />
+    <Compile Include="MathExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\NamespaceDoc.cs" />
-    <Compile Include="Reflection\ReflectionExtensions.cs" />
-    <Compile Include="Utilities.cs" />
     <Compile Include="XNA\EventArgs.cs" />
     <Compile Include="XNA\GameTimer.cs" />
     <Compile Include="XNA\ImageFormat.cs" />
@@ -105,10 +52,15 @@
     <Compile Include="XNA\InputLib\GamePadManager.cs" />
     <Compile Include="XNA\InputLib\InputManagerComponent.cs" />
     <Compile Include="XNA\InputLib\KeyboardManager.cs" />
+    <Compile Include="XNA\InputLib\MouseManager.cs" />
+    <Compile Include="XNA\InputLib\NamespaceDoc.cs" />
+    <Compile Include="XNA\InputLib\ScreenRegion.cs" />
+    <Compile Include="XNA\NamespaceDoc.cs" />
     <Compile Include="XNA\ScreenGame.cs" />
     <Compile Include="XNA\SpriteInterfaces.cs" />
     <Compile Include="XNA\SpriteLib\BackgroundSprite.cs" />
     <Compile Include="XNA\SpriteLib\Direction.cs" />
+    <Compile Include="XNA\SpriteLib\NamespaceDoc.cs" />
     <Compile Include="XNA\SpriteLib\Position.cs" />
     <Compile Include="XNA\SpriteLib\ProgressBar.cs" />
     <Compile Include="XNA\SpriteLib\Screen.cs" />
@@ -127,6 +79,18 @@
     <Compile Include="XNA\SpriteLib\Velocity.cs" />
     <Compile Include="XNA\TextureFactory.cs" />
     <Compile Include="XNA\XnaExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <Reference Include="Microsoft.Xna.Framework.GamerServices" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
