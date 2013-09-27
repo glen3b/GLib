@@ -1526,5 +1526,37 @@
             The <see cref="N:Glib.Cryptography"/> namespace provides various cryptocraphic extension methods and utilities.
             </summary>
         </member>
+        <member name="T:Glib.Collections.CollectionExtensions">
+            <summary>
+            Provides extension methods on collections.
+            </summary>
+        </member>
+        <member name="M:Glib.Collections.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Determines whether the specified enumerable contains any of the specified elements.
+            </summary>
+            <typeparam name="T">The type of the elements.</typeparam>
+            <param name="enumerable">The enumerable to check containment in.</param>
+            <param name="elements">The elements to check containment of.</param>
+            <returns>Whether any of the elements are present in the enumerable.</returns>
+        </member>
+        <member name="M:Glib.Collections.CollectionExtensions.ContentsEqual``1(``0[],``0[])">
+            <summary>
+            Determines whether the specified arrays' contents are equal.
+            </summary>
+            <typeparam name="T">The type of the elements.</typeparam>
+            <param name="enumerable">The left-hand side array.</param>
+            <param name="elements">The right-hand side array.</param>
+            <returns>Whether the contents of the arrays are equal.</returns>
+        </member>
+        <member name="M:Glib.Collections.CollectionExtensions.ContainsAll``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Determines whether the specified enumerable contains all of the specified elements.
+            </summary>
+            <typeparam name="T">The type of the elements.</typeparam>
+            <param name="enumerable">The enumerable to check containment in.</param>
+            <param name="elements">The elements to check containment of.</param>
+            <returns>Whether all of the elements are present in the enumerable.</returns>
+        </member>
     </members>
 </doc>

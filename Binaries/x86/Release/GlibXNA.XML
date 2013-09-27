@@ -799,6 +799,13 @@
             <param name="centerTo">The viewport to center the ISizable to.</param>
             <returns>The position which would be required to center the specified sizable object.</returns>
         </member>
+        <member name="M:Glib.XNA.XnaExtensions.Inverse(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Calculates the inverse of the specified vector (where new.X = orig.Y and new.Y = orig.X).
+            </summary>
+            <param name="vector">The vector to invert.</param>
+            <returns>The inverse of the specified vector.</returns>
+        </member>
         <member name="M:Glib.XNA.XnaExtensions.GetCenterPosition(Glib.XNA.ISizable,Microsoft.Xna.Framework.Graphics.Viewport,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Get the position which would be required to center the specified sizable object to the specified Viewport.
@@ -2195,6 +2202,205 @@
             This operation is expensive, so make minimal calls to it.
             </remarks>
         </member>
+        <member name="T:Glib.SupplementaryExtensions">
+            <summary>
+            A class providing extension methods that are present in the core library, which cannot be used on Xbox projects.
+            </summary>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToInt(System.Object)">
+            <summary>
+            Convert the specified object to an integer.
+            </summary>
+            <param name="o">The object to convert to an integer.</param>
+            <returns>The integer representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToArrayString(System.Array)">
+            <summary>
+            Convert an array to a string, using space as a delimiter.
+            </summary>
+            <param name="array">The array to convert.</param>
+            <returns>All elements of the array delimited by delimiter in a string.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToArrayString(System.Array,System.String)">
+            <summary>
+            Convert an array to a string.
+            </summary>
+            <param name="array">The array to convert.</param>
+            <param name="delimiter">The delimiter between elements.</param>
+            <returns>All elements of the array delimited by delimiter in a string.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Format(System.String,System.Object[])">
+            <summary>
+            Format the specified string, using String.Format(String, Object[]).
+            </summary>
+            <param name="s">String.Format(String, Object[])'s first argument.</param>
+            <param name="formatElements">The array of objects to go into String.Format(String, Object[])'s 2nd argument.</param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Format(System.String,System.String@,System.Object[])">
+            <summary>
+            Format the specified string, using String.Format(String, Object[]), and sending the results to output.
+            </summary>
+            <param name="s">String.Format(String, Object[])'s first argument.</param>
+            <param name="output">The string to output the results to.</param>
+            <param name="formatElements">The array of objects to go into String.Format(String, Object[])'s 2nd argument.</param>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Double,System.Double)">
+            <summary>
+            Raise the specified number to a power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise a number to.</param>
+            <returns>The number risen to a power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Single,System.Double)">
+            <summary>
+            Raise the specified number to the specified power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise the number to.</param>
+            <returns>The number risen to the specified power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int16,System.Double)">
+            <summary>
+            Raise the specified number to the specified power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise the number to.</param>
+            <returns>The number risen to the specified power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int32,System.Double)">
+            <summary>
+            Raise the specified number to the specified power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise the number to.</param>
+            <returns>The number risen to the specified power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Decimal,System.Double)">
+            <summary>
+            Raise the specified number to the specified power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise the number to.</param>
+            <returns>The number risen to the specified power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int64,System.Double)">
+            <summary>
+            Raise the specified number to the specified power.
+            </summary>
+            <param name="d">The number to raise to a power.</param>
+            <param name="power">The power to raise the number to.</param>
+            <returns>The number risen to the specified power.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToDecimal(System.Object)">
+            <summary>
+            Convert the specified object into a decimal.
+            </summary>
+            <param name="o">The object to convert to a decimal.</param>
+            <returns>The object represented as a decimal.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToShort(System.Object)">
+            <summary>
+            Convert the specified object to a short.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The short representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToLong(System.Object)">
+            <summary>
+            Convert the specified object to a long.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The long representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToFloat(System.Object)">
+            <summary>
+            Convert the specified object to a single-precision floating point number.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The object represented as a float.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToDouble(System.Object)">
+            <summary>
+            Convert the specified object to a double-precision floating point number.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The object represented as a double.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToBoolean(System.Object)">
+            <summary>
+            Convert the specified object to a boolean.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The boolean representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToUnsignedShort(System.Object)">
+            <summary>
+            Convert the specified object to an unsigned short.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The ushort representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToUnsignedInt(System.Object)">
+            <summary>
+            Convert the specified object to a uint.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>This object represented as a UInt32.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.ToUnsignedLong(System.Object)">
+            <summary>
+            Convert this object to an unsigned long.
+            </summary>
+            <param name="o">The object to convert.</param>
+            <returns>The unsigned long representation of the specified object.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Round(System.Single)">
+            <summary>
+            Round a float to the nearest whole number.
+            </summary>
+            <param name="f">The floating-point number to round</param>
+            <returns>The number rounded to the nearest integer</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Round(System.Double)">
+            <summary>
+            Round a double to the nearest whole number.
+            </summary>
+            <param name="d">The floating-point number to round</param>
+            <returns>The number rounded to the nearest integer</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Round(System.Decimal)">
+            <summary>
+            Round a decimal to the nearest whole number.
+            </summary>
+            <param name="d">The decimal number to round</param>
+            <returns>The number rounded to the nearest integer</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Implements(System.Type,System.Type)">
+            <summary>
+            Check if a type implements a given interface.
+            </summary>
+            <param name="cT">The type to check implementation of an interface on</param>
+            <param name="t">The interface to check</param>
+            <returns>Whether or not the object implements the given interface</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Cast``1(System.Object)">
+            <summary>
+            Cast this object to the specified type.
+            </summary>
+            <typeparam name="T">The type to cast the object to.</typeparam>
+            <param name="o">The object to cast.</param>
+            <returns>The object casted to T.</returns>
+        </member>
+        <member name="M:Glib.SupplementaryExtensions.Cast``1(System.Object,``0@)">
+            <summary>
+            Cast this object to the specified type, and output the casted object to a variable.
+            </summary>
+            <typeparam name="T">The type to cast the object to.</typeparam>
+            <param name="o">The object to cast.</param>
+            <param name="castedObj">The object casted to T.</param>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.TextBoxSprite">
             <summary>
             A Sprite which accepts Text as input.
@@ -3061,205 +3267,6 @@
             <summary>
             An edge representing the right side of a viewport.
             </summary>
-        </member>
-        <member name="T:Glib.SupplementaryExtensions">
-            <summary>
-            A class providing extension methods that are present in the core library, which cannot be used on Xbox projects.
-            </summary>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToInt(System.Object)">
-            <summary>
-            Convert the specified object to an integer.
-            </summary>
-            <param name="o">The object to convert to an integer.</param>
-            <returns>The integer representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToArrayString(System.Array)">
-            <summary>
-            Convert an array to a string, using space as a delimiter.
-            </summary>
-            <param name="array">The array to convert.</param>
-            <returns>All elements of the array delimited by delimiter in a string.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToArrayString(System.Array,System.String)">
-            <summary>
-            Convert an array to a string.
-            </summary>
-            <param name="array">The array to convert.</param>
-            <param name="delimiter">The delimiter between elements.</param>
-            <returns>All elements of the array delimited by delimiter in a string.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Format(System.String,System.Object[])">
-            <summary>
-            Format the specified string, using String.Format(String, Object[]).
-            </summary>
-            <param name="s">String.Format(String, Object[])'s first argument.</param>
-            <param name="formatElements">The array of objects to go into String.Format(String, Object[])'s 2nd argument.</param>
-            <returns>The formatted string.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Format(System.String,System.String@,System.Object[])">
-            <summary>
-            Format the specified string, using String.Format(String, Object[]), and sending the results to output.
-            </summary>
-            <param name="s">String.Format(String, Object[])'s first argument.</param>
-            <param name="output">The string to output the results to.</param>
-            <param name="formatElements">The array of objects to go into String.Format(String, Object[])'s 2nd argument.</param>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Double,System.Double)">
-            <summary>
-            Raise the specified number to a power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise a number to.</param>
-            <returns>The number risen to a power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Single,System.Double)">
-            <summary>
-            Raise the specified number to the specified power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise the number to.</param>
-            <returns>The number risen to the specified power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int16,System.Double)">
-            <summary>
-            Raise the specified number to the specified power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise the number to.</param>
-            <returns>The number risen to the specified power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int32,System.Double)">
-            <summary>
-            Raise the specified number to the specified power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise the number to.</param>
-            <returns>The number risen to the specified power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Decimal,System.Double)">
-            <summary>
-            Raise the specified number to the specified power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise the number to.</param>
-            <returns>The number risen to the specified power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.RaiseToPower(System.Int64,System.Double)">
-            <summary>
-            Raise the specified number to the specified power.
-            </summary>
-            <param name="d">The number to raise to a power.</param>
-            <param name="power">The power to raise the number to.</param>
-            <returns>The number risen to the specified power.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToDecimal(System.Object)">
-            <summary>
-            Convert the specified object into a decimal.
-            </summary>
-            <param name="o">The object to convert to a decimal.</param>
-            <returns>The object represented as a decimal.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToShort(System.Object)">
-            <summary>
-            Convert the specified object to a short.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The short representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToLong(System.Object)">
-            <summary>
-            Convert the specified object to a long.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The long representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToFloat(System.Object)">
-            <summary>
-            Convert the specified object to a single-precision floating point number.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The object represented as a float.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToDouble(System.Object)">
-            <summary>
-            Convert the specified object to a double-precision floating point number.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The object represented as a double.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToBoolean(System.Object)">
-            <summary>
-            Convert the specified object to a boolean.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The boolean representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToUnsignedShort(System.Object)">
-            <summary>
-            Convert the specified object to an unsigned short.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The ushort representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToUnsignedInt(System.Object)">
-            <summary>
-            Convert the specified object to a uint.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>This object represented as a UInt32.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.ToUnsignedLong(System.Object)">
-            <summary>
-            Convert this object to an unsigned long.
-            </summary>
-            <param name="o">The object to convert.</param>
-            <returns>The unsigned long representation of the specified object.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Round(System.Single)">
-            <summary>
-            Round a float to the nearest whole number.
-            </summary>
-            <param name="f">The floating-point number to round</param>
-            <returns>The number rounded to the nearest integer</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Round(System.Double)">
-            <summary>
-            Round a double to the nearest whole number.
-            </summary>
-            <param name="d">The floating-point number to round</param>
-            <returns>The number rounded to the nearest integer</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Round(System.Decimal)">
-            <summary>
-            Round a decimal to the nearest whole number.
-            </summary>
-            <param name="d">The decimal number to round</param>
-            <returns>The number rounded to the nearest integer</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Implements(System.Type,System.Type)">
-            <summary>
-            Check if a type implements a given interface.
-            </summary>
-            <param name="cT">The type to check implementation of an interface on</param>
-            <param name="t">The interface to check</param>
-            <returns>Whether or not the object implements the given interface</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Cast``1(System.Object)">
-            <summary>
-            Cast this object to the specified type.
-            </summary>
-            <typeparam name="T">The type to cast the object to.</typeparam>
-            <param name="o">The object to cast.</param>
-            <returns>The object casted to T.</returns>
-        </member>
-        <member name="M:Glib.SupplementaryExtensions.Cast``1(System.Object,``0@)">
-            <summary>
-            Cast this object to the specified type, and output the casted object to a variable.
-            </summary>
-            <typeparam name="T">The type to cast the object to.</typeparam>
-            <param name="o">The object to cast.</param>
-            <param name="castedObj">The object casted to T.</param>
         </member>
     </members>
 </doc>
