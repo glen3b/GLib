@@ -87,6 +87,16 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Calculates the inverse of the specified vector (where new.X = orig.Y and new.Y = orig.X).
+        /// </summary>
+        /// <param name="vector">The vector to invert.</param>
+        /// <returns>The inverse of the specified vector.</returns>
+        public static Vector2 Inverse(this Vector2 vector)
+        {
+            return new Vector2(vector.Y, vector.X);
+        }
+
+        /// <summary>
         /// Get the position which would be required to center the specified sizable object to the specified Viewport.
         /// </summary>
         /// <param name="obj">The sizable object to center.</param>

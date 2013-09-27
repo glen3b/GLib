@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alphabet.cs" />
+    <Compile Include="Collections\CollectionExtensions.cs" />
     <Compile Include="Conversions.cs" />
     <Compile Include="Cryptography\CryptoExtensions.cs" />
     <Compile Include="Cryptography\NamespaceDoc.cs" />
