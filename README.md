@@ -3,11 +3,8 @@ Glen Library
 
 Glib is a simple, general purpose C# library covering windows forms, XNA, extension methods, and more.
 
-#### Cross-platform binaries
-* <a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/GlenLibrary.dll">Desktop DLL</a>
-* <a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/GlenLibrary.xml">Desktop documentation</a>
-* <a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/GlibXbox.dll">XBOX DLL</a>
-* <a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/GlibXbox.XML">XBOX documentation</a>
+#### Downloads
+To download this project, please see <a href="http://glen3b.github.io/Glib">the website</a>.
 
 Copyright 2013 Glen Husman
 
