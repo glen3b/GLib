@@ -107,8 +107,8 @@ namespace Glib.XNA
         {
             Vector2 centerOfViewport = new Vector2(centerToViewport.Width / 2, centerToViewport.Height / 2);
 
-            centerOfViewport.X -= origin.X;
-            centerOfViewport.Y -= origin.Y;
+            centerOfViewport.X -= (obj.Width / 2f) - origin.X;
+            centerOfViewport.Y -= (obj.Height / 2f) - origin.Y;
 
 
             return centerOfViewport;
