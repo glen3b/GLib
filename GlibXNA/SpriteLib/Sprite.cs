@@ -146,12 +146,38 @@ namespace Glib.XNA.SpriteLib
             get { return _drawRegion; }
             set { _drawRegion = value; }
         }
-        
+
 
         /// <summary>
         /// An EventHandler called after the successful movement of this Sprite.
         /// </summary>
-        public event EventHandler Moved = null;
+        public event EventHandler Moved
+        {
+            add
+            {
+                moved += value;
+            }
+            remove
+            {
+                if (value != null)
+                {
+                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this && value.Method.Name.ToLower().Trim().Equals("rectUpdate", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        throw new InvalidOperationException("Cannot remove an internally used delegate handler.");
+                    }
+                }
+                    moved -= value;
+                
+            }
+        }
+
+        private void rectUpdate(object o, EventArgs e)
+        {
+            _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), Width.Round(), Height.Round());
+        }
+
+
+        private event EventHandler moved = null;
 
         /// <summary>
         /// The speed of the sprite along the Y axis.
@@ -232,13 +258,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (!IsMoveEventCanceled(new Vector2(value, _pos.Y)))
+                Vector2 target = new Vector2(value, _pos.Y);
+                if (!IsMoveEventCanceled(target))
                 {
-                    _pos.X = value;
-                    if (Moved != null)
-                    {
-                        Moved(this, new EventArgs());
-                    }
+                    MoveSprite(target);
+
                 }
             }
         }
@@ -254,13 +278,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (!IsMoveEventCanceled(new Vector2(_pos.X, value)))
+                Vector2 target = new Vector2(_pos.X, value);
+                if (!IsMoveEventCanceled(target))
                 {
-                    _pos.Y = value;
-                    if (Moved != null)
-                    {
-                        Moved(this, new EventArgs());
-                    }
+                    MoveSprite(target);
+
                 }
             }
         }
@@ -338,10 +360,12 @@ namespace Glib.XNA.SpriteLib
         protected void MoveSprite(Vector2 newPos)
         {
             _pos = newPos;
-            if (Moved != null)
+            if (moved == null)
             {
-                Moved(this, EventArgs.Empty);
+                Moved += new EventHandler(rectUpdate);
             }
+            moved(this, EventArgs.Empty);
+
         }
 
         /// <summary>
@@ -447,11 +471,12 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                Vector2 usedPos = Position;
-                usedPos -= Origin * Scale;
-                return new Rectangle(Convert.ToInt32(usedPos.X), Convert.ToInt32(usedPos.Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
+                return _boundingRect;
             }
         }
+
+        private Rectangle _boundingRect;
+
 
         #region Origin settings
         private Vector2 _customOrigin = Vector2.Zero;
@@ -464,7 +489,7 @@ namespace Glib.XNA.SpriteLib
         public SpriteOriginType OriginType
         {
             get { return _originType; }
-            set { _originType = value; }
+            set { _originType = value; rectUpdate(this, EventArgs.Empty); }
         }
 
 
@@ -499,6 +524,19 @@ namespace Glib.XNA.SpriteLib
                     _originType = SpriteOriginType.Custom;
                     _customOrigin = value;
                 }
+                rectUpdate(this, EventArgs.Empty);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the top left corner of this Sprite.
+        /// </summary>
+        public Vector2 TopLeft
+        {
+            get
+            {
+                return Position - (Origin * Scale);
             }
         }
 
@@ -517,7 +555,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                _originType = value ? SpriteOriginType.Center : (_originType == SpriteOriginType.Center ? SpriteOriginType.Zero : _originType);
+                OriginType = value ? SpriteOriginType.Center : (_originType == SpriteOriginType.Center ? SpriteOriginType.Zero : _originType);
             }
         }
         #endregion
