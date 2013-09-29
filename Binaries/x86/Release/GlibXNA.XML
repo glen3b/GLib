@@ -711,6 +711,11 @@
             Gets or sets the origin of the Sprite.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.TopLeft">
+            <summary>
+            Gets the top left corner of this Sprite.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.UseCenterAsOrigin">
             <summary>
             Gets or sets whether or not to use the center of the Sprite as the origin.

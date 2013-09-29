@@ -159,6 +159,7 @@ namespace Glib.XNA.SpriteLib
             }
             remove
             {
+#if WINDOWS
                 if (value != null)
                 {
                     if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this && value.Method.Name.ToLower().Trim().Equals("rectUpdate", StringComparison.InvariantCultureIgnoreCase))
@@ -166,6 +167,7 @@ namespace Glib.XNA.SpriteLib
                         throw new InvalidOperationException("Cannot remove an internally used delegate handler.");
                     }
                 }
+#endif
                     moved -= value;
                 
             }
