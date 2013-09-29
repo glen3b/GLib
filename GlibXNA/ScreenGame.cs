@@ -64,6 +64,7 @@ namespace Glib.XNA
         {
             _sb = new SpriteBatch(GraphicsDevice);
             _allScreens = new ScreenManager(_sb, BackgroundColor);
+            InitializeScreens();
             base.LoadContent();
         }
 
