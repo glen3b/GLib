@@ -19,7 +19,7 @@ namespace Glib
             if(typeof(T) == typeof(ulong) || typeof(T) == typeof(uint) || typeof(T) == typeof(ushort)){
 
             }else{
-                throw new Exception("Please use a UINT, ULONG, or USHORT type.");
+                throw new ArgumentException("Please use a UINT, ULONG, or USHORT type.");
             }
 
         }
@@ -50,7 +50,7 @@ namespace Glib
             set {
                 if (!IsPrime(value))
                 {
-                    throw new Exception("Number " + value + " is not prime");
+                    throw new ArgumentException("Number " + value + " is not prime");
                 }
                 else
                 {

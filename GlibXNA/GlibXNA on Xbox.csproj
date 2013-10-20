@@ -79,6 +79,7 @@
     <Compile Include="SpriteLib\Velocity.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />
+    <Compile Include="ThreeDimensional\ModelRenderer.cs" />
     <Compile Include="XnaExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
