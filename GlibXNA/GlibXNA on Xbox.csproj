@@ -55,6 +55,9 @@
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="NetworkLib\NamespaceDoc.cs" />
+    <Compile Include="NetworkLib\NetworkInformationReceivedEventArgs.cs" />
+    <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenGame.cs" />
     <Compile Include="SpriteInterfaces.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />
     <Compile Include="ThreeDimensional\ModelRenderer.cs" />
+    <Compile Include="ThreeDimensional\NamespaceDoc.cs" />
     <Compile Include="XnaExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +91,7 @@
     <Reference Include="Microsoft.Xna.Framework.Game" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices" />
     <Reference Include="Microsoft.Xna.Framework.Graphics" />
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

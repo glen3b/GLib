@@ -112,7 +112,7 @@ namespace Glib.XNA.ThreeDimensional
             set { _position = value; _calculatedWorldEffect = false; }
         }
 
-        private Vector3 _cameraPos;
+        private Vector3 _cameraPos = new Vector3(0.0f, 50.0f, 5000.0f);
 
         /// <summary>
         /// Gets or sets of the position of the camera looking at the model.

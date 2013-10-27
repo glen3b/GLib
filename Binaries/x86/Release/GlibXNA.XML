@@ -769,6 +769,120 @@
             Gets or sets a boolean indicating whether or not to show stitches.
             </summary>
         </member>
+        <member name="T:Glib.XNA.NetworkLib.NetworkWatcherComponent">
+            <summary>
+            A game component for watching the network for information and sending information.
+            </summary>
+            <remarks>
+            Supports sending Vector4, string, double.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.#ctor(Microsoft.Xna.Framework.Game)">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.NetworkLib.NetworkWatcherComponent"/>.
+            </summary>
+            <param name="game">The game to add this component to.</param>
+            <remarks>
+            Before this <see cref="T:Glib.XNA.NetworkLib.NetworkWatcherComponent"/> is active, the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/> property must be assigned.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.Initialize">
+            <summary>
+            Allows the game component to perform any initialization it needs to before starting
+            to run.  This is where it can query for any required services and load content.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.NetworkLib.NetworkWatcherComponent._dataReaders">
+            <summary>
+            A dictionary holding <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/>s for every <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.NetworkLib.NetworkWatcherComponent._dataWriters">
+            <summary>
+            A dictionary holding <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/>s for every <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>.
+            </summary>
+            <remarks>
+            These <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/>s are written to in the following format:
+            - String name
+            - String type
+            - Type value
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,System.String)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - three strings (one is the data itself).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,System.Double)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and a double (the data).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,Microsoft.Xna.Framework.Vector4)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and a Vector4 (the data).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32,Microsoft.Xna.Framework.Net.NetworkGamer,Microsoft.Xna.Framework.Net.SendDataOptions)">
+            <summary>
+            Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
+            </summary>
+            <param name="senderIndex">The index of the <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
+            <param name="recipient">The recipient of the data, or null if to send to everyone.</param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.ParseData(Microsoft.Xna.Framework.Net.PacketReader,System.String,System.Type@,System.Object@)">
+            <summary>
+            Parse the next block of data from the specified <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> which is of the specified unknown type.
+            </summary>
+            <param name="activeReader">The <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> containing the data.</param>
+            <param name="typeString">The string representing the type of the data, according to the sender.</param>
+            <param name="dataType">The actual type of the data.</param>
+            <param name="value">The actual data, represented as an instance of dataType.</param>
+            <returns>Whether this method successfully parsed the data.</returns>
+            <remarks>
+            It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Receives data from the network and updates the <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/>.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.IsNetworking">
+            <summary>
+            Gets a boolean indicating whether this <see cref="T:Glib.XNA.NetworkLib.NetworkWatcherComponent"/> is currently performing network logic.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/> that this <see cref="T:Glib.XNA.NetworkLib.NetworkWatcherComponent"/> uses to send and receive data.
+            </summary>
+        </member>
+        <member name="E:Glib.XNA.NetworkLib.NetworkWatcherComponent.NetworkInformationReceived">
+            <summary>
+            An event fired when information is received from the network.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.XnaExtensions">
             <summary>
             Extensions onto XNA objects.
@@ -1198,6 +1312,14 @@
             <summary>
             The position to draw the text.
             </summary>
+        </member>
+        <member name="T:Glib.XNA.ThreeDimensional.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA.ThreeDimensional"/> namespace provides 3D utilities.
+            </summary>
+            <remarks>
+            This namespace is in beta.
+            </remarks>
         </member>
         <member name="T:Glib.XNA.SpriteLib.Velocity">
             <summary>
@@ -1744,6 +1866,44 @@
             Gets the key associated with this event.
             </summary>
         </member>
+        <member name="T:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs">
+            <summary>
+            A class representing the event arguments for the NetworkInformationReceived event.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.#ctor">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs"/> with no data.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.PropertyName">
+            <summary>
+            Gets the name of the received property.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Data">
+            <summary>
+            Gets the received data.
+            </summary>
+            <remarks>
+            This will always be of type ReceivedType.
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Recipient">
+            <summary>
+            Gets the recipient of this property information.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Sender">
+            <summary>
+            Gets the sender of this property information.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.ReceivedType">
+            <summary>
+            Gets the type of the received data.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.SpriteLib"/> namespace provides various sprite utilities for XNA.
@@ -1867,6 +2027,83 @@
         <member name="P:Glib.XNA.GameTimer.IsRepeating">
             <summary>
             Gets or sets a boolean indeicating whether or not this timer is repeating.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.ThreeDimensional.ModelRenderer">
+            <summary>
+            A class that assists with the rendering of a 3D model.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ThreeDimensional.ModelRenderer.#ctor(Microsoft.Xna.Framework.Graphics.Model,Microsoft.Xna.Framework.Graphics.Viewport)">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.ThreeDimensional.ModelRenderer"/> to render the specified <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/>.
+            </summary>
+            <param name="model">The model to render.</param>
+            <param name="screen">The <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> on which the <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/> will be rendered.</param>
+        </member>
+        <member name="M:Glib.XNA.ThreeDimensional.ModelRenderer.#ctor(Microsoft.Xna.Framework.Graphics.Model,System.Single)">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.ThreeDimensional.ModelRenderer"/> to render the specified <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/>.
+            </summary>
+            <param name="model">The model to render.</param>
+            <param name="aspectRatio">The aspect ratio of the <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> on which the <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/> will be rendered.</param>
+        </member>
+        <member name="F:Glib.XNA.ThreeDimensional.ModelRenderer._calculatedWorldEffect">
+            <summary>
+            A boolean indicating whether or not the most up-to-date world effect has been calculated.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.ThreeDimensional.ModelRenderer._calculatedViewEffect">
+            <summary>
+            A boolean indicating whether or not the most up-to-date view effect has been calculated.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ThreeDimensional.ModelRenderer.Draw">
+            <summary>
+            Renders this model to the GraphicsDevice.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.ThreeDimensional.ModelRenderer.Update">
+            <summary>
+            When implemented in a subclass, updates the model.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.Model">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/> to render.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.Rotation">
+            <summary>
+            Gets or sets the rendering rotation of the model.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.AspectRatio">
+            <summary>
+            Gets or sets the aspect ratio of the <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> on which the <see cref="T:Microsoft.Xna.Framework.Graphics.Model"/> will be rendered.
+            </summary>
+            <remarks>
+            Recalculates the projection matrix using default values.
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.Position">
+            <summary>
+            Gets or sets the position of the model.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.CameraPosition">
+            <summary>
+            Gets or sets of the position of the camera looking at the model.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.CameraTarget">
+            <summary>
+            Gets or sets the target position of the camera.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.ProjectionMatrix">
+            <summary>
+            Gets or sets the projection matrix to use when rendering.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.Updater">
@@ -3065,6 +3302,11 @@
         <member name="T:Glib.XNA.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA"/> namespace provides various XNA utilities and classes.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA.NetworkLib"/> namespace provides various XNA networking utilities.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.MouseFollowParams">
