@@ -50,7 +50,7 @@ namespace Glib.XNA.NetworkLib
         {
             get
             {
-                return Enabled && _session != null;
+                return Enabled && _session != null && !_session.IsDisposed;
             }
         }
 
