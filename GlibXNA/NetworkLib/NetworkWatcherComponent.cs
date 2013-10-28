@@ -205,8 +205,27 @@ namespace Glib.XNA.NetworkLib
         /// Sends data for the specified <see cref="LocalNetworkGamer"/> across the network.
         /// </summary>
         /// <param name="senderIndex">The index of the <see cref="LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
+        public void SendData(int senderIndex)
+        {
+            SendData(senderIndex, SendDataOptions.None);
+        }
+
+        /// <summary>
+        /// Sends data for the specified <see cref="LocalNetworkGamer"/> across the network.
+        /// </summary>
+        /// <param name="senderIndex">The index of the <see cref="LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
+        /// <param name="options">The <see cref="SendDataOptions"/> to send the data with.</param>
+        public void SendData(int senderIndex, SendDataOptions options)
+        {
+            SendData(senderIndex, null, options);
+        }
+
+        /// <summary>
+        /// Sends data for the specified <see cref="LocalNetworkGamer"/> across the network.
+        /// </summary>
+        /// <param name="senderIndex">The index of the <see cref="LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
         /// <param name="recipient">The recipient of the data, or null if to send to everyone.</param>
-        /// <param name="options"></param>
+        /// <param name="options">The <see cref="SendDataOptions"/> to send the data with.</param>
         public virtual void SendData(int senderIndex, NetworkGamer recipient, SendDataOptions options)
         {
             if (!IsNetworking)
