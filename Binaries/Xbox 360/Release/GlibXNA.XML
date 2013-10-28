@@ -740,13 +740,26 @@
             Sends 3 values - two strings and a Vector4 (the data).
             </remarks>
         </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32)">
+            <summary>
+            Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
+            </summary>
+            <param name="senderIndex">The index of the <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32,Microsoft.Xna.Framework.Net.SendDataOptions)">
+            <summary>
+            Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
+            </summary>
+            <param name="senderIndex">The index of the <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
+            <param name="options">The <see cref="T:Microsoft.Xna.Framework.Net.SendDataOptions"/> to send the data with.</param>
+        </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32,Microsoft.Xna.Framework.Net.NetworkGamer,Microsoft.Xna.Framework.Net.SendDataOptions)">
             <summary>
             Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
             </summary>
             <param name="senderIndex">The index of the <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> that is in Session.LocalGamers to send data for.</param>
             <param name="recipient">The recipient of the data, or null if to send to everyone.</param>
-            <param name="options"></param>
+            <param name="options">The <see cref="T:Microsoft.Xna.Framework.Net.SendDataOptions"/> to send the data with.</param>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.ParseData(Microsoft.Xna.Framework.Net.PacketReader,System.String,System.Type@,System.Object@)">
             <summary>

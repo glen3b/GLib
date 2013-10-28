@@ -146,7 +146,7 @@ namespace Glib.XNA.ThreeDimensional
             set { _cameraTarget = value; }
         }
 
-        private Matrix _fieldOfView;
+        //private Matrix _fieldOfView;
 
         private Matrix _projectionMatrix;
 
