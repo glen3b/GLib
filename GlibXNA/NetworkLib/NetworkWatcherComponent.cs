@@ -278,7 +278,6 @@ namespace Glib.XNA.NetworkLib
         {
             if (IsNetworking)
             {
-                Session.Update();
                 foreach (var gamer in Session.LocalGamers)
                 {
                     if (!gamer.IsDataAvailable)
