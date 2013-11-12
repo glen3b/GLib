@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkInformationReceivedEventArgs.cs" />
+    <Compile Include="NetworkLib\NetworkSessionJoinedEventArgs.cs" />
+    <Compile Include="NetworkLib\NetworkSessionsFoundEventArgs.cs" />
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="ThreeDimensional\ModelRenderer.cs" />
