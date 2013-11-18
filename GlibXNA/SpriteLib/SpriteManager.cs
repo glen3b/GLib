@@ -143,7 +143,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Draw all <seealso cref="Sprite"/>s managed by this SpriteManager, without opening or closing the SpriteBatch.
         /// </summary>
-        public void DrawNonAuto()
+        public virtual void DrawNonAuto()
         {
             for (_i = 0; _i < _sprites.Count; _i++)
             {
@@ -158,7 +158,7 @@ namespace Glib.XNA.SpriteLib
         /// Does not call Update(GameTime) on subclasses of Sprite implementing ITimerSprite.
         /// The MouseState for click checking is InputLib.Mouse.MouseManager.CurrentMouseState.
         /// </remarks>
-        public void Update()
+        public virtual void Update()
         {
             for (_i = 0; _i < _sprites.Count; _i++ )
             {
@@ -173,7 +173,7 @@ namespace Glib.XNA.SpriteLib
         /// Uses InputLib.Mouse.MouseManager.CurrentMouseState.
         /// </remarks>
         /// <param name="gameTime">The current game time.</param>
-        public void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public virtual void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             for (_i = 0; _i < _sprites.Count; _i++)
             {

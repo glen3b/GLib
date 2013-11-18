@@ -67,6 +67,11 @@
     <Compile Include="NetworkLib\NetworkSessionsFoundEventArgs.cs" />
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\Particle.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\ParticleEngine.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\IParticleGenerator.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\RandomParticleGenerator.cs" />
     <Compile Include="ThreeDimensional\ModelRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventArgs.cs" />

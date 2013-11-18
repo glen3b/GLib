@@ -162,9 +162,12 @@ namespace Glib.XNA.NetworkLib
             _asyncSessionOperationsInProgress--;
             Exception err = null;
             NetworkSession joined = null;
-            try{
+            try
+            {
                 joined = NetworkSession.EndJoin(res);
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 err = e;
             }
 
