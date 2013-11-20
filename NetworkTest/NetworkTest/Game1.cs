@@ -73,7 +73,7 @@ namespace NetworkTest
             title.AdditionalSprites.Add(createSession);
             title.AdditionalSprites.Add(joinSession);
             title.Name = "titleScreen";
-            title.AdditionalSprites.Add(new ParticleEngine(new RandomParticleGenerator(spriteBatch, Content.Load<Texture2D>("Star"), new TextureFactory(GraphicsDevice).CreateRectangle(6, 8, Color.Beige)) { ParticlesToGenerate = 5 } ) { Tracked = MouseManager.MousePositionable });
+            title.AdditionalSprites.Add(new ParticleEngine(new RandomParticleGenerator(spriteBatch, Content.Load<Texture2D>("Star"), new TextureFactory(GraphicsDevice).CreateRectangle(6, 8, Color.Beige)) { ParticlesToGenerate = 5, TTLSettings = TimeToLiveSettings.StrictTTL | TimeToLiveSettings.AlphaLess75, MinimumParticleColorChangeRate = 0.63f } ) { Tracked = MouseManager.MousePositionable });
             title.Visible = true;
 
             Screen waitForPlayers = new Screen(spriteBatch, Color.CornflowerBlue);

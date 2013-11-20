@@ -35,7 +35,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             get { return _colorVelocity; }
             set { _colorVelocity = value; }
         }
-        
+
 
         /// <summary>
         /// Gets or sets the rotation, in degrees, by which the rotation will change each update.
@@ -57,6 +57,35 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             set { _timeToLive = value; }
         }
 
+        private bool _isDead = false;
+
+        /// <summary>
+        /// Gets a boolean indicating if this particle is dead.
+        /// </summary>
+        public bool IsDead
+        {
+            get
+            {
+                return _isDead;
+            }
+            protected set
+            {
+                _isDead = value;
+            }
+        }
+
+        private TimeToLiveSettings _ttlSettings = TimeToLiveSettings.StrictTTL;
+
+        /// <summary>
+        /// Gets or sets a value indicating how to apply the time to live setting.
+        /// </summary>
+        public TimeToLiveSettings TimeToLiveSettings
+        {
+            get { return _ttlSettings; }
+            set { _ttlSettings = value; }
+        }
+
+
         /// <summary>
         /// Updates the particle.
         /// </summary>
@@ -65,6 +94,41 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             base.Update();
             Rotation += RotationVelocity;
             Color *= ColorChange;
+
+            #region "Dead" particle condition checks
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.StrictTTL) && TimeToLive.Ticks <= 0)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess25) && Color.A <= 25)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess50) && Color.A <= 50)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess75) && Color.A <= 75)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess100) && Color.A <= 100)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess125) && Color.A <= 125)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess150) && Color.A <= 150)
+            {
+                IsDead = true;
+            }
+            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess175) && Color.A <= 175)
+            {
+                IsDead = true;
+            }
+            #endregion
         }
 
         /// <summary>
@@ -73,9 +137,8 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// <param name="gt">The current GameTime.</param>
         public virtual void Update(Microsoft.Xna.Framework.GameTime gt)
         {
-            Update();
             _timeToLive -= gt.ElapsedGameTime;
-            
+            Update();
         }
     }
 }

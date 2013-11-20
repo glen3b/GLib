@@ -121,7 +121,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
 
                 _particles[i].Update(gt);
-                if (_particles[i].TimeToLive <= TimeSpan.Zero)
+                if (_particles[i].IsDead)
                 {
                     _particles.RemoveAt(i);
                     i--;
