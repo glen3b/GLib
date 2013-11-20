@@ -196,7 +196,7 @@
         </member>
         <member name="T:Glib.Exceptions.NamespaceDoc">
             <summary>
-            The <see cref="N:Glib.Exceptions"/> namespace provides various extensions not provided by the .NET framework.
+            The <see cref="N:Glib.Exceptions"/> namespace provides various exception classes that are not provided by the .NET framework.
             </summary>
         </member>
         <member name="T:Glib.WinForms.Controls.SqlParameterTextBox">

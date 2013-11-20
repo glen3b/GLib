@@ -22,6 +22,21 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
 
         private float _rotationVelocity;
 
+        private float _colorVelocity = 1;
+
+        /// <summary>
+        /// Gets or sets the amount by which to change the color every update.
+        /// </summary>
+        /// <remarks>
+        /// Should be greater than zero.
+        /// </remarks>
+        public float ColorChange
+        {
+            get { return _colorVelocity; }
+            set { _colorVelocity = value; }
+        }
+        
+
         /// <summary>
         /// Gets or sets the rotation, in degrees, by which the rotation will change each update.
         /// </summary>
@@ -49,6 +64,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         {
             base.Update();
             Rotation += RotationVelocity;
+            Color *= ColorChange;
         }
 
         /// <summary>

@@ -1161,6 +1161,11 @@
             A GIF image.
             </summary>
         </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.NamespaceDoc">
+            <summary>
+            The <see cref="N:Glib.XNA.SpriteLib.ParticleEngine"/> namespace provides a basic implementation of a particle engine.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.TextSprite">
             <summary>
             An ISprite representing text.
@@ -1884,6 +1889,23 @@
             Gets the key associated with this event.
             </summary>
         </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator">
+            <summary>
+            Represents an interface for a class that can generate particles.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Generates a new particle at the specified position.
+            </summary>
+            <returns>A new particle.</returns>
+            <param name="pos">The position of the object to create particles around.</param>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.ParticlesToGenerate">
+            <summary>
+            Gets the number of particles to create within an update.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs">
             <summary>
             A class representing the event arguments for the NetworkInformationReceived event.
@@ -2122,6 +2144,55 @@
         <member name="P:Glib.XNA.ThreeDimensional.ModelRenderer.ProjectionMatrix">
             <summary>
             Gets or sets the projection matrix to use when rendering.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine">
+            <summary>
+            A class that manages multiple particles.
+            </summary>
+            <remarks>
+            This class handles updating and drawing of particles.
+            Does not manage the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.#ctor(Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator)">
+            <summary>
+            Creates a particle engine using the specified generator.
+            </summary>
+            <param name="particleGenerator">The particle generator to use.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Draw">
+            <summary>
+            Draws all of the particles being managed by this particle manager.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates all of the particles being managed by this particle manager.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.ParticlesVisible">
+            <summary>
+            Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Tracked">
+            <summary>
+            Gets or sets the object that this particle engine tracks and creates particles near.
+            </summary>
+            <remarks>
+            If this is null, the particle engine will not generate new particles.
+            This is intended to be a reference to an object.
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Particles">
+            <summary>
+            Gets the collection of particles that this particle engine currently manages.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Generator">
+            <summary>
+            Gets or sets the object to use for generating particles.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.Updater">
@@ -2395,6 +2466,102 @@
         <member name="F:Glib.XNA.SpriteLib.SpriteOriginType.Custom">
             <summary>
             The origin is a user-specified value.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator">
+            <summary>
+            A class that generates particles randomly.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.Texture2D[])">
+            <summary>
+            Creates a new random particle generator.
+            </summary>
+            <param name="textures">The possible textures to assign the particle.</param>
+            <param name="batch">The SpriteBatch that the particles will appear on.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Generates a new particle at the specified position.
+            </summary>
+            <returns>A new particle.</returns>
+            <param name="pos">The position of the object to create particles around.</param>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.ParticlesToGenerate">
+            <summary>
+            Gets or sets the number of particles to create within an update.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Textures">
+            <summary>
+            Gets the list of textures to generate particles with.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MaximumTimeToLive">
+            <summary>
+            Gets or sets the maximum time to live for a particle.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MinimumTimeToLive">
+            <summary>
+            Gets or sets the minimum time to live for a particle.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Random">
+            <summary>
+            Gets or sets the random generator to use in the generation of particles.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MinimumParticleColorChangeRate">
+            <summary>
+            Gets or sets the minimum rate of color change for a particle.
+            </summary>
+            <remarks>
+            Set to 1 to diable color degeneration.
+            Set to a value less than one to have particles fade out.
+            Set to a value greater than one to have particles fade in to white.
+            </remarks>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.Particle">
+            <summary>
+            A basic particle for the particle engine.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
+            </summary>
+            <param name="texture">The texture of the particle.</param>
+            <param name="pos">The position of the particle.</param>
+            <param name="batch">The SpriteBatch on which to draw the particle.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.Update">
+            <summary>
+            Updates the particle.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the particle, changing the time to live.
+            </summary>
+            <param name="gt">The current GameTime.</param>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.ColorChange">
+            <summary>
+            Gets or sets the amount by which to change the color every update.
+            </summary>
+            <remarks>
+            Should be greater than zero.
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.RotationVelocity">
+            <summary>
+            Gets or sets the rotation, in degrees, by which the rotation will change each update.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.TimeToLive">
+            <summary>
+            Gets or sets the remaining time to live.
             </summary>
         </member>
         <member name="T:Glib.XNA.TextureFactory">
@@ -3657,155 +3824,6 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.NamespaceDoc">
-            <summary>
-            The <see cref="N:Glib.XNA.SpriteLib.ParticleEngine"/> namespace provides a basic implementation of a particle engine.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.Particle">
-            <summary>
-            A basic particle for the particle engine.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
-            </summary>
-            <param name="texture">The texture of the particle.</param>
-            <param name="pos">The position of the particle.</param>
-            <param name="batch">The SpriteBatch on which to draw the particle.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.Update">
-            <summary>
-            Updates the particle.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the particle, changing the time to live.
-            </summary>
-            <param name="gt">The current GameTime.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.RotationVelocity">
-            <summary>
-            Gets or sets the rotation, in degrees, by which the rotation will change each update.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.TimeToLive">
-            <summary>
-            Gets or sets the remaining time to live.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine">
-            <summary>
-            A class that manages multiple particles.
-            </summary>
-            <remarks>
-            This class handles updating and drawing of particles.
-            Does not manage the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
-            </remarks>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.#ctor(Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator)">
-            <summary>
-            Creates a particle engine using the specified generator.
-            </summary>
-            <param name="particleGenerator">The particle generator to use.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Draw">
-            <summary>
-            Draws all of the particles being managed by this particle manager.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates all of the particles being managed by this particle manager.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.ParticlesVisible">
-            <summary>
-            Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Tracked">
-            <summary>
-            Gets or sets the object that this particle engine tracks and creates particles near.
-            </summary>
-            <remarks>
-            If this is null, the particle engine will not generate new particles.
-            This is intended to be a reference to an object.
-            </remarks>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Particles">
-            <summary>
-            Gets the collection of particles that this particle engine currently manages.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Generator">
-            <summary>
-            Gets or sets the object to use for generating particles.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator">
-            <summary>
-            Represents an interface for a class that can generate particles.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Generates a new particle at the specified position.
-            </summary>
-            <returns>A new particle.</returns>
-            <param name="pos">The position of the object to create particles around.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.ParticlesToGenerate">
-            <summary>
-            Gets the number of particles to create within an update.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator">
-            <summary>
-            A class that generates particles randomly.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.Texture2D[])">
-            <summary>
-            Creates a new random particle generator.
-            </summary>
-            <param name="textures">The possible textures to assign the particle.</param>
-            <param name="batch">The SpriteBatch that the particles will appear on.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Generates a new particle at the specified position.
-            </summary>
-            <returns>A new particle.</returns>
-            <param name="pos">The position of the object to create particles around.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.ParticlesToGenerate">
-            <summary>
-            Gets or sets the number of particles to create within an update.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Textures">
-            <summary>
-            Gets the list of textures to generate particles with.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MaximumTimeToLive">
-            <summary>
-            Gets or sets the maximum time to live for a particle.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MinimumTimeToLive">
-            <summary>
-            Gets or sets the minimum time to live for a particle.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Random">
-            <summary>
-            Gets or sets the random generator to use in the generation of particles.
             </summary>
         </member>
     </members>

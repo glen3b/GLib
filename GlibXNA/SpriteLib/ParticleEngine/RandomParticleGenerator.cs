@@ -129,6 +129,23 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             }
         }
 
+        private float _minumumParticleColorChangeRate = 0.63f;
+
+        /// <summary>
+        /// Gets or sets the minimum rate of color change for a particle.
+        /// </summary>
+        /// <remarks>
+        /// Set to 1 to diable color degeneration.
+        /// Set to a value less than one to have particles fade out.
+        /// Set to a value greater than one to have particles fade in to white.
+        /// </remarks>
+        public float MinimumParticleColorChangeRate
+        {
+            get { return _minumumParticleColorChangeRate; }
+            set { _minumumParticleColorChangeRate = value; }
+        }
+        
+
         /// <summary>
         /// Generates a new particle at the specified position.
         /// </summary>
@@ -143,6 +160,16 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             particle.Color = new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
             particle.Scale = new Vector2(_random.NextDouble().ToFloat());
             particle.TimeToLive = TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));
+
+            if (_minumumParticleColorChangeRate != 1)
+            {
+                float particleColorDegenerationRate = _random.NextDouble().ToFloat();
+                while (particleColorDegenerationRate < _minumumParticleColorChangeRate)
+                {
+                    particleColorDegenerationRate += Convert.ToSingle(_random.NextDouble() % 0.15);
+                }
+                particle.ColorChange = particleColorDegenerationRate;
+            }
 
             particle.UseCenterAsOrigin = true;
 
