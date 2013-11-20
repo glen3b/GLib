@@ -327,6 +327,11 @@
             Gets the current mouse state.
             </summary>
         </member>
+        <member name="P:Glib.XNA.InputLib.MouseManager.MousePositionable">
+            <summary>
+            Gets an <see cref="T:Glib.XNA.IPositionable"/> representing the current mouse position.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.InputLib.MouseManager.LastMouseState">
             <summary>
             Gets the last known mouse state before the current mouse state.
@@ -3664,6 +3669,14 @@
             A basic particle for the particle engine.
             </summary>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
+            </summary>
+            <param name="texture">The texture of the particle.</param>
+            <param name="pos">The position of the particle.</param>
+            <param name="batch">The SpriteBatch on which to draw the particle.</param>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.ParticleEngine.Particle.Update">
             <summary>
             Updates the particle.
@@ -3694,6 +3707,12 @@
             Does not manage the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
             </remarks>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.#ctor(Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator)">
+            <summary>
+            Creates a particle engine using the specified generator.
+            </summary>
+            <param name="particleGenerator">The particle generator to use.</param>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Draw">
             <summary>
             Draws all of the particles being managed by this particle manager.
@@ -3702,6 +3721,11 @@
         <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
             Updates all of the particles being managed by this particle manager.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.ParticlesVisible">
+            <summary>
+            Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Tracked">
@@ -3745,11 +3769,12 @@
             A class that generates particles randomly.
             </summary>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D[])">
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.Texture2D[])">
             <summary>
             Creates a new random particle generator.
             </summary>
             <param name="textures">The possible textures to assign the particle.</param>
+            <param name="batch">The SpriteBatch that the particles will appear on.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
             <summary>
@@ -3766,6 +3791,11 @@
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Textures">
             <summary>
             Gets the list of textures to generate particles with.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MaximumTimeToLive">
+            <summary>
+            Gets or sets the maximum time to live for a particle.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.MinimumTimeToLive">

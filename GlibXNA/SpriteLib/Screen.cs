@@ -62,7 +62,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Any non-Sprite deriving Sprites that need to be drawn to this Screen.
         /// </summary>
-        public List<ISprite> AdditionalSprites = new List<ISprite>();
+        public List<IDrawableComponent> AdditionalSprites = new List<IDrawableComponent>();
 
         /// <summary>
         /// The color to clear this screen as.
@@ -203,8 +203,10 @@ namespace Glib.XNA.SpriteLib
             Sprites.Update();
             for (int i = 0; i < AdditionalSprites.Count; i++)
             {
-                ISprite spr = AdditionalSprites[i];
-                spr.Update();
+                if (AdditionalSprites[i] is ISprite)
+                {
+                    (AdditionalSprites[i] as ISprite).Update();
+                }
             }
         }
 
@@ -275,14 +277,13 @@ namespace Glib.XNA.SpriteLib
             Sprites.Update(game);
             for (int i = 0; i < AdditionalSprites.Count; i++ )
             {
-                ISprite spr = AdditionalSprites[i];
-                if (spr is ITimerSprite)
+                if (AdditionalSprites[i] is ITimerSprite)
                 {
-                    (spr as ITimerSprite).Update(game);
+                    (AdditionalSprites[i] as ITimerSprite).Update(game);
                 }
-                else
+                else if(AdditionalSprites[i] is ISprite)
                 {
-                    spr.Update();
+                    (AdditionalSprites[i] as ISprite).Update();
                 }
             }
         }
@@ -400,7 +401,7 @@ namespace Glib.XNA.SpriteLib
                         }
                     }
                     s.Sprites.DrawNonAuto();
-                    foreach (ISprite spr in s.AdditionalSprites)
+                    foreach (var spr in s.AdditionalSprites)
                     {
                         if (spr is ISpriteBatchManagerSprite)
                         {

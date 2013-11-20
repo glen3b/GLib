@@ -12,6 +12,12 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     /// </summary>
     public class Particle : Sprite, ITimerSprite
     {
+        /// <summary>
+        /// Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
+        /// </summary>
+        /// <param name="texture">The texture of the particle.</param>
+        /// <param name="pos">The position of the particle.</param>
+        /// <param name="batch">The SpriteBatch on which to draw the particle.</param>
         public Particle(Texture2D texture, Vector2 pos, SpriteBatch batch) : base(texture, pos, batch) { }
 
         private float _rotationVelocity;

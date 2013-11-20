@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
+using Glib.XNA.SpriteLib.ParticleEngine;
 
 namespace NetworkTest
 {
@@ -72,6 +73,7 @@ namespace NetworkTest
             title.AdditionalSprites.Add(createSession);
             title.AdditionalSprites.Add(joinSession);
             title.Name = "titleScreen";
+            title.AdditionalSprites.Add(new ParticleEngine(new RandomParticleGenerator(spriteBatch, Content.Load<Texture2D>("Star"), new TextureFactory(GraphicsDevice).CreateRectangle(6, 8, Color.Beige)) { ParticlesToGenerate = 2 } ) { Tracked = MouseManager.MousePositionable });
             title.Visible = true;
 
             Screen waitForPlayers = new Screen(spriteBatch, Color.CornflowerBlue);

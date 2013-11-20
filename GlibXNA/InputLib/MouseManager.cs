@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace Glib.XNA.InputLib
 {
@@ -21,6 +22,19 @@ namespace Glib.XNA.InputLib
         {
             get { return _currentMs; }
         }
+
+        /// <summary>
+        /// Gets an <see cref="IPositionable"/> representing the current mouse position.
+        /// </summary>
+        public static IPositionable MousePositionable
+        {
+            get
+            {
+                return _mousePositionable;
+            }
+        }
+
+        private static Glib.XNA.SpriteLib.PositionRepresentation _mousePositionable = (Glib.XNA.SpriteLib.PositionRepresentation)Vector2.Zero.AsPositionable();
 
         /// <summary>
         /// Gets the last known mouse state before the current mouse state.
@@ -53,6 +67,9 @@ namespace Glib.XNA.InputLib
             {
                 s.Update();
             }
+
+            _mousePositionable.X = _currentMs.X;
+            _mousePositionable.Y = _currentMs.Y;
 
             if (Updated != null)
             {
