@@ -2171,6 +2171,11 @@
             Updates all of the particles being managed by this particle manager.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.FramesPerGeneration">
+            <summary>
+            Gets or sets the number of frames per particle generation burst.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.ParticlesVisible">
             <summary>
             Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.

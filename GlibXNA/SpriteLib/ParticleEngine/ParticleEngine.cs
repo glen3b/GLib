@@ -17,6 +17,27 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     {
         private bool _isVisible = true;
 
+        private uint _frameNumber = 0;
+
+        private int _frameRatio = 1;
+
+        /// <summary>
+        /// Gets or sets the number of frames per particle generation burst.
+        /// </summary>
+        public int FramesPerGeneration
+        {
+            get { return _frameRatio; }
+            set
+            {
+                if (value < 1)
+                {
+                    throw new ArgumentException("FramesPerGeneration must be greater than or equal to zero.");
+                }
+                _frameRatio = value;
+            }
+        }
+
+
         /// <summary>
         /// Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.
         /// </summary>
@@ -128,12 +149,17 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
             }
 
-            if (Tracked != null)
+            if (Tracked != null && _frameNumber % _frameRatio == 0)
             {
                 for (int genPart = 0; genPart < Generator.ParticlesToGenerate; genPart++)
                 {
                     _particles.Add(Generator.GenerateParticle(Tracked.Position));
                 }
+            }
+
+            if (_frameNumber++ >= uint.MaxValue - 250)
+            {
+                _frameNumber %= Convert.ToUInt32(_frameRatio);
             }
         }
     }
