@@ -96,35 +96,35 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             Color *= ColorChange;
 
             #region "Dead" particle condition checks
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.StrictTTL) && TimeToLive.Ticks <= 0)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.StrictTTL) && TimeToLive.Ticks <= 0)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess25) && Color.A <= 25)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess25) && Color.A <= 25)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess50) && Color.A <= 50)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess50) && Color.A <= 50)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess75) && Color.A <= 75)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess75) && Color.A <= 75)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess100) && Color.A <= 100)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess100) && Color.A <= 100)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess125) && Color.A <= 125)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess125) && Color.A <= 125)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess150) && Color.A <= 150)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess150) && Color.A <= 150)
             {
                 IsDead = true;
             }
-            if (TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess175) && Color.A <= 175)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess175) && Color.A <= 175)
             {
                 IsDead = true;
             }
