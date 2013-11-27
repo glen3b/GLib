@@ -61,6 +61,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkInformationReceivedEventArgs.cs" />
     <Compile Include="NetworkLib\NetworkSessionJoinedEventArgs.cs" />
