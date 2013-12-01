@@ -284,7 +284,9 @@ namespace Glib.XNA.NetworkLib
         /// <param name="value">The actual data, represented as an instance of dataType.</param>
         /// <returns>Whether this method successfully parsed the data.</returns>
         /// <remarks>
-        /// It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component).
+        /// The string typeString should be compared case insensitively.
+        /// It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component), because it is a placeholder method.
+        /// The base implementation of this method merely sets the output parameters to null and returns false. It should not be invoked.
         /// </remarks>
         protected virtual bool ParseData(PacketReader activeReader, string typeString, out Type dataType, out object value)
         {
@@ -297,6 +299,9 @@ namespace Glib.XNA.NetworkLib
         /// <summary>
         /// An event fired when information is received from the network.
         /// </summary>
+        /// <remarks>
+        /// If you do not subscribe to this event, sending information over the network is pointless.
+        /// </remarks>
         public event EventHandler<NetworkInformationReceivedEventArgs> NetworkInformationReceived;
 
         /// <summary>
