@@ -130,11 +130,11 @@ namespace Glib.XNA.NetworkLib
             }
             if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
             {
-                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+                throw new ArgumentOutOfRangeException("senderIndex");
             }
             if (propertyName == null)
             {
-                throw new ArgumentException("propertyName");
+                throw new ArgumentNullException("propertyName");
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
@@ -159,11 +159,11 @@ namespace Glib.XNA.NetworkLib
             }
             if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
             {
-                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+                throw new ArgumentOutOfRangeException("senderIndex");
             }
             if (propertyName == null)
             {
-                throw new ArgumentException("propertyName");
+                throw new ArgumentNullException("propertyName");
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
@@ -188,6 +188,35 @@ namespace Glib.XNA.NetworkLib
             }
             if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
             {
+                throw new ArgumentOutOfRangeException("senderIndex");
+            }
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName");
+            }
+
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Vector4");
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(data);
+        }
+
+        /// <summary>
+        /// Writes data to the specified <see cref="LocalNetworkGamer"/>'s <see cref="PacketWriter"/> to be sent across the network.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to send.</param>
+        /// <param name="senderIndex">The index of the sender in the <see cref="Session"/>'s LocalGamers collection.</param>
+        /// <param name="data">The data to send.</param>
+        /// <remarks>
+        /// Sends 3 values - two strings and a Matrix (the data).
+        /// </remarks>
+        public virtual void WriteData(string propertyName, int senderIndex, Matrix data)
+        {
+            if (!IsNetworking)
+            {
+                throw new InvalidOperationException("This component is not currently active.");
+            }
+            if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
+            {
                 throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
             }
             if (propertyName == null)
@@ -196,7 +225,7 @@ namespace Glib.XNA.NetworkLib
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
-            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Vector4");
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Matrix");
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(data);
         }
         #endregion
@@ -234,7 +263,7 @@ namespace Glib.XNA.NetworkLib
             }
             if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
             {
-                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+                throw new ArgumentOutOfRangeException("senderIndex", "The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
             }
             if (recipient != null)
             {
@@ -247,7 +276,7 @@ namespace Glib.XNA.NetworkLib
         }
 
         /// <summary>
-        /// Parse the next block of data from the specified <see cref="PacketReader"/> which is of the specified unknown type.
+        /// Parse the incoming data from the specified <see cref="PacketReader"/> which is of the specified unknown type.
         /// </summary>
         /// <param name="activeReader">The <see cref="PacketReader"/> containing the data.</param>
         /// <param name="typeString">The string representing the type of the data, according to the sender.</param>
@@ -311,6 +340,10 @@ namespace Glib.XNA.NetworkLib
                                 case "double":
                                     data = read.ReadDouble();
                                     type = typeof(double);
+                                    break;
+                                case "matrix":
+                                    data = read.ReadMatrix();
+                                    type = typeof(Matrix);
                                     break;
                                 default:
                                     if (!ParseData(read, typeStr, out type, out data))
