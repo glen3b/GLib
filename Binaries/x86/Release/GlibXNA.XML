@@ -846,6 +846,17 @@
             Sends 3 values - two strings and a Vector4 (the data).
             </remarks>
         </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,Microsoft.Xna.Framework.Matrix)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and a Matrix (the data).
+            </remarks>
+        </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32)">
             <summary>
             Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
@@ -869,7 +880,7 @@
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.ParseData(Microsoft.Xna.Framework.Net.PacketReader,System.String,System.Type@,System.Object@)">
             <summary>
-            Parse the next block of data from the specified <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> which is of the specified unknown type.
+            Parse the incoming data from the specified <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> which is of the specified unknown type.
             </summary>
             <param name="activeReader">The <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> containing the data.</param>
             <param name="typeString">The string representing the type of the data, according to the sender.</param>
@@ -877,7 +888,9 @@
             <param name="value">The actual data, represented as an instance of dataType.</param>
             <returns>Whether this method successfully parsed the data.</returns>
             <remarks>
-            It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component).
+            The string typeString should be compared case insensitively.
+            It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component), because it is a placeholder method.
+            The base implementation of this method merely sets the output parameters to null and returns false. It should not be invoked.
             </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.Update(Microsoft.Xna.Framework.GameTime)">
@@ -900,6 +913,9 @@
             <summary>
             An event fired when information is received from the network.
             </summary>
+            <remarks>
+            If you do not subscribe to this event, sending information over the network is pointless.
+            </remarks>
         </member>
         <member name="T:Glib.XNA.XnaExtensions">
             <summary>
@@ -1969,39 +1985,6 @@
             </summary>
             <param name="gameTime">The current GameTime.</param>
         </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator">
-            <summary>
-            A class that provides a basis for generating particles with a fixed set of settings.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.SetProperties(Glib.XNA.SpriteLib.ParticleEngine.Particle)">
-            <summary>
-            Set the desired properties on the specified generated particle.
-            </summary>
-            <param name="particle">The particle to set properties on.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Generates a new particle at the specified position.
-            </summary>
-            <returns>A new particle.</returns>
-            <param name="pos">The position of the object to create particles around.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.ParticlesToGenerate">
-            <summary>
-            Gets or sets the number of particles to create within an update.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Texture">
-            <summary>
-            Gets or sets the texture to generate particles with.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Batch">
-            <summary>
-            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to generate particles with.
-            </summary>
-        </member>
         <member name="T:Glib.XNA.SpriteLib.SpritePositionMapping">
             <summary>
             A simple class for storing a mapping of ISprites to positions on the screen.
@@ -2046,6 +2029,39 @@
         <member name="T:Glib.XNA.InputLib.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.InputLib"/> namespace provides various XNA input utilities.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator">
+            <summary>
+            A class that provides a basis for generating particles with a fixed set of settings.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.SetProperties(Glib.XNA.SpriteLib.ParticleEngine.Particle)">
+            <summary>
+            Set the desired properties on the specified generated particle.
+            </summary>
+            <param name="particle">The particle to set properties on.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.GenerateParticle(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Generates a new particle at the specified position.
+            </summary>
+            <returns>A new particle.</returns>
+            <param name="pos">The position of the object to create particles around.</param>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.ParticlesToGenerate">
+            <summary>
+            Gets or sets the number of particles to create within an update.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Texture">
+            <summary>
+            Gets or sets the texture to generate particles with.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Batch">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to generate particles with.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.SpriteMoveEventHandler">
