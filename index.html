@@ -1,47 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
     <title>Glib by glen3b</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/glen3b/Glib">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/glen3b/Glib/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/glen3b/Glib/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
+    <header>
+      <div class="container">
+        <h1>Glib</h1>
+        <h2>A simple general purpose C# library covering windows forms, XNA, extension methods, and more.</h2>
 
-      <section>
-        <div id="title">
-          <h1>Glib</h1>
-          <p>A simple general purpose C# library covering windows forms, XNA, extension methods, and more.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/glen3b">glen3b</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+        <section id="downloads">
+          <a href="https://github.com/glen3b/Glib/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/glen3b/Glib/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/glen3b/Glib" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
+    <div class="container">
+      <section id="main_content">
         <h2>
 <a name="welcome-to-glib" class="anchor" href="#welcome-to-glib"><span class="octicon octicon-link"></span></a>Welcome to Glib</h2>
 
-<p>This library simplifies usage of various APIs available in C#, such as XNA, Windows Forms, and conversions to common types, such as integer. For example, to parse a string as an integer, you can just run: <code>"Your string".ToInt()</code>.</p>
+<p>This library simplifies usage of various APIs available in C#, such as XNA, Windows Forms, and conversions to common types, such as integer. For example, to parse a string as an integer, you can just run: <code>"Your string".ToInt()</code>. <strong>If you find a bug, <em>please</em> report it on the <a href="https://github.com/glen3b/Glib/issues?state=open">issues page</a>.</strong></p>
 
 <h2>
 <a name="users-of-our-library" class="anchor" href="#users-of-our-library"><span class="octicon octicon-link"></span></a>Users of our library</h2>
@@ -53,7 +43,9 @@
 </ul><p>If you are using this library and want to be on this page, please contact <a href="https://github.com/glen3b" class="user-mention">@glen3b</a>.</p>
 
 <h2>
-<a name="downloads" class="anchor" href="#downloads"><span class="octicon octicon-link"></span></a>Downloads</h2>
+<a name="development-builds" class="anchor" href="#development-builds"><span class="octicon octicon-link"></span></a>Development Builds</h2>
+
+<p><strong>These builds are the latest compiled builds from the source tree. They are NOT supported in any way, shape, or form; however reports for bugs found on these builds are appreciated.</strong></p>
 
 <h3>
 <a name="windows-binaries" class="anchor" href="#windows-binaries"><span class="octicon octicon-link"></span></a>Windows binaries</h3>
@@ -90,9 +82,8 @@
 
 <p>Docs are available as XML documentation when you build the project, or are available on <a href="http://glen3b.pagekite.me/glibDoc/">my website</a>.</p>
       </section>
-
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
     
   </body>
 </html>
