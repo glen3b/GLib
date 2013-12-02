@@ -17,7 +17,7 @@ namespace Glib.XNA.NetworkLib
     /// A game component for watching the network for information and sending information.
     /// </summary>
     /// <remarks>
-    /// Supports sending Vector4, string, double.
+    /// Supports sending various types entailed in the WriteData overloads.
     /// </remarks>
     public class NetworkWatcherComponent : Microsoft.Xna.Framework.GameComponent
     {
@@ -228,6 +228,35 @@ namespace Glib.XNA.NetworkLib
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Matrix");
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(data);
         }
+
+        /// <summary>
+        /// Writes data to the specified <see cref="LocalNetworkGamer"/>'s <see cref="PacketWriter"/> to be sent across the network.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to send.</param>
+        /// <param name="senderIndex">The index of the sender in the <see cref="Session"/>'s LocalGamers collection.</param>
+        /// <param name="data">The data to send.</param>
+        /// <remarks>
+        /// Sends 3 values - two strings and an integer (the data).
+        /// </remarks>
+        public virtual void WriteData(string propertyName, int senderIndex, int data)
+        {
+            if (!IsNetworking)
+            {
+                throw new InvalidOperationException("This component is not currently active.");
+            }
+            if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
+            {
+                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+            }
+            if (propertyName == null)
+            {
+                throw new ArgumentException("propertyName");
+            }
+
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Integer");
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(data);
+        }
         #endregion
 
         /// <summary>
@@ -349,6 +378,10 @@ namespace Glib.XNA.NetworkLib
                                 case "matrix":
                                     data = read.ReadMatrix();
                                     type = typeof(Matrix);
+                                    break;
+                                case "integer":
+                                    data = read.ReadInt32();
+                                    type = typeof(int);
                                     break;
                                 default:
                                     if (!ParseData(read, typeStr, out type, out data))
