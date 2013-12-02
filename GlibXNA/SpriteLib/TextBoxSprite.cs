@@ -204,7 +204,7 @@ namespace Glib.XNA.SpriteLib
             _textView = new TextSprite(SpriteBatch, font, "");
             _textView.Position = Position + Vector2.One;
             Height = font.LineSpacing + 1;
-            Scale.X = 0;
+            Scale = new Vector2(0, Scale.Y);
             movementInternal = new EventHandler(this.TextBoxSprite_Moved);
             Moved += movementInternal;
             base.UseCenterAsOrigin = false;

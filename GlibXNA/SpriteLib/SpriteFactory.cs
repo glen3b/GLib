@@ -10,6 +10,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A class to construct sprites easily.
     /// </summary>
+    [Obsolete("Use an object initializer.")]
     public class SpriteBuilder
     {
         private Sprite _constructing;
@@ -69,7 +70,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>This SpriteBuilder.</returns>
         public SpriteBuilder SetWidth(float w)
         {
-            _constructing.Scale.X = w / _constructing.Texture.Width;
+            _constructing.Width = w;
             return this;
         }
 
@@ -178,7 +179,7 @@ namespace Glib.XNA.SpriteLib
         /// <returns>This SpriteBuilder.</returns>
         public SpriteBuilder SetHeight(float h)
         {
-            _constructing.Scale.Y = h / _constructing.Texture.Height;
+            _constructing.Height = h;
             return this;
         }
 

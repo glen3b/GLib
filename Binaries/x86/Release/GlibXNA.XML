@@ -448,11 +448,6 @@
             The SpriteBatch used for drawing the sprite.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.Scale">
-            <summary>
-            The scale at which to render the sprite.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.Rotation">
             <summary>
             The current rotation of the sprite.
@@ -653,6 +648,11 @@
         <member name="E:Glib.XNA.SpriteLib.Sprite.Move">
             <summary>
             A cancellable event called before every change of this sprite's position.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Scale">
+            <summary>
+            Gets or sets the scale at which to render the sprite.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Center">
@@ -3942,6 +3942,37 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.VideoSprite">
+            <summary>
+            A sprite that displays a video.
+            </summary>
+            <remarks>
+            This class performs calculations that assume that the game operates at a constant framerate.
+            </remarks>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.VideoSprite.VideoSize">
+            <summary>
+            The size of the video.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.#ctor(Microsoft.Xna.Framework.Media.Video,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/> and begins playing the video.
+            </summary>
+            <param name="videoToPlay">The <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+            <param name="position">The position of the <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/>.</param>
+            <param name="spriteBatch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.Update">
+            <summary>
+            Updates the video.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.VideoSprite.Video">
+            <summary>
+            Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
             </summary>
         </member>
     </members>

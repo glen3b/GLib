@@ -222,10 +222,17 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public SpriteBatch SpriteBatch;
 
+        private Vector2 _scale = Vector2.One;
+
         /// <summary>
-        /// The scale at which to render the sprite.
+        /// Gets or sets the scale at which to render the sprite.
         /// </summary>
-        public Vector2 Scale = Vector2.One;
+        public virtual Vector2 Scale
+        {
+            get { return _scale; }
+            set { _scale = value; }
+        }
+        
 
         /// <summary>
         /// Gets the scale-sensitive center of the sprite.
@@ -300,7 +307,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                Scale.X = value / Texture.Width;
+                Scale = new Vector2(value / Texture.Width, Scale.Y);
             }
         }
 
@@ -315,7 +322,7 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                Scale.Y = value / Texture.Height;
+                Scale = new Vector2(Scale.X, value / Texture.Height);
             }
         }
 
