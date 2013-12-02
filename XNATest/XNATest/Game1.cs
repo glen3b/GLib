@@ -74,6 +74,7 @@ namespace XNATest
             menuTxt = new TextSprite(spriteBatch, new Vector2(0), Content.Load<SpriteFont>("SpriteFont1"), "Hello world!", Color.Black);
             menuTxt.IsHoverable = true;
             menuTxt.IsSelected = true;
+            menuTxt.IsDraggable = true;
             menuTxt.Pressed += new EventHandler(menuTxt_Clicked);
             
             menuTxtTwo = new TextSprite(spriteBatch, new Vector2(250,0), Content.Load<SpriteFont>("SpriteFont1"), "Selectable", Color.Black);

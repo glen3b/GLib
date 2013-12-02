@@ -565,7 +565,7 @@
         </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.UsedViewport">
             <summary>
-            If not null, the viewport to use in viewport-requiring operation.
+            If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.RemoveFromManager">
@@ -741,7 +741,7 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.BackgroundSprite.DrawNonAuto">
             <summary>
-            Draw this background sprite w/o opening/closing the SpriteBatch.
+            Draw this background sprite without opening or closing the SpriteBatch.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.BackgroundSprite.CenterViewport">
@@ -1211,7 +1211,7 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.TextSprite.Update">
             <summary>
-            Update the TextSprite. Just calls the Updated event by default.
+            Update the TextSprite.
             </summary>
             <remarks>
             Uses the InputLib.MouseManager.CurrentMouseState for mouse data.
@@ -1283,6 +1283,16 @@
         <member name="E:Glib.XNA.SpriteLib.TextSprite.TextChanged">
             <summary>
             An event fired when the text of this TextSprite changes.
+            </summary>
+        </member>
+        <member name="E:Glib.XNA.SpriteLib.TextSprite.Dragged">
+            <summary>
+            An event fired when this <see cref="T:Glib.XNA.SpriteLib.TextSprite"/> is dragged with the mouse.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextSprite.IsDraggable">
+            <summary>
+            Gets or sets a boolean indicating whether this <see cref="T:Glib.XNA.SpriteLib.TextSprite"/> is draggable with the mouse.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.TextSprite.IsShadowed">
@@ -1805,6 +1815,28 @@
             </summary>
             <param name="source">The source of the event.</param>
             <param name="e">The <seealso cref="T:Glib.XNA.SingleKeyEventArgs">SingleKeyEventArgs</seealso> for this event.</param>
+        </member>
+        <member name="T:Glib.XNA.DragEventArgs">
+            <summary>
+            Event arguments for a possible mouse drag.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.DragEventArgs.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.DragEventArgs"/>, specifying an old position and a new position.
+            </summary>
+            <param name="newPos">The new position of the dragged object.</param>
+            <param name="oldPos">The old position of the dragged object.</param>
+        </member>
+        <member name="P:Glib.XNA.DragEventArgs.NewPosition">
+            <summary>
+            Gets the new position of the object.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.DragEventArgs.OldPosition">
+            <summary>
+            Gets the old position of the object.
+            </summary>
         </member>
         <member name="T:Glib.XNA.SpriteMoveEventArgs">
             <summary>
@@ -3136,7 +3168,7 @@
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.RemoveSelf(Glib.XNA.SpriteLib.Sprite)">
             <summary>
             Remove a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> from this SpriteManager.
-            Safe to call during Update() or Draw() (or from their corresponding events).
+            Safe to call during Update or Draw (or from their corresponding events).
             </summary>
             <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
         </member>

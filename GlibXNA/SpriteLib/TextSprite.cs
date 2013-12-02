@@ -269,7 +269,7 @@ namespace Glib.XNA.SpriteLib
                     mousePosDiff = MouseManager.MousePositionable.Position - new Vector2(actualX, actualY);
 
                 }
-                else if (currentMouseState.LeftButton == _lastMouseState.LeftButton && currentMouseState.LeftButton == ButtonState.Pressed && (_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
+                else if (currentMouseState.LeftButton == _lastMouseState.LeftButton && currentMouseState.LeftButton == ButtonState.Pressed && !XnaExtensions.IsGuideVisible)
                 {
                     //Continuing drag.
                     if (!DragEventCanceled())
@@ -289,6 +289,10 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        /// <summary>
+        /// Determines whether the dragged event is cancelled.
+        /// </summary>
+        /// <returns>Whether the Dragged event is cancelled.</returns>
         protected bool DragEventCanceled()
         {
             if (Dragged == null) return false;
