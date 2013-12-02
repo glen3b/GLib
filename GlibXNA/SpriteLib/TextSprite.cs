@@ -289,6 +289,7 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+#if WINDOWS
         /// <summary>
         /// Determines whether the dragged event is cancelled.
         /// </summary>
@@ -301,6 +302,7 @@ namespace Glib.XNA.SpriteLib
             Dragged(this, eventArgs);
             return eventArgs.Cancel;
         }
+#endif
 
         /// <summary>
         /// Whether or not to call Clicked events for keypresses of Enter.

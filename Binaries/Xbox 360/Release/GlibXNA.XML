@@ -393,11 +393,6 @@
             The SpriteBatch used for drawing the sprite.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.Scale">
-            <summary>
-            The scale at which to render the sprite.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.Rotation">
             <summary>
             The current rotation of the sprite.
@@ -495,7 +490,7 @@
         </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.UsedViewport">
             <summary>
-            If not null, the viewport to use in viewport-requiring operation.
+            If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.RemoveFromManager">
@@ -557,6 +552,11 @@
         <member name="E:Glib.XNA.SpriteLib.Sprite.Move">
             <summary>
             A cancellable event called before every change of this sprite's position.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Scale">
+            <summary>
+            Gets or sets the scale at which to render the sprite.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Center">
@@ -635,7 +635,7 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.BackgroundSprite.DrawNonAuto">
             <summary>
-            Draw this background sprite w/o opening/closing the SpriteBatch.
+            Draw this background sprite without opening or closing the SpriteBatch.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.BackgroundSprite.CenterViewport">
@@ -673,7 +673,7 @@
             A game component for watching the network for information and sending information.
             </summary>
             <remarks>
-            Supports sending Vector4, string, double.
+            Supports sending various types entailed in the WriteData overloads.
             </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.#ctor(Microsoft.Xna.Framework.Game)">
@@ -749,6 +749,17 @@
             <param name="data">The data to send.</param>
             <remarks>
             Sends 3 values - two strings and a Matrix (the data).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,System.Int32)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and an integer (the data).
             </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32)">
@@ -1076,6 +1087,37 @@
             A GIF image.
             </summary>
         </member>
+        <member name="T:Glib.XNA.SpriteLib.VideoSprite">
+            <summary>
+            A sprite that displays a video.
+            </summary>
+            <remarks>
+            This class performs calculations that assume that the game operates at a constant framerate.
+            </remarks>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.VideoSprite.VideoSize">
+            <summary>
+            The size of the video.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.#ctor(Microsoft.Xna.Framework.Media.Video,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/> and begins playing the video.
+            </summary>
+            <param name="videoToPlay">The <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+            <param name="position">The position of the <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/>.</param>
+            <param name="spriteBatch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.Update">
+            <summary>
+            Updates the video.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.VideoSprite.Video">
+            <summary>
+            Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.TextSprite">
             <summary>
             An ISprite representing text.
@@ -1094,7 +1136,7 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.TextSprite.Update">
             <summary>
-            Update the TextSprite. Just calls the Updated event by default.
+            Update the TextSprite.
             </summary>
             <remarks>
             Uses the InputLib.MouseManager.CurrentMouseState for mouse data.
@@ -1738,6 +1780,28 @@
             </summary>
             <param name="source">The source of the event.</param>
             <param name="e">The <seealso cref="T:Glib.XNA.SingleKeyEventArgs">SingleKeyEventArgs</seealso> for this event.</param>
+        </member>
+        <member name="T:Glib.XNA.DragEventArgs">
+            <summary>
+            Event arguments for a possible mouse drag.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.DragEventArgs.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Create a new <see cref="T:Glib.XNA.DragEventArgs"/>, specifying an old position and a new position.
+            </summary>
+            <param name="newPos">The new position of the dragged object.</param>
+            <param name="oldPos">The old position of the dragged object.</param>
+        </member>
+        <member name="P:Glib.XNA.DragEventArgs.NewPosition">
+            <summary>
+            Gets the new position of the object.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.DragEventArgs.OldPosition">
+            <summary>
+            Gets the old position of the object.
+            </summary>
         </member>
         <member name="T:Glib.XNA.SpriteMoveEventArgs">
             <summary>
@@ -3014,7 +3078,7 @@
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.RemoveSelf(Glib.XNA.SpriteLib.Sprite)">
             <summary>
             Remove a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> from this SpriteManager.
-            Safe to call during Update() or Draw() (or from their corresponding events).
+            Safe to call during Update or Draw (or from their corresponding events).
             </summary>
             <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
         </member>
@@ -3244,19 +3308,6 @@
             <summary>
             Gets the collection of all existing <see cref="T:Glib.XNA.SpriteLib.Screen"/>s.
             </summary>
-        </member>
-        <member name="T:Glib.XNA.EnumExtensions">
-            <summary>
-            A class that provides Xbox extensions on enums.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.EnumExtensions.HasFlag(System.Enum,System.Enum)">
-            <summary>
-            Test whether an enum has a flag.
-            </summary>
-            <param name="enumVal">The enum to test.</param>
-            <param name="flag">The flag to check for.</param>
-            <returns>Whether a has flag.</returns>
         </member>
         <member name="T:Glib.XNA.SpriteLib.Screen">
             <summary>
@@ -3539,6 +3590,19 @@
             <summary>
             The <see cref="N:Glib.XNA"/> namespace provides various XNA utilities and classes.
             </summary>
+        </member>
+        <member name="T:Glib.XNA.EnumExtensions">
+            <summary>
+            A class that provides Xbox extensions on enums.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.EnumExtensions.HasFlag(System.Enum,System.Enum)">
+            <summary>
+            Test whether an enum has a flag.
+            </summary>
+            <param name="enumVal">The enum to test.</param>
+            <param name="flag">The flag to check for.</param>
+            <returns>Whether a has flag.</returns>
         </member>
         <member name="T:Glib.XNA.NetworkLib.NetworkSessionJoinedEventArgs">
             <summary>

@@ -1217,6 +1217,12 @@
             Uses the InputLib.MouseManager.CurrentMouseState for mouse data.
             </remarks>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.TextSprite.DragEventCanceled">
+            <summary>
+            Determines whether the dragged event is cancelled.
+            </summary>
+            <returns>Whether the Dragged event is cancelled.</returns>
+        </member>
         <member name="F:Glib.XNA.SpriteLib.TextSprite.CallKeyboardClickEvent">
             <summary>
             Whether or not to call Clicked events for keypresses of Enter.
@@ -1371,6 +1377,37 @@
         <member name="P:Glib.XNA.SpriteLib.TextSprite.Position">
             <summary>
             The position to draw the text.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.VideoSprite">
+            <summary>
+            A sprite that displays a video.
+            </summary>
+            <remarks>
+            This class performs calculations that assume that the game operates at a constant framerate.
+            </remarks>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.VideoSprite.VideoSize">
+            <summary>
+            The size of the video.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.#ctor(Microsoft.Xna.Framework.Media.Video,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/> and begins playing the video.
+            </summary>
+            <param name="videoToPlay">The <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+            <param name="position">The position of the <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/>.</param>
+            <param name="spriteBatch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.Update">
+            <summary>
+            Updates the video.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.VideoSprite.Video">
+            <summary>
+            Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
             </summary>
         </member>
         <member name="T:Glib.XNA.ThreeDimensional.NamespaceDoc">
@@ -3985,37 +4022,6 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.VideoSprite">
-            <summary>
-            A sprite that displays a video.
-            </summary>
-            <remarks>
-            This class performs calculations that assume that the game operates at a constant framerate.
-            </remarks>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.VideoSprite.VideoSize">
-            <summary>
-            The size of the video.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.VideoSprite.#ctor(Microsoft.Xna.Framework.Media.Video,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Creates a <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/> and begins playing the video.
-            </summary>
-            <param name="videoToPlay">The <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
-            <param name="position">The position of the <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/>.</param>
-            <param name="spriteBatch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the <see cref="T:Microsoft.Xna.Framework.Media.Video"/> to play.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.VideoSprite.Update">
-            <summary>
-            Updates the video.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.VideoSprite.Video">
-            <summary>
-            Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
             </summary>
         </member>
     </members>
