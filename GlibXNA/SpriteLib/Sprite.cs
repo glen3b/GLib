@@ -708,7 +708,7 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// If not null, the viewport to use in viewport-requiring operation.
+        /// If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="GraphicsDevice"/>.
         /// </summary>
         public Viewport? UsedViewport = null;
 

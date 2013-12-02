@@ -109,7 +109,7 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Draw this background sprite w/o opening/closing the SpriteBatch.
+        /// Draw this background sprite without opening or closing the SpriteBatch.
         /// </summary>
         public override void DrawNonAuto()
         {

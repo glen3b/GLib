@@ -779,7 +779,7 @@
             A game component for watching the network for information and sending information.
             </summary>
             <remarks>
-            Supports sending Vector4, string, double.
+            Supports sending various types entailed in the WriteData overloads.
             </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.#ctor(Microsoft.Xna.Framework.Game)">
@@ -855,6 +855,17 @@
             <param name="data">The data to send.</param>
             <remarks>
             Sends 3 values - two strings and a Matrix (the data).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,System.Int32)">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and an integer (the data).
             </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32)">
