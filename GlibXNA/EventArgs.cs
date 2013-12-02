@@ -22,6 +22,33 @@ namespace Glib.XNA
     public delegate void SingleKeyEventHandler(object source, SingleKeyEventArgs e);
 
     /// <summary>
+    /// Event arguments for a possible mouse drag.
+    /// </summary>
+    public class DragEventArgs : System.ComponentModel.CancelEventArgs
+    {
+        /// <summary>
+        /// Gets the new position of the object.
+        /// </summary>
+        public Vector2 NewPosition { get; protected internal set; }
+
+        /// <summary>
+        /// Gets the old position of the object.
+        /// </summary>
+        public Vector2 OldPosition { get; protected internal set; }
+
+        /// <summary>
+        /// Create a new <see cref="DragEventArgs"/>, specifying an old position and a new position.
+        /// </summary>
+        /// <param name="newPos">The new position of the dragged object.</param>
+        /// <param name="oldPos">The old position of the dragged object.</param>
+        public DragEventArgs(Vector2 oldPos, Vector2 newPos)
+        {
+            OldPosition = oldPos;
+            NewPosition = newPos;
+        }
+    }
+
+    /// <summary>
     /// Event arguments for a sprite movement.
     /// </summary>
     public class SpriteMoveEventArgs : System.ComponentModel.CancelEventArgs

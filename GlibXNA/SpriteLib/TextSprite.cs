@@ -22,6 +22,25 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public event EventHandler TextChanged;
 
+#if WINDOWS
+        /// <summary>
+        /// An event fired when this <see cref="TextSprite"/> is dragged with the mouse.
+        /// </summary>
+        public event EventHandler<DragEventArgs> Dragged;
+
+        private Vector2 mousePosDiff;
+
+        /// <summary>
+        /// Gets or sets a boolean indicating whether this <see cref="TextSprite"/> is draggable with the mouse.
+        /// </summary>
+        public bool IsDraggable
+        {
+            get;
+            set;
+        }
+#endif
+
+
         private bool _isShadowed = false;
 
         /// <summary>
@@ -63,7 +82,7 @@ namespace Glib.XNA.SpriteLib
                     {
                         throw new InvalidOperationException("ShadowColor must have a value to draw a shadow on this TextSprite.");
                     }
-                    SpriteBatch.DrawString(Font, Text, Position+Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                    SpriteBatch.DrawString(Font, Text, Position + Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
                 }
                 SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
             }
@@ -177,7 +196,7 @@ namespace Glib.XNA.SpriteLib
 
 
         /// <summary>
-        /// Update the TextSprite. Just calls the Updated event by default.
+        /// Update the TextSprite.
         /// </summary>
         /// <remarks>
         /// Uses the InputLib.MouseManager.CurrentMouseState for mouse data.
@@ -204,7 +223,7 @@ namespace Glib.XNA.SpriteLib
             }
 
 #if WINDOWS
-            if ( (Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)) ) && !XnaExtensions.IsGuideVisible)
+            if ((Visible && IsSelected && ((msPos.X >= actualX && msPos.X <= actualX + actualW && msPos.Y >= actualY && msPos.Y <= actualY + actualH && oldMsPos.X >= actualX && oldMsPos.X <= actualX + actualW && oldMsPos.Y >= actualY && oldMsPos.Y <= actualY + actualH && currentMouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed))) && !XnaExtensions.IsGuideVisible)
             {
                 FireClicked();
             }
@@ -240,6 +259,27 @@ namespace Glib.XNA.SpriteLib
 #endif
                 }
             }
+
+#if WINDOWS
+            if (IsDraggable)
+            {
+                if (currentMouseState.LeftButton == ButtonState.Pressed && _lastMouseState.LeftButton == ButtonState.Released && (_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
+                {
+                    //Dragging mouse, need to calculate mouse position difference from our position.
+                    mousePosDiff = MouseManager.MousePositionable.Position - new Vector2(actualX, actualY);
+
+                }
+                else if (currentMouseState.LeftButton == _lastMouseState.LeftButton && currentMouseState.LeftButton == ButtonState.Pressed && (_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
+                {
+                    //Continuing drag.
+                    if (!DragEventCanceled())
+                    {
+                        Position = MouseManager.MousePositionable.Position - mousePosDiff;
+                    }
+                }
+            }
+#endif
+
 #if WINDOWS
             _lastMouseState = currentMouseState;
 #endif
@@ -247,6 +287,15 @@ namespace Glib.XNA.SpriteLib
             {
                 Updated(this, EventArgs.Empty);
             }
+        }
+
+        protected bool DragEventCanceled()
+        {
+            if (Dragged == null) return false;
+
+            DragEventArgs eventArgs = new DragEventArgs(Position, MouseManager.MousePositionable.Position - mousePosDiff);
+            Dragged(this, eventArgs);
+            return eventArgs.Cancel;
         }
 
         /// <summary>
@@ -429,7 +478,8 @@ namespace Glib.XNA.SpriteLib
         public string Text
         {
             get { return _text; }
-            set {
+            set
+            {
                 if (value == null)
                 {
                     throw new ArgumentNullException("The Text of this TextSprite must not be null.", null as Exception);
@@ -444,7 +494,7 @@ namespace Glib.XNA.SpriteLib
                 }
             }
         }
-        
+
 
         /// <summary>
         /// The color to draw the text as.
