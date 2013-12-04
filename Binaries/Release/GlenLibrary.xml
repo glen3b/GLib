@@ -211,12 +211,12 @@
         </member>
         <member name="P:Glib.SQL.ISQLParameterProvider.ParameterName">
             <summary>
-            The name of the provided parameter.
+            Gets the name of the provided parameter.
             </summary>
         </member>
         <member name="P:Glib.SQL.ISQLParameterProvider.ParameterValue">
             <summary>
-            The value of the provided parameter.
+            Gets the value of the provided parameter.
             </summary>
         </member>
         <member name="M:Glib.WinForms.Controls.SqlParameterTextBox.#ctor(System.String)">
@@ -227,12 +227,12 @@
         </member>
         <member name="P:Glib.WinForms.Controls.SqlParameterTextBox.ParameterName">
             <summary>
-            The name of the represented SQL parameter.
+            Gets the name of the represented SQL parameter.
             </summary>
         </member>
         <member name="P:Glib.WinForms.Controls.SqlParameterTextBox.ParameterValue">
             <summary>
-            The string value of the text box, which is the value of the SQL parameter.
+            Gets or sets the string value of the text box, which is the value of the SQL parameter.
             </summary>
         </member>
         <member name="T:Glib.WinForms.Shapes.Triangle">
@@ -1122,7 +1122,7 @@
         </member>
         <member name="M:Glib.WinForms.Controls.RequiredTextBox.IsValid(System.String)">
             <summary>
-            The default field validation code.
+            The default field validation predicate.
             </summary>
             <remarks>
             Checks if the field text is empty, and returns that value inverted.
@@ -1132,7 +1132,7 @@
         </member>
         <member name="M:Glib.WinForms.Controls.RequiredTextBox.#ctor">
             <summary>
-            Create a new RequiredTextBox with default validation code.
+            Create a new RequiredTextBox with default validation logic.
             </summary>
         </member>
         <member name="F:Glib.WinForms.Controls.RequiredTextBox.FieldValidation">
@@ -1143,7 +1143,7 @@
         </member>
         <member name="M:Glib.WinForms.Controls.RequiredTextBox.#ctor(System.Predicate{System.String})">
             <summary>
-            Create a new RequiredTextBox with the specified parameter name and validation code.
+            Create a new RequiredTextBox with the specified parameter name and validation predicate.
             </summary>
             <param name="validator">The predicate to use to check if the field is complete.</param>
         </member>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace Glib.WinForms
 {
@@ -19,6 +20,7 @@ namespace Glib.WinForms
         /// <summary>
         /// Gets a string indicating the error to display if the field is invalid.
         /// </summary>
+        [Description("The error message to display if the field is invalid.")]
         string InvalidityError { get; }
     }
 }

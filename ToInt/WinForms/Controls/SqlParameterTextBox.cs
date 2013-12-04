@@ -24,7 +24,7 @@ namespace Glib.WinForms.Controls
         private string _paramName;
 
         /// <summary>
-        /// The name of the represented SQL parameter.
+        /// Gets the name of the represented SQL parameter.
         /// </summary>
         public string ParameterName
         {
@@ -35,7 +35,7 @@ namespace Glib.WinForms.Controls
         }
 
         /// <summary>
-        /// The string value of the text box, which is the value of the SQL parameter.
+        /// Gets or sets the string value of the text box, which is the value of the SQL parameter.
         /// </summary>
         public object ParameterValue
         {

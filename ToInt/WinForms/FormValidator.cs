@@ -7,6 +7,29 @@ using System.Windows.Forms;
 namespace Glib.WinForms
 {
     /// <summary>
+    /// The handler for a control validation event.
+    /// </summary>
+    /// <param name="sender">The object performing validation.</param>
+    /// <param name="eventArgs">The <see cref="ControlValidatedEventArgs"/> for this event.</param>
+    public delegate void ControlValidatedEventHandler(object sender, ControlValidatedEventArgs eventArgs);
+
+    /// <summary>
+    /// Represents event arguments for the <see cref="ControlValidatedEventHandler"/> event.
+    /// </summary>
+    public class ControlValidatedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Gets the control that was validated.
+        /// </summary>
+        public Control ValidatedControl { get; protected internal set; }
+
+        /// <summary>
+        /// Gets the result of the validation.
+        /// </summary>
+        public bool ValidationResult { get; protected internal set; }
+    }
+
+    /// <summary>
     /// A class validating forms to ensure all <see cref="IRequiredField"/>s are complete.
     /// </summary>
     public class FormValidator
@@ -23,6 +46,11 @@ namespace Glib.WinForms
         }
 
         private Control.ControlCollection _controls;
+
+        /// <summary>
+        /// An event fired when a control is validated.
+        /// </summary>
+        public event ControlValidatedEventHandler ControlValidated;
 
         /// <summary>
         /// Create a new FormValidator validating the specified form.
@@ -61,22 +89,36 @@ namespace Glib.WinForms
         /// <returns>Whether or not the form is complete.</returns>
         public bool ValidateForm(ErrorProvider errors)
         {
+            bool allValid = true;
+
             foreach (Control c in _controls)
             {
+                if (c == null)
+                {
+                    continue;
+                }
                 if (c is IRequiredField)
                 {
                     IRequiredField field = c.Cast<IRequiredField>();
-                    if (!field.Completed)
+                    bool fieldFinished = field.Completed;
+                    
+                    if (!fieldFinished)
                     {
-                       errors.SetError(c, field.InvalidityError);
+                        allValid = false;
+                        errors.SetError(c, field.InvalidityError);
                     }
                     else
                     {
                         errors.SetError(c, null);
                     }
+
+                    if (ControlValidated != null)
+                    {
+                        ControlValidated(this, new ControlValidatedEventArgs() { ValidatedControl = c, ValidationResult = fieldFinished });
+                    }
                 }
             }
-            return IsComplete;
+            return allValid;
         }
 
         /// <summary>
@@ -91,7 +133,14 @@ namespace Glib.WinForms
                     if (c is IRequiredField)
                     {
                         IRequiredField field = c.Cast<IRequiredField>();
-                        if (!field.Completed)
+                        bool fieldComplete = field.Completed;
+
+                        if (ControlValidated != null)
+                        {
+                            ControlValidated(this, new ControlValidatedEventArgs() { ValidatedControl = c, ValidationResult = fieldComplete });
+                        }
+
+                        if (!fieldComplete)
                         {
                             return false;
                         }

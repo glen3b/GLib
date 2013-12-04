@@ -21,22 +21,30 @@ namespace WinFormsTest
             InitializeComponent();
         }
 
+        Triangle t;
+
         private void Form1_Shown(object sender, EventArgs e)
         {
             valid = new FormValidator(this);
             gfx = this.CreateGraphics();
-            Triangle t = new Triangle(new Point(3,3), new Point(40,40), new Point(3,56), Color.Black);
+            t = new Triangle(new Point(3, 3), new Point(40, 40), new Point(3, 56), Color.Black);
             t.Draw(gfx);
         }
 
         private void requiredTextBox1_TextChanged(object sender, EventArgs e)
         {
             valid.ValidateForm(errorProvider1);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            requiredTextBox1.FieldValidation = new Predicate<string>(delegate(string str) { return str == "John Smith"; });
+            requiredTextBox1.FieldValidation = new Predicate<string>(delegate(string str) { return str == "Glen Husman"; });
+        }
+
+        private void requiredTextBox_Validated(object sender, EventArgs e)
+        {
+            t.Draw(gfx);
         }
     }
 }

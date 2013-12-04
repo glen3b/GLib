@@ -27,10 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXNA", "GlibXNA\GlibXNA.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXNA on Xbox", "GlibXNA\GlibXNA on Xbox.csproj", "{442E51D1-79AE-4F9E-B368-F9DA7A70EC39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoTest", "..\VideoTest\VideoTest\VideoTest.csproj", "{DB2C8D4A-473F-46D9-9327-A4152431B6BF}"
-EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "VideoTestContent", "..\VideoTest\VideoTestContent\VideoTestContent.contentproj", "{9C2901BA-B20D-49A3-9183-D620C369BAD0}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GlenLibrary.vsmdi
@@ -198,26 +194,6 @@ Global
 		{442E51D1-79AE-4F9E-B368-F9DA7A70EC39}.Release|x86.ActiveCfg = Release|Xbox 360
 		{442E51D1-79AE-4F9E-B368-F9DA7A70EC39}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
 		{442E51D1-79AE-4F9E-B368-F9DA7A70EC39}.Release|Xbox 360.Build.0 = Release|Xbox 360
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|x86.ActiveCfg = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|x86.Build.0 = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Debug|Xbox 360.ActiveCfg = Debug|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|Any CPU.ActiveCfg = Release|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|Mixed Platforms.Build.0 = Release|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|x86.ActiveCfg = Release|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|x86.Build.0 = Release|x86
-		{DB2C8D4A-473F-46D9-9327-A4152431B6BF}.Release|Xbox 360.ActiveCfg = Release|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Debug|x86.ActiveCfg = Debug|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Debug|Xbox 360.ActiveCfg = Debug|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Release|Any CPU.ActiveCfg = Release|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Release|x86.ActiveCfg = Release|x86
-		{9C2901BA-B20D-49A3-9183-D620C369BAD0}.Release|Xbox 360.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

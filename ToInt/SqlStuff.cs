@@ -63,12 +63,12 @@ namespace Glib.SQL
     public interface ISQLParameterProvider
     {
         /// <summary>
-        /// The name of the provided parameter.
+        /// Gets the name of the provided parameter.
         /// </summary>
         string ParameterName { get; }
 
         /// <summary>
-        /// The value of the provided parameter.
+        /// Gets the value of the provided parameter.
         /// </summary>
         object ParameterValue { get; set; }
     }
