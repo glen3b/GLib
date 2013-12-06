@@ -17,26 +17,7 @@ namespace Glib.XNA.NetworkLib
         /// </summary>
         protected internal NetworkInformationReceivedEventArgs() { }
 
-        /// <summary>
-        /// Gets the name of the received property.
-        /// </summary>
-        public string PropertyName
-        {
-            get { return _propName; }
-            protected internal set { _propName = value; }
-        }
-
-        /// <summary>
-        /// Gets the received data.
-        /// </summary>
-        /// <remarks>
-        /// This will always be of type ReceivedType.
-        /// </remarks>
-        public object Data
-        {
-            get;
-            protected internal set;
-        }
+        
 
         /// <summary>
         /// Gets the recipient of this property information.
@@ -48,18 +29,9 @@ namespace Glib.XNA.NetworkLib
         }
 
         /// <summary>
-        /// Gets the sender of this property information.
+        /// Gets the sent data.
         /// </summary>
-        public Microsoft.Xna.Framework.Net.NetworkGamer Sender
-        {
-            get;
-            protected internal set;
-        }
-
-        /// <summary>
-        /// Gets the type of the received data.
-        /// </summary>
-        public Type ReceivedType
+        public NetworkData Data
         {
             get;
             protected internal set;

@@ -309,18 +309,16 @@ namespace Glib.XNA.NetworkLib
         /// </summary>
         /// <param name="activeReader">The <see cref="PacketReader"/> containing the data.</param>
         /// <param name="typeString">The string representing the type of the data, according to the sender.</param>
-        /// <param name="dataType">The actual type of the data.</param>
-        /// <param name="value">The actual data, represented as an instance of dataType.</param>
+        /// <param name="value">The actual data, represented as an instance of the type represented by typeString.</param>
         /// <returns>Whether this method successfully parsed the data.</returns>
         /// <remarks>
         /// The string typeString should be compared case insensitively.
         /// It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component), because it is a placeholder method.
         /// The base implementation of this method merely sets the output parameters to null and returns false. It should not be invoked.
         /// </remarks>
-        protected virtual bool ParseData(PacketReader activeReader, string typeString, out Type dataType, out object value)
+        protected virtual bool ParseData(PacketReader activeReader, string typeString, out object value)
         {
             //Unless overridden in subclass, does nothing
-            dataType = null;
             value = null;
             return false;
         }
@@ -360,31 +358,25 @@ namespace Glib.XNA.NetworkLib
                             string prop = read.ReadString();
                             string typeStr = read.ReadString();
                             object data = null;
-                            Type type = null;
                             switch (typeStr.ToLower())
                             {
                                 case "vector4":
                                     data = read.ReadVector4();
-                                    type = typeof(Vector4);
                                     break;
                                 case "string":
                                     data = read.ReadString();
-                                    type = typeof(string);
                                     break;
                                 case "double":
                                     data = read.ReadDouble();
-                                    type = typeof(double);
                                     break;
                                 case "matrix":
                                     data = read.ReadMatrix();
-                                    type = typeof(Matrix);
                                     break;
                                 case "integer":
                                     data = read.ReadInt32();
-                                    type = typeof(int);
                                     break;
                                 default:
-                                    if (!ParseData(read, typeStr, out type, out data))
+                                    if (!ParseData(read, typeStr, out data))
                                     {
                                         throw new InvalidCastException("The received data could not be parsed as a recognized type.");
                                     }
@@ -395,10 +387,7 @@ namespace Glib.XNA.NetworkLib
                             if (NetworkInformationReceived != null)
                             {
                                 NetworkInformationReceivedEventArgs args = new NetworkInformationReceivedEventArgs();
-                                args.PropertyName = prop;
-                                args.Data = data;
-                                args.ReceivedType = type;
-                                args.Sender = sender;
+                                args.Data = new NetworkData(prop, data, sender);
                                 args.Recipient = gamer;
                                 NetworkInformationReceived(this, args);
                             }
