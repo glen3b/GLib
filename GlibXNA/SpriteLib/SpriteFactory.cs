@@ -10,7 +10,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A class to construct sprites easily.
     /// </summary>
-    [Obsolete("Use an object initializer.")]
+    [Obsolete("Use an object initializer instead of this class.")]
     public class SpriteBuilder
     {
         private Sprite _constructing;
@@ -93,25 +93,6 @@ namespace Glib.XNA.SpriteLib
         public SpriteBuilder SetViewport(Viewport v)
         {
             _constructing.UsedViewport = v;
-            return this;
-        }
-
-        /// <summary>
-        /// Set the velocity of the sprite.
-        /// </summary>
-        /// <param name="v">The new Sprite velocity.</param>
-        /// <returns>This SpriteBuilder.</returns>
-        [Obsolete("Please use SetSpeed instead.", true)]
-        public SpriteBuilder SetVelocity(Velocity v)
-        {
-            if (v.XVelocity.HasValue)
-            {
-                _constructing.XSpeed = v.XVelocity.Value;
-            }
-            if (v.YVelocity.HasValue)
-            {
-                _constructing.YSpeed = v.YVelocity.Value;
-            }
             return this;
         }
 
