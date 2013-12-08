@@ -14,6 +14,26 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Name = {Name}")]
     public class Screen : IPositionable
     {
+        private float _layerDepth = 0;
+
+        /// <summary>
+        /// Gets or sets the layer depth at which to render the <see cref="Screen"/>.
+        /// </summary>
+        public float LayerDepth
+        {
+            get { return _layerDepth; }
+            set {
+                if (value < 0 || value > 1)
+                {
+                    throw new ArgumentOutOfRangeException("LayerDepth", value, "The layer depth must be between zero and one.");
+                }
+
+                _layerDepth = value;
+            
+            }
+        }
+        
+
         private static int screenNum = 1;
 
         /// <summary>
@@ -430,7 +450,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (s.Visible)
                 {
-                    SpriteBatch.Draw(s.Target, s.Position, null, s.TintColor, 0f, (s.CenterOrigin ? new Vector2(s.Width / 2, s.Height / 2): Vector2.Zero), Vector2.One, SpriteEffects.None, 0f);
+                    SpriteBatch.Draw(s.Target, s.Position, null, s.TintColor, 0f, (s.CenterOrigin ? new Vector2(s.Width / 2, s.Height / 2) : Vector2.Zero), Vector2.One, SpriteEffects.None, s.LayerDepth);
                 }
             }
         }

@@ -573,6 +573,26 @@ namespace Glib.XNA.SpriteLib
         private MouseState _lastMouseState = new MouseState();
 #endif
 
+        private float _layerDepth = 0;
+
+        /// <summary>
+        /// Gets or sets the layer depth at which to render the <see cref="Sprite"/>.
+        /// </summary>
+        public float LayerDepth
+        {
+            get { return _layerDepth; }
+            set
+            {
+                if (value < 0 || value > 1)
+                {
+                    throw new ArgumentOutOfRangeException("LayerDepth", value, "The layer depth must be between zero and one.");
+                }
+
+                _layerDepth = value;
+
+            }
+        }
+
         /// <summary>
         /// Draws the sprite.
         /// Requires you to begin the SpriteBatch before you draw the sprite, and to end the SpriteBatch after you draw the sprite.

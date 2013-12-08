@@ -439,12 +439,12 @@ namespace Glib.XNA.InputLib
                 {
                     if (_currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
                     {
-                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Left, _lastGamepadState.ThumbSticks.Left, _currentGamepadState.ThumbSticks.Left);
+                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Left, _lastGamepadState.ThumbSticks.Left, _currentGamepadState.ThumbSticks.Left));
                     }
 
                     if (_currentGamepadState.ThumbSticks.Right != _lastGamepadState.ThumbSticks.Right)
                     {
-                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Right, _lastGamepadState.ThumbSticks.Right, _currentGamepadState.ThumbSticks.Right);
+                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Right, _lastGamepadState.ThumbSticks.Right, _currentGamepadState.ThumbSticks.Right));
                     }
                 }
 

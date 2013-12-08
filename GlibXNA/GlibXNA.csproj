@@ -113,7 +113,6 @@
     <Compile Include="SpriteLib\TextSprite.cs" />
     <Compile Include="SpriteLib\UpdateParamaters.cs" />
     <Compile Include="SpriteLib\Updater.cs" />
-    <Compile Include="SpriteLib\Velocity.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />
     <Compile Include="ThreeDimensional\NamespaceDoc.cs" />

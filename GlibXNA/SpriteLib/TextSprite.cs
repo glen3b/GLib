@@ -17,6 +17,26 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Text = {Text}")]
     public class TextSprite : ISprite, IPositionable, ISizedScreenObject, ISizable
     {
+        private float _layerDepth = 0;
+
+        /// <summary>
+        /// Gets or sets the layer depth at which to render the <see cref="TextSprite"/>.
+        /// </summary>
+        public float LayerDepth
+        {
+            get { return _layerDepth; }
+            set
+            {
+                if (value < 0 || value > 1)
+                {
+                    throw new ArgumentOutOfRangeException("LayerDepth", value, "The layer depth must be between zero and one.");
+                }
+
+                _layerDepth = value;
+
+            }
+        }
+
         /// <summary>
         /// An event fired when the text of this TextSprite changes.
         /// </summary>
@@ -82,9 +102,9 @@ namespace Glib.XNA.SpriteLib
                     {
                         throw new InvalidOperationException("ShadowColor must have a value to draw a shadow on this TextSprite.");
                     }
-                    SpriteBatch.DrawString(Font, Text, Position + Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                    SpriteBatch.DrawString(Font, Text, Position + Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, _layerDepth);
                 }
-                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+                SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, _layerDepth);
             }
         }
 
