@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="InputLib\JoystickMovedEventArgs.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />
     <Compile Include="NetworkLib\NetworkInformationReceivedEventArgs.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="NetworkLib\NetworkSessionsFoundEventArgs.cs" />
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
+    <Compile Include="LeftRight.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\ParticleEngine\Particle.cs" />

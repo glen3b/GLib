@@ -189,6 +189,17 @@ namespace Glib.XNA.InputLib
         /// </summary>
         public event EventHandler RightShoulderReleased;
 
+        private GamePadButtons _currentState;
+
+        /// <summary>
+        /// Gets the current state of <see cref="GamePad"/> buttons.
+        /// </summary>
+        public GamePadButtons State
+        {
+            get { return _currentState; }
+        }
+        
+
         internal void FireEvents(GamePadButtons currentButtonState, GamePadButtons lastButtonState)
         {
             //TODO: Finish
@@ -263,6 +274,8 @@ namespace Glib.XNA.InputLib
             {
                 BackButtonReleased(this, EventArgs.Empty);
             }
+
+           _currentState = currentButtonState;
         }
     }
 
@@ -382,9 +395,9 @@ namespace Glib.XNA.InputLib
         
 
         /// <summary>
-        /// An event fired when the left joystick has moved.
+        /// An event fired when a joystick has moved.
         /// </summary>
-        public event EventHandler LeftJoystickMoved;
+        public event EventHandler<JoystickMovedEventArgs> JoystickMoved;
 
         /// <summary>
         /// An event fired when the left trigger has moved.
@@ -395,11 +408,6 @@ namespace Glib.XNA.InputLib
         /// An event fired when the right trigger has moved.
         /// </summary>
         public event EventHandler RightTriggerMoved;
-
-        /// <summary>
-        /// An event fired when the right joystick has moved.
-        /// </summary>
-        public event EventHandler RightJoystickMoved;
 
         /// <summary>
         /// An event fired when the GamePad has been disconnected.
@@ -421,17 +429,23 @@ namespace Glib.XNA.InputLib
         /// </summary>
         internal void Update()
         {
-            _currentGamepadState = GamePad.GetState(_player);
-            if (_currentGamepadState.PacketNumber != _lastGamepadState.PacketNumber)
-            {
-                if (LeftJoystickMoved != null && _currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
-                {
-                    LeftJoystickMoved(this, EventArgs.Empty);
-                }
+            GamePadState state = GamePad.GetState(_player);
 
-                if (RightJoystickMoved != null && _currentGamepadState.ThumbSticks.Right != _lastGamepadState.ThumbSticks.Right)
+            //If this is new information
+            if (state.PacketNumber != _lastGamepadState.PacketNumber)
+            {
+                _currentGamepadState = state;
+                if (JoystickMoved != null)
                 {
-                    RightJoystickMoved(this, EventArgs.Empty);
+                    if (_currentGamepadState.ThumbSticks.Left != _lastGamepadState.ThumbSticks.Left)
+                    {
+                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Left, _lastGamepadState.ThumbSticks.Left, _currentGamepadState.ThumbSticks.Left);
+                    }
+
+                    if (_currentGamepadState.ThumbSticks.Right != _lastGamepadState.ThumbSticks.Right)
+                    {
+                        JoystickMoved(this, new JoystickMovedEventArgs(LeftRight.Right, _lastGamepadState.ThumbSticks.Right, _currentGamepadState.ThumbSticks.Right);
+                    }
                 }
 
                 if (GamePadConnected != null && _currentGamepadState.IsConnected && !_lastGamepadState.IsConnected)
@@ -460,8 +474,9 @@ namespace Glib.XNA.InputLib
                 {
                     Updated(this, EventArgs.Empty);
                 }
+
+                _lastGamepadState = _currentGamepadState;
             }
-            _lastGamepadState = _currentGamepadState;
         }
 
         private GamePadState _currentGamepadState = new GamePadState();

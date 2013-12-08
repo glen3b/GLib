@@ -51,10 +51,12 @@
     <Compile Include="InputLib\GamePadButtonEnumerator.cs" />
     <Compile Include="InputLib\GamePadManager.cs" />
     <Compile Include="InputLib\InputManagerComponent.cs" />
+    <Compile Include="InputLib\JoystickMovedEventArgs.cs" />
     <Compile Include="InputLib\KeyboardManager.cs" />
     <Compile Include="InputLib\MouseManager.cs" />
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
+    <Compile Include="LeftRight.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />
