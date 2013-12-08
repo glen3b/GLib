@@ -4,7 +4,7 @@ Glen Library
 GLib is a simple, general purpose C# library covering windows forms, XNA, extension methods, and more. Feature requests, known bugs, and improvement suggestions are welcomed via the issue tracker!
 
 #### Downloads
-To download this project, please see <a href="http://glen3b.github.io/Glib">the website</a>.
+To download this project, please see <a href="http://glen3b.github.io/GLib">the website</a>.
 
 Copyright 2013 Glen Husman
 
