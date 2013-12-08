@@ -88,7 +88,6 @@
     <Compile Include="SpriteLib\SpriteRotation.cs" />
     <Compile Include="SpriteLib\SpriteSheet.cs" />
     <Compile Include="SpriteLib\SpriteWrapper.cs" />
-    <Compile Include="SpriteLib\SprPosMapping.cs" />
     <Compile Include="SpriteLib\TextBoxSprite.cs" />
     <Compile Include="SpriteLib\TextSprite.cs" />
     <Compile Include="SpriteLib\UpdateParamaters.cs" />
