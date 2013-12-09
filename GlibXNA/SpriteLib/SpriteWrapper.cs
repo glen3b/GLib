@@ -9,6 +9,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A class for managing multiple instances of any implementation of ISprite using the same SpriteBatch easily.
     /// </summary>
+    [Obsolete("Please use a Screen, and add ISprites to that screen instead.")]
     public class SpriteWrapper : ISprite, ITimerSprite
     {
         private List<ISprite> _sprites;

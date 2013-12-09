@@ -79,10 +79,16 @@ namespace Glib.XNA.SpriteLib
             Position = new Vector2(v.Width / 2, v.Height / 2);
         }
 
+        private List<IDrawableComponent> _addlSprites;
+
         /// <summary>
-        /// Any non-Sprite deriving Sprites that need to be drawn to this Screen.
+        /// Gets a collection of any non-Sprite deriving drawables that need to be drawn to this Screen.
         /// </summary>
-        public List<IDrawableComponent> AdditionalSprites = new List<IDrawableComponent>();
+        public List<IDrawableComponent> AdditionalSprites
+        {
+            get { return _addlSprites; }
+        }
+        
 
         /// <summary>
         /// The color to clear this screen as.
