@@ -25,7 +25,7 @@ namespace Glib.XNA.SpriteLib
             set {
                 if (value < 0 || value > 1)
                 {
-                    throw new ArgumentOutOfRangeException("LayerDepth", value, "The layer depth must be between zero and one.");
+                    throw new ArgumentOutOfRangeException("LayerDepth");
                 }
 
                 _layerDepth = value;
@@ -79,7 +79,7 @@ namespace Glib.XNA.SpriteLib
             Position = new Vector2(v.Width / 2, v.Height / 2);
         }
 
-        private List<IDrawableComponent> _addlSprites;
+        private List<IDrawableComponent> _addlSprites = new List<IDrawableComponent>();
 
         /// <summary>
         /// Gets a collection of any non-Sprite deriving drawables that need to be drawn to this Screen.

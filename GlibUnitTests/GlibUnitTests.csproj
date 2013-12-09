@@ -63,7 +63,6 @@
     <Compile Include="TestGame.cs" />
     <Compile Include="TextureFactoryTest.cs" />
     <Compile Include="UnitTestUtils.cs" />
-    <Compile Include="VelocityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlibXNA\GlibXNA.csproj">

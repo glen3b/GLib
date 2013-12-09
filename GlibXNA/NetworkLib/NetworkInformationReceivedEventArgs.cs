@@ -10,8 +10,6 @@ namespace Glib.XNA.NetworkLib
     /// </summary>
     public class NetworkInformationReceivedEventArgs : EventArgs
     {
-        private string _propName;
-
         /// <summary>
         /// Create a new <see cref="NetworkInformationReceivedEventArgs"/> with no data.
         /// </summary>

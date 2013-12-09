@@ -10,6 +10,7 @@ namespace Glib.XNA.SpriteLib
     /// A base class for generic update logic using a SpriteWrapper.
     /// Extend this class to implement sprite updating logic if you are using a SpriteWrapper.
     /// </summary>
+    [Obsolete()]
     public abstract class Updater
     {
         internal SpriteWrapper _sw;

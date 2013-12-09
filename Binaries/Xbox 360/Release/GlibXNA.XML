@@ -624,6 +624,11 @@
             If this is set to false, the Origin will not be changed.
             </remarks>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.LayerDepth">
+            <summary>
+            Gets or sets the layer depth at which to render the <see cref="T:Glib.XNA.SpriteLib.Sprite"/>.
+            </summary>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.BackgroundSprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Int32,System.Int32)">
             <summary>
             Create a new BackgroundSprite.
@@ -783,14 +788,13 @@
             <param name="recipient">The recipient of the data, or null if to send to everyone.</param>
             <param name="options">The <see cref="T:Microsoft.Xna.Framework.Net.SendDataOptions"/> to send the data with.</param>
         </member>
-        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.ParseData(Microsoft.Xna.Framework.Net.PacketReader,System.String,System.Type@,System.Object@)">
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.ParseData(Microsoft.Xna.Framework.Net.PacketReader,System.String,System.Object@)">
             <summary>
             Parse the incoming data from the specified <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> which is of the specified unknown type.
             </summary>
             <param name="activeReader">The <see cref="T:Microsoft.Xna.Framework.Net.PacketReader"/> containing the data.</param>
             <param name="typeString">The string representing the type of the data, according to the sender.</param>
-            <param name="dataType">The actual type of the data.</param>
-            <param name="value">The actual data, represented as an instance of dataType.</param>
+            <param name="value">The actual data, represented as an instance of the type represented by typeString.</param>
             <returns>Whether this method successfully parsed the data.</returns>
             <remarks>
             The string typeString should be compared case insensitively.
@@ -821,6 +825,39 @@
             <remarks>
             If you do not subscribe to this event, sending information over the network is pointless.
             </remarks>
+        </member>
+        <member name="T:Glib.XNA.InputLib.JoystickMovedEventArgs">
+            <summary>
+            Represents event arguments for the movement of a joystick on an Xbox controller.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.InputLib.JoystickMovedEventArgs.#ctor(Glib.XNA.LeftRight,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new instance of <see cref="T:Glib.XNA.InputLib.JoystickMovedEventArgs"/>.
+            </summary>
+            <param name="joystick">The identifier for the joystick.</param>
+            <param name="prevPos">The previous joystick position.</param>
+            <param name="currentPos">The current joystick position.</param>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.PreviousPosition">
+            <summary>
+            Gets the previous position of the joystick.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.CurrentPosition">
+            <summary>
+            Gets the current position of the joystick.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Difference">
+            <summary>
+            Gets the difference between the current joystick position and the previous joystick position.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Joystick">
+            <summary>
+            Gets the joystick that moved (left or right joystick).
+            </summary>
         </member>
         <member name="T:Glib.XNA.XnaExtensions">
             <summary>
@@ -954,6 +991,21 @@
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.SpriteLib.ParticleEngine"/> namespace provides a basic implementation of a particle engine.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.LeftRight">
+            <summary>
+            An enumerator representing a left or right direction.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.LeftRight.Left">
+            <summary>
+            The direction left.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.LeftRight.Right">
+            <summary>
+            The direction right.
             </summary>
         </member>
         <member name="T:Glib.XNA.InputLib.InputType">
@@ -1205,6 +1257,11 @@
             The rotation of the TextSprite.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.TextSprite.LayerDepth">
+            <summary>
+            Gets or sets the layer depth at which to render the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+        </member>
         <member name="E:Glib.XNA.SpriteLib.TextSprite.TextChanged">
             <summary>
             An event fired when the text of this TextSprite changes.
@@ -1291,36 +1348,6 @@
             This namespace is in beta.
             </remarks>
         </member>
-        <member name="T:Glib.XNA.SpriteLib.Velocity">
-            <summary>
-            Represents the velocity of a sprite.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.Velocity.XVelocity">
-            <summary>
-            The velocity on the X axis (null means no change).
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.Velocity.YVelocity">
-            <summary>
-            The velocity on the Y axis (null means no change).
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Velocity.#ctor">
-            <summary>
-            Construct a new velocity representing no change.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Velocity.#ctor(System.Single,System.Single)">
-            <summary>
-            Construct a new velocity representing the passed in values of XSpeed and YSpeed.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Velocity.Vector">
-            <summary>
-            Gets a Vector2 representing this Velocity.
-            </summary>
-        </member>
         <member name="T:Glib.XNA.SpriteLib.SpriteBuilder">
             <summary>
             A class to construct sprites easily.
@@ -1375,13 +1402,6 @@
             Set the viewport this Sprite should use.
             </summary>
             <param name="v">The Viewport this Sprite should use.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetVelocity(Glib.XNA.SpriteLib.Velocity)">
-            <summary>
-            Set the velocity of the sprite.
-            </summary>
-            <param name="v">The new Sprite velocity.</param>
             <returns>This SpriteBuilder.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetSpeed(System.Single,System.Single)">
@@ -1505,32 +1525,14 @@
             Create a new <see cref="T:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs"/> with no data.
             </summary>
         </member>
-        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.PropertyName">
-            <summary>
-            Gets the name of the received property.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Data">
-            <summary>
-            Gets the received data.
-            </summary>
-            <remarks>
-            This will always be of type ReceivedType.
-            </remarks>
-        </member>
         <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Recipient">
             <summary>
             Gets the recipient of this property information.
             </summary>
         </member>
-        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Sender">
+        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.Data">
             <summary>
-            Gets the sender of this property information.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs.ReceivedType">
-            <summary>
-            Gets the type of the received data.
+            Gets the sent data.
             </summary>
         </member>
         <member name="T:Glib.XNA.InputLib.DPadEvents">
@@ -1665,6 +1667,11 @@
             An event fired when the right shoulder is released.
             </summary>
         </member>
+        <member name="P:Glib.XNA.InputLib.ControllerButtonEvents.State">
+            <summary>
+            Gets the current state of <see cref="T:Microsoft.Xna.Framework.Input.GamePad"/> buttons.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.InputLib.GamePadManager">
             <summary>
             A manager of GamePad related information. This class cannot be inherited.
@@ -1722,9 +1729,9 @@
             Gets a class containing DPad-related Xbox 360 controller events.
             </summary>
         </member>
-        <member name="E:Glib.XNA.InputLib.GamePadManager.LeftJoystickMoved">
+        <member name="E:Glib.XNA.InputLib.GamePadManager.JoystickMoved">
             <summary>
-            An event fired when the left joystick has moved.
+            An event fired when a joystick has moved.
             </summary>
         </member>
         <member name="E:Glib.XNA.InputLib.GamePadManager.LeftTriggerMoved">
@@ -1735,11 +1742,6 @@
         <member name="E:Glib.XNA.InputLib.GamePadManager.RightTriggerMoved">
             <summary>
             An event fired when the right trigger has moved.
-            </summary>
-        </member>
-        <member name="E:Glib.XNA.InputLib.GamePadManager.RightJoystickMoved">
-            <summary>
-            An event fired when the right joystick has moved.
             </summary>
         </member>
         <member name="E:Glib.XNA.InputLib.GamePadManager.GamePadDisconnected">
@@ -1937,47 +1939,6 @@
             Updates the InputManagerComponent, calling the Update method on all input related classes.
             </summary>
             <param name="gameTime">The current GameTime.</param>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.SpritePositionMapping">
-            <summary>
-            A simple class for storing a mapping of ISprites to positions on the screen.
-            It is strongly suggested that the implementation of ISprite has a Location/Position property instead of using this class.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.FindPosition(Glib.XNA.ISprite)">
-            <summary>
-            Finds the position of a certain sprite.
-            </summary>
-            <param name="spr">The sprite to find the position of.</param>
-            <returns>The position of the sprite, or a blank Vector2 if not found</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.Remove(Glib.XNA.ISprite)">
-            <summary>
-            Remove the position of the specified ISprite from this SpritePositionMapping.
-            </summary>
-            <param name="spr">The sprite to remove.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.MoveSprite(Glib.XNA.ISprite,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Move the given sprite to a new position.
-            </summary>
-            <param name="spr">The sprite to move.</param>
-            <param name="newpos">The new position of the sprite.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpritePositionMapping.Item(Glib.XNA.ISprite)">
-            <summary>
-            Get and set the position of the specified ISprite.
-            </summary>
-            <param name="sprite">The ISprite you want to change the position of.</param>
-            <returns>The position of the given ISprite.</returns>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpritePositionMapping.Length">
-            <summary>
-            The number of items in this SpritePositionMapping.
-            </summary>
-            <remarks>
-            The same thing as Count.
-            </remarks>
         </member>
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator">
             <summary>
@@ -2633,6 +2594,49 @@
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.TimeToLiveSettings">
             <summary>
             Gets or sets a value indicating how to apply the time to live setting.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.NetworkData">
+            <summary>
+            Represents network information.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkData.#ctor(System.String,System.Object)">
+            <summary>
+            Creates a new piece of network information.
+            </summary>
+            <param name="dataName">The name identifying the information.</param>
+            <param name="data">The actual data.</param>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkData.#ctor(System.String,System.Object,Microsoft.Xna.Framework.Net.NetworkGamer)">
+            <summary>
+            Creates a new piece of network information.
+            </summary>
+            <param name="dataName">The name identifying the information.</param>
+            <param name="data">The actual data.</param>
+            <param name="sender">The sender of network information.</param>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkData.Name">
+            <summary>
+            Gets the name of this information.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkData.Data">
+            <summary>
+            Gets the data.
+            </summary>
+            <remarks>
+            This will always be of type DataType.
+            </remarks>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkData.Sender">
+            <summary>
+            Gets the sender of this information.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.NetworkData.DataType">
+            <summary>
+            Gets the type of the network data.
             </summary>
         </member>
         <member name="T:Glib.XNA.TextureFactory">
@@ -3325,11 +3329,6 @@
             </summary>
             <param name="v">The viewport to center to.</param>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Screen.AdditionalSprites">
-            <summary>
-            Any non-Sprite deriving Sprites that need to be drawn to this Screen.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Screen.ClearColor">
             <summary>
             The color to clear this screen as.
@@ -3415,6 +3414,11 @@
             </summary>
             <param name="game">The active game time.</param>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.Screen.LayerDepth">
+            <summary>
+            Gets or sets the layer depth at which to render the <see cref="T:Glib.XNA.SpriteLib.Screen"/>.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.Screen.Visible">
             <summary>
             Gets or sets a boolean representing whether or not this Screen is visible.
@@ -3428,6 +3432,11 @@
         <member name="P:Glib.XNA.SpriteLib.Screen.CenterOrigin">
             <summary>
             Gets or sets a value indicating whether or not to use the center of the Screen as the origin when drawing.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Screen.AdditionalSprites">
+            <summary>
+            Gets a collection of any non-Sprite deriving drawables that need to be drawn to this Screen.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Screen.Width">

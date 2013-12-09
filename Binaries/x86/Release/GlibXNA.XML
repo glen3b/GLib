@@ -932,6 +932,39 @@
             If you do not subscribe to this event, sending information over the network is pointless.
             </remarks>
         </member>
+        <member name="T:Glib.XNA.InputLib.JoystickMovedEventArgs">
+            <summary>
+            Represents event arguments for the movement of a joystick on an Xbox controller.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.InputLib.JoystickMovedEventArgs.#ctor(Glib.XNA.LeftRight,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new instance of <see cref="T:Glib.XNA.InputLib.JoystickMovedEventArgs"/>.
+            </summary>
+            <param name="joystick">The identifier for the joystick.</param>
+            <param name="prevPos">The previous joystick position.</param>
+            <param name="currentPos">The current joystick position.</param>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.PreviousPosition">
+            <summary>
+            Gets the previous position of the joystick.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.CurrentPosition">
+            <summary>
+            Gets the current position of the joystick.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Difference">
+            <summary>
+            Gets the difference between the current joystick position and the previous joystick position.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Joystick">
+            <summary>
+            Gets the joystick that moved (left or right joystick).
+            </summary>
+        </member>
         <member name="T:Glib.XNA.XnaExtensions">
             <summary>
             Extensions onto XNA objects.
@@ -1195,6 +1228,21 @@
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.SpriteLib.ParticleEngine"/> namespace provides a basic implementation of a particle engine.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.LeftRight">
+            <summary>
+            An enumerator representing a left or right direction.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.LeftRight.Left">
+            <summary>
+            The direction left.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.LeftRight.Right">
+            <summary>
+            The direction right.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.TextSprite">
@@ -2018,47 +2066,6 @@
             Updates the InputManagerComponent, calling the Update method on all input related classes.
             </summary>
             <param name="gameTime">The current GameTime.</param>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.SpritePositionMapping">
-            <summary>
-            A simple class for storing a mapping of ISprites to positions on the screen.
-            It is strongly suggested that the implementation of ISprite has a Location/Position property instead of using this class.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.FindPosition(Glib.XNA.ISprite)">
-            <summary>
-            Finds the position of a certain sprite.
-            </summary>
-            <param name="spr">The sprite to find the position of.</param>
-            <returns>The position of the sprite, or a blank Vector2 if not found</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.Remove(Glib.XNA.ISprite)">
-            <summary>
-            Remove the position of the specified ISprite from this SpritePositionMapping.
-            </summary>
-            <param name="spr">The sprite to remove.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpritePositionMapping.MoveSprite(Glib.XNA.ISprite,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Move the given sprite to a new position.
-            </summary>
-            <param name="spr">The sprite to move.</param>
-            <param name="newpos">The new position of the sprite.</param>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpritePositionMapping.Item(Glib.XNA.ISprite)">
-            <summary>
-            Get and set the position of the specified ISprite.
-            </summary>
-            <param name="sprite">The ISprite you want to change the position of.</param>
-            <returns>The position of the given ISprite.</returns>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpritePositionMapping.Length">
-            <summary>
-            The number of items in this SpritePositionMapping.
-            </summary>
-            <remarks>
-            The same thing as Count.
-            </remarks>
         </member>
         <member name="T:Glib.XNA.InputLib.NamespaceDoc">
             <summary>
@@ -3449,11 +3456,6 @@
             </summary>
             <param name="v">The viewport to center to.</param>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Screen.AdditionalSprites">
-            <summary>
-            Any non-Sprite deriving Sprites that need to be drawn to this Screen.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Screen.ClearColor">
             <summary>
             The color to clear this screen as.
@@ -3557,6 +3559,11 @@
         <member name="P:Glib.XNA.SpriteLib.Screen.CenterOrigin">
             <summary>
             Gets or sets a value indicating whether or not to use the center of the Screen as the origin when drawing.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Screen.AdditionalSprites">
+            <summary>
+            Gets a collection of any non-Sprite deriving drawables that need to be drawn to this Screen.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Screen.Width">
@@ -4024,54 +4031,6 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.InputLib.JoystickMovedEventArgs">
-            <summary>
-            Represents event arguments for the movement of a joystick on an Xbox controller.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.InputLib.JoystickMovedEventArgs.#ctor(Glib.XNA.LeftRight,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Creates a new instance of <see cref="T:Glib.XNA.InputLib.JoystickMovedEventArgs"/>.
-            </summary>
-            <param name="joystick">The identifier for the joystick.</param>
-            <param name="prevPos">The previous joystick position.</param>
-            <param name="currentPos">The current joystick position.</param>
-        </member>
-        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.PreviousPosition">
-            <summary>
-            Gets the previous position of the joystick.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.CurrentPosition">
-            <summary>
-            Gets the current position of the joystick.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Difference">
-            <summary>
-            Gets the difference between the current joystick position and the previous joystick position.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Joystick">
-            <summary>
-            Gets the joystick that moved (left or right joystick).
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.LeftRight">
-            <summary>
-            An enumerator representing a left or right direction.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.LeftRight.Left">
-            <summary>
-            The direction left.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.LeftRight.Right">
-            <summary>
-            The direction right.
             </summary>
         </member>
     </members>
