@@ -80,6 +80,7 @@
     <Compile Include="SpriteLib\ParticleEngine\RandomParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\TimeToLiveSettings.cs" />
     <Compile Include="SpriteLib\Shadow.cs" />
+    <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\VideoSprite.cs" />
     <Compile Include="ThreeDimensional\ModelRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

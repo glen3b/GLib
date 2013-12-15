@@ -90,6 +90,7 @@
     <Compile Include="SpriteLib\SpriteSheet.cs" />
     <Compile Include="SpriteLib\SpriteWrapper.cs" />
     <Compile Include="SpriteLib\TextBoxSprite.cs" />
+    <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\TextSprite.cs" />
     <Compile Include="SpriteLib\UpdateParamaters.cs" />
     <Compile Include="SpriteLib\Updater.cs" />

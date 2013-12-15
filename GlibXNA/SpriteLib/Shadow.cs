@@ -10,14 +10,15 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A shadow behind an object.
     /// </summary>
-    public abstract class Shadow : IDrawableComponent, IPositionable
+    /// <typeparam name="TShadowed">The type of the shadowed object.</typeparam>
+    public abstract class Shadow<TShadowed> : IDrawableComponent, IPositionable where TShadowed : IPositionable
     {
         /// <summary>
         /// Creates a shadow, shadowing the specified object at the specified relative position.
         /// </summary>
         /// <param name="shadowed">The shadowed object.</param>
         /// <param name="relativePos">The position of the shadow relative to the shadowed object.</param>
-        public Shadow(IPositionable shadowed, Vector2 relativePos)
+        public Shadow(TShadowed shadowed, Vector2 relativePos)
         {
             if (shadowed == null)
             {
@@ -31,7 +32,7 @@ namespace Glib.XNA.SpriteLib
         /// Creates a shadow, shadowing the specified object.
         /// </summary>
         /// <param name="shadowed">The shadowed object.</param>
-        public Shadow(IPositionable shadowed) : this(shadowed, Vector2.One) { }
+        public Shadow(TShadowed shadowed) : this(shadowed, Vector2.One) { }
 
         private Vector2 _relativePosition = Vector2.One;
 
@@ -44,12 +45,12 @@ namespace Glib.XNA.SpriteLib
             set { _relativePosition = value; }
         }
 
-        private IPositionable _shadowedObject;
+        private TShadowed _shadowedObject;
 
         /// <summary>
         /// Gets or sets the object that is shadowed.
         /// </summary>
-        public IPositionable ShadowedObject
+        public TShadowed ShadowedObject
         {
             get { return _shadowedObject; }
             set
@@ -66,7 +67,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the absolute position of the shadow.
         /// </summary>
-        Vector2 IPositionable.Position
+        public Vector2 Position
         {
             get
             {
@@ -85,5 +86,10 @@ namespace Glib.XNA.SpriteLib
                 RelativePosition = value - ShadowedObject.Position;
             }
         }
+
+        /// <summary>
+        /// Renders the shadow.
+        /// </summary>
+        public abstract void Draw();
     }
 }
