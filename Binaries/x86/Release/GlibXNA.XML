@@ -1250,11 +1250,6 @@
             An ISprite representing text.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.TextSprite.ShadowColor">
-            <summary>
-            The color that, if applicable, this TextSprite should be shadowed with.
-            </summary>
-        </member>
         <member name="M:Glib.XNA.SpriteLib.TextSprite.Draw">
             <summary>
             Draw this text sprite to the SpriteBatch.
@@ -1356,6 +1351,16 @@
         <member name="P:Glib.XNA.SpriteLib.TextSprite.IsDraggable">
             <summary>
             Gets or sets a boolean indicating whether this <see cref="T:Glib.XNA.SpriteLib.TextSprite"/> is draggable with the mouse.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextSprite.Shadow">
+            <summary>
+            Gets or sets the shadow of this <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextSprite.ShadowColor">
+            <summary>
+            The color that, if applicable, this TextSprite should be shadowed with.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.TextSprite.IsShadowed">
@@ -4031,6 +4036,88 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.Shadow`1">
+            <summary>
+            A shadow behind an object.
+            </summary>
+            <typeparam name="TShadowed">The type of the shadowed object.</typeparam>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a shadow, shadowing the specified object at the specified relative position.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativePos">The position of the shadow relative to the shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0)">
+            <summary>
+            Creates a shadow, shadowing the specified object.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.Draw">
+            <summary>
+            Renders the shadow.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.RelativePosition">
+            <summary>
+            Gets or sets the position of the shadow relative to <see cref="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject"/>.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject">
+            <summary>
+            Gets or sets the object that is shadowed.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.Position">
+            <summary>
+            Gets or sets the absolute position of the shadow.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.TextShadow">
+            <summary>
+            A shadow that shadows text.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
+            <param name="shadowColor">The color of the shadow.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="shadowColor">The color of the shadow.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.Draw">
+            <summary>
+            Draws the shadow of <see cref="!:ShadowedObject"/>.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextShadow.ShadowColor">
+            <summary>
+            Gets or sets the color of the shadow.
             </summary>
         </member>
     </members>

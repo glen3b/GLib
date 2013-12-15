@@ -60,31 +60,56 @@ namespace Glib.XNA.SpriteLib
         }
 #endif
 
+        private TextShadow _shadow;
 
-        private bool _isShadowed = false;
+        /// <summary>
+        /// Gets or sets the shadow of this <see cref="TextSprite"/>.
+        /// </summary>
+        public TextShadow Shadow
+        {
+            get { return _shadow; }
+            set { _shadow = value; }
+        }
+
 
         /// <summary>
         /// The color that, if applicable, this TextSprite should be shadowed with.
         /// </summary>
-        public Color? ShadowColor = null;
+        [Obsolete("Use Shadow instead.")]
+        public Color? ShadowColor
+        {
+            get
+            {
+                return Shadow == null ? (Color?)null : (Color?)Shadow.ShadowColor;
+            }
+            set
+            {
+                if (!value.HasValue)
+                {
+                    Shadow = null;
+                }
+
+                if (Shadow == null)
+                {
+                    Shadow = new TextShadow(this, value.Value);
+                }
+                else
+                {
+                    Shadow.ShadowColor = value.Value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets a boolean indicating whether or not this TextSprie is shadowed.
         /// </summary>
+        [Obsolete("Use Shadow instead.")]
         public bool IsShadowed
         {
-            get { return _isShadowed; }
+            get { return Shadow != null; }
             set
             {
-                if (value != _isShadowed)
-                {
-                    _isShadowed = value;
-                    if (!ShadowColor.HasValue)
-                    {
-                        Color mainColor = NonHoverColor.HasValue ? NonHoverColor.Value : Color;
-                        ShadowColor = new Color(255 - mainColor.R, 255 - mainColor.G, 255 - mainColor.B, mainColor.A);
-                    }
-                }
+                Shadow = value ? (Shadow == null ? new TextShadow(this) : Shadow) : null;
             }
         }
 
@@ -96,13 +121,10 @@ namespace Glib.XNA.SpriteLib
         {
             if (Visible)
             {
-                if (IsShadowed)
+                if (Shadow != null)
                 {
-                    if (!ShadowColor.HasValue)
-                    {
-                        throw new InvalidOperationException("ShadowColor must have a value to draw a shadow on this TextSprite.");
-                    }
-                    SpriteBatch.DrawString(Font, Text, Position + Vector2.One, ShadowColor.Value, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, _layerDepth);
+                    Shadow.ShadowedObject = this;
+                    Shadow.Draw();
                 }
                 SpriteBatch.DrawString(Font, Text, Position, Color, Rotation.Radians, Vector2.Zero, Scale, SpriteEffects.None, _layerDepth);
             }

@@ -66,13 +66,18 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Draws the shadow of <see cref="ShadowedObject"/>.
+        /// Draws the shadow of the shadowed object.
         /// </summary>
         public override void Draw()
         {
             if (ShadowedObject == null)
             {
                 throw new InvalidOperationException();
+            }
+
+            if (!ShadowedObject.Visible)
+            {
+                return;
             }
 
             ShadowedObject.SpriteBatch.DrawString(ShadowedObject.Font, ShadowedObject.Text, Position, ShadowColor, ShadowedObject.Rotation.Radians, Vector2.Zero, ShadowedObject.Scale, SpriteEffects.None, 1);
