@@ -80,7 +80,7 @@ namespace Glib.XNA.SpriteLib
                 return;
             }
 
-            ShadowedObject.SpriteBatch.DrawString(ShadowedObject.Font, ShadowedObject.Text, Position, ShadowColor, ShadowedObject.Rotation.Radians, Vector2.Zero, ShadowedObject.Scale, SpriteEffects.None, 1);
+            ShadowedObject.SpriteBatch.DrawString(ShadowedObject.Font, ShadowedObject.Text, Position, ShadowColor, ShadowedObject.Rotation.Radians, Vector2.Zero, ShadowedObject.Scale, SpriteEffects.None, 1-float.Epsilon);
         }
     }
 }

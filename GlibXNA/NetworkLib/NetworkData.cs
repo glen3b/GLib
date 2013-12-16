@@ -54,7 +54,7 @@ namespace Glib.XNA.NetworkLib
         public object Data
         {
             get { return _data; }
-            protected internal set { if (value == null) { throw new ArgumentNullException(); } _data = value; }
+            protected internal set { if (value == null) { throw new ArgumentNullException(); } _data = value; DataType = value.GetType(); }
         }
 
         private object _data;
@@ -73,10 +73,8 @@ namespace Glib.XNA.NetworkLib
         /// </summary>
         public Type DataType
         {
-            get
-            {
-                return Data.GetType();
-            }
+            get;
+            protected internal set;
         }
 
     }

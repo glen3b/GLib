@@ -4112,12 +4112,104 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.TextShadow.Draw">
             <summary>
-            Draws the shadow of <see cref="!:ShadowedObject"/>.
+            Draws the shadow of the shadowed object.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.TextShadow.ShadowColor">
             <summary>
             Gets or sets the color of the shadow.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.INetworkSerializer`1">
+            <summary>
+            Represents a type for preparing arbitrary data for network transmission as a string
+            </summary>
+            <typeparam name="TSerialized">The serialized type.</typeparam>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.INetworkSerializer`1.Serialize(`0)">
+            <summary>
+            Serializes the speficied data.
+            </summary>
+            <param name="data">The data to serialize.</param>
+            <returns>The serialized data.</returns>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.INetworkSerializer`1.Deserialize(System.String)">
+            <summary>
+            Deserializes the speficied data.
+            </summary>
+            <param name="serializedData">The data as a string.</param>
+            <returns>The deserialized data.</returns>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.Vector2Serializer">
+            <summary>
+            Serializes <see cref="T:Microsoft.Xna.Framework.Vector2"/> objects.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector2Serializer.Serialize(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Serializes the speficied data.
+            </summary>
+            <param name="data">The data to serialize.</param>
+            <returns>The serialized data.</returns>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector2Serializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the speficied data.
+            </summary>
+            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector2"/>, as a string.</param>
+            <returns>The deserialized data.</returns>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.Vector2Serializer.Instance">
+            <summary>
+            Gets the instance of the serializer.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.Vector3Serializer">
+            <summary>
+            Serializes <see cref="T:Microsoft.Xna.Framework.Vector3"/> objects.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector3Serializer.Serialize(Microsoft.Xna.Framework.Vector3)">
+            <summary>
+            Serializes the speficied data.
+            </summary>
+            <param name="data">The data to serialize.</param>
+            <returns>The serialized data.</returns>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector3Serializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the speficied data.
+            </summary>
+            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector3"/>, as a string.</param>
+            <returns>The deserialized data.</returns>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.Vector3Serializer.Instance">
+            <summary>
+            Gets the instance of the serializer.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.NetworkLib.Vector4Serializer">
+            <summary>
+            Serializes <see cref="T:Microsoft.Xna.Framework.Vector4"/> objects.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector4Serializer.Serialize(Microsoft.Xna.Framework.Vector4)">
+            <summary>
+            Serializes the speficied data.
+            </summary>
+            <param name="data">The data to serialize.</param>
+            <returns>The serialized data.</returns>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.Vector4Serializer.Deserialize(System.String)">
+            <summary>
+            Deserializes the speficied data.
+            </summary>
+            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector4"/>, as a string.</param>
+            <returns>The deserialized data.</returns>
+        </member>
+        <member name="P:Glib.XNA.NetworkLib.Vector4Serializer.Instance">
+            <summary>
+            Gets the instance of the serializer.
             </summary>
         </member>
     </members>
