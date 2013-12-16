@@ -33,7 +33,7 @@ namespace Glib.XNA.NetworkLib
             : base(game)
         {
         }
-        
+
 
         /// <summary>
         /// Allows the game component to perform any initialization it needs to before starting
@@ -266,11 +266,10 @@ namespace Glib.XNA.NetworkLib
         /// <param name="propertyName">The name of the property to send.</param>
         /// <param name="senderIndex">The index of the sender in the <see cref="Session"/>'s LocalGamers collection.</param>
         /// <param name="data">The data to send.</param>
-        /// <typeparam name="T">The type of the data array.</typeparam>
         /// <remarks>
-        /// Sends 3 strings.
+        /// Sends 3 values - two strings and a vector array (the data).
         /// </remarks>
-        public virtual void WriteDataArray<T>(string propertyName, int senderIndex, params T[] data)
+        public virtual void WriteData(string propertyName, int senderIndex, Vector4[] data)
         {
             if (!IsNetworking)
             {
@@ -284,60 +283,62 @@ namespace Glib.XNA.NetworkLib
             {
                 throw new ArgumentNullException("propertyName");
             }
-            
-            if(data == null){
+            if (data == null)
+            {
                 throw new ArgumentNullException("data");
             }
 
-            INetworkSerializer serializer = null;
-
-            for (int i = 0; i < Serializers.Count; i++)
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Vector4Array");
+            StringBuilder array = new StringBuilder();
+            foreach (Vector4 v4 in data)
             {
-                if (Serializers[i] == null)
-                {
-                    Serializers.RemoveAt(i);
-                    i--;
-                    continue;
-                }
-
-                if (Serializers[i].SupportedType == typeof(T))
-                {
-                    serializer = Serializers[i];
-                    break;
-                }
+                array.Append(string.Format("({0},{1},{2},{3})", v4.X, v4.Y, v4.Z, v4.W));
+                array.Append('\0');
             }
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(array.ToString());
+        }
 
-            if (serializer == null)
+        /// <summary>
+        /// Writes data to the specified <see cref="LocalNetworkGamer"/>'s <see cref="PacketWriter"/> to be sent across the network.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to send.</param>
+        /// <param name="senderIndex">The index of the sender in the <see cref="Session"/>'s LocalGamers collection.</param>
+        /// <param name="data">The data to send.</param>
+        /// <remarks>
+        /// Sends 3 values - two strings and an integer array (the data).
+        /// </remarks>
+        public virtual void WriteData(string propertyName, int senderIndex, int[] data)
+        {
+            if (!IsNetworking)
             {
-                throw new InvalidOperationException("The specified type has no registered serializers.");
+                throw new InvalidOperationException("This component is not currently active.");
             }
-
-            StringBuilder array = new StringBuilder(string.Empty);
-            
-            foreach(T element in data)
+            if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
             {
-                array.Append(serializer.Serialize(element));
-                array.Append(NetworkArrayDelimiter);
+                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+            }
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName");
+            }
+            if (data == null)
+            {
+                throw new ArgumentNullException("data");
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
-            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(string.Format("Array<{0}>", typeof(T).Name));
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write("IntegerArray");
+            StringBuilder array = new StringBuilder();
+            foreach (int i in data)
+            {
+                array.Append(i);
+                array.Append('\0');
+            }
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(array.ToString());
         }
         #endregion
 
-        private const string NetworkArrayDelimiter = "\n\n\n";
-
-        private List<INetworkSerializer> _serializers = new List<INetworkSerializer>(new INetworkSerializer[]{ Vector2Serializer.Instance, Vector3Serializer.Instance, Vector4Serializer.Instance });
-
-        /// <summary>
-        /// Gets a list of network serializers used for array transmission.
-        /// </summary>
-        public List<INetworkSerializer> Serializers
-        {
-            get { return _serializers; }
-        }
-        
 
         /// <summary>
         /// Sends data for the specified <see cref="LocalNetworkGamer"/> across the network.
@@ -455,12 +456,26 @@ namespace Glib.XNA.NetworkLib
                                 case "integer":
                                     data = read.ReadInt32();
                                     break;
-                                default:
-                                    if (typeStr.Length > 5 && typeStr.Substring(0, 5).Equals("array", StringComparison.InvariantCultureIgnoreCase))
+                                case "vector4array":
+                                    string[] datas = read.ReadString().Split('\0');
+                                    Vector4[] result = new Vector4[datas.Length];
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        //Parsing array
-                                        throw new InvalidOperationException("This code path has been discontinued as too generic.");
+                                        string[] numbas = datas[i].Replace("(", "").Replace(")", "").Split(',');
+                                        result[i] = new Vector4(float.Parse(numbas[0]), float.Parse(numbas[1]), float.Parse(numbas[2]), float.Parse(numbas[3]));
                                     }
+                                    data = result;
+                                    break;
+                                case "integerarray":
+                                    string[] ints = read.ReadString().Split('\0');
+                                    int[] intRes = new int[ints.Length];
+                                    for (int i = 0; i < intRes.Length; i++)
+                                    {
+                                        intRes[i] = ints[i].ToInt();
+                                    }
+                                    data = intRes;
+                                    break;
+                                default:
 
                                     if (!ParseData(read, typeStr, out data))
                                     {
