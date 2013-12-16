@@ -73,7 +73,7 @@
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="LeftRight.cs" />
-    <Compile Include="NetworkLib\VectorSerializers.cs" />
+    <Compile Include="NetworkLib\VectorSerializer.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\ParticleEngine\Particle.cs" />

@@ -8,21 +8,25 @@ namespace Glib.XNA.NetworkLib
     /// <summary>
     /// Represents a type for preparing arbitrary data for network transmission as a string
     /// </summary>
-    /// <typeparam name="TSerialized">The serialized type.</typeparam>
-    public interface INetworkSerializer<TSerialized>
+    public interface INetworkSerializer
     {
         /// <summary>
         /// Serializes the speficied data.
         /// </summary>
         /// <param name="data">The data to serialize.</param>
         /// <returns>The serialized data.</returns>
-        string Serialize(TSerialized data);
+        string Serialize(object data);
 
         /// <summary>
         /// Deserializes the speficied data.
         /// </summary>
         /// <param name="serializedData">The data as a string.</param>
         /// <returns>The deserialized data.</returns>
-        TSerialized Deserialize(String serializedData);
+        object Deserialize(String serializedData);
+
+        /// <summary>
+        /// Gets the supported type of this serializer.
+        /// </summary>
+        Type SupportedType { get; }
     }
 }

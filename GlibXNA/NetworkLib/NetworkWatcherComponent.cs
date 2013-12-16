@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
+using System.Text;
 
 
 namespace Glib.XNA.NetworkLib
@@ -32,6 +33,7 @@ namespace Glib.XNA.NetworkLib
             : base(game)
         {
         }
+        
 
         /// <summary>
         /// Allows the game component to perform any initialization it needs to before starting
@@ -221,7 +223,7 @@ namespace Glib.XNA.NetworkLib
             }
             if (propertyName == null)
             {
-                throw new ArgumentException("propertyName");
+                throw new ArgumentNullException("propertyName");
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
@@ -250,14 +252,92 @@ namespace Glib.XNA.NetworkLib
             }
             if (propertyName == null)
             {
-                throw new ArgumentException("propertyName");
+                throw new ArgumentNullException("propertyName");
             }
 
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write("Integer");
             _dataWriters[Session.LocalGamers[senderIndex].Id].Write(data);
         }
+
+        /// <summary>
+        /// Writes data to the specified <see cref="LocalNetworkGamer"/>'s <see cref="PacketWriter"/> to be sent across the network.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to send.</param>
+        /// <param name="senderIndex">The index of the sender in the <see cref="Session"/>'s LocalGamers collection.</param>
+        /// <param name="data">The data to send.</param>
+        /// <typeparam name="T">The type of the data array.</typeparam>
+        /// <remarks>
+        /// Sends 3 strings.
+        /// </remarks>
+        public virtual void WriteDataArray<T>(string propertyName, int senderIndex, params T[] data)
+        {
+            if (!IsNetworking)
+            {
+                throw new InvalidOperationException("This component is not currently active.");
+            }
+            if (senderIndex >= Session.LocalGamers.Count || senderIndex < 0)
+            {
+                throw new ArgumentException("The senderIndex parameter is outside of the bounds of Session.LocalGamers.");
+            }
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName");
+            }
+            
+            if(data == null){
+                throw new ArgumentNullException("data");
+            }
+
+            INetworkSerializer serializer = null;
+
+            for (int i = 0; i < Serializers.Count; i++)
+            {
+                if (Serializers[i] == null)
+                {
+                    Serializers.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
+                if (Serializers[i].SupportedType == typeof(T))
+                {
+                    serializer = Serializers[i];
+                    break;
+                }
+            }
+
+            if (serializer == null)
+            {
+                throw new InvalidOperationException("The specified type has no registered serializers.");
+            }
+
+            StringBuilder array = new StringBuilder(string.Empty);
+            
+            foreach(T element in data)
+            {
+                array.Append(serializer.Serialize(element));
+                array.Append(NetworkArrayDelimiter);
+            }
+
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(propertyName);
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(string.Format("Array<{0}>", typeof(T).Name));
+            _dataWriters[Session.LocalGamers[senderIndex].Id].Write(array.ToString());
+        }
         #endregion
+
+        private const string NetworkArrayDelimiter = "\n\n\n";
+
+        private List<INetworkSerializer> _serializers = new List<INetworkSerializer>(new INetworkSerializer[]{ Vector2Serializer.Instance, Vector3Serializer.Instance, Vector4Serializer.Instance });
+
+        /// <summary>
+        /// Gets a list of network serializers used for array transmission.
+        /// </summary>
+        public List<INetworkSerializer> Serializers
+        {
+            get { return _serializers; }
+        }
+        
 
         /// <summary>
         /// Sends data for the specified <see cref="LocalNetworkGamer"/> across the network.
@@ -376,6 +456,12 @@ namespace Glib.XNA.NetworkLib
                                     data = read.ReadInt32();
                                     break;
                                 default:
+                                    if (typeStr.Length > 5 && typeStr.Substring(0, 5).Equals("array", StringComparison.InvariantCultureIgnoreCase))
+                                    {
+                                        //Parsing array
+                                        throw new InvalidOperationException("This code path has been discontinued as too generic.");
+                                    }
+
                                     if (!ParseData(read, typeStr, out data))
                                     {
                                         throw new InvalidCastException("The received data could not be parsed as a recognized type.");
