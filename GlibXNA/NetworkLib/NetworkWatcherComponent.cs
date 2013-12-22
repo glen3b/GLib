@@ -457,23 +457,37 @@ namespace Glib.XNA.NetworkLib
                                     data = read.ReadInt32();
                                     break;
                                 case "vector4array":
-                                    string[] datas = read.ReadString().Split('\0');
-                                    Vector4[] result = new Vector4[datas.Length];
-                                    for (int i = 0; i < result.Length; i++)
+                                    try
                                     {
-                                        string[] numbas = datas[i].Replace("(", "").Replace(")", "").Split(',');
-                                        result[i] = new Vector4(float.Parse(numbas[0]), float.Parse(numbas[1]), float.Parse(numbas[2]), float.Parse(numbas[3]));
+                                        string[] serializedvector4array = read.ReadString().Split('\0');
+                                        Vector4[] v4res = new Vector4[serializedvector4array.Length];
+                                        for (int i = 0; i < v4res.Length; i++)
+                                        {
+                                            string[] numbas = serializedvector4array[i].Replace("(", "").Replace(")", "").Split(',');
+                                            v4res[i] = new Vector4(float.Parse(numbas[0]), float.Parse(numbas[1]), float.Parse(numbas[2]), float.Parse(numbas[3]));
+                                        }
+                                        data = v4res;
                                     }
-                                    data = result;
+                                    catch
+                                    {
+                                        throw new InvalidCastException("The received data was labeled as a Vector4[], but an error occurred during the parsing of the array.");
+                                    }
                                     break;
                                 case "integerarray":
-                                    string[] ints = read.ReadString().Split('\0');
-                                    int[] intRes = new int[ints.Length];
-                                    for (int i = 0; i < intRes.Length; i++)
+                                    try
                                     {
-                                        intRes[i] = ints[i].ToInt();
+                                        string[] ints = read.ReadString().Split('\0');
+                                        int[] intRes = new int[ints.Length];
+                                        for (int i = 0; i < intRes.Length; i++)
+                                        {
+                                            intRes[i] = ints[i].ToInt();
+                                        }
+                                        data = intRes;
                                     }
-                                    data = intRes;
+                                    catch
+                                    {
+                                        throw new InvalidCastException("The received data was labeled as an Integer[], but an error occurred during the parsing of the array.");
+                                    }
                                     break;
                                 default:
 

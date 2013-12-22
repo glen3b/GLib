@@ -233,5 +233,70 @@ namespace Glib.XNA
         {
             return triangle.X.RaiseToPower(2) + triangle.Y.RaiseToPower(2) == triangle.Z.RaiseToPower(2);
         }
+
+        /// <summary>
+        /// Generates a new <see cref="Vector2"/> within the specified range.
+        /// </summary>
+        /// <param name="rand">The random generator to use for the creation of the variables.</param>
+        /// <param name="minimumPos">The inclusive minimum position of the random vector.</param>
+        /// <param name="maximumPos">The exclusive maximum position of the random vector.</param>
+        /// <returns>A random <see cref="Vector2"/> within the specified bounds.</returns>
+        public static Vector2 NextVector2(this Random rand, Vector2 minimumPos, Vector2 maximumPos)
+        {
+            if (rand == null)
+            {
+                throw new ArgumentNullException("rand");
+            }
+
+            if (minimumPos.Equals(maximumPos))
+            {
+                return minimumPos;
+            }
+
+            if (minimumPos.X > maximumPos.X || minimumPos.Y > maximumPos.Y)
+            {
+                throw new ArgumentException("The minimum position must be less than the maximum position.");
+            }
+
+            Double minX = Math.Ceiling(minimumPos.X);
+            Double minY = Math.Ceiling(minimumPos.Y);
+
+            Double maxX = Math.Floor(maximumPos.X);
+            Double maxY = Math.Floor(maximumPos.Y);
+
+            Vector2 result = Vector2.Zero;
+
+            if (!minX.Equals(maxX))
+            {
+                double tempX = rand.Next(Convert.ToInt32(minX), Convert.ToInt32(maxX));
+                double addition = rand.NextDouble();
+                if (tempX + addition < maxX)
+                {
+                    tempX += addition;
+                }
+                result.X = Convert.ToSingle(tempX);
+            }
+            else
+            {
+                result.X = minimumPos.X;
+            }
+
+            if (!minY.Equals(maxY))
+            {
+                double tempY = rand.Next(Convert.ToInt32(minY), Convert.ToInt32(maxY));
+                double addition = rand.NextDouble();
+                if (tempY + addition < maxY)
+                {
+                    tempY += addition;
+                }
+                result.Y = Convert.ToSingle(tempY);
+            }
+            else
+            {
+                result.Y = minimumPos.Y;
+            }
+
+            return result;
+        }
     }
 }

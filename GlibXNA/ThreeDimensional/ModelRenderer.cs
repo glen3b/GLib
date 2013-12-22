@@ -94,11 +94,7 @@ namespace Glib.XNA.ThreeDimensional
             {
                 throw new ArgumentException("The aspect ratio must be greater than zero.");
             }
-            _aspectRatio = aspectRatio;
-
-            _projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
-                        MathHelper.ToRadians(45.0f), _aspectRatio,
-                        1.0f, 10000.0f);
+            AspectRatio = aspectRatio;
         }
 
         private Vector3 _position;
