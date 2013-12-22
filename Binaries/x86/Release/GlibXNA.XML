@@ -873,6 +873,28 @@
             Sends 3 values - two strings and an integer (the data).
             </remarks>
         </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,Microsoft.Xna.Framework.Vector4[])">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and a vector array (the data).
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.WriteData(System.String,System.Int32,System.Int32[])">
+            <summary>
+            Writes data to the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/>'s <see cref="T:Microsoft.Xna.Framework.Net.PacketWriter"/> to be sent across the network.
+            </summary>
+            <param name="propertyName">The name of the property to send.</param>
+            <param name="senderIndex">The index of the sender in the <see cref="P:Glib.XNA.NetworkLib.NetworkWatcherComponent.Session"/>'s LocalGamers collection.</param>
+            <param name="data">The data to send.</param>
+            <remarks>
+            Sends 3 values - two strings and an integer array (the data).
+            </remarks>
+        </member>
         <member name="M:Glib.XNA.NetworkLib.NetworkWatcherComponent.SendData(System.Int32)">
             <summary>
             Sends data for the specified <see cref="T:Microsoft.Xna.Framework.Net.LocalNetworkGamer"/> across the network.
@@ -963,6 +985,52 @@
         <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Joystick">
             <summary>
             Gets the joystick that moved (left or right joystick).
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.RandomPositionGenerator">
+            <summary>
+            Represents a class that generates positions randomly upon each call to <see cref="P:Glib.XNA.RandomPositionGenerator.Position"/>.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(System.Random,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>.
+            </summary>
+            <param name="randGenerator">The object to use for generating random numbers.</param>
+            <param name="minPos">The minimum position to generate.</param>
+            <param name="maxPos">The maximum position to generate.</param>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, initializing a new <see cref="T:System.Random"/> object.
+            </summary>
+            <param name="minPos">The minimum position to generate.</param>
+            <param name="maxPos">The maximum position to generate.</param>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Graphics.Viewport)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, using the size and position of the specified <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to bound the generated values.
+            </summary>
+            <param name="boundingViewport">The <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to use to bound the generated positions.</param>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.RandomGenerator">
+            <summary>
+            Gets the random generator used for generating random positions.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.MinimumPosition">
+            <summary>
+            Gets or sets the minimum position to generate.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.MaximumPosition">
+            <summary>
+            Gets or sets the maximum position to generate.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.Position">
+            <summary>
+            Gets the next random position.
             </summary>
         </member>
         <member name="T:Glib.XNA.XnaExtensions">
@@ -1085,6 +1153,15 @@
             </summary>
             <param name="triangle">The triangle to use when determining if this is a right triangle.</param>
             <returns>Whether or not the specified triangle is a right triangle.</returns>
+        </member>
+        <member name="M:Glib.XNA.XnaExtensions.NextVector2(System.Random,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Generates a new <see cref="T:Microsoft.Xna.Framework.Vector2"/> within the specified range.
+            </summary>
+            <param name="rand">The random generator to use for the creation of the variables.</param>
+            <param name="minimumPos">The inclusive minimum position of the random vector.</param>
+            <param name="maximumPos">The exclusive maximum position of the random vector.</param>
+            <returns>A random <see cref="T:Microsoft.Xna.Framework.Vector2"/> within the specified bounds.</returns>
         </member>
         <member name="P:Glib.XNA.XnaExtensions.IsGuideVisible">
             <summary>
@@ -3167,6 +3244,88 @@
             The character to display for passwords.
             </summary>
         </member>
+        <member name="T:Glib.XNA.SpriteLib.TextShadow">
+            <summary>
+            A shadow that shadows text.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.SpriteLib.Shadow`1">
+            <summary>
+            A shadow behind an object.
+            </summary>
+            <typeparam name="TShadowed">The type of the shadowed object.</typeparam>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a shadow, shadowing the specified object at the specified relative position.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativePos">The position of the shadow relative to the shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0)">
+            <summary>
+            Creates a shadow, shadowing the specified object.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Shadow`1.Draw">
+            <summary>
+            Renders the shadow.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.RelativePosition">
+            <summary>
+            Gets or sets the position of the shadow relative to <see cref="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject"/>.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject">
+            <summary>
+            Gets or sets the object that is shadowed.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Shadow`1.Position">
+            <summary>
+            Gets or sets the absolute position of the shadow.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
+            <param name="shadowColor">The color of the shadow.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="shadowColor">The color of the shadow.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
+            </summary>
+            <param name="shadowed">The shadowed object.</param>
+            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.TextShadow.Draw">
+            <summary>
+            Draws the shadow of the shadowed object.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.TextShadow.ShadowColor">
+            <summary>
+            Gets or sets the color of the shadow.
+            </summary>
+        </member>
         <member name="T:Glib.XNA.NetworkLib.NetworkSessionsFoundEventArgs">
             <summary>
             Represents event arguments for the SessionsFound event.
@@ -4036,180 +4195,6 @@
         <member name="F:Glib.XNA.SpriteLib.Direction.Right">
             <summary>
             An edge representing the right side of a viewport.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.Shadow`1">
-            <summary>
-            A shadow behind an object.
-            </summary>
-            <typeparam name="TShadowed">The type of the shadowed object.</typeparam>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Creates a shadow, shadowing the specified object at the specified relative position.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-            <param name="relativePos">The position of the shadow relative to the shadowed object.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Shadow`1.#ctor(`0)">
-            <summary>
-            Creates a shadow, shadowing the specified object.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Shadow`1.Draw">
-            <summary>
-            Renders the shadow.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Shadow`1.RelativePosition">
-            <summary>
-            Gets or sets the position of the shadow relative to <see cref="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject"/>.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Shadow`1.ShadowedObject">
-            <summary>
-            Gets or sets the object that is shadowed.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Shadow`1.Position">
-            <summary>
-            Gets or sets the absolute position of the shadow.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.TextShadow">
-            <summary>
-            A shadow that shadows text.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
-            <summary>
-            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
-            <param name="shadowColor">The color of the shadow.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite)">
-            <summary>
-            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Color)">
-            <summary>
-            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-            <param name="shadowColor">The color of the shadow.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextShadow.#ctor(Glib.XNA.SpriteLib.TextSprite,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Creates a shadow of a <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.
-            </summary>
-            <param name="shadowed">The shadowed object.</param>
-            <param name="relativeShadowPos">The position of the shadow relative to the <see cref="T:Glib.XNA.SpriteLib.TextSprite"/>.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextShadow.Draw">
-            <summary>
-            Draws the shadow of the shadowed object.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.TextShadow.ShadowColor">
-            <summary>
-            Gets or sets the color of the shadow.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.NetworkLib.INetworkSerializer`1">
-            <summary>
-            Represents a type for preparing arbitrary data for network transmission as a string
-            </summary>
-            <typeparam name="TSerialized">The serialized type.</typeparam>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.INetworkSerializer`1.Serialize(`0)">
-            <summary>
-            Serializes the speficied data.
-            </summary>
-            <param name="data">The data to serialize.</param>
-            <returns>The serialized data.</returns>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.INetworkSerializer`1.Deserialize(System.String)">
-            <summary>
-            Deserializes the speficied data.
-            </summary>
-            <param name="serializedData">The data as a string.</param>
-            <returns>The deserialized data.</returns>
-        </member>
-        <member name="T:Glib.XNA.NetworkLib.Vector2Serializer">
-            <summary>
-            Serializes <see cref="T:Microsoft.Xna.Framework.Vector2"/> objects.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector2Serializer.Serialize(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Serializes the speficied data.
-            </summary>
-            <param name="data">The data to serialize.</param>
-            <returns>The serialized data.</returns>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector2Serializer.Deserialize(System.String)">
-            <summary>
-            Deserializes the speficied data.
-            </summary>
-            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector2"/>, as a string.</param>
-            <returns>The deserialized data.</returns>
-        </member>
-        <member name="P:Glib.XNA.NetworkLib.Vector2Serializer.Instance">
-            <summary>
-            Gets the instance of the serializer.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.NetworkLib.Vector3Serializer">
-            <summary>
-            Serializes <see cref="T:Microsoft.Xna.Framework.Vector3"/> objects.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector3Serializer.Serialize(Microsoft.Xna.Framework.Vector3)">
-            <summary>
-            Serializes the speficied data.
-            </summary>
-            <param name="data">The data to serialize.</param>
-            <returns>The serialized data.</returns>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector3Serializer.Deserialize(System.String)">
-            <summary>
-            Deserializes the speficied data.
-            </summary>
-            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector3"/>, as a string.</param>
-            <returns>The deserialized data.</returns>
-        </member>
-        <member name="P:Glib.XNA.NetworkLib.Vector3Serializer.Instance">
-            <summary>
-            Gets the instance of the serializer.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.NetworkLib.Vector4Serializer">
-            <summary>
-            Serializes <see cref="T:Microsoft.Xna.Framework.Vector4"/> objects.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector4Serializer.Serialize(Microsoft.Xna.Framework.Vector4)">
-            <summary>
-            Serializes the speficied data.
-            </summary>
-            <param name="data">The data to serialize.</param>
-            <returns>The serialized data.</returns>
-        </member>
-        <member name="M:Glib.XNA.NetworkLib.Vector4Serializer.Deserialize(System.String)">
-            <summary>
-            Deserializes the speficied data.
-            </summary>
-            <param name="serializedData">The data, which should be an instance of <see cref="T:Microsoft.Xna.Framework.Vector4"/>, as a string.</param>
-            <returns>The deserialized data.</returns>
-        </member>
-        <member name="P:Glib.XNA.NetworkLib.Vector4Serializer.Instance">
-            <summary>
-            Gets the instance of the serializer.
             </summary>
         </member>
     </members>
