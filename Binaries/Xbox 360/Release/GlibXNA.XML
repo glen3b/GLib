@@ -881,52 +881,6 @@
             Gets the joystick that moved (left or right joystick).
             </summary>
         </member>
-        <member name="T:Glib.XNA.RandomPositionGenerator">
-            <summary>
-            Represents a class that generates positions randomly upon each call to <see cref="P:Glib.XNA.RandomPositionGenerator.Position"/>.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(System.Random,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>.
-            </summary>
-            <param name="randGenerator">The object to use for generating random numbers.</param>
-            <param name="minPos">The minimum position to generate.</param>
-            <param name="maxPos">The maximum position to generate.</param>
-        </member>
-        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, initializing a new <see cref="T:System.Random"/> object.
-            </summary>
-            <param name="minPos">The minimum position to generate.</param>
-            <param name="maxPos">The maximum position to generate.</param>
-        </member>
-        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Graphics.Viewport)">
-            <summary>
-            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, using the size and position of the specified <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to bound the generated values.
-            </summary>
-            <param name="boundingViewport">The <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to use to bound the generated positions.</param>
-        </member>
-        <member name="P:Glib.XNA.RandomPositionGenerator.RandomGenerator">
-            <summary>
-            Gets the random generator used for generating random positions.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.RandomPositionGenerator.MinimumPosition">
-            <summary>
-            Gets or sets the minimum position to generate.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.RandomPositionGenerator.MaximumPosition">
-            <summary>
-            Gets or sets the maximum position to generate.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.RandomPositionGenerator.Position">
-            <summary>
-            Gets the next random position.
-            </summary>
-        </member>
         <member name="T:Glib.XNA.XnaExtensions">
             <summary>
             Extensions onto XNA objects.
@@ -1068,6 +1022,52 @@
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.SpriteLib.ParticleEngine"/> namespace provides a basic implementation of a particle engine.
+            </summary>
+        </member>
+        <member name="T:Glib.XNA.RandomPositionGenerator">
+            <summary>
+            Represents a class that generates positions randomly upon each call to <see cref="P:Glib.XNA.RandomPositionGenerator.Position"/>.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(System.Random,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>.
+            </summary>
+            <param name="randGenerator">The object to use for generating random numbers.</param>
+            <param name="minPos">The minimum position to generate.</param>
+            <param name="maxPos">The maximum position to generate.</param>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, initializing a new <see cref="T:System.Random"/> object.
+            </summary>
+            <param name="minPos">The minimum position to generate.</param>
+            <param name="maxPos">The maximum position to generate.</param>
+        </member>
+        <member name="M:Glib.XNA.RandomPositionGenerator.#ctor(Microsoft.Xna.Framework.Graphics.Viewport)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.RandomPositionGenerator"/>, using the size and position of the specified <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to bound the generated values.
+            </summary>
+            <param name="boundingViewport">The <see cref="T:Microsoft.Xna.Framework.Graphics.Viewport"/> to use to bound the generated positions.</param>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.RandomGenerator">
+            <summary>
+            Gets the random generator used for generating random positions.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.MinimumPosition">
+            <summary>
+            Gets or sets the minimum position to generate.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.MaximumPosition">
+            <summary>
+            Gets or sets the maximum position to generate.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.RandomPositionGenerator.Position">
+            <summary>
+            Gets the next random position.
             </summary>
         </member>
         <member name="T:Glib.XNA.LeftRight">

@@ -228,7 +228,7 @@ namespace Glib.XNA.NetworkLib
                 Session.Dispose();
             }
 
-            if (Session.IsDisposed)
+            if (Session != null && Session.IsDisposed)
             {
                 Session = null;
             }
