@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Glib.XNA.SpriteLib.ParticleEngine
 {
@@ -66,6 +67,18 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             }
             _generator = particleGenerator;
         }
+
+        private Vector2 _positionOffset;
+
+        /// <summary>
+        /// Gets or sets the offset from the position of <see cref="Tracked"/> at which to generate the particles.
+        /// </summary>
+        public Vector2 PositionOffset
+        {
+            get { return _positionOffset; }
+            set { _positionOffset = value; }
+        }
+        
 
         private IPositionable _tracked;
 
@@ -153,7 +166,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             {
                 for (int genPart = 0; genPart < Generator.ParticlesToGenerate; genPart++)
                 {
-                    _particles.Add(Generator.GenerateParticle(Tracked.Position));
+                    _particles.Add(Generator.GenerateParticle(Tracked.Position + PositionOffset));
                 }
             }
 
