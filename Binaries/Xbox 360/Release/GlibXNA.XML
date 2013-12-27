@@ -2186,6 +2186,11 @@
             Gets or sets a boolean indicating whether the particles for the tracked object should be drawn.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.PositionOffset">
+            <summary>
+            Gets or sets the offset from the position of <see cref="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Tracked"/> at which to generate the particles.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine.Tracked">
             <summary>
             Gets or sets the object that this particle engine tracks and creates particles near.
