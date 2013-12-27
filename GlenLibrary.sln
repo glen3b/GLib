@@ -27,9 +27,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXNA", "GlibXNA\GlibXNA.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXNA on Xbox", "GlibXNA\GlibXNA on Xbox.csproj", "{442E51D1-79AE-4F9E-B368-F9DA7A70EC39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLibXNASample", "..\GLibXNASample\GLibXNASample\GLibXNASample.csproj", "{4CAEFF7F-5851-4205-9B0F-34F9EE1F8462}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLibXNASample", "GLibXNASample\GLibXNASample\GLibXNASample.csproj", "{4CAEFF7F-5851-4205-9B0F-34F9EE1F8462}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GLibXNASampleContent", "..\GLibXNASample\GLibXNASampleContent\GLibXNASampleContent.contentproj", "{E6F15301-FC4B-4EEF-8138-F2438BC95D13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLibXNASampleContent", "GLibXNASample\GLibXNASampleContent\GLibXNASampleContent.contentproj", "{E6F15301-FC4B-4EEF-8138-F2438BC95D13}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
