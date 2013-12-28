@@ -184,7 +184,28 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
                 _scaleFactor = value; }
         }
-        
+
+        private RandomParticleProperties _randomProperties;
+
+        /// <summary>
+        /// Gets or sets a value specifying what properties to randomly generate for new particles.
+        /// </summary>
+        public RandomParticleProperties RandomProperties
+        {
+            get { return _randomProperties; }
+            set { _randomProperties = value; }
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> used for the construction of particles.
+        /// </summary>
+        public SpriteBatch SpriteBatch
+        {
+            get
+            {
+                return _batch;
+            }
+        }
 
         /// <summary>
         /// Generates a new particle at the specified position.
@@ -195,14 +216,18 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         {
             Particle particle = new Particle(_textures[_random.Next(_textures.Count)], pos, _batch);
 
-            particle.Speed = new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
-            particle.RotationVelocity = MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);
-            particle.Color = new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
-            particle.Scale = new Vector2(_random.NextDouble().ToFloat() / ScaleFactor);
-            particle.TimeToLive = TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));
+            particle.Speed = _randomProperties.Speed.HasValue ? _randomProperties.Speed.Value : new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
+            particle.RotationVelocity = _randomProperties.RotationChange.HasValue ? _randomProperties.RotationChange.Value : MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);
+            particle.Color = _randomProperties.Tint.HasValue ? _randomProperties.Tint.Value : new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
+            particle.Scale = _randomProperties.Scale.HasValue ? _randomProperties.Scale.Value : new Vector2(_random.NextDouble().ToFloat() / ScaleFactor);
+            particle.TimeToLive = _randomProperties.TimeToLive.HasValue ? _randomProperties.TimeToLive.Value : TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));
             particle.TimeToLiveSettings = _ttlSettings;
 
-            if (_minumumParticleColorChangeRate != 1)
+            if (_randomProperties.ColorFactor.HasValue)
+            {
+                particle.ColorChange = _randomProperties.ColorFactor.Value;
+            }
+            else if (_minumumParticleColorChangeRate != 1)
             {
                 float particleColorDegenerationRate = _random.NextDouble().ToFloat();
                 while (particleColorDegenerationRate < _minumumParticleColorChangeRate)
