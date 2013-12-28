@@ -64,11 +64,8 @@ namespace GLibXNASample.Screens
                 //These are the colors that are displayed at the various hovering states
                 button.HoverColor = Color.DarkCyan;
                 button.NonHoverColor = Color.Black;
-                //Pressed event handler inline delegate
-                button.Pressed += delegate(object src, EventArgs args)
-                {
-                    GLibXNASampleGame.Instance.SetScreen(element.Value);
-                };
+                //"Pressed" event handler lambda expression
+                button.Pressed += (src, args) => GLibXNASampleGame.Instance.SetScreen(element.Value);
                 //Setting width and height on a Sprite scales it
                 buttonSprite.Width = button.Width + 6;
                 buttonSprite.Height = button.Height + 4;
