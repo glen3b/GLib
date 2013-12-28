@@ -35,6 +35,8 @@ namespace GLibXNASample.Screens
             //Sprite: A simple bitmap image, with convenient methods and properties
             //Yet it has so many possibilities...
             //Here it is used as a mouse cursor
+            //Star image courtesy of Wikimedia user Felipe Micaroni Lalli
+            //Image obtained from http://commons.wikimedia.org/wiki/File:Star_Ouro.svg
             mouseCursor = new Sprite(GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"), Vector2.Zero, sb);
             mouseCursor.Scale = new Vector2(.1f);
             mouseCursor.UseCenterAsOrigin = true;
