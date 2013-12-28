@@ -20,8 +20,8 @@ namespace GLibXNASample.Screens
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
         TextSprite title;
-        TextSprite viewFilmButton;
-        Sprite viewFilmButtonSprite;
+
+        Dictionary<String, String> buttons = new Dictionary<string, string>();
 
         /// <summary>
         /// Creates and initializes the main menu.
@@ -45,33 +45,50 @@ namespace GLibXNASample.Screens
             //Extension method: GetCenterPosition: Returns the position required to center the object on the specified viewport
             title.Position = new Vector2(title.GetCenterPosition(sb.GraphicsDevice.Viewport).X, 15);
             //Fancy color constructor: Uses a Vector4 with RGBA values expressed as floats from 0 to 1, basically dark gray shadow with 128 alpha
-            title.Shadow = new TextShadow(title, new Vector2(-1, 1), new Color(new Vector4(Color.DarkGray.ToVector3(), 0.5f)));
+            title.Shadow = new TextShadow(title, new Vector2(-2, 2), new Color(new Vector4(Color.DarkGray.ToVector3(), 0.5f)));
 
             AdditionalSprites.Add(title);
 
-            viewFilmButtonSprite = new Sprite(GLibXNASampleGame.Instance.TextureCreator.CreateSquare(1, Color.Red), Vector2.Zero, sb);
+            #region Generation of buttons systematically
+            buttons.Add("Video Player", "VideoPlayer");
 
-            viewFilmButton = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), "Video Viewer");
-            //Allows hovering (and therefore clicking) on a sprite
-            viewFilmButton.IsHoverable = true;
-            //These are the colors that are displayed at the various hovering states
-            viewFilmButton.HoverColor = Color.DarkCyan;
-            viewFilmButton.NonHoverColor = Color.Black;
-            //Setting width and height on a Sprite scales it
-            viewFilmButtonSprite.Width = viewFilmButton.Width + 6;
-            viewFilmButtonSprite.Height = viewFilmButton.Height + 6;
-            viewFilmButtonSprite.Position = new Vector2(viewFilmButtonSprite.GetCenterPosition(sb.GraphicsDevice.Viewport).X, 60);
-            //ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
-            viewFilmButton.ParentSprite = viewFilmButtonSprite;
+            float yCoord = 60;
 
-            Sprites.Add(viewFilmButtonSprite);
-            AdditionalSprites.Add(viewFilmButton);
+            foreach (var element in buttons)
+            {
+                Sprite buttonSprite = new Sprite(GLibXNASampleGame.Instance.TextureCreator.CreateSquare(1, Color.Red), Vector2.Zero, sb);
+
+                TextSprite button = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), element.Key);
+                //Allows hovering (and therefore clicking) on a sprite
+                button.IsHoverable = true;
+                //These are the colors that are displayed at the various hovering states
+                button.HoverColor = Color.DarkCyan;
+                button.NonHoverColor = Color.Black;
+                //Pressed event handler inline delegate
+                button.Pressed += delegate(object src, EventArgs args)
+                {
+                    GLibXNASampleGame.Instance.SetScreen(element.Value);
+                };
+                //Setting width and height on a Sprite scales it
+                buttonSprite.Width = button.Width + 6;
+                buttonSprite.Height = button.Height + 4;
+                buttonSprite.Position = new Vector2(buttonSprite.GetCenterPosition(sb.GraphicsDevice.Viewport).X, yCoord);
+                //ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
+                button.ParentSprite = buttonSprite;
+
+                Sprites.Add(buttonSprite);
+                AdditionalSprites.Add(button);
+
+                yCoord += buttonSprite.Height;
+                yCoord += 7.5f;
+            }
+            #endregion
 
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
             particlegen.MinimumParticleColorChangeRate = 0.925f;
             particlegen.MinimumTimeToLive = TimeSpan.FromMilliseconds(400);
-            particlegen.MaximumTimeToLive = TimeSpan.FromMilliseconds(875);
+            particlegen.MaximumTimeToLive = TimeSpan.FromMilliseconds(780);
             particlegen.ParticlesToGenerate = 1;
             particlegen.ScaleFactor = 15;
             //TimeToLiveSettings: When to make a particle expire, binary flaggable enumerator

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Glib.XNA;
 using Glib.XNA.InputLib;
 using GLibXNASample.Screens;
+using Glib.XNA.SpriteLib;
 
 namespace GLibXNASample
 {
@@ -71,6 +72,18 @@ namespace GLibXNASample
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Makes the specified <see cref="Screen"/> the currently visible screen.
+        /// </summary>
+        /// <param name="newScreenName">The name of the screen to show.</param>
+        public void SetScreen(String newScreenName)
+        {
+            foreach (Screen screen in AllScreens)
+            {
+                screen.Visible = screen.Name.Equals(newScreenName, StringComparison.InvariantCultureIgnoreCase);
+            }
         }
 
         /// <summary>
