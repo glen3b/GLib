@@ -176,7 +176,11 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             get { return _scaleFactor; }
             set { 
                 if(value <= 0){
-                    throw new ArgumentOutOfRangeException("ScaleFactor", value, "The ScaleFactor must be greater than 0.");    
+#if WINDOWS
+                    throw new ArgumentOutOfRangeException("ScaleFactor", value, "The ScaleFactor must be greater than 0."); 
+#else
+                    throw new ArgumentOutOfRangeException("ScaleFactor"); 
+#endif
                 }
                 _scaleFactor = value; }
         }

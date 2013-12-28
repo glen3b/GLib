@@ -41,7 +41,11 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             {
                 if (value <= 0)
                 {
+#if WINDOWS
                     throw new ArgumentOutOfRangeException("ColorChange", value, "The ColorChange property must be greater than zero.");
+#else
+                    throw new ArgumentOutOfRangeException("ColorChange");
+#endif
                 }
                 _colorVelocity = value;
             }
