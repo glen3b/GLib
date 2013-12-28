@@ -25,15 +25,22 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         private float _colorVelocity = 1;
 
         /// <summary>
-        /// Gets or sets the amount by which to change the color every update.
+        /// Gets or sets the amount of the color to preserve every update.
         /// </summary>
         /// <remarks>
-        /// Should be greater than zero.
+        /// Should be greater than zero. The color is multiplied by this factor every frame, so this factor can be used for color deterioration.
         /// </remarks>
         public float ColorChange
         {
             get { return _colorVelocity; }
-            set { _colorVelocity = value; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException("ColorChange", value, "The ColorChange property must be greater than zero.");
+                }
+                _colorVelocity = value;
+            }
         }
 
 

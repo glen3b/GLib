@@ -162,6 +162,24 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
                 _minumumParticleColorChangeRate = value; }
         }
+
+        private float _scaleFactor = 1;
+
+        /// <summary>
+        /// Gets or sets the value by which to divide the randomly generated scale.
+        /// </summary>
+        /// <remarks>
+        /// Defaults to one. This can be used to enlarge or shrink generated particles by a constant amount.
+        /// </remarks>
+        public float ScaleFactor
+        {
+            get { return _scaleFactor; }
+            set { 
+                if(value <= 0){
+                    throw new ArgumentOutOfRangeException("ScaleFactor", value, "The ScaleFactor must be greater than 0.");    
+                }
+                _scaleFactor = value; }
+        }
         
 
         /// <summary>
@@ -176,7 +194,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             particle.Speed = new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
             particle.RotationVelocity = MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);
             particle.Color = new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
-            particle.Scale = new Vector2(_random.NextDouble().ToFloat());
+            particle.Scale = new Vector2(_random.NextDouble().ToFloat() / ScaleFactor);
             particle.TimeToLive = TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));
             particle.TimeToLiveSettings = _ttlSettings;
 
