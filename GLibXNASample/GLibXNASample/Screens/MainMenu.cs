@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Glib.XNA.SpriteLib.ParticleEngine;
 using Glib.XNA.InputLib;
+using Glib.XNA;
 
 namespace GLibXNASample.Screens
 {
@@ -17,6 +18,7 @@ namespace GLibXNASample.Screens
     {
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
+        TextSprite title;
 
         /// <summary>
         /// Creates and initializes the main menu.
@@ -36,11 +38,25 @@ namespace GLibXNASample.Screens
 
             Sprites.Add(mouseCursor);
 
+            //TextSprite: Displays text
+            //Can be used for titles, descriptions, etc
+            title = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Title"), "GlenLibrary XNA");
+            //Extension method: GetCenterPosition: Returns the position required to center the object on the specified viewport
+            title.Position = new Vector2(title.GetCenterPosition(sb.GraphicsDevice.Viewport).X, 15);
+            //Fancy color constructor: Uses a Vector4 with RGBA values expressed as floats from 0 to 1, basically dark gray shadow with 128 alpha
+            title.Shadow = new TextShadow(title, new Vector2(-1, 1), new Color(new Vector4(Color.DarkGray.ToVector3(), 0.5f)));
+
+            AdditionalSprites.Add(title);
+
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
-            particlegen.MinimumParticleColorChangeRate = 0.975f;
+            particlegen.MinimumParticleColorChangeRate = 0.925f;
+            particlegen.MinimumTimeToLive = TimeSpan.FromMilliseconds(400);
+            particlegen.MaximumTimeToLive = TimeSpan.FromMilliseconds(875);
             particlegen.ParticlesToGenerate = 1;
             particlegen.ScaleFactor = 15;
+            //TimeToLiveSettings: When to make a particle expire, binary flaggable enumerator
+            particlegen.TTLSettings = TimeToLiveSettings.AlphaLess100 | TimeToLiveSettings.StrictTTL;
 
             //Particle engine: Generates particles using the specified particle generator
             mouseParticleGen = new ParticleEngine(particlegen);
