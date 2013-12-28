@@ -44,7 +44,7 @@ namespace GLibXNASample.Screens
 
             //Particle engine: Generates particles using the specified particle generator
             mouseParticleGen = new ParticleEngine(particlegen);
-            mouseParticleGen.FramesPerGeneration = 2;
+            mouseParticleGen.FramesPerGeneration = 3;
             mouseParticleGen.Tracked = mouseCursor;
 
             AdditionalSprites.Add(mouseParticleGen);

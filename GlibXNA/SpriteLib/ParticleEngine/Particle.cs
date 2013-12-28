@@ -18,7 +18,11 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// <param name="texture">The texture of the particle.</param>
         /// <param name="pos">The position of the particle.</param>
         /// <param name="batch">The SpriteBatch on which to draw the particle.</param>
-        public Particle(Texture2D texture, Vector2 pos, SpriteBatch batch) : base(texture, pos, batch) { }
+        public Particle(Texture2D texture, Vector2 pos, SpriteBatch batch)
+            : base(texture, pos, batch)
+        {
+            LayerDepth = 1;
+        }
 
         private float _rotationVelocity;
 
