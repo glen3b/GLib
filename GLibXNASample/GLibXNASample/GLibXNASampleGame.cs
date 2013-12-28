@@ -37,13 +37,18 @@ namespace GLibXNASample
         {
             Instance = this;
 
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
+
             base.Initialize();
         }
 
         /// <summary>
         /// Gets the instance of this class.
         /// </summary>
+        /// <remarks>
+        /// This game is not a true singleton (it is not enforced), but in all practical circumstances it will only be initialized once.
+        /// This property is primarily used for loading of content from <see cref="Screen"/> deriving classes.
+        /// </remarks>
         public static GLibXNASampleGame Instance
         {
             get;

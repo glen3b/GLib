@@ -2771,6 +2771,14 @@
             Disabled by default.
             </remarks>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.ScaleFactor">
+            <summary>
+            Gets or sets the value by which to divide the randomly generated scale.
+            </summary>
+            <remarks>
+            Defaults to one. This can be used to enlarge or shrink generated particles by a constant amount.
+            </remarks>
+        </member>
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.Particle">
             <summary>
             A basic particle for the particle engine.
@@ -2797,10 +2805,10 @@
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.ColorChange">
             <summary>
-            Gets or sets the amount by which to change the color every update.
+            Gets or sets the amount of the color to preserve every update.
             </summary>
             <remarks>
-            Should be greater than zero.
+            Should be greater than zero. The color is multiplied by this factor every frame, so this factor can be used for color deterioration.
             </remarks>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.RotationVelocity">
