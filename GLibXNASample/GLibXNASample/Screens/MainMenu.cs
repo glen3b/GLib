@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Glib.XNA.SpriteLib.ParticleEngine;
 using Glib.XNA.InputLib;
 using Glib.XNA;
+using Glib;
 
 namespace GLibXNASample.Screens
 {
@@ -19,6 +20,8 @@ namespace GLibXNASample.Screens
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
         TextSprite title;
+        TextSprite viewFilmButton;
+        Sprite viewFilmButtonSprite;
 
         /// <summary>
         /// Creates and initializes the main menu.
@@ -33,10 +36,8 @@ namespace GLibXNASample.Screens
             //Yet it has so many possibilities...
             //Here it is used as a mouse cursor
             mouseCursor = new Sprite(GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"), Vector2.Zero, sb);
-            mouseCursor.Scale = new Vector2(.075f);
+            mouseCursor.Scale = new Vector2(.1f);
             mouseCursor.UseCenterAsOrigin = true;
-
-            Sprites.Add(mouseCursor);
 
             //TextSprite: Displays text
             //Can be used for titles, descriptions, etc
@@ -47,6 +48,24 @@ namespace GLibXNASample.Screens
             title.Shadow = new TextShadow(title, new Vector2(-1, 1), new Color(new Vector4(Color.DarkGray.ToVector3(), 0.5f)));
 
             AdditionalSprites.Add(title);
+
+            viewFilmButtonSprite = new Sprite(GLibXNASampleGame.Instance.TextureCreator.CreateSquare(1, Color.Red), Vector2.Zero, sb);
+
+            viewFilmButton = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), "Video Viewer");
+            //Allows hovering (and therefore clicking) on a sprite
+            viewFilmButton.IsHoverable = true;
+            //These are the colors that are displayed at the various hovering states
+            viewFilmButton.HoverColor = Color.DarkCyan;
+            viewFilmButton.NonHoverColor = Color.Black;
+            //Setting width and height on a Sprite scales it
+            viewFilmButtonSprite.Width = viewFilmButton.Width + 6;
+            viewFilmButtonSprite.Height = viewFilmButton.Height + 6;
+            viewFilmButtonSprite.Position = new Vector2(viewFilmButtonSprite.GetCenterPosition(sb.GraphicsDevice.Viewport).X, 60);
+            //ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
+            viewFilmButton.ParentSprite = viewFilmButtonSprite;
+
+            Sprites.Add(viewFilmButtonSprite);
+            AdditionalSprites.Add(viewFilmButton);
 
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
@@ -64,6 +83,8 @@ namespace GLibXNASample.Screens
             mouseParticleGen.Tracked = mouseCursor;
 
             AdditionalSprites.Add(mouseParticleGen);
+            AdditionalSprites.Add(mouseCursor);
+
         }
 
         /// <summary>

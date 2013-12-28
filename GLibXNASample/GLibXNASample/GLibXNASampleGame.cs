@@ -43,6 +43,15 @@ namespace GLibXNASample
         }
 
         /// <summary>
+        /// Loads content for the game, including loading screens (done in the superclass).
+        /// </summary>
+        protected override void LoadContent()
+        {
+            TextureCreator = new TextureFactory(GraphicsDevice);
+            base.LoadContent();
+        }
+
+        /// <summary>
         /// Gets the instance of this class.
         /// </summary>
         /// <remarks>
@@ -56,7 +65,16 @@ namespace GLibXNASample
         }
 
         /// <summary>
-        /// Initializes all <see cref="Screen"/>s, and adds them to <see cref="AllScreens"/>.
+        /// Gets a <see cref="TextureFactory"/>, an object for creating simple textures at runtime.
+        /// </summary>
+        public TextureFactory TextureCreator
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Initializes all <see cref="Screen"/>s for this game, and adds them to <see cref="AllScreens"/>.
         /// </summary>
         protected override void InitializeScreens()
         {
