@@ -20,6 +20,7 @@ namespace GLibXNASample.Screens
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
         TextSprite title;
+        TextSprite desc;
         ProgressBar progressBar;
 
         Dictionary<String, String> buttons = new Dictionary<string, string>();
@@ -52,10 +53,20 @@ namespace GLibXNASample.Screens
 
             AdditionalSprites.Add(title);
 
+
+            desc = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Subtitle"), "A general purpose XNA library", Color.Chocolate);
+            desc.Color *= 0.75f;
+            desc.Color.A = 255;
+            desc.X = desc.GetCenterPosition(Graphics.Viewport).X;
+            desc.Y = title.Y + title.Height + 5;
+
+            AdditionalSprites.Add(desc);
+
             #region Generation of buttons systematically
             buttons.Add("Video Player", "VideoPlayer");
+            buttons.Add("Multiplayer", "MultiPlayer");
 
-            float yCoord = 60;
+            float yCoord = desc.Y + desc.Height + 10;
 
             foreach (var element in buttons)
             {
@@ -76,11 +87,17 @@ namespace GLibXNASample.Screens
                 //ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
                 button.ParentSprite = buttonSprite;
 
+                button.Scale.X = button.Scale.X.Round();
+                button.Scale.Y = button.Scale.Y.Round();
+                button.X = button.X.Round();
+                button.Y = button.Y.Round();
+
                 Sprites.Add(buttonSprite);
                 AdditionalSprites.Add(button);
 
                 yCoord += buttonSprite.Height;
                 yCoord += 7.5f;
+                yCoord = yCoord.Round();
             }
             #endregion
 
@@ -115,7 +132,7 @@ namespace GLibXNASample.Screens
 
         }
 
-        #region Progress bar demo logic variables
+        #region Progress bar - variables for demo
         private int _cycleNumber = 0;
         private Color[] _filledColors = new Color[] { Color.DarkGreen, Color.DarkBlue, Color.DarkMagenta };
         private Color[] _emptyColors = new Color[] { Color.LightSlateGray, Color.MediumAquamarine, Color.Magenta };
