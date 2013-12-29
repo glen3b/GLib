@@ -79,7 +79,7 @@ namespace GLibXNASample.Screens
                 button.HoverColor = Color.DarkCyan;
                 button.NonHoverColor = Color.Black;
                 //"Pressed" event handler lambda expression
-                button.Pressed += (src, args) => GLibXNASampleGame.Instance.SetScreen(element.Value);
+                button.Pressed += (src, args) => GLibXNASampleGame.Instance.SetScreen(buttons[((TextSprite)src).Text]);
                 //Setting width and height on a Sprite scales it
                 buttonSprite.Width = button.Width + 6;
                 buttonSprite.Height = button.Height + 4;

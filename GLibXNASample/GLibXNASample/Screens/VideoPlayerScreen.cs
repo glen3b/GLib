@@ -61,11 +61,7 @@ namespace GLibXNASample.Screens
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
         {
-            if (e.Key == Keys.Escape)
-            {
-                GLibXNASampleGame.Instance.SetScreen("MainMenu");
-            }
-            else if (e.Key == Keys.Space)
+            if (Visible && e.Key == Keys.Space)
             {
                 if (video.Video.State == MediaState.Playing)
                 {

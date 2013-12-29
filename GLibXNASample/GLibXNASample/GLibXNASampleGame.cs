@@ -42,8 +42,21 @@ namespace GLibXNASample
 
             //Sets the title of the game window
             Window.Title = "GlenLibrary XNA Sample Game";
-
+            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
             base.Initialize();
+        }
+
+        /// <summary>
+        /// Called when a key is pressed down.
+        /// </summary>
+        /// <param name="source">Null source (KeyboardManager is static).</param>
+        /// <param name="e">The event arguments containing data for this event.</param>
+        void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
+        {
+            if (e.Key == Keys.Escape)
+            {
+                SetScreen("MainMenu");
+            }
         }
 
         /// <summary>
@@ -83,6 +96,8 @@ namespace GLibXNASample
         /// <param name="newScreenName">The name of the screen to show.</param>
         public void SetScreen(String newScreenName)
         {
+            if (AllScreens[newScreenName].Visible) { return; }
+
             foreach (Screen screen in AllScreens)
             {
                 screen.Visible = screen.Name.Equals(newScreenName, StringComparison.InvariantCultureIgnoreCase);
@@ -100,6 +115,7 @@ namespace GLibXNASample
             //Special case for the main menu: I use an object initializer to set it to visible.
             AllScreens.Add(new MainMenu(SpriteBatch) { Visible = true });
             AllScreens.Add(new VideoPlayerScreen(SpriteBatch));
+            AllScreens.Add(new MultiplayerScreen(SpriteBatch));
         }
     }
 }
