@@ -6,6 +6,8 @@ using Glib.XNA;
 using Glib.XNA.SpriteLib;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace GLibXNASample.Screens
 {
@@ -42,7 +44,8 @@ namespace GLibXNASample.Screens
         /// </summary>
         void hostSession_Pressed(object sender, EventArgs e)
         {
-
+            GLibXNASampleGame.Instance.SetScreen("Loading");
+            //GLibXNASampleGame.Instance.SessionManagement.(NetworkSessionType.SystemLink, 1);
         }
 
         public override bool Visible
@@ -56,6 +59,15 @@ namespace GLibXNASample.Screens
                 base.Visible = value;
                 if (value)
                 {
+                    if (Gamer.SignedInGamers.Count <= 0)
+                    {
+                        if(!Guide.IsVisible){
+                            Guide.ShowSignIn(1, false);
+                        }
+                        GLibXNASampleGame.Instance.SetScreen("MainMenu");
+                        return;
+                    }
+
                     GLibXNASampleGame.Instance.SetMouseVisible(true);
                 }
             }

@@ -43,6 +43,7 @@ namespace GLibXNASample
             NetworkTransmitter = new NetworkWatcherComponent(this);
             Components.Add(SessionManagement);
             Components.Add(NetworkTransmitter);
+            Components.Add(new GamerServicesComponent(this));
 
             //Sets the title of the game window
             Window.Title = "GlenLibrary XNA Sample Game";
@@ -155,6 +156,7 @@ namespace GLibXNASample
             AllScreens.Add(new MainMenu(SpriteBatch) { Visible = true });
             AllScreens.Add(new VideoPlayerScreen(SpriteBatch));
             AllScreens.Add(new MultiplayerScreen(SpriteBatch));
+            AllScreens.Add(new LoadingScreen(SpriteBatch));
         }
     }
 }
