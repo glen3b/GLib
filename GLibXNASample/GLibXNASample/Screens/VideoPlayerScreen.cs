@@ -8,22 +8,25 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Glib.XNA.InputLib;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GLibXNASample.Screens
 {
     /// <summary>
     /// This is a class extending <see cref="Screen"/>, it is the video player demo.
     /// </summary>
-    public class VideoPlayer : Screen
+    public class VideoPlayerScreen : Screen
     {
         TextSprite title;
         TextSprite escapeReturnDesc;
+        VideoSprite video;
+        TextSprite creditTextSprite;
 
         /// <summary>
         /// Creates and initializes the video player sample screen.
         /// </summary>
         /// <param name="spriteBatch">The <see cref="SpriteBatch"/> to render to.</param>
-        public VideoPlayer(SpriteBatch spriteBatch)
+        public VideoPlayerScreen(SpriteBatch spriteBatch)
             : base(spriteBatch, Color.DarkGray)
         {
             Name = "VideoPlayer";
@@ -43,6 +46,17 @@ namespace GLibXNASample.Screens
 
             //This event is fired when a key is pressed
             KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
+
+            creditTextSprite = new TextSprite(spriteBatch, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Details"), "Video obtained from nps.gov/cany/planyourvisit/rivervideos.htm", Color.Goldenrod);
+            creditTextSprite.Color.A = 32;
+            creditTextSprite.Position = new Vector2(creditTextSprite.GetCenterPosition(spriteBatch.GraphicsDevice.Viewport).X, spriteBatch.GraphicsDevice.Viewport.Height - creditTextSprite.Height - 5);
+            AdditionalSprites.Add(creditTextSprite);
+
+            //VideoSprite: Like a sprite, but displays a video
+            video = new VideoSprite(GLibXNASampleGame.Instance.Content.Load<Video>("VideoSample"), Vector2.Zero, spriteBatch);
+            video.Video.Stop();
+            video.Position = video.GetCenterPosition(spriteBatch.GraphicsDevice.Viewport);
+            Sprites.Add(video);
         }
 
         void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
@@ -50,6 +64,17 @@ namespace GLibXNASample.Screens
             if (e.Key == Keys.Escape)
             {
                 GLibXNASampleGame.Instance.SetScreen("MainMenu");
+            }
+            else if (e.Key == Keys.Space)
+            {
+                if (video.Video.State == MediaState.Playing)
+                {
+                    video.Video.Pause();
+                }
+                else
+                {
+                    video.Video.Resume();
+                }
             }
         }
 
@@ -67,6 +92,11 @@ namespace GLibXNASample.Screens
                 {
                     //Resets screen
                     escapeReturnDesc.Color = Color.PaleGoldenrod;
+                    video.Video.Play(GLibXNASampleGame.Instance.Content.Load<Video>("VideoSample"));
+                }
+                else
+                {
+                    video.Video.Stop();
                 }
             }
         }

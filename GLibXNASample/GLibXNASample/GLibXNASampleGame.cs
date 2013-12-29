@@ -99,7 +99,7 @@ namespace GLibXNASample
 
             //Special case for the main menu: I use an object initializer to set it to visible.
             AllScreens.Add(new MainMenu(SpriteBatch) { Visible = true });
-            AllScreens.Add(new VideoPlayer(SpriteBatch));
+            AllScreens.Add(new VideoPlayerScreen(SpriteBatch));
         }
     }
 }
