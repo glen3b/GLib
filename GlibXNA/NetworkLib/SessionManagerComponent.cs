@@ -16,6 +16,9 @@ namespace Glib.XNA.NetworkLib
     /// <summary>
     /// A game component that manages a <see cref="NetworkSession"/>.
     /// </summary>
+    /// <remarks>
+    /// This class provides utility methods for the joining of existing <see cref="NetworkSession"/>s. Creation of <see cref="NetworkSession"/> objects must be done using the <see cref="NetworkSession"/> class itself.
+    /// </remarks>
     public class SessionManagerComponent : Microsoft.Xna.Framework.GameComponent
     {
         /// <summary>

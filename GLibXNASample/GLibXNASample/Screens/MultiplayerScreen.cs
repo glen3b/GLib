@@ -45,7 +45,35 @@ namespace GLibXNASample.Screens
         void hostSession_Pressed(object sender, EventArgs e)
         {
             GLibXNASampleGame.Instance.SetScreen("Loading");
-            //GLibXNASampleGame.Instance.SessionManagement.(NetworkSessionType.SystemLink, 1);
+
+            //The SessionManagerComponent does not provide methods for the creation of NetworkSessions
+            //It must me done through the NetworkSession class directly
+            NetworkSession.BeginCreate(NetworkSessionType.SystemLink, 1, 4, onSessionCreation, null);
+        }
+
+        private void onSessionCreation(IAsyncResult res)
+        {
+            NetworkSession createdSession = null;
+            try
+            {
+                createdSession = NetworkSession.EndCreate(res);
+            }
+            catch
+            {
+                createdSession = null;
+            }
+
+            if (createdSession == null)
+            {
+                if (!Guide.IsVisible)
+                {
+                    Guide.BeginShowMessageBox(PlayerIndex.One, "Error Creating Multiplayer Game", "An error occurred during the creation of the multiplayer session.", new string[] { "OK" }, 0, MessageBoxIcon.Error, null, null);
+                }
+                return;
+            }
+
+            GLibXNASampleGame.Instance.SessionManagement.JoinSession(createdSession);
+            GLibXNASampleGame.Instance.NetworkTransmitter.Session = createdSession;
         }
 
         public override bool Visible
