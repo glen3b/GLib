@@ -12,6 +12,7 @@ using Glib.XNA;
 using Glib.XNA.InputLib;
 using GLibXNASample.Screens;
 using Glib.XNA.SpriteLib;
+using Glib.XNA.NetworkLib;
 
 namespace GLibXNASample
 {
@@ -38,13 +39,28 @@ namespace GLibXNASample
         {
             Instance = this;
 
-            //IsMouseVisible = true;
+            SessionManagement = new SessionManagerComponent(this);
+            NetworkTransmitter = new NetworkWatcherComponent(this);
+            Components.Add(SessionManagement);
+            Components.Add(NetworkTransmitter);
 
             //Sets the title of the game window
             Window.Title = "GlenLibrary XNA Sample Game";
             KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
             base.Initialize();
         }
+
+        private static Random _random = new Random();
+
+        /// <summary>
+        /// Gets a <see cref="Random"/> instance for random calculations.
+        /// </summary>
+        public static Random Random
+        {
+            get { return _random; }
+            set { _random = value; }
+        }
+        
 
         /// <summary>
         /// Called when a key is pressed down.
@@ -91,6 +107,24 @@ namespace GLibXNASample
         }
 
         /// <summary>
+        /// Gets a <see cref="NetworkWatcherComponent"/>, an object for sending data across a <see cref="NetworkSession"/>.
+        /// </summary>
+        public NetworkWatcherComponent NetworkTransmitter
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets a <see cref="SessionManagerComponent"/>, an object for managing network sessions.
+        /// </summary>
+        public SessionManagerComponent SessionManagement
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Makes the specified <see cref="Screen"/> the currently visible screen.
         /// </summary>
         /// <param name="newScreenName">The name of the screen to show.</param>
@@ -102,6 +136,11 @@ namespace GLibXNASample
             {
                 screen.Visible = screen.Name.Equals(newScreenName, StringComparison.InvariantCultureIgnoreCase);
             }
+        }
+
+        public void SetMouseVisible(Boolean mouseVisible)
+        {
+            IsMouseVisible = mouseVisible;
         }
 
         /// <summary>
