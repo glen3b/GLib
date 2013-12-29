@@ -20,6 +20,7 @@ namespace GLibXNASample.Screens
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
         TextSprite title;
+        ProgressBar progressBar;
 
         Dictionary<String, String> buttons = new Dictionary<string, string>();
 
@@ -83,6 +84,17 @@ namespace GLibXNASample.Screens
             }
             #endregion
 
+            //ProgressBar: A dynamically generated progress bar, could be used to represent asset loading progress
+            //Here it is just used for effects :)
+            progressBar = new ProgressBar(Vector2.Zero, _filledColors[0], _emptyColors[0], sb);
+            //HeightScale: The progress bar shall be 5 high
+            progressBar.HeightScale = 5;
+            progressBar.Denominator = Graphics.Viewport.Width - 20;
+            progressBar.Value = 0;
+            progressBar.X = progressBar.GetCenterPosition(sb.GraphicsDevice.Viewport).X;
+            progressBar.Y = Graphics.Viewport.Height - progressBar.Height - 5;
+            Sprites.Add(progressBar);
+
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
             particlegen.MinimumParticleColorChangeRate = 0.925f;
@@ -103,6 +115,12 @@ namespace GLibXNASample.Screens
 
         }
 
+        #region Progress bar demo logic variables
+        private int _cycleNumber = 0;
+        private Color[] _filledColors = new Color[] { Color.DarkGreen, Color.DarkBlue, Color.DarkMagenta };
+        private Color[] _emptyColors = new Color[] { Color.LightSlateGray, Color.MediumAquamarine, Color.Magenta };
+        #endregion
+
         /// <summary>
         /// There are 2 update methods provided by <see cref="Screen"/>, one accepting <see cref="GameTime"/>, the other not.
         /// Since this is being updated through a <see cref="ScreenGame"/>, a <see cref="GameTime"/> will be provided, so this method will be called.
@@ -115,6 +133,14 @@ namespace GLibXNASample.Screens
 
             //The mouse cursor follows the mouse
             mouseCursor.Position = MouseManager.MousePositionable.Position;
+            progressBar.Value = progressBar.Value >= progressBar.Denominator ? progressBar.Denominator : progressBar.Value + 1;
+            if (progressBar.Value >= progressBar.Denominator)
+            {
+                _cycleNumber++;
+                progressBar.FillColor = _filledColors[_cycleNumber % _filledColors.Length];
+                progressBar.EmptyColor = _emptyColors[_cycleNumber % _emptyColors.Length];
+                progressBar.Value = 0;
+            }
         }
     }
 }
