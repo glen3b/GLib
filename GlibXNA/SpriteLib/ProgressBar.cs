@@ -114,7 +114,9 @@ namespace Glib.XNA.SpriteLib
                 {
                     if (value > Denominator)
                     {
-                        throw new ArgumentException("The value cannot be greater than the denominator.");
+                        //Set value to denominator
+                        value = Denominator;
+                        //throw new ArgumentException("The value cannot be greater than the denominator.");
                     }
                     if (ProgressBarFilled != null && value == Denominator)
                     {

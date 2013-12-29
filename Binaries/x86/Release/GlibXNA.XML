@@ -4169,6 +4169,9 @@
             <summary>
             A game component that manages a <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/>.
             </summary>
+            <remarks>
+            This class provides utility methods for the joining of existing <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/>s. Creation of <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/> objects must be done using the <see cref="T:Microsoft.Xna.Framework.Net.NetworkSession"/> class itself.
+            </remarks>
         </member>
         <member name="M:Glib.XNA.NetworkLib.SessionManagerComponent.#ctor(Microsoft.Xna.Framework.Game)">
             <summary>
