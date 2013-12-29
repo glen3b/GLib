@@ -134,9 +134,25 @@ namespace GLibXNASample.Screens
 
         #region Progress bar - variables for demo
         private int _cycleNumber = 0;
-        private Color[] _filledColors = new Color[] { Color.DarkGreen, Color.DarkBlue, Color.DarkMagenta };
-        private Color[] _emptyColors = new Color[] { Color.LightSlateGray, Color.MediumAquamarine, Color.Magenta };
+        private Color[] _filledColors = new Color[] { Color.DarkMagenta, Color.DarkGreen, Color.DarkBlue };
+        private Color[] _emptyColors = new Color[] { Color.Magenta, Color.LightSlateGray, Color.MediumAquamarine };
         #endregion
+
+        public override bool Visible
+        {
+            get
+            {
+                return base.Visible;
+            }
+            set
+            {
+                base.Visible = value;
+                if (value)
+                {
+                    GLibXNASampleGame.Instance.SetMouseVisible(false);
+                }
+            }
+        }
 
         /// <summary>
         /// There are 2 update methods provided by <see cref="Screen"/>, one accepting <see cref="GameTime"/>, the other not.
@@ -150,12 +166,21 @@ namespace GLibXNASample.Screens
 
             //The mouse cursor follows the mouse
             mouseCursor.Position = MouseManager.MousePositionable.Position;
-            progressBar.Value = progressBar.Value >= progressBar.Denominator ? progressBar.Denominator : progressBar.Value + 1;
+            progressBar.Value = progressBar.Value >= progressBar.Denominator ? progressBar.Denominator : progressBar.Value + GLibXNASampleGame.Random.Next(3);
             if (progressBar.Value >= progressBar.Denominator)
             {
                 _cycleNumber++;
-                progressBar.FillColor = _filledColors[_cycleNumber % _filledColors.Length];
-                progressBar.EmptyColor = _emptyColors[_cycleNumber % _emptyColors.Length];
+
+                if (_cycleNumber % _filledColors.Length == 0)
+                {
+                    progressBar.FillColor = new Color(new Vector3(GLibXNASampleGame.Random.NextDouble().ToFloat(), GLibXNASampleGame.Random.NextDouble().ToFloat(), GLibXNASampleGame.Random.NextDouble().ToFloat()));
+                    progressBar.EmptyColor = new Color(Vector3.One - progressBar.FillColor.ToVector3());
+                }
+                else
+                {
+                    progressBar.FillColor = _filledColors[_cycleNumber % _filledColors.Length];
+                    progressBar.EmptyColor = _emptyColors[_cycleNumber % _emptyColors.Length];
+                }
                 progressBar.Value = 0;
             }
         }
