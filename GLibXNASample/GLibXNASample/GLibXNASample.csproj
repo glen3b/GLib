@@ -76,6 +76,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="GLibXNASampleGame.cs" />
     <Compile Include="Screens\MainMenu.cs" />
+    <Compile Include="Screens\VideoPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
