@@ -74,6 +74,7 @@ namespace GLibXNASample.Screens
 
             GLibXNASampleGame.Instance.SessionManagement.JoinSession(createdSession);
             GLibXNASampleGame.Instance.NetworkTransmitter.Session = createdSession;
+            GLibXNASampleGame.Instance.SetScreen("NetworkLobby");
         }
 
         public override bool Visible
