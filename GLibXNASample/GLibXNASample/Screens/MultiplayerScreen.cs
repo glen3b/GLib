@@ -28,6 +28,8 @@ namespace GLibXNASample.Screens
             Name = "MultiPlayer";
 
             GLibXNASampleGame.Instance.SessionManagement.SessionsFound += new EventHandler<Glib.XNA.NetworkLib.NetworkSessionsFoundEventArgs>(SessionManagement_SessionsFound);
+            GLibXNASampleGame.Instance.SessionManagement.SessionJoined += new EventHandler<Glib.XNA.NetworkLib.NetworkSessionJoinedEventArgs>(SessionManagement_SessionJoined);
+
 
             //See MainMenu for TextSprite sample comments
             title = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Title"), "Networking Sample", Color.Gold);
@@ -47,6 +49,16 @@ namespace GLibXNASample.Screens
             joinSession.HoverColor = Color.SpringGreen;
             joinSession.Pressed += new EventHandler(joinSession_Pressed);
             AdditionalSprites.Add(joinSession);
+        }
+
+        void SessionManagement_SessionJoined(object sender, Glib.XNA.NetworkLib.NetworkSessionJoinedEventArgs e)
+        {
+            if (e.Error != null || e.Joined == null)
+            {
+                //TODO: Errors reported to user
+                GLibXNASampleGame.Instance.SetScreen("MultiPlayer");
+                return;
+            }
         }
 
         void joinSession_Pressed(object sender, EventArgs e)

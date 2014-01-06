@@ -601,6 +601,10 @@ namespace Glib.XNA.SpriteLib
         {
             if (Visible)
             {
+                if (Texture == null)
+                {
+                    throw new InvalidOperationException("Sprites cannot be drawn with a null texture.");
+                }
                 SpriteBatch.Draw(this);
                 CallDrawn();
             }
