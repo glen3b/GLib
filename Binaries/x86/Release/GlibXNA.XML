@@ -4071,6 +4071,11 @@
             Represents a progress bar.
             </summary>
         </member>
+        <member name="F:Glib.XNA.SpriteLib.ProgressBar.syncLock">
+            <summary>
+            The object for locking when modifying variables relating to the value of the <see cref="T:Glib.XNA.SpriteLib.ProgressBar"/>. The provided properties use this object by default.
+            </summary>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.ProgressBar.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
             <summary>
             Create a new ProgressBar.
@@ -4105,6 +4110,9 @@
             <summary>
             Gets the percentage (not fraction) of the progress bar that is complete.
             </summary>
+            <remarks>
+            Returns a value from 0 to 100.
+            </remarks>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ProgressBar.Value">
             <summary>

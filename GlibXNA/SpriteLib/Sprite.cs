@@ -645,7 +645,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="pos">The position to check.</param>
         /// <returns>Whether or not the specified position intersects with this Sprite.</returns>
-        public bool Intersects(Vector2 pos)
+        public virtual bool Intersects(Vector2 pos)
         {
             if (!Visible)
             {
@@ -676,7 +676,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="r">The rectangle to check intersection against</param>
         /// <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
-        public bool Intersects(Rectangle r)
+        public virtual bool Intersects(Rectangle r)
         {
             return Visible && Rectangle.Intersects(r);
         }
@@ -686,7 +686,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="s">The sprite to check intersection against.</param>
         /// <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
-        public bool Intersects(Sprite s)
+        public virtual bool Intersects(Sprite s)
         {
             return Visible && s.Visible && Intersects(s.Rectangle);
         }
