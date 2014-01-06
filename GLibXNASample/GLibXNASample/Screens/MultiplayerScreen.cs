@@ -18,6 +18,7 @@ namespace GLibXNASample.Screens
     {
         TextSprite title;
         TextSprite hostSession;
+        TextSprite joinSession;
 
         public MultiplayerScreen(SpriteBatch sb)
             : base(sb, Color.Chocolate * 0.9f)
@@ -25,6 +26,8 @@ namespace GLibXNASample.Screens
             ClearColor.A = 255;
 
             Name = "MultiPlayer";
+
+            GLibXNASampleGame.Instance.SessionManagement.SessionsFound += new EventHandler<Glib.XNA.NetworkLib.NetworkSessionsFoundEventArgs>(SessionManagement_SessionsFound);
 
             //See MainMenu for TextSprite sample comments
             title = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Title"), "Networking Sample", Color.Gold);
@@ -37,6 +40,33 @@ namespace GLibXNASample.Screens
             hostSession.HoverColor = Color.SpringGreen;
             hostSession.Pressed += new EventHandler(hostSession_Pressed);
             AdditionalSprites.Add(hostSession);
+
+            joinSession = new TextSprite(sb, new Vector2(0, hostSession.Y + hostSession.Height + 5), GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), "Join Session", Color.MediumSpringGreen);
+            joinSession.X = joinSession.GetCenterPosition(Graphics.Viewport).X;
+            joinSession.IsHoverable = true;
+            joinSession.HoverColor = Color.SpringGreen;
+            joinSession.Pressed += new EventHandler(joinSession_Pressed);
+            AdditionalSprites.Add(joinSession);
+        }
+
+        void joinSession_Pressed(object sender, EventArgs e)
+        {
+            GLibXNASampleGame.Instance.SetScreen("Loading");
+            GLibXNASampleGame.Instance.SessionManagement.FindSessions(NetworkSessionType.SystemLink, 4);
+        }
+
+        void SessionManagement_SessionsFound(object sender, Glib.XNA.NetworkLib.NetworkSessionsFoundEventArgs e)
+        {
+            //TODO: Make this better:
+            //Session list screen [User chooses session]
+            //Errors reported to user
+
+            if (!e.SessionsFound || e.Error != null)
+            {
+                GLibXNASampleGame.Instance.SetScreen("MultiPlayer");
+                return;
+            }
+            e.SessionToJoin = e.AvailableSessions[0];
         }
 
         /// <summary>
