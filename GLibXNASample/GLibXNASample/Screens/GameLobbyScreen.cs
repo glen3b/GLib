@@ -55,6 +55,13 @@ namespace GLibXNASample.Screens
 
                     //gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
                 }
+                else
+                {
+                    if (GLibXNASampleGame.Instance.SessionManagement.Session != null)
+                    {
+                        GLibXNASampleGame.Instance.SessionManagement.LeaveSession();
+                    }
+                }
             }
         }
 

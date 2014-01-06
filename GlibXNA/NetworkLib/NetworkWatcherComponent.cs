@@ -71,6 +71,8 @@ namespace Glib.XNA.NetworkLib
                 {
                     if (value != null)
                     {
+                        _dataReaders.Clear();
+                        _dataWriters.Clear();
                         value.GamerJoined += new EventHandler<GamerJoinedEventArgs>(value_GamerJoined);
                         value.GamerLeft += new EventHandler<GamerLeftEventArgs>(value_GamerLeft);
                     }
@@ -92,6 +94,8 @@ namespace Glib.XNA.NetworkLib
         {
             if (e.Gamer.IsLocal)
             {
+                _dataWriters.Remove(e.Gamer.Id);
+                _dataReaders.Remove(e.Gamer.Id);
                 _dataWriters.Add(e.Gamer.Id, new PacketWriter());
                 _dataReaders.Add(e.Gamer.Id, new PacketReader());
             }
