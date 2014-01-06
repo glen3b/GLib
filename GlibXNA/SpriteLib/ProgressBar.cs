@@ -17,24 +17,33 @@ namespace Glib.XNA.SpriteLib
         private int _denominator = 10;
 
         /// <summary>
+        /// The object for locking when modifying variables relating to the value of the <see cref="ProgressBar"/>. The provided properties use this object by default.
+        /// </summary>
+        protected readonly object syncLock = new object();
+
+        /// <summary>
         /// Gets or sets the highest possible value (denominator) of the progress bar.
         /// </summary>
         public int Denominator
         {
             get { return _denominator; }
-            set {
-                if (value != _denominator)
+            set
+            {
+                lock (syncLock)
                 {
-                    if (value <= 0)
+                    if (value != _denominator)
                     {
-                        throw new ArgumentException("The denominator must be greater than zero.");
+                        if (value <= 0)
+                        {
+                            throw new ArgumentException("The denominator must be greater than zero.");
+                        }
+                        _denominator = value;
+                        if (_denominator > Value)
+                        {
+                            Value = _denominator;
+                        }
+                        _textureNeedsCalculation = true;
                     }
-                    _denominator = value;
-                    if (_denominator > Value)
-                    {
-                        Value = _denominator;
-                    }
-                    _textureNeedsCalculation = true;
                 }
             }
         }
@@ -42,7 +51,8 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new ProgressBar.
         /// </summary>
-        public ProgressBar(Vector2 pos, Color fillColor, Color emptyColor, SpriteBatch sb) : base(null, pos, sb)
+        public ProgressBar(Vector2 pos, Color fillColor, Color emptyColor, SpriteBatch sb)
+            : base(null, pos, sb)
         {
             FillColor = fillColor;
             EmptyColor = emptyColor;
@@ -63,10 +73,13 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
-                if (_heightScale != value)
+                lock (syncLock)
                 {
-                    _heightScale = value;
-                    _textureNeedsCalculation = true;
+                    if (_heightScale != value)
+                    {
+                        _heightScale = value;
+                        _textureNeedsCalculation = true;
+                    }
                 }
             }
         }
@@ -79,19 +92,26 @@ namespace Glib.XNA.SpriteLib
         public int WidthScale
         {
             get { return _widthScale; }
-            set{
-                if (_widthScale != value)
+            set
+            {
+                lock (syncLock)
                 {
-                    _widthScale = value;
-                    _textureNeedsCalculation = true;
+                    if (_widthScale != value)
+                    {
+                        _widthScale = value;
+                        _textureNeedsCalculation = true;
+                    }
                 }
-           }
+            }
         }
-        
+
 
         /// <summary>
         /// Gets the percentage (not fraction) of the progress bar that is complete.
         /// </summary>
+        /// <remarks>
+        /// Returns a value from 0 to 100.
+        /// </remarks>
         public float Percentage
         {
             get
@@ -109,21 +129,25 @@ namespace Glib.XNA.SpriteLib
         public int Value
         {
             get { return _value; }
-            set {
-                if (value != _value)
+            set
+            {
+                lock (syncLock)
                 {
-                    if (value > Denominator)
+                    if (value != _value)
                     {
-                        //Set value to denominator
-                        value = Denominator;
-                        //throw new ArgumentException("The value cannot be greater than the denominator.");
+                        if (value > Denominator)
+                        {
+                            //Set value to denominator
+                            value = Denominator;
+                            //throw new ArgumentException("The value cannot be greater than the denominator.");
+                        }
+                        if (ProgressBarFilled != null && value == Denominator)
+                        {
+                            ProgressBarFilled(this, EventArgs.Empty);
+                        }
+                        _value = value;
+                        _textureNeedsCalculation = true;
                     }
-                    if (ProgressBarFilled != null && value == Denominator)
-                    {
-                        ProgressBarFilled(this, EventArgs.Empty);
-                    }
-                    _value = value;
-                    _textureNeedsCalculation = true;
                 }
             }
         }
@@ -151,80 +175,86 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                if (_cachedTexture != null && !_textureNeedsCalculation)
+                lock (syncLock)
                 {
-                    return _cachedTexture;
-                }
-                Texture2D returnValue = new Texture2D(SpriteBatch.GraphicsDevice, Denominator * _widthScale, _heightScale);
-
-                Color[] data = new Color[returnValue.Width*returnValue.Height];
-
-                for (int i = 0; i < data.Length; i++)
-                {
-                    if (i % returnValue.Width < Value*_widthScale)
+                    if (_cachedTexture != null && !_textureNeedsCalculation)
                     {
-                        data[i] = FillColor;
+                        return _cachedTexture;
                     }
-                    else
-                    {
-                        data[i] = EmptyColor;
-                    }
-                }
+                    Texture2D returnValue = new Texture2D(SpriteBatch.GraphicsDevice, Denominator * _widthScale, _heightScale);
 
-                returnValue.SetData<Color>(data);
-                _cachedTexture = returnValue;
-                _textureNeedsCalculation = false;
-                return returnValue;
+                    Color[] data = new Color[returnValue.Width * returnValue.Height];
+
+                    for (int i = 0; i < data.Length; i++)
+                    {
+                        if (i % returnValue.Width < Value * _widthScale)
+                        {
+                            data[i] = FillColor;
+                        }
+                        else
+                        {
+                            data[i] = EmptyColor;
+                        }
+                    }
+
+                    returnValue.SetData<Color>(data);
+                    _cachedTexture = returnValue;
+                    _textureNeedsCalculation = false;
+                    return returnValue;
+                }
             }
             set
             {
-                if (value != null)
+                lock (syncLock)
                 {
-                    Color[] textureData = new Color[value.Width * value.Height];
-                    if (textureData.Length == 0)
+                    if (value != null)
                     {
-                        throw new ArgumentException("The texture must have a size greater than zero in both dimensions.");
-                    }
-                    value.GetData<Color>(textureData);
-                    if (textureData.Distinct().ToArray().Length > 2)
-                    {
-                        throw new ArgumentException("The texture must have less than or equal to 2 colors.");
-                    }
-                    if (textureData.Distinct().ToArray().Length == 1)
-                    {
-                        //0% or 100%, let's check the data against our colors to see if full (we assume not inverted)
-                        Denominator = value.Width / _widthScale;
-                        Value = textureData[0] == FillColor ? Denominator : 0;
+                        Color[] textureData = new Color[value.Width * value.Height];
+                        if (textureData.Length == 0)
+                        {
+                            throw new ArgumentException("The texture must have a size greater than zero in both dimensions.");
+                        }
+                        value.GetData<Color>(textureData);
+                        if (textureData.Distinct().ToArray().Length > 2)
+                        {
+                            throw new ArgumentException("The texture must have less than or equal to 2 colors.");
+                        }
+                        if (textureData.Distinct().ToArray().Length == 1)
+                        {
+                            //0% or 100%, let's check the data against our colors to see if full (we assume not inverted)
+                            Denominator = value.Width / _widthScale;
+                            Value = textureData[0] == FillColor ? Denominator : 0;
+                        }
+                        else
+                        {
+                            Color colorOnLeft = textureData[0];
+
+                            int progBarValue = 0;
+
+                            //This is scale accounted
+                            int progBarDenom = textureData.Length / value.Height / _widthScale;
+                            //Begin parsing, we know color on left is value
+                            for (int i = 0; i < progBarDenom; i++)
+                            {
+                                //We only need first row
+                                if (textureData[i] == colorOnLeft)
+                                {
+                                    progBarValue++;
+                                }
+                            }
+
+                            //Account for current scale, assign variables
+                            Denominator = progBarDenom;
+                            Value = progBarValue / _widthScale;
+                        }
+                        //throw new NotImplementedException("You cannot set the texture of a progress bar.");
                     }
                     else
                     {
-                        Color colorOnLeft = textureData[0];
+                        FillColor = Color.Transparent;
 
-                        int progBarValue = 0;
-
-                        //This is scale accounted
-                        int progBarDenom = textureData.Length / value.Height / _widthScale;
-                        //Begin parsing, we know color on left is value
-                        for (int i = 0; i < progBarDenom; i++)
-                        {
-                            //We only need first row
-                            if (textureData[i] == colorOnLeft)
-                            {
-                                progBarValue++;
-                            }
-                        }
-
-                        //Account for current scale, assign variables
-                        Denominator = progBarDenom;
-                        Value = progBarValue / _widthScale;
+                        EmptyColor = Color.Transparent;
                     }
-                    //throw new NotImplementedException("You cannot set the texture of a progress bar.");
-                }
-                else
-                {
-                    FillColor = Color.Transparent;
-
-                    EmptyColor = Color.Transparent;
                 }
             }
         }
@@ -233,6 +263,6 @@ namespace Glib.XNA.SpriteLib
         /// The color to show for portions of the progress bar that are empty.
         /// </summary>
         public Color EmptyColor;
-        
+
     }
 }
