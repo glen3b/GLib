@@ -41,25 +41,30 @@ namespace GLibXNASample.Screens
             }
             set
             {
-                base.Visible = value;
-                if (value)
+                if (value != Visible)
                 {
-                    //Subscribe to events relating to Gamers joining and leaving the NetworkSession
-                    GLibXNASampleGame.Instance.SessionManagement.Session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(Session_GamerJoined);
-                    GLibXNASampleGame.Instance.SessionManagement.Session.GamerLeft += new EventHandler<GamerLeftEventArgs>(Session_GamerLeft);
-
-                    //foreach (NetworkGamer gamer in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
-                    //{
-                    //    gamerList.Text += gamer.Gamertag + Environment.NewLine;
-                    //}
-
-                    //gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
-                }
-                else
-                {
-                    if (GLibXNASampleGame.Instance.SessionManagement.Session != null)
+                    base.Visible = value;
+                    if (value)
                     {
-                        GLibXNASampleGame.Instance.SessionManagement.LeaveSession();
+                        //Clear the list of gamers
+                        gamerList.Text = String.Empty;
+                        gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
+
+                        //Subscribe to events relating to Gamers joining and leaving the NetworkSession
+                        GLibXNASampleGame.Instance.SessionManagement.Session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(Session_GamerJoined);
+                        GLibXNASampleGame.Instance.SessionManagement.Session.GamerLeft += new EventHandler<GamerLeftEventArgs>(Session_GamerLeft);
+
+                        //foreach (NetworkGamer gamer in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
+                        //{
+                        //    gamerList.Text += gamer.Gamertag + Environment.NewLine;
+                        //}
+                    }
+                    else
+                    {
+                        if (GLibXNASampleGame.Instance.SessionManagement.Session != null)
+                        {
+                            GLibXNASampleGame.Instance.SessionManagement.LeaveSession();
+                        }
                     }
                 }
             }
