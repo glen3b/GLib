@@ -8,6 +8,8 @@ using Glib.XNA.SpriteLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Net;
+using Glib.XNA.InputLib;
+using Microsoft.Xna.Framework.Input;
 
 namespace GLibXNASample.Screens
 {
@@ -31,6 +33,23 @@ namespace GLibXNASample.Screens
             gamerList = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), "", Color.IndianRed);
             gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
             AdditionalSprites.Add(gamerList);
+
+            KeyboardManager.KeyDown += new SingleKeyEventHandler(KeyboardManager_KeyDown);
+        }
+
+        void KeyboardManager_KeyDown(object source, SingleKeyEventArgs e)
+        {
+            if (Visible && e.Key == Keys.R)
+            {
+                foreach (LocalNetworkGamer gamer in GLibXNASampleGame.Instance.SessionManagement.Session.LocalGamers)
+                {
+                    gamer.IsReady = !gamer.IsReady;
+                }
+            }
+            else if (Visible && (e.Key == Keys.Space || e.Key == Keys.Enter) && GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers.Count >= 2 && GLibXNASampleGame.Instance.SessionManagement.Session.IsHost && GLibXNASampleGame.Instance.SessionManagement.Session.SessionState == NetworkSessionState.Lobby && GLibXNASampleGame.Instance.SessionManagement.Session.IsEveryoneReady)
+            {
+                GLibXNASampleGame.Instance.SessionManagement.Session.StartGame();
+            }
         }
 
         public override bool Visible
@@ -54,10 +73,8 @@ namespace GLibXNASample.Screens
                         GLibXNASampleGame.Instance.SessionManagement.Session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(Session_GamerJoined);
                         GLibXNASampleGame.Instance.SessionManagement.Session.GamerLeft += new EventHandler<GamerLeftEventArgs>(Session_GamerLeft);
 
-                        //foreach (NetworkGamer gamer in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
-                        //{
-                        //    gamerList.Text += gamer.Gamertag + Environment.NewLine;
-                        //}
+                        //Subscribe to the game start event
+                        GLibXNASampleGame.Instance.SessionManagement.Session.GameStarted += new EventHandler<GameStartedEventArgs>(Session_GameStarted);
                     }
                     else
                     {
@@ -68,6 +85,11 @@ namespace GLibXNASample.Screens
                     }
                 }
             }
+        }
+
+        void Session_GameStarted(object sender, GameStartedEventArgs e)
+        {
+            
         }
 
         void Session_GamerLeft(object sender, GamerLeftEventArgs e)

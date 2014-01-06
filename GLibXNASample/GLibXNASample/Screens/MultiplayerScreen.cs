@@ -69,6 +69,7 @@ namespace GLibXNASample.Screens
                 {
                     Guide.BeginShowMessageBox(PlayerIndex.One, "Error Creating Multiplayer Game", "An error occurred during the creation of the multiplayer session.", new string[] { "OK" }, 0, MessageBoxIcon.Error, null, null);
                 }
+                GLibXNASampleGame.Instance.SetScreen("MainMenu");
                 return;
             }
 
