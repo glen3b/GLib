@@ -26,7 +26,13 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public int Denominator
         {
-            get { return _denominator; }
+            get
+            {
+                lock (syncLock)
+                {
+                    return _denominator;
+                }
+            }
             set
             {
                 lock (syncLock)
@@ -69,7 +75,10 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return _heightScale;
+                lock (syncLock)
+                {
+                    return _heightScale;
+                }
             }
             set
             {
@@ -91,7 +100,11 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public int WidthScale
         {
-            get { return _widthScale; }
+            get
+            {
+                lock (syncLock)
+                { return _widthScale; }
+            }
             set
             {
                 lock (syncLock)
@@ -116,7 +129,10 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return 100f * (Value.ToFloat() / Denominator.ToFloat());
+                lock (syncLock)
+                {
+                    return 100f * (Value.ToFloat() / Denominator.ToFloat());
+                }
             }
         }
 
@@ -128,7 +144,11 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public int Value
         {
-            get { return _value; }
+            get
+            {
+                lock (syncLock)
+                { return _value; }
+            }
             set
             {
                 lock (syncLock)
