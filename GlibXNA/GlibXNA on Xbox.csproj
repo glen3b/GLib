@@ -77,6 +77,7 @@
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\ParticleEngine\Particle.cs" />
     <Compile Include="SpriteLib\ParticleEngine\ParticleEngine.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\ParticlePool.cs" />
     <Compile Include="SpriteLib\ParticleEngine\RandomParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\RandomParticleProperties.cs" />
     <Compile Include="SpriteLib\ParticleEngine\TimeToLiveSettings.cs" />
