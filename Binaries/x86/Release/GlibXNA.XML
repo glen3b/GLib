@@ -4160,14 +4160,9 @@
             Create a new ProgressBar.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.ProgressBar.FillColor">
+        <member name="F:Glib.XNA.SpriteLib.ProgressBar._textureNeedsCalculation">
             <summary>
-            The color to show for portions of the progress bar that are full.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.ProgressBar.EmptyColor">
-            <summary>
-            The color to show for portions of the progress bar that are empty.
+            A boolean indicating whether the texture needs to be recalculated.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ProgressBar.Denominator">
@@ -4198,6 +4193,11 @@
             Gets or sets the numerator (value) of the progress bar.
             </summary>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.ProgressBar.FillColor">
+            <summary>
+            Gets or sets the color to show for portions of the progress bar that are full.
+            </summary>
+        </member>
         <member name="E:Glib.XNA.SpriteLib.ProgressBar.ProgressBarFilled">
             <summary>
             An event fired when the progress bar is filled (value is set to denominator).
@@ -4212,7 +4212,13 @@
             It does not assume the same color scheme, but it does assume the same scale.
             If the bar is one color, the program will parse it as 0% unless the color is the FillColor of this ProgressBar.
             If the color scheme is inverted in the texture you are setting this ProgressBar to, you should be aware of this.
+            Parsing any non-null texture will not result in a change to <see cref="P:Glib.XNA.SpriteLib.ProgressBar.FillColor"/> and <see cref="P:Glib.XNA.SpriteLib.ProgressBar.EmptyColor"/>, but will instead set the appropriate values and cause a change in the values of this progress bar.
             </remarks>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ProgressBar.EmptyColor">
+            <summary>
+            Gets or sets the color to show for portions of the progress bar that are empty.
+            </summary>
         </member>
         <member name="T:Glib.XNA.InputLib.KeyboardManager">
             <summary>
