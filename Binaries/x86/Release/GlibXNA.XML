@@ -469,11 +469,6 @@
             <param name="newPos">The position to call the move event with.</param>
             <returns>Whether or not the called move event was cancelled.</returns>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.Color">
-            <summary>
-            The color of which to tint the sprite. Defaults to white.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.UpdateParams">
             <summary>
             The <see cref="T:Glib.XNA.SpriteLib.UpdateParamaters">UpdateParamaters</see> used to update the sprite.
@@ -689,6 +684,11 @@
         <member name="P:Glib.XNA.SpriteLib.Sprite.Position">
             <summary>
             The current position of the sprite.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.TintColor">
+            <summary>
+            Gets or sets the color to tint the sprite. Defaults to white.
             </summary>
         </member>
         <member name="E:Glib.XNA.SpriteLib.Sprite.MouseEnter">
@@ -1610,124 +1610,6 @@
             <remarks>
             This namespace is in beta.
             </remarks>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.SpriteBuilder">
-            <summary>
-            A class to construct sprites easily.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Make a new SpriteBuilder.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.#ctor(Microsoft.Xna.Framework.Content.ContentManager,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Make a new SpriteBuilder.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetDrawRegion(Microsoft.Xna.Framework.Rectangle)">
-            <summary>
-            Set the DrawRegion of the Sprite.
-            </summary>
-            <param name="region">The new DrawRegion of the Sprite.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.RemoveDrawRegion">
-            <summary>
-            Remove the DrawRegion from the Sprite, drawing the entire Sprite.
-            </summary>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetColor(Microsoft.Xna.Framework.Color)">
-            <summary>
-            Set the color of the Sprite under construction.
-            </summary>
-            <param name="c">The color to use.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetWidth(System.Single)">
-            <summary>
-            Set the width of the Sprite under construction via scaling.
-            </summary>
-            <param name="w">The new width.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetUpdateParamaters(Glib.XNA.SpriteLib.UpdateParamaters)">
-            <summary>
-            Set the <seealso cref="T:Glib.XNA.SpriteLib.UpdateParamaters"/> for this Sprite.
-            </summary>
-            <param name="u">The UpdateParamaters to use for this Sprite.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetViewport(Microsoft.Xna.Framework.Graphics.Viewport)">
-            <summary>
-            Set the viewport this Sprite should use.
-            </summary>
-            <param name="v">The Viewport this Sprite should use.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetSpeed(System.Single,System.Single)">
-            <summary>
-            Set the speed of this Sprite.
-            </summary>
-            <param name="xspeed">The speed in X.</param>
-            <param name="yspeed">The speed in Y.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.RegisterDrawEvent(System.EventHandler)">
-            <summary>
-            Register an event for when the Sprite is drawn.
-            </summary>
-            <param name="drawEvent">The SpriteEventHandler for the Drawn event.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.RegisterMoveEvent(Glib.XNA.SpriteLib.SpriteMoveEventHandler)">
-            <summary>
-            Register an event for when the Sprite moves.
-            </summary>
-            <param name="moveEvent">The SpriteMoveEventHandler for the Move event.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.Build">
-            <summary>
-            Return the Sprite under construction.
-            </summary>
-            <returns>The Sprite under construction.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetHeight(System.Single)">
-            <summary>
-            Set the height of the Sprite under construction via scaling.
-            </summary>
-            <param name="h">The new height.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.RegisterUpdateEvent(System.EventHandler)">
-            <summary>
-            Register an update event handler for the Sprite under construction.
-            </summary>
-            <param name="updateEvent">The update event to register.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetScale(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Set the scale of the Sprite under construction.
-            </summary>
-            <param name="scale">The scale to assign to the Sprite.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteBuilder.SetScale(System.Single,System.Single)">
-            <summary>
-            Set the scale of the Sprite under construction.
-            </summary>
-            <param name="scalex">The X scale to assign to the Sprite.</param>
-            <param name="scaley">The Y scale to assign to the Sprite.</param>
-            <returns>This SpriteBuilder.</returns>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteBuilder.Built">
-            <summary>
-            Gets the Sprite under construction.
-            </summary>
         </member>
         <member name="T:Glib.XNA.IGravitySource">
             <summary>

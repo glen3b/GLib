@@ -420,10 +420,17 @@ namespace Glib.XNA.SpriteLib
             return cancel;
         }
 
+        private Color _tintColor = Color.White;
+
         /// <summary>
-        /// The color of which to tint the sprite. Defaults to white.
+        /// Gets or sets the color to tint the sprite. Defaults to white.
         /// </summary>
-        public Color Color = Color.White;
+        public Color TintColor
+        {
+            get { return _tintColor; }
+            set { _tintColor = value; }
+        }
+        
 
 #if WINDOWS
         /// <summary>
@@ -457,7 +464,7 @@ namespace Glib.XNA.SpriteLib
         public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb)
             : this(texture, pos, sb)
         {
-            this.Color = color;
+            this.TintColor = color;
         }
 
         /// <summary>

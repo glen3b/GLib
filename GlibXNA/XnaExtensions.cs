@@ -182,7 +182,7 @@ namespace Glib.XNA
         {
             if (sprToDraw.Visible)
             {
-                sb.Draw(sprToDraw.Texture, sprToDraw.Position, sprToDraw.DrawRegion, sprToDraw.Color, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, sprToDraw.LayerDepth);
+                sb.Draw(sprToDraw.Texture, sprToDraw.Position, sprToDraw.DrawRegion, sprToDraw.TintColor, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, sprToDraw.LayerDepth);
             }
         }
 

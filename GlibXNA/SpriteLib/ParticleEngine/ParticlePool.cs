@@ -102,7 +102,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 {
                     throw new InvalidOperationException("The particle pool has not been initialized.");
                 }
-                particle.Color = Color.White;
+                particle.TintColor = Color.White;
                 particle.ColorChange = 1;
                 particle.DrawRegion = null;
                 particle.Effect = SpriteEffects.None;

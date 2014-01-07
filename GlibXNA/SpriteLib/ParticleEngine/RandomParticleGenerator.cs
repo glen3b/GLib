@@ -224,7 +224,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
 
             particle.Speed = _randomProperties.Speed.HasValue ? _randomProperties.Speed.Value : new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
             particle.RotationVelocity = _randomProperties.RotationChange.HasValue ? _randomProperties.RotationChange.Value : MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);
-            particle.Color = _randomProperties.Tint.HasValue ? _randomProperties.Tint.Value : new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
+            particle.TintColor = _randomProperties.Tint.HasValue ? _randomProperties.Tint.Value : new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
             particle.Scale = _randomProperties.Scale.HasValue ? _randomProperties.Scale.Value : new Vector2(_random.NextDouble().ToFloat() / ScaleFactor);
             particle.TimeToLive = _randomProperties.TimeToLive.HasValue ? _randomProperties.TimeToLive.Value : TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));
             particle.TimeToLiveSettings = _ttlSettings;
