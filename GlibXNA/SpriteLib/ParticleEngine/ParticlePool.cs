@@ -28,7 +28,11 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             {
                 throw new InvalidOperationException("The particle pool has not been initialized.");
             }
-            return new Particle(null, Vector2.Zero, _spriteBatch);
+
+            Particle returnVal = new Particle(null, Vector2.Zero, _spriteBatch);
+            returnVal.ReviveParticle();
+
+            return returnVal;
         }
 
         /// <summary>
@@ -117,6 +121,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 particle.UpdateParams = new UpdateParamaters();
                 particle.UsedViewport = null;
                 particle.Visible = true;
+                particle.ReviveParticle();
 
                 _particleStack.Push(particle);
             }

@@ -29,6 +29,14 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         private float _colorVelocity = 1;
 
         /// <summary>
+        /// Revives this particle if it is dead.
+        /// </summary>
+        protected internal void ReviveParticle()
+        {
+            IsDead = false;
+        }
+
+        /// <summary>
         /// Gets or sets the amount of the color to preserve every update.
         /// </summary>
         /// <remarks>
