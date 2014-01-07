@@ -147,6 +147,9 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
 
                 Particle toReturn = _particleStack.Pop();
 
+                toReturn.Position = particleLocation;
+                toReturn.Texture = particleImg;
+
                 if (_particleStack.Count <= ParticleCountGenerate)
                 {
                     for (int i = 0; i < ParticlesLowGeneration; i++)
