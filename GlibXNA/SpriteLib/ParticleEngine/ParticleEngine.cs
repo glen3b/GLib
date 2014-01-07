@@ -170,6 +170,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 _particles[i].Update(gt);
                 if (_particles[i].IsDead)
                 {
+                    _generator.Pool.ReturnParticle(_particles[i]);
                     _particles.RemoveAt(i);
                     i--;
                 }

@@ -242,11 +242,21 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
+                if (Texture == null)
+                {
+                    throw new InvalidOperationException("The texture must be set to determine the center of the image.");
+                }
+
                 return new Vector2((X - (Origin.X * Scale.X)) + (Width / 2), (Y - (Origin.Y * Scale.Y)) + (Height / 2));
                 //return new Vector2(Rectangle.Center.X, Rectangle.Center.Y);
             }
             set
             {
+                if (Texture == null)
+                {
+                    throw new InvalidOperationException("The texture must be set to set the center of the image.");
+                }
+
                 Vector2 proposition = new Vector2(value.X - Width / 2, value.Y - Height / 2);
                 if (!IsMoveEventCanceled(proposition))
                 {
@@ -303,10 +313,15 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return Texture.Width * Scale.X;
+                return Texture == null ? 0 : Texture.Width * Scale.X;
             }
             set
             {
+                if (Texture == null)
+                {
+                    throw new InvalidOperationException("The texture must be set to set the scaled width of the image.");
+                }
+
                 Scale = new Vector2(value / Texture.Width, Scale.Y);
             }
         }
@@ -318,10 +333,15 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return Texture.Height * Scale.Y;
+                return Texture == null ? 0 : Texture.Height * Scale.Y;
             }
             set
             {
+                if (Texture == null)
+                {
+                    throw new InvalidOperationException("The texture must be set to set the scaled width of the image.");
+                }
+
                 Scale = new Vector2(Scale.X, value / Texture.Height);
             }
         }

@@ -1549,6 +1549,60 @@
             Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
             </summary>
         </member>
+        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool">
+            <summary>
+            A class for the storage of particles.
+            </summary>
+            <remarks>
+            An attempt to avoid garbage collection. This class stores and manages all particles.
+            </remarks>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticleCountGenerate">
+            <summary>
+            The number of particles at which <see cref="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesLowGeneration"/> more particles will be generated.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesLowGeneration">
+            <summary>
+            The number of particles to generate when the particle count drops below <see cref="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticleCountGenerate"/>.
+            </summary>
+        </member>
+        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesToGenerate">
+            <summary>
+            The number of particles to generate on pool initialization.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.GenerateParticle">
+            <summary>
+            Generates a particle. This method should not be called to retrieve a particle for use, use <see cref="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.GetParticle(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)"/> instead.
+            </summary>
+            <returns>A new particle.</returns>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ClearPool">
+            <summary>
+            Clears the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/> of generated particles, and regenerates particles.
+            </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Creates a new <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/>.
+            </summary>
+            <param name="batch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to use for particle generation.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ReturnParticle(Glib.XNA.SpriteLib.ParticleEngine.Particle)">
+            <summary>
+            Returns a "dead" particle to the pool.
+            </summary>
+            <param name="particle">The particle to return.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.GetParticle(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets a particle from the pool.
+            </summary>
+            <param name="particleImg">The <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D"/> to display on the particle.</param>
+            <param name="particleLocation">The location of the particle.</param>
+            <returns>A particle from the particle pool.</returns>
+        </member>
         <member name="T:Glib.XNA.ThreeDimensional.NamespaceDoc">
             <summary>
             The <see cref="N:Glib.XNA.ThreeDimensional"/> namespace provides 3D utilities.
@@ -2096,12 +2150,17 @@
             <summary>
             Generates a new particle at the specified position.
             </summary>
-            <returns>A new particle.</returns>
+            <returns>An initialized particle from the pool.</returns>
             <param name="pos">The position of the object to create particles around.</param>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.ParticlesToGenerate">
             <summary>
             Gets the number of particles to create within an update.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator.Pool">
+            <summary>
+            Gets the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/> used as the source of particles for this <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.IParticleGenerator"/>.
             </summary>
         </member>
         <member name="T:Glib.XNA.NetworkLib.NetworkInformationReceivedEventArgs">
@@ -2159,6 +2218,11 @@
             A class that provides a basis for generating particles with a fixed set of settings.
             </summary>
         </member>
+        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator._batch">
+            <summary>
+            The underlying field for the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> property.
+            </summary>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.SetProperties(Glib.XNA.SpriteLib.ParticleEngine.Particle)">
             <summary>
             Set the desired properties on the specified generated particle.
@@ -2185,6 +2249,11 @@
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Batch">
             <summary>
             Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to generate particles with.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.AbstractParticleGenerator.Pool">
+            <summary>
+            Gets the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/> used for generation of particles.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.SpriteMoveEventHandler">
@@ -2734,6 +2803,11 @@
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.ParticlesToGenerate">
             <summary>
             Gets or sets the number of particles to create within an update.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Pool">
+            <summary>
+            Gets the particle pool used for generation of particles.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.RandomParticleGenerator.Textures">
@@ -4278,48 +4352,6 @@
             <summary>
             An edge representing the right side of a viewport.
             </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool">
-            <summary>
-            A class for the storage of particles.
-            </summary>
-            <remarks>
-            An attempt to avoid garbage collection. This class stores and manages all particles.
-            </remarks>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticleCountGenerate">
-            <summary>
-            The number of particles at which <see cref="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesLowGeneration"/> more particles will be generated.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesLowGeneration">
-            <summary>
-            The number of particles to generate when the particle count drops below <see cref="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticleCountGenerate"/>.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.ParticlesToGenerate">
-            <summary>
-            The number of particles to generate on pool initialization.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.GenerateParticle">
-            <summary>
-            Generates a particle. This method should not be called to retrieve a particle for use, use <see cref="!:"/> instead.
-            </summary>
-            <returns>A new particle.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.InitializePool(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Initializes the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/>, keeping existing particles.
-            </summary>
-            <param name="batch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to use for particle generation.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool.InitializePool(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Boolean)">
-            <summary>
-            Initializes the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/>.
-            </summary>
-            <param name="batch">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to use for particle generation.</param>
-            <param name="clearPool">Whether to clear the <see cref="T:Glib.XNA.SpriteLib.ParticleEngine.ParticlePool"/> of existing particles before initialization.</param>
         </member>
     </members>
 </doc>
