@@ -48,9 +48,15 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             }
             _textures = textures.ToList();
             _random = new Random();
+            Pool = new ParticlePool(batch);
         }
 
         private List<Texture2D> _textures;
+
+        /// <summary>
+        /// Gets the particle pool used for generation of particles.
+        /// </summary>
+        public ParticlePool Pool { get; private set; }
 
         /// <summary>
         /// Gets the list of textures to generate particles with.
@@ -214,7 +220,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// <param name="pos">The position of the object to create particles around.</param>
         public virtual Particle GenerateParticle(Vector2 pos)
         {
-            Particle particle = new Particle(_textures[_random.Next(_textures.Count)], pos, _batch);
+            Particle particle = Pool.GetParticle(_textures[_random.Next(_textures.Count)], pos);
 
             particle.Speed = _randomProperties.Speed.HasValue ? _randomProperties.Speed.Value : new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
             particle.RotationVelocity = _randomProperties.RotationChange.HasValue ? _randomProperties.RotationChange.Value : MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);

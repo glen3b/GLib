@@ -32,16 +32,28 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             set { _texture = value; }
         }
 
-        private SpriteBatch _batch;
+        /// <summary>
+        /// The underlying field for the <see cref="SpriteBatch"/> property.
+        /// </summary>
+        protected SpriteBatch _batch;
 
         /// <summary>
         /// Gets or sets the <see cref="SpriteBatch"/> to generate particles with.
         /// </summary>
-        public SpriteBatch Batch
+        public virtual SpriteBatch Batch
         {
             get { return _batch; }
             set { _batch = value; }
         }
+
+        /// <summary>
+        /// Gets the <see cref="ParticlePool"/> used for generation of particles.
+        /// </summary>
+        public abstract ParticlePool Pool
+        {
+            get;
+        }
+        
 
         /// <summary>
         /// Set the desired properties on the specified generated particle.
