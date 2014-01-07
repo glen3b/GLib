@@ -108,7 +108,6 @@
     <Compile Include="SpriteLib\Screen.cs" />
     <Compile Include="SpriteLib\Sprite.cs" />
     <Compile Include="SpriteLib\SpriteEvents.cs" />
-    <Compile Include="SpriteLib\SpriteFactory.cs" />
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
     <Compile Include="SpriteLib\SpriteSheet.cs" />
