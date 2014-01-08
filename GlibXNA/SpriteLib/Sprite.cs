@@ -803,17 +803,17 @@ namespace Glib.XNA.SpriteLib
                 direction += new Vector2(speed, speed);
                 direction *= acceleration;
                 Position += direction;
-                Rotation = SpriteRotation.FromRadians(direction.ToAngle(initialRotation.Radians));
+                Rotation = SpriteRotation.FromVector(direction, initialRotation);
             }
         }
 
 
         /// <summary>
-        /// Follow the mouse pointer at .05 speed.
+        /// Follow the mouse pointer at .1 speed.
         /// </summary>
         public void FollowMouse()
         {
-            FollowMouse(.05f);
+            FollowMouse(.1f);
         }
 
         /// <summary>
