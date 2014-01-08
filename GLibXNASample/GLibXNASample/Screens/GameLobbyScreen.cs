@@ -78,7 +78,7 @@ namespace GLibXNASample.Screens
                         GLibXNASampleGame.Instance.SessionManagement.Session.GameStarted += new EventHandler<GameStartedEventArgs>(Session_GameStarted);
 
                         //Populate the gamer list
-                        foreach (Gamer g in GamerServicesComponent)
+                        foreach (Gamer g in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
                         {
                             gamerList.Text += g.Gamertag + Environment.NewLine;
                         }
@@ -98,7 +98,7 @@ namespace GLibXNASample.Screens
         {
             if (!Guide.IsVisible)
             {
-                Guide.BeginShowMessageBox("Multiplayer!", "You joined a network session that just started! Our sample ends here. Go wherever you want with your code now!", new string[] { "Great!" }, 0, MessageBoxIcon.None, toMPScr, null);
+                Guide.BeginShowMessageBox("Multiplayer!", "You joined a network session that just started! Our sample ends here. Go wherever you want with your code now!", new string[] { "Great!" }, 0, MessageBoxIcon.None, toMPScreen, null);
             }
         }
 
