@@ -198,11 +198,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// The SpriteManager associated with this sprite, if any.
-        /// </summary>
-        public SpriteManager SpriteManager = null;
-
-        /// <summary>
         /// An event called after every update of this sprite.
         /// </summary>
         public event EventHandler Updated = null;
@@ -791,15 +786,6 @@ namespace Glib.XNA.SpriteLib
         /// If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="GraphicsDevice"/>.
         /// </summary>
         public Viewport? UsedViewport = null;
-
-        /// <summary>
-        /// Remove this Sprite from it's associated SpriteManager.
-        /// </summary>
-        /// <exception cref="System.NullReferenceException">If there is no associated SpriteManager (the SpriteManager property is null).</exception>
-        public void RemoveFromManager()
-        {
-            SpriteManager.RemoveSelf(this);
-        }
 
 #if WINDOWS
         /// <summary>

@@ -114,7 +114,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 particle.Scale = Vector2.One;
                 particle.Speed = Vector2.Zero;
                 particle.SpriteBatch = _spriteBatch;
-                particle.SpriteManager = null;
                 particle.Texture = null;
                 particle.TimeToLive = TimeSpan.Zero;
                 particle.TimeToLiveSettings = TimeToLiveSettings.StrictTTL;

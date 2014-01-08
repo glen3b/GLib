@@ -101,7 +101,6 @@ namespace Glib.XNA.SpriteLib
         /// <param name="spr">The <seealso cref="Sprite"/> to add.</param>
         public void Add(Sprite spr)
         {
-            spr.SpriteManager = this;
             _sprites.Add(spr);
         }
 
@@ -125,7 +124,6 @@ namespace Glib.XNA.SpriteLib
             foreach (Sprite s in sprites)
             {
                 s.SpriteBatch = sb;
-                s.SpriteManager = this;
                 _sprites.Add(s);
             }
         }
