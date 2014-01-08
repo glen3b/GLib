@@ -59,7 +59,7 @@ namespace Glib.XNA.SpriteLib
             {
                 val = (SpriteRotation)obj;
             }
-            return val.Degrees == this.Degrees;
+            return val.Degrees.Equals(this.Degrees);
         }
 
         /// <summary>
@@ -90,11 +90,6 @@ namespace Glib.XNA.SpriteLib
                 return new SpriteRotation(0);
             }
         }
-
-        /// <summary>
-        /// An event fired when the rotation value of this <see cref="SpriteRotation"/> changes.
-        /// </summary>
-        public event EventHandler ValueChanged;
 
         /// <summary>
         /// Returns a value indicating whether two SpriteRotations are not equal.
@@ -135,6 +130,27 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
+        /// Returns a SpriteRotation representing the specified vector.
+        /// </summary>
+        /// <param name="vector">The vector to convert to a <see cref="SpriteRotation"/>.</param>
+        /// <returns>A new SpriteRotation representing the specified vector.</returns>
+        public static SpriteRotation FromVector(Vector2 vector)
+        {
+            return FromVector(vector, SpriteRotation.Zero);
+        }
+
+        /// <summary>
+        /// Returns a SpriteRotation representing the specified vector.
+        /// </summary>
+        /// <param name="vector">The vector to convert to a <see cref="SpriteRotation"/>.</param>
+        /// <param name="offsetAngle">The initial angle offset.</param>
+        /// <returns>A new SpriteRotation representing the specified vector.</returns>
+        public static SpriteRotation FromVector(Vector2 vector, SpriteRotation offsetAngle)
+        {
+            return new SpriteRotation(vector.ToAngle(offsetAngle.Radians), AngleType.Radians);
+        }
+
+        /// <summary>
         /// Returns a SpriteRotation representing the specified value in degrees.
         /// </summary>
         /// <param name="degrees">The number of degrees to represent in the new SpriteRotation.</param>
@@ -145,7 +161,7 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Gets or sets the rotation of the sprite in degrees.
+        /// Gets the rotation of the sprite in degrees.
         /// </summary>
         public float Degrees
         {
@@ -153,14 +169,14 @@ namespace Glib.XNA.SpriteLib
             {
                 return MathHelper.ToDegrees(Radians);
             }
-            set
-            {
-                Radians = MathHelper.ToRadians(value);
-            }
+            //set
+            //{
+            //    Radians = MathHelper.ToRadians(value);
+            //}
         }
 
         /// <summary>
-        /// Gets or sets a vector representing this angle.
+        /// Gets a vector representing this angle.
         /// </summary>
         /// <remarks>
         /// All logic of this is handled by XnaExtensions.
@@ -171,10 +187,10 @@ namespace Glib.XNA.SpriteLib
             {
                 return Radians.AngleToVector();
             }
-            set
-            {
-                Radians = value.ToAngle();
-            }
+            //set
+            //{
+            //    Radians = value.ToAngle();
+            //}
         }
 
         /// <summary>
@@ -300,11 +316,10 @@ namespace Glib.XNA.SpriteLib
             {
                 throw new NotImplementedException("The specified AngleType has not been implemented.");
             }
-            ValueChanged = null;
         }
 
         /// <summary>
-        /// Gets or sets the rotation of the Sprite in gradians (AKA gons, grads, or grades).
+        /// Gets the rotation of the Sprite in gradians (AKA gons, grads, or grades).
         /// </summary>
         public float Gradians
         {
@@ -312,16 +327,16 @@ namespace Glib.XNA.SpriteLib
             {
                 return .9f * Degrees;
             }
-            set
-            {
-                Degrees = value / .9f;
-            }
+            //set
+            //{
+            //    Degrees = value / .9f;
+            //}
         }
 
 
 
         /// <summary>
-        /// Gets or sets the rotation of the sprite in radians.
+        /// Gets the rotation of the sprite in radians.
         /// </summary>
         public float Radians
         {
@@ -329,17 +344,18 @@ namespace Glib.XNA.SpriteLib
             {
                 return _radians;
             }
-            set
-            {
-                if (value != _radians)
-                {
-                    _radians = value;
-                    if (ValueChanged != null)
-                    {
-                        ValueChanged(this, EventArgs.Empty);
-                    }
-                }
-            }
+
+            //set
+            //{
+            //    if (value != _radians)
+            //    {
+            //        _radians = value;
+            //        if (ValueChanged != null)
+            //        {
+            //            ValueChanged(this, EventArgs.Empty);
+            //        }
+            //    }
+            //}
         }
     }
 }

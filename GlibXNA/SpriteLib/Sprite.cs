@@ -346,10 +346,39 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        private SpriteRotation _rotation;
+
         /// <summary>
-        /// The current rotation of the sprite.
+        /// Gets or sets the current rotation of the sprite.
         /// </summary>
-        public SpriteRotation Rotation = new SpriteRotation();
+        public virtual SpriteRotation Rotation
+        {
+            get { return _rotation; }
+            set
+            {
+                if (_rotation != value)
+                {
+                    _rotation = value;
+                    FireRotationChangeEvent();
+                }
+            }
+        }
+
+        /// <summary>
+        /// An event fired after the rotation of this <see cref="Sprite"/> changes.
+        /// </summary>
+        public event EventHandler RotationChanged;
+
+        /// <summary>
+        /// Fire the <see cref="RotationChanged"/> event.
+        /// </summary>
+        protected void FireRotationChangeEvent()
+        {
+            if (RotationChanged != null)
+            {
+                RotationChanged(this, EventArgs.Empty);
+            }
+        }
 
         private Texture2D _texture;
 
@@ -796,7 +825,7 @@ namespace Glib.XNA.SpriteLib
                 direction += new Vector2(speed, speed);
                 direction *= acceleration;
                 Position += direction;
-                Rotation.Radians = direction.ToAngle(initialRotation.Radians);
+                Rotation = SpriteRotation.FromRadians(direction.ToAngle(initialRotation.Radians));
             }
         }
 
