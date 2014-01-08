@@ -75,6 +75,21 @@
             <param name="radians">The number of radians to represent in the new SpriteRotation.</param>
             <returns>A new SpriteRotation representing the specified value in radians.</returns>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteRotation.FromVector(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Returns a SpriteRotation representing the specified vector.
+            </summary>
+            <param name="vector">The vector to convert to a <see cref="T:Glib.XNA.SpriteLib.SpriteRotation"/>.</param>
+            <returns>A new SpriteRotation representing the specified vector.</returns>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.SpriteRotation.FromVector(Microsoft.Xna.Framework.Vector2,Glib.XNA.SpriteLib.SpriteRotation)">
+            <summary>
+            Returns a SpriteRotation representing the specified vector.
+            </summary>
+            <param name="vector">The vector to convert to a <see cref="T:Glib.XNA.SpriteLib.SpriteRotation"/>.</param>
+            <param name="offsetAngle">The initial angle offset.</param>
+            <returns>A new SpriteRotation representing the specified vector.</returns>
+        </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteRotation.FromDegrees(System.Single)">
             <summary>
             Returns a SpriteRotation representing the specified value in degrees.
@@ -164,19 +179,14 @@
             Gets a SpriteRotation representing zero degrees.
             </summary>
         </member>
-        <member name="E:Glib.XNA.SpriteLib.SpriteRotation.ValueChanged">
-            <summary>
-            An event fired when the rotation value of this <see cref="T:Glib.XNA.SpriteLib.SpriteRotation"/> changes.
-            </summary>
-        </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Degrees">
             <summary>
-            Gets or sets the rotation of the sprite in degrees.
+            Gets the rotation of the sprite in degrees.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Vector">
             <summary>
-            Gets or sets a vector representing this angle.
+            Gets a vector representing this angle.
             </summary>
             <remarks>
             All logic of this is handled by XnaExtensions.
@@ -184,12 +194,12 @@
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Gradians">
             <summary>
-            Gets or sets the rotation of the Sprite in gradians (AKA gons, grads, or grades).
+            Gets the rotation of the Sprite in gradians (AKA gons, grads, or grades).
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteRotation.Radians">
             <summary>
-            Gets or sets the rotation of the sprite in radians.
+            Gets the rotation of the sprite in radians.
             </summary>
         </member>
         <member name="T:Glib.XNA.InputLib.ScreenRegion">
@@ -438,19 +448,14 @@
             The speed of the sprite in X and Y.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.SpriteManager">
-            <summary>
-            The SpriteManager associated with this sprite, if any.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.SpriteBatch">
             <summary>
             The SpriteBatch used for drawing the sprite.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.Rotation">
+        <member name="M:Glib.XNA.SpriteLib.Sprite.FireRotationChangeEvent">
             <summary>
-            The current rotation of the sprite.
+            Fire the <see cref="E:Glib.XNA.SpriteLib.Sprite.RotationChanged"/> event.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.MoveSprite(Microsoft.Xna.Framework.Vector2)">
@@ -558,17 +563,6 @@
             </summary>
             <returns>An array of directions representing the edges this sprite is past. Empty if none.</returns>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.UsedViewport">
-            <summary>
-            If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.RemoveFromManager">
-            <summary>
-            Remove this Sprite from it's associated SpriteManager.
-            </summary>
-            <exception cref="T:System.NullReferenceException">If there is no associated SpriteManager (the SpriteManager property is null).</exception>
-        </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.FollowMouse(Glib.XNA.SpriteLib.SpriteRotation,System.Single)">
             <summary>
             Follow the mouse pointer.
@@ -674,6 +668,16 @@
         <member name="P:Glib.XNA.SpriteLib.Sprite.Height">
             <summary>
             A scale-sensitive height. Use Texture.Height to not account for scale.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Rotation">
+            <summary>
+            Gets or sets the current rotation of the sprite.
+            </summary>
+        </member>
+        <member name="E:Glib.XNA.SpriteLib.Sprite.RotationChanged">
+            <summary>
+            An event fired after the rotation of this <see cref="T:Glib.XNA.SpriteLib.Sprite"/> changes.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Texture">

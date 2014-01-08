@@ -126,14 +126,14 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void CenterViewport()
         {
-            if (Texture.Width > (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Width)
+            if (Texture.Width > SpriteBatch.GraphicsDevice.Viewport.Width)
             {
-                X = -(Texture.Width - (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Width) / 2;
+                X = -(Texture.Width - SpriteBatch.GraphicsDevice.Viewport.Width) / 2;
             }
 
-            if (Texture.Height > (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Height)
+            if (Texture.Height > SpriteBatch.GraphicsDevice.Viewport.Height)
             {
-                Y = -(Texture.Height - (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Height) / 2;
+                Y = -(Texture.Height - SpriteBatch.GraphicsDevice.Viewport.Height) / 2;
             }
         }
         }

@@ -105,6 +105,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The speed of the sprite along the X axis.
         /// </summary>
+        [Obsolete("This property will be removed.")]
         public virtual float XSpeed
         {
             get
@@ -114,7 +115,6 @@ namespace Glib.XNA.SpriteLib
             set
             {
                 Speed.X = value;
-                UpdateParams.UpdateX = true;
             }
         }
 
@@ -184,6 +184,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The speed of the sprite along the Y axis.
         /// </summary>
+        [Obsolete("This property will be removed.")]
         public virtual float YSpeed
         {
             get
@@ -193,7 +194,6 @@ namespace Glib.XNA.SpriteLib
             set
             {
                 Speed.Y = value;
-                UpdateParams.UpdateY = true;
             }
         }
 
@@ -470,6 +470,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
         /// </summary>
+        [Obsolete("This feature will be replaced.")]
         public UpdateParamaters UpdateParams = new UpdateParamaters(true, true);
 
         /// <summary>
@@ -494,6 +495,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
+        [Obsolete("UpdateParameters is obselete and will be replaced.")]
         public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, UpdateParamaters up)
             : this(texture, pos, color, sb)
         {
@@ -503,6 +505,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
+        [Obsolete("UpdateParameters is obselete and will be replaced.")]
         public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb, UpdateParamaters up)
             : this(texture, pos, sb)
         {
@@ -754,15 +757,9 @@ namespace Glib.XNA.SpriteLib
         public Direction[] EdgesPast()
         {
             Viewport vp = SpriteBatch.GraphicsDevice.Viewport;
-            if (UsedViewport.HasValue)
-            {
-                vp = UsedViewport.Value;
-            }
             List<Direction> allEdges = new List<Direction>();
-            float realX = X;
-            float realY = Y;
-            realX -= Origin.X * Scale.X;
-            realY -= Origin.Y * Scale.Y;
+            float realX = TopLeft.X;
+            float realY = TopLeft.Y;
             if (realX < 0)
             {
                 allEdges.Add(Direction.Left);
@@ -781,11 +778,6 @@ namespace Glib.XNA.SpriteLib
             }
             return allEdges.ToArray();
         }
-
-        /// <summary>
-        /// If not null, the viewport to use in viewport-requiring operations. Otherwise, use the default viewport from any obtainable <see cref="GraphicsDevice"/>.
-        /// </summary>
-        public Viewport? UsedViewport = null;
 
 #if WINDOWS
         /// <summary>
@@ -843,21 +835,21 @@ namespace Glib.XNA.SpriteLib
         {
             if (UpdateParams.UpdateX)
             {
-                X += XSpeed;
+                X += Speed.X;
             }
             if (UpdateParams.UpdateY)
             {
-                Y += YSpeed;
+                Y += Speed.Y;
             }
             if (UpdateParams.FixEdgeOff)
             {
                 _pastDirections = EdgesPast();
                 if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
                 {
-                    XSpeed *= -1;
+                    Speed.X *= -1;
                 } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
                 {
-                    YSpeed *= -1;
+                    Speed.Y *= -1;
                 }
             }
 #if WINDOWS

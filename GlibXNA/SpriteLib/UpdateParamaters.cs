@@ -9,6 +9,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// The parameters to use for automatically following the mouse every update.
     /// </summary>
+    [Obsolete("UpdateParameters is obselete and will be replaced. This structure will not be used.")]
     public struct MouseFollowParams
     {
         /// <summary>
@@ -58,6 +59,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// A structure representing things to automatically do when Update() is called on a Sprite.
     /// </summary>
+    [Obsolete("This feature will be replaced.")]
     public struct UpdateParamaters
     {
         /// <summary>

@@ -117,8 +117,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 particle.Texture = null;
                 particle.TimeToLive = TimeSpan.Zero;
                 particle.TimeToLiveSettings = TimeToLiveSettings.StrictTTL;
-                particle.UpdateParams = new UpdateParamaters();
-                particle.UsedViewport = null;
+                particle.UpdateParams = new UpdateParamaters(true, true);
                 particle.Visible = true;
                 particle.ReviveParticle();
 
