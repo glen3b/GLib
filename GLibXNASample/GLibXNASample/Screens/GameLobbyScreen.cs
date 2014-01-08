@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Net;
 using Glib.XNA.InputLib;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.GamerServices;
 
 namespace GLibXNASample.Screens
 {
@@ -75,6 +76,12 @@ namespace GLibXNASample.Screens
 
                         //Subscribe to the game start event
                         GLibXNASampleGame.Instance.SessionManagement.Session.GameStarted += new EventHandler<GameStartedEventArgs>(Session_GameStarted);
+
+                        //Populate the gamer list
+                        foreach (Gamer g in GamerServicesComponent)
+                        {
+                            gamerList.Text += g.Gamertag + Environment.NewLine;
+                        }
                     }
                     else
                     {
@@ -89,7 +96,15 @@ namespace GLibXNASample.Screens
 
         void Session_GameStarted(object sender, GameStartedEventArgs e)
         {
-            
+            if (!Guide.IsVisible)
+            {
+                Guide.BeginShowMessageBox("Multiplayer!", "You joined a network session that just started! Our sample ends here. Go wherever you want with your code now!", new string[] { "Great!" }, 0, MessageBoxIcon.None, toMPScr, null);
+            }
+        }
+
+        void toMPScreen(IAsyncResult r)
+        {
+            GLibXNASampleGame.Instance.SetScreen("MainMenu");
         }
 
         void Session_GamerLeft(object sender, GamerLeftEventArgs e)
@@ -100,8 +115,11 @@ namespace GLibXNASample.Screens
 
         void Session_GamerJoined(object sender, GamerJoinedEventArgs e)
         {
-            gamerList.Text += e.Gamer.Gamertag + Environment.NewLine;
-            gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
+            if (!gamerList.Text.Contains(e.Gamer.Gamertag + Environment.NewLine))
+            {
+                gamerList.Text += e.Gamer.Gamertag + Environment.NewLine;
+                gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
+            }
         }
     }
 }

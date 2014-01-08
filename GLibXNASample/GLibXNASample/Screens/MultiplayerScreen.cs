@@ -56,7 +56,7 @@ namespace GLibXNASample.Screens
             if (e.Error != null || e.Joined == null)
             {
                 //TODO: Errors reported to user
-                GLibXNASampleGame.Instance.SetScreen("MultiPlayer");
+                GLibXNASampleGame.Instance.SetScreen("NetworkLobby");
                 return;
             }
         }
