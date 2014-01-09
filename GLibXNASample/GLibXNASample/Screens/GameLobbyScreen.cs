@@ -70,18 +70,18 @@ namespace GLibXNASample.Screens
                         gamerList.Text = String.Empty;
                         gamerList.Position = gamerList.GetCenterPosition(Graphics.Viewport);
 
+                        //Populate the gamer list
+                        foreach (Gamer g in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
+                        {
+                            gamerList.Text += g.Gamertag + Environment.NewLine;
+                        }
+
                         //Subscribe to events relating to Gamers joining and leaving the NetworkSession
                         GLibXNASampleGame.Instance.SessionManagement.Session.GamerJoined += new EventHandler<GamerJoinedEventArgs>(Session_GamerJoined);
                         GLibXNASampleGame.Instance.SessionManagement.Session.GamerLeft += new EventHandler<GamerLeftEventArgs>(Session_GamerLeft);
 
                         //Subscribe to the game start event
                         GLibXNASampleGame.Instance.SessionManagement.Session.GameStarted += new EventHandler<GameStartedEventArgs>(Session_GameStarted);
-
-                        //Populate the gamer list
-                        foreach (Gamer g in GLibXNASampleGame.Instance.SessionManagement.Session.AllGamers)
-                        {
-                            gamerList.Text += g.Gamertag + Environment.NewLine;
-                        }
                     }
                     else
                     {
