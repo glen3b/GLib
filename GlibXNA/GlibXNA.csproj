@@ -75,7 +75,9 @@
     <Compile Include="RandomPositionGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
-    <Compile Include="SpriteLib\ParticleEngine\Particle.cs" />
+    <Compile Include="SpriteLib\ParticleEngine\Particle.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\ParticleEngine\ParticleEngine.cs" />
     <Compile Include="SpriteLib\ParticleEngine\IParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\ParticlePool.cs" />
@@ -84,7 +86,9 @@
     <Compile Include="SpriteLib\ParticleEngine\TimeToLiveSettings.cs" />
     <Compile Include="SpriteLib\Shadow.cs" />
     <Compile Include="SpriteLib\TextShadow.cs" />
-    <Compile Include="SpriteLib\VideoSprite.cs" />
+    <Compile Include="SpriteLib\VideoSprite.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ThreeDimensional\ModelRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventArgs.cs" />
@@ -100,19 +104,29 @@
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="ScreenGame.cs" />
     <Compile Include="SpriteInterfaces.cs" />
-    <Compile Include="SpriteLib\BackgroundSprite.cs" />
+    <Compile Include="SpriteLib\BackgroundSprite.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\Direction.cs" />
     <Compile Include="SpriteLib\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\Position.cs" />
-    <Compile Include="SpriteLib\ProgressBar.cs" />
+    <Compile Include="SpriteLib\ProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\Screen.cs" />
-    <Compile Include="SpriteLib\Sprite.cs" />
+    <Compile Include="SpriteLib\Sprite.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\SpriteEvents.cs" />
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
-    <Compile Include="SpriteLib\SpriteSheet.cs" />
+    <Compile Include="SpriteLib\SpriteSheet.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\SpriteWrapper.cs" />
-    <Compile Include="SpriteLib\TextBoxSprite.cs" />
+    <Compile Include="SpriteLib\TextBoxSprite.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\TextSprite.cs" />
     <Compile Include="SpriteLib\UpdateParamaters.cs" />
     <Compile Include="SpriteLib\Updater.cs" />
