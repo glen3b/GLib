@@ -251,7 +251,7 @@ namespace Glib.XNA.SpriteLib
         /// Open the specified SpriteBatch with the settings required for drawing this Screen.
         /// </summary>
         /// <param name="sb">The SpriteBatch to open.</param>
-        public virtual void OpenSpriteBatch(ref SpriteBatch sb)
+        public virtual void OpenSpriteBatch(SpriteBatch sb)
         {
             sb.Begin();
         }
@@ -444,7 +444,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     Graphics.SetRenderTarget(s.Target);
                     Graphics.Clear(s.ClearColor);
-                    s.OpenSpriteBatch(ref SpriteBatch);
+                    s.OpenSpriteBatch(SpriteBatch);
                     if (s.BackgroundSprite != null)
                     {
                         if (s.BackgroundSprite is ISpriteBatchManagerSprite)
