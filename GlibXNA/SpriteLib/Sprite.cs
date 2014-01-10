@@ -34,7 +34,7 @@ namespace Glib.XNA.SpriteLib
     /// An implementation of ISprite with many features, such as updated, drawn, and moved events, an easily accessible position, configurable position changes per update, center-point support, and scale support.
     /// </summary>
     [DebuggerDisplay("Position = {Position}")]
-    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable
+    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
     {
         /// <summary>
         /// The speed of the sprite in X and Y.
