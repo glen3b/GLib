@@ -36,38 +36,6 @@ namespace Glib.XNA.SpriteLib
     [DebuggerDisplay("Position = {Position}")]
     public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
     {
-        #region Operators
-        /// <summary>
-        /// Convert the specified Sprite to a rectangle.
-        /// </summary>
-        /// <param name="spr">The Sprite to convert to a Rectangle.</param>
-        /// <returns>The Rectangle representing the area of the Sprite.</returns>
-        static public explicit operator Rectangle(Sprite spr)
-        {
-            return spr.Rectangle;
-        }
-
-        /// <summary>
-        /// Convert the specified Sprite to a screen region.
-        /// </summary>
-        /// <param name="spr">The Sprite to convert to a screen region.</param>
-        /// <returns>The screen region representing the area of the Sprite (scale sensitive).</returns>
-        static public implicit operator ScreenRegion(Sprite spr)
-        {
-            return new ScreenRegion(spr.Position, new Vector2(spr.Width, spr.Height));
-        }
-
-        /// <summary>
-        /// Convert the specified Sprite to a texture.
-        /// </summary>
-        /// <param name="spr">The Sprite to convert to a Texture2D.</param>
-        /// <returns>The texture of the Sprite.</returns>
-        static public explicit operator Texture2D(Sprite spr)
-        {
-            return spr.Texture;
-        }
-        #endregion
-
         /// <summary>
         /// The speed of the sprite in X and Y.
         /// </summary>
@@ -468,12 +436,6 @@ namespace Glib.XNA.SpriteLib
 #endif
 
         /// <summary>
-        /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
-        /// </summary>
-        [Obsolete("Please override the Sprite class to implement this functionality instead.")]
-        public UpdateParamaters UpdateParams = new UpdateParamaters(true, true);
-
-        /// <summary>
         /// Create a new Sprite.
         /// </summary>
         public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb)
@@ -490,26 +452,6 @@ namespace Glib.XNA.SpriteLib
             : this(texture, pos, sb)
         {
             this.TintColor = color;
-        }
-
-        /// <summary>
-        /// Create a new Sprite.
-        /// </summary>
-        [Obsolete("UpdateParameters is obselete and will be replaced.")]
-        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, UpdateParamaters up)
-            : this(texture, pos, color, sb)
-        {
-            this.UpdateParams = up;
-        }
-
-        /// <summary>
-        /// Create a new Sprite.
-        /// </summary>
-        [Obsolete("UpdateParameters is obselete and will be replaced.")]
-        public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb, UpdateParamaters up)
-            : this(texture, pos, sb)
-        {
-            this.UpdateParams = up;
         }
 
         /// <summary>
@@ -833,41 +775,41 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void Update()
         {
-            if (UpdateParams.UpdateX)
-            {
-                X += Speed.X;
-            }
-            if (UpdateParams.UpdateY)
-            {
-                Y += Speed.Y;
-            }
-            if (UpdateParams.FixEdgeOff)
-            {
-                _pastDirections = EdgesPast();
-                if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
-                {
-                    Speed.X *= -1;
-                } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
-                {
-                    Speed.Y *= -1;
-                }
-            }
-#if WINDOWS
-            if (UpdateParams.MouseFollow.DoesFollow)
-            {
-                FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
-            }
+//            if (UpdateParams.UpdateX)
+//            {
+//                X += Speed.X;
+//            }
+//            if (UpdateParams.UpdateY)
+//            {
+//                Y += Speed.Y;
+//            }
+//            if (UpdateParams.FixEdgeOff)
+//            {
+//                _pastDirections = EdgesPast();
+//                if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
+//                {
+//                    Speed.X *= -1;
+//                } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
+//                {
+//                    Speed.Y *= -1;
+//                }
+//            }
+//#if WINDOWS
+//            if (UpdateParams.MouseFollow.DoesFollow)
+//            {
+//                FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
+//            }
 
-            if (MouseEnter != null && Intersects(MouseManager.CurrentMouseState) && !Intersects(_lastMouseState))
-            {
-                MouseEnter(this, EventArgs.Empty);
-            }
+//            if (MouseEnter != null && Intersects(MouseManager.CurrentMouseState) && !Intersects(_lastMouseState))
+//            {
+//                MouseEnter(this, EventArgs.Empty);
+//            }
 
-            if (MouseLeave != null && !Intersects(MouseManager.CurrentMouseState) && Intersects(_lastMouseState))
-            {
-                MouseLeave(this, EventArgs.Empty);
-            }
-#endif
+//            if (MouseLeave != null && !Intersects(MouseManager.CurrentMouseState) && Intersects(_lastMouseState))
+//            {
+//                MouseLeave(this, EventArgs.Empty);
+//            }
+//#endif
 
             if (Updated != null)
             {

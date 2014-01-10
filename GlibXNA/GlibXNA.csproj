@@ -128,7 +128,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SpriteLib\TextSprite.cs" />
-    <Compile Include="SpriteLib\UpdateParamaters.cs" />
     <Compile Include="SpriteLib\Updater.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />

@@ -161,14 +161,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Create a new TextBoxSprite.
-        /// </summary>
-        public TextBoxSprite(Texture2D texture, Vector2 pos, SpriteBatch sb, SpriteFont font)
-            : this(texture, pos, Color.White, sb, new UpdateParamaters(true, true), font)
-        {
-        }
-
-        /// <summary>
         /// Create a new TextBoxSprite using a white background.
         /// </summary>
         /// <param name="pos">The position of the TextBoxSprite.</param>
@@ -176,16 +168,6 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sb">The SpriteBatch to draw to.</param>
         public TextBoxSprite(Vector2 pos, SpriteBatch sb, SpriteFont font)
             : this(new TextureFactory(sb.GraphicsDevice).WhitePixel, pos, sb, font)
-        {
-        }
-
-
-
-        /// <summary>
-        /// Create a new TextBoxSprite.
-        /// </summary>
-        public TextBoxSprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, SpriteFont font)
-            : this(texture, pos, color, sb, new UpdateParamaters(true, true), font)
         {
         }
 
@@ -197,9 +179,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="pos">The position of the TextBoxSprite.</param>
         /// <param name="font">The SpriteFont to draw the text with.</param>
         /// <param name="sb">The SpriteBatch to draw to.</param>
-        /// <param name="up">The UpdateParameters to use when updating this Sprite.</param>
-        [Obsolete("UpdateParameters is obselete and will be replaced.")]
-        public TextBoxSprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, UpdateParamaters up, SpriteFont font)
+        public TextBoxSprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb, SpriteFont font)
             : base(texture, pos, color, sb)
         {
             _textView = new TextSprite(SpriteBatch, font, "");
@@ -209,16 +189,13 @@ namespace Glib.XNA.SpriteLib
             movementInternal = new EventHandler(this.TextBoxSprite_Moved);
             Moved += movementInternal;
             base.UseCenterAsOrigin = false;
-
-            UpdateParams = up;
         }
 
         /// <summary>
         /// Create a new TextBoxSprite.
         /// </summary>
-        [Obsolete("UpdateParameters is obselete and will be replaced.")]
-        public TextBoxSprite(Texture2D texture, Vector2 pos, SpriteBatch sb, UpdateParamaters up, SpriteFont font)
-            : this(texture, pos, Color.White, sb, up, font)
+        public TextBoxSprite(Texture2D texture, Vector2 pos, SpriteBatch sb, SpriteFont font)
+            : this(texture, pos, Color.White, sb, font)
         {
         }
 

@@ -94,7 +94,6 @@
     <Compile Include="SpriteLib\TextBoxSprite.cs" />
     <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\TextSprite.cs" />
-    <Compile Include="SpriteLib\UpdateParamaters.cs" />
     <Compile Include="SpriteLib\Updater.cs" />
     <Compile Include="SpriteLib\VideoSprite.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
