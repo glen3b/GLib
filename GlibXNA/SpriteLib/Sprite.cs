@@ -232,6 +232,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The current X coordinate of the sprite.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704", Justification="The member name represents the X coordinate of the sprite.")]
         public virtual float X
         {
             get
@@ -252,6 +253,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The current Y coordinate of the sprite.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704", Justification = "The member name represents the Y coordinate of the sprite.")]
         public virtual float Y
         {
             get

@@ -12,6 +12,88 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     public struct RandomParticleProperties
     {
         /// <summary>
+        /// Calculates a hash code for this object.
+        /// </summary>
+        /// <returns>The hash code for this instance of <see cref="RandomParticleProperties"/>.</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 23;
+
+                if (Speed != null)
+                {
+                    hash = hash * 31 + Speed.GetHashCode();
+                }
+                if (Tint != null)
+                {
+                    hash = hash * 31 + Tint.GetHashCode();
+                }
+                if (Scale != null)
+                {
+                    hash = hash * 31 + Scale.GetHashCode();
+                }
+                if (TimeToLive != null)
+                {
+                    hash = hash * 31 + TimeToLive.GetHashCode();
+                }
+                if (ColorFactor != null)
+                {
+                    hash = hash * 31 + ColorFactor.GetHashCode();
+                }
+                if (RotationChange != null)
+                {
+                    hash = hash * 31 + RotationChange.GetHashCode();
+                }
+                return hash;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to this object.
+        /// </summary>
+        /// <param name="obj">The object to compare to.</param>
+        /// <returns>Whether the specified object is equal to this instance of <see cref="RandomParticleProperties"/>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (obj == null) { return false; }
+            if (!(obj.GetType() == typeof(RandomParticleProperties))) { return false; }
+            RandomParticleProperties val = (RandomParticleProperties)obj;
+
+            if (val.GetHashCode() != GetHashCode())
+            {
+                return false;
+            }
+
+            if (val.ColorFactor != ColorFactor)
+            {
+                return false;
+            }
+            if (val.RotationChange != RotationChange)
+            {
+                return false;
+            }
+            if (val.Scale != Scale)
+            {
+                return false;
+            }
+            if (val.Speed != Speed)
+            {
+                return false;
+            }
+            if (val.TimeToLive != TimeToLive)
+            {
+                return false;
+            }
+            if (val.Tint != Tint)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// The speed to use for new particles, or null for a random value.
         /// </summary>
         public Vector2? Speed;

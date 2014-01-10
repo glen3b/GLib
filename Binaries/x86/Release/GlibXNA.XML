@@ -933,11 +933,11 @@
             Represents event arguments for the movement of a joystick on an Xbox controller.
             </summary>
         </member>
-        <member name="M:Glib.XNA.InputLib.JoystickMovedEventArgs.#ctor(Glib.XNA.LeftRight,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+        <member name="M:Glib.XNA.InputLib.JoystickMovedEventArgs.#ctor(System.Int32,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Creates a new instance of <see cref="T:Glib.XNA.InputLib.JoystickMovedEventArgs"/>.
             </summary>
-            <param name="joystick">The identifier for the joystick.</param>
+            <param name="joystick">The identifier for the joystick. -1 is left, 1 is right.</param>
             <param name="prevPos">The previous joystick position.</param>
             <param name="currentPos">The current joystick position.</param>
         </member>
@@ -958,7 +958,17 @@
         </member>
         <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.Joystick">
             <summary>
-            Gets the joystick that moved (left or right joystick).
+            Gets the joystick that moved (-1 is left and 1 is right joystick).
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.IsRightJoystick">
+            <summary>
+            Gets a value indicating if the joystick that moved was the right joystick.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.InputLib.JoystickMovedEventArgs.IsLeftJoystick">
+            <summary>
+            Gets a value indicating if the joystick that moved was the left joystick.
             </summary>
         </member>
         <member name="T:Glib.XNA.XnaExtensions">
@@ -1279,21 +1289,6 @@
         <member name="P:Glib.XNA.RandomPositionGenerator.Position">
             <summary>
             Gets the next random position.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.LeftRight">
-            <summary>
-            An enumerator representing a left or right direction.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.LeftRight.Left">
-            <summary>
-            The direction left.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.LeftRight.Right">
-            <summary>
-            The direction right.
             </summary>
         </member>
         <member name="T:Glib.XNA.SpriteLib.TextSprite">
@@ -3346,9 +3341,9 @@
             </summary>
             <returns>An enumerator that iterates through this <seealso cref="T:Glib.XNA.SpriteLib.SpriteManager"/>.</returns>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteManager.Sprites">
+        <member name="M:Glib.XNA.SpriteLib.SpriteManager.Dispose">
             <summary>
-            Gets the list of <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>s managed by this SpriteManager.
+            Disposes of owned <see cref="T:Glib.XNA.SpriteLib.Sprite"/>s.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.SpriteManager.SpriteBatch">
@@ -3595,6 +3590,11 @@
             Update all Sprites on this Screen.
             </summary>
             <param name="game">The active game time.</param>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Screen.Dispose">
+            <summary>
+            Disposes of all <see cref="F:Glib.XNA.SpriteLib.Screen.Sprites"/> (and other assorted managed assets) owned by this <see cref="T:Glib.XNA.SpriteLib.Screen"/>.
+            </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Screen.LayerDepth">
             <summary>
