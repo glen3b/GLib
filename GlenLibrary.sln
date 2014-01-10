@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTest", "NetworkTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTestContent", "NetworkTest\NetworkTestContent\NetworkTestContent.contentproj", "{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibUnitTests", "GlibUnitTests\GlibUnitTests.csproj", "{B330C39D-9E1A-4D8E-8601-46791D38692A}"
-EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "GlibDocs", "GlibDocs.shfbproj", "{AB995E12-0E41-4069-BF53-92BA5CCA0281}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlibXNA", "GlibXNA\GlibXNA.csproj", "{CE0948B0-4DD8-4841-A163-BD79C03D52EB}"
@@ -148,18 +146,6 @@ Global
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|x86.ActiveCfg = Release|x86
 		{8FC7FDB6-01BA-4538-BDF1-EA79C5E41DC0}.Release|Xbox 360.ActiveCfg = Release|x86
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|x86.ActiveCfg = Release|Any CPU
-		{B330C39D-9E1A-4D8E-8601-46791D38692A}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 		{AB995E12-0E41-4069-BF53-92BA5CCA0281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB995E12-0E41-4069-BF53-92BA5CCA0281}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB995E12-0E41-4069-BF53-92BA5CCA0281}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
