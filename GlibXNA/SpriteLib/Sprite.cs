@@ -34,7 +34,7 @@ namespace Glib.XNA.SpriteLib
     /// An implementation of ISprite with many features, such as updated, drawn, and moved events, an easily accessible position, configurable position changes per update, center-point support, and scale support.
     /// </summary>
     [DebuggerDisplay("Position = {Position}")]
-    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
+    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable
     {
         /// <summary>
         /// The speed of the sprite in X and Y.
@@ -820,6 +820,22 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
             _lastMouseState = MouseManager.CurrentMouseState;
 #endif
+        }
+
+        /// <summary>
+        /// Disposes of the assets owned by this <see cref="Sprite"/>.
+        /// </summary>
+        void IDisposable.Dispose()
+        {
+            if (Texture != null && !Texture.IsDisposed)
+            {
+                Texture.Dispose();
+                Texture = null;
+            }
+            if (SpriteBatch != null && !SpriteBatch.IsDisposed)
+            {
+                SpriteBatch.Dispose();
+            }
         }
     }
 }
