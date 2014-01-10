@@ -823,10 +823,14 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Disposes of the assets owned by this <see cref="Sprite"/>.
+        /// Disposes of this <see cref="Sprite"/>.
         /// </summary>
-        void IDisposable.Dispose()
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
+        protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
+
+            //Dispose only does unmanaged on Texture2D and SpriteBatch
             if (Texture != null && !Texture.IsDisposed)
             {
                 Texture.Dispose();

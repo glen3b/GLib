@@ -85,7 +85,7 @@ namespace Glib.XNA.SpriteLib
         //public void Update(GameTime gt)
         //{
         //    ShouldRetrieveTexture = true;
-            
+
         //    // // // // // // // // // // // // // // //
         //    //       Unneccesary logic follows        //
         //    // // // // // // // // // // // // // // //
@@ -121,5 +121,19 @@ namespace Glib.XNA.SpriteLib
         //    //}
         //    Update();
         //}
+
+        /// <summary>
+        /// Disposes of this <see cref="VideoSprite"/>.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (Video != null && !Video.IsDisposed)
+            {
+                Video.Dispose();
+            }
+        }
     }
 }
