@@ -78,6 +78,7 @@ namespace Glib.XNA.NetworkLib
         /// </summary>
         public event EventHandler<NetworkSessionsFoundEventArgs> SessionsFound;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031", Justification = "The exception is set as the value of an 'Error' parameter of an event argument type.")]
         private void NetSessionsFound(IAsyncResult res)
         {
             _asyncSessionOperationsInProgress--;

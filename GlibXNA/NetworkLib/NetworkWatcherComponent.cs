@@ -401,6 +401,7 @@ namespace Glib.XNA.NetworkLib
         /// It is not recommended to call the implementation of this method present in GLib (if you are subclassing this component), because it is a placeholder method.
         /// The base implementation of this method merely sets the output parameters to null and returns false. It should not be invoked.
         /// </remarks>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1007", Justification="Generic parameters cannot be passed across the network without using reflection.")]
         protected virtual bool ParseData(PacketReader activeReader, string typeString, out object value)
         {
             //Unless overridden in subclass, does nothing

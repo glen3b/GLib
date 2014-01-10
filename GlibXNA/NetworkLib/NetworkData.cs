@@ -42,7 +42,7 @@ namespace Glib.XNA.NetworkLib
         public string Name
         {
             get { return _name; }
-            protected internal set { if (value == null) { throw new ArgumentNullException(); } _name = value; }
+            protected internal set { if (value == null) { throw new ArgumentNullException("The name cannot be null.", (Exception)null); } _name = value; }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Glib.XNA.NetworkLib
         public object Data
         {
             get { return _data; }
-            protected internal set { if (value == null) { throw new ArgumentNullException(); } _data = value; DataType = value.GetType(); }
+            protected internal set { if (value == null) { throw new ArgumentNullException("The data cannot be null.", (Exception)null); } _data = value; DataType = value.GetType(); }
         }
 
         private object _data;

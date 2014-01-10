@@ -15,10 +15,10 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// Creates a new instance of <see cref="JoystickMovedEventArgs"/>.
         /// </summary>
-        /// <param name="joystick">The identifier for the joystick.</param>
+        /// <param name="joystick">The identifier for the joystick. -1 is left, 1 is right.</param>
         /// <param name="prevPos">The previous joystick position.</param>
         /// <param name="currentPos">The current joystick position.</param>
-        public JoystickMovedEventArgs(LeftRight joystick, Vector2 prevPos, Vector2 currentPos)
+        public JoystickMovedEventArgs(int joystick, Vector2 prevPos, Vector2 currentPos)
         {
             _joystick = joystick;
             PreviousPosition = prevPos;
@@ -43,16 +43,36 @@ namespace Glib.XNA.InputLib
             get { return CurrentPosition - PreviousPosition; }
         }
 
-        private LeftRight _joystick;
+        private int _joystick;
 
         /// <summary>
-        /// Gets the joystick that moved (left or right joystick).
+        /// Gets the joystick that moved (-1 is left and 1 is right joystick).
         /// </summary>
-        public LeftRight Joystick
+        public int Joystick
         {
             get { return _joystick; }
         }
-        
 
+        /// <summary>
+        /// Gets a value indicating if the joystick that moved was the right joystick.
+        /// </summary>
+        public bool IsRightJoystick
+        {
+            get
+            {
+                return Joystick == 1;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating if the joystick that moved was the left joystick.
+        /// </summary>
+        public bool IsLeftJoystick
+        {
+            get
+            {
+                return Joystick == -1;
+            }
+        }
     }
 }

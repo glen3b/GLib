@@ -12,7 +12,7 @@ namespace Glib.XNA.SpriteLib
     /// Represents a RenderTarget2D which is a screen.
     /// </summary>
     [DebuggerDisplay("Name = {Name}")]
-    public class Screen : IPositionable
+    public class Screen : IPositionable, IDisposable
     {
         private float _layerDepth = 0;
 
@@ -22,17 +22,18 @@ namespace Glib.XNA.SpriteLib
         public float LayerDepth
         {
             get { return _layerDepth; }
-            set {
+            set
+            {
                 if (value < 0 || value > 1)
                 {
-                    throw new ArgumentOutOfRangeException("LayerDepth");
+                    throw new ArgumentOutOfRangeException();
                 }
 
                 _layerDepth = value;
-            
+
             }
         }
-        
+
 
         private static int screenNum = 1;
 
@@ -67,7 +68,7 @@ namespace Glib.XNA.SpriteLib
             get { return _centerOrigin; }
             set { _centerOrigin = value; }
         }
-        
+
 
         /// <summary>
         /// Center the position of this Screen relative to the position of the specified Viewport.
@@ -88,7 +89,7 @@ namespace Glib.XNA.SpriteLib
         {
             get { return _addlSprites; }
         }
-        
+
 
         /// <summary>
         /// The color to clear this screen as.
@@ -127,7 +128,7 @@ namespace Glib.XNA.SpriteLib
             get { return _name; }
             set { _name = value; }
         }
-        
+
 
         /// <summary>
         /// The color to tint this screen as.
@@ -166,7 +167,8 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sizeOfTarget">The size and position of the RenderTarget.</param>
         /// <param name="color">The color to clear this Screen as before drawing.</param>
         /// <param name="allSprites">The SpriteManager containing the Sprites to draw.</param>
-        public Screen(Rectangle sizeOfTarget, Color color, SpriteManager allSprites) : this(new RenderTarget2D(allSprites.SpriteBatch.GraphicsDevice, sizeOfTarget.Width, sizeOfTarget.Height), color, allSprites)
+        public Screen(Rectangle sizeOfTarget, Color color, SpriteManager allSprites)
+            : this(new RenderTarget2D(allSprites.SpriteBatch.GraphicsDevice, sizeOfTarget.Width, sizeOfTarget.Height), color, allSprites)
         {
             Position = new Vector2(sizeOfTarget.X, sizeOfTarget.Y);
         }
@@ -176,7 +178,8 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="sb">The SpriteBatch to draw.</param>
         /// <param name="c">The color of the Screen.</param>
-        public Screen(SpriteBatch sb, Color c) : this(new SpriteManager(sb), c)
+        public Screen(SpriteBatch sb, Color c)
+            : this(new SpriteManager(sb), c)
         {
 
         }
@@ -301,16 +304,43 @@ namespace Glib.XNA.SpriteLib
                 }
             }
             Sprites.Update(game);
-            for (int i = 0; i < AdditionalSprites.Count; i++ )
+            for (int i = 0; i < AdditionalSprites.Count; i++)
             {
                 if (AdditionalSprites[i] is ITimerSprite)
                 {
                     (AdditionalSprites[i] as ITimerSprite).Update(game);
                 }
-                else if(AdditionalSprites[i] is ISprite)
+                else if (AdditionalSprites[i] is ISprite)
                 {
                     (AdditionalSprites[i] as ISprite).Update();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Disposes of all <see cref="Sprites"/> (and other assorted managed assets) owned by this <see cref="Screen"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            foreach(IDrawableComponent obj in AdditionalSprites){
+                if(obj != null && obj is IDisposable){
+                    ((IDisposable)obj).Dispose();
+                }
+            }
+
+            if (Sprites != null)
+            {
+                this.Sprites.Dispose();
+            }
+
+            if (Target != null && !Target.IsDisposed)
+            {
+                this.Target.Dispose();
+            }
+
+            if (Graphics != null && !Graphics.IsDisposed)
+            {
+                Graphics.Dispose();
             }
         }
     }

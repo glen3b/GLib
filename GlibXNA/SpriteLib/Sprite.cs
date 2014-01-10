@@ -136,8 +136,8 @@ namespace Glib.XNA.SpriteLib
                     }
                 }
 #endif
-                    moved -= value;
-                
+                moved -= value;
+
             }
         }
 
@@ -195,7 +195,7 @@ namespace Glib.XNA.SpriteLib
             get { return _scale; }
             set { _scale = value; }
         }
-        
+
 
         /// <summary>
         /// Gets the scale-sensitive center of the sprite.
@@ -422,7 +422,7 @@ namespace Glib.XNA.SpriteLib
             get { return _tintColor; }
             set { _tintColor = value; }
         }
-        
+
 
 #if WINDOWS
         /// <summary>
@@ -460,11 +460,7 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void Draw()
         {
-            try
-            {
-                SpriteBatch.Begin();
-            }
-            catch { }
+            SpriteBatch.Begin();
             DrawNonAuto();
             SpriteBatch.End();
         }
@@ -581,7 +577,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (value < 0 || value > 1)
                 {
-                    throw new ArgumentOutOfRangeException("LayerDepth");
+                    throw new ArgumentOutOfRangeException();
                 }
 
                 _layerDepth = value;
@@ -775,25 +771,25 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void Update()
         {
-//            if (UpdateParams.UpdateX)
-//            {
-//                X += Speed.X;
-//            }
-//            if (UpdateParams.UpdateY)
-//            {
-//                Y += Speed.Y;
-//            }
-//            if (UpdateParams.FixEdgeOff)
-//            {
-//                _pastDirections = EdgesPast();
-//                if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
-//                {
-//                    Speed.X *= -1;
-//                } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
-//                {
-//                    Speed.Y *= -1;
-//                }
-//            }
+            //            if (UpdateParams.UpdateX)
+            //            {
+            //                X += Speed.X;
+            //            }
+            //            if (UpdateParams.UpdateY)
+            //            {
+            //                Y += Speed.Y;
+            //            }
+            //            if (UpdateParams.FixEdgeOff)
+            //            {
+            //                _pastDirections = EdgesPast();
+            //                if (_pastDirections.Contains(Direction.Left) || _pastDirections.Contains(Direction.Right))
+            //                {
+            //                    Speed.X *= -1;
+            //                } if (_pastDirections.Contains(Direction.Top) || _pastDirections.Contains(Direction.Bottom))
+            //                {
+            //                    Speed.Y *= -1;
+            //                }
+            //            }
 #if WINDOWS
             //if (UpdateParams.MouseFollow.DoesFollow)
             //{

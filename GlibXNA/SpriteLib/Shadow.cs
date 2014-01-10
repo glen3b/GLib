@@ -57,7 +57,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("ShadowedObject", "The shadowed object must not be null.");
+                    throw new NullReferenceException("The shadowed object must not be null.");
                 }
                 _shadowedObject = value;
             }

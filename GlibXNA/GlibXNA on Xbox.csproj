@@ -56,7 +56,6 @@
     <Compile Include="InputLib\MouseManager.cs" />
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
-    <Compile Include="LeftRight.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />

@@ -71,7 +71,6 @@
     <Compile Include="NetworkLib\NetworkSessionsFoundEventArgs.cs" />
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
-    <Compile Include="LeftRight.cs" />
     <Compile Include="RandomPositionGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
