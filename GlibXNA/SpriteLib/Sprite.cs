@@ -470,7 +470,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The <see cref="UpdateParamaters">UpdateParamaters</see> used to update the sprite.
         /// </summary>
-        [Obsolete("This feature will be replaced.")]
+        [Obsolete("Please override the Sprite class to implement this functionality instead.")]
         public UpdateParamaters UpdateParams = new UpdateParamaters(true, true);
 
         /// <summary>
