@@ -14,7 +14,7 @@ namespace Glib.XNA.SpriteLib
     /// <remarks>
     /// This class performs calculations that assume that the game operates at a constant framerate.
     /// </remarks>
-    public class VideoSprite : Sprite
+    public class VideoSprite : Sprite, IDisposable
     {
         private static TextureFactory _textureCreator;
 
@@ -122,6 +122,7 @@ namespace Glib.XNA.SpriteLib
         //    Update();
         //}
 
+#if WINDOWS
         /// <summary>
         /// Disposes of this <see cref="VideoSprite"/>.
         /// </summary>
@@ -135,5 +136,18 @@ namespace Glib.XNA.SpriteLib
                 Video.Dispose();
             }
         }
+#else
+        /// <summary>
+        /// Disposes of this <see cref="VideoSprite"/>.
+        /// </summary>
+        public override void Dispose()
+        {
+            base.Dispose();
+            if (Video != null && !Video.IsDisposed)
+            {
+                Video.Dispose();
+            }
+        }
+#endif
     }
 }

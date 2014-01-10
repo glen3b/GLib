@@ -13,7 +13,11 @@ namespace Glib.XNA.SpriteLib
     /// Manages multiple <seealso cref="Sprite"/> objects on the same SpriteBatch.
     /// </summary>
     [DebuggerDisplay("Count = {Count}")]
+#if WINDOWS
     public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite, ICollection<Sprite>, IDisposable
+#else
+    public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite, ICollection<Sprite>
+#endif
     {
         ///// <summary>
         ///// Gets the list of <seealso cref="Sprite"/>s managed by this SpriteManager.
