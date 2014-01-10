@@ -422,27 +422,6 @@
             Gets or sets the texture of the ITexturable.
             </summary>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.op_Explicit(Glib.XNA.SpriteLib.Sprite)~Microsoft.Xna.Framework.Rectangle">
-            <summary>
-            Convert the specified Sprite to a rectangle.
-            </summary>
-            <param name="spr">The Sprite to convert to a Rectangle.</param>
-            <returns>The Rectangle representing the area of the Sprite.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.op_Implicit(Glib.XNA.SpriteLib.Sprite)~Glib.XNA.InputLib.ScreenRegion">
-            <summary>
-            Convert the specified Sprite to a screen region.
-            </summary>
-            <param name="spr">The Sprite to convert to a screen region.</param>
-            <returns>The screen region representing the area of the Sprite (scale sensitive).</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.op_Explicit(Glib.XNA.SpriteLib.Sprite)~Microsoft.Xna.Framework.Graphics.Texture2D">
-            <summary>
-            Convert the specified Sprite to a texture.
-            </summary>
-            <param name="spr">The Sprite to convert to a Texture2D.</param>
-            <returns>The texture of the Sprite.</returns>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.Speed">
             <summary>
             The speed of the sprite in X and Y.
@@ -474,27 +453,12 @@
             <param name="newPos">The position to call the move event with.</param>
             <returns>Whether or not the called move event was cancelled.</returns>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.UpdateParams">
-            <summary>
-            The <see cref="T:Glib.XNA.SpriteLib.UpdateParamaters">UpdateParamaters</see> used to update the sprite.
-            </summary>
-        </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
             <summary>
             Create a new Sprite.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
-            <summary>
-            Create a new Sprite.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.UpdateParamaters)">
-            <summary>
-            Create a new Sprite.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.UpdateParamaters)">
             <summary>
             Create a new Sprite.
             </summary>
@@ -575,7 +539,7 @@
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.FollowMouse">
             <summary>
-            Follow the mouse pointer at .05 speed.
+            Follow the mouse pointer at .1 speed.
             </summary>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.FollowMouse(System.Single)">
@@ -588,6 +552,12 @@
             <summary>
             Logically update this sprite. This can also be done in the Updated event.
             </summary>
+        </member>
+        <member name="M:Glib.XNA.SpriteLib.Sprite.Dispose(System.Boolean)">
+            <summary>
+            Disposes of this <see cref="T:Glib.XNA.SpriteLib.Sprite"/>.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Visible">
             <summary>
@@ -1548,6 +1518,12 @@
             Updates the video.
             </summary>
         </member>
+        <member name="M:Glib.XNA.SpriteLib.VideoSprite.Dispose(System.Boolean)">
+            <summary>
+            Disposes of this <see cref="T:Glib.XNA.SpriteLib.VideoSprite"/>.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.VideoSprite.Video">
             <summary>
             Gets the <see cref="T:Microsoft.Xna.Framework.Media.VideoPlayer"/> representing the current video.
@@ -2345,116 +2321,6 @@
             Gets or sets the object to use for generating particles.
             </summary>
         </member>
-        <member name="T:Glib.XNA.SpriteLib.Updater">
-            <summary>
-            A base class for generic update logic using a SpriteWrapper.
-            Extend this class to implement sprite updating logic if you are using a SpriteWrapper.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Updater.#ctor(Glib.XNA.SpriteLib.SpriteWrapper)">
-            <summary>
-            Construct a new Updater associated with this SpriteWrapper.
-            </summary>
-            <param name="sw">The SpriteWrapper to associate this Updater with.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Updater.RemoveSprite(Glib.XNA.ISprite)">
-            <summary>
-            Remove an ISprite from the parent SpriteWrapper.
-            </summary>
-            <param name="remove">The ISprite to remove.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Updater.AddSprite(Glib.XNA.ISprite)">
-            <summary>
-            Add an ISprite to the parent SpriteWrapper.
-            </summary>
-            <param name="sprite">The ISprite to add.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Updater.GetAllSprites">
-            <summary>
-            Get all ISprites in the parent SpriteWrapper.
-            </summary>
-            <returns>An enumerable of all the ISprites managed by the parent SpriteWrapper.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.Updater.UpdateSprite(Glib.XNA.ISprite)">
-            <summary>
-            Update this ISprite.
-            </summary>
-            <param name="updating">The ISprite to update.</param>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.SpriteWrapper">
-            <summary>
-            A class for managing multiple instances of any implementation of ISprite using the same SpriteBatch easily.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.Add(Glib.XNA.ISprite)">
-            <summary>
-            Add a new ISprite to this SpriteManager.
-            </summary>
-            <param name="spr">The ISprite to add.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.ISprite[])">
-            <summary>
-            Create a new SpriteWrapper.
-            </summary>
-            <param name="spritestart">The Collection of ISprites to initialize Sprites with.</param>
-            <param name="sb">The SpriteBatch to use.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.#ctor(System.Collections.Generic.ICollection{Glib.XNA.ISprite},Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.Updater)">
-            <summary>
-            Create a new SpriteWrapper.
-            </summary>
-            <param name="spritestart">The Collection of ISprites to initialize Sprites with.</param>
-            <param name="sb">The SpriteBatch to use.</param>
-            <param name="updates">The Updater to use for updating ISprite objects (in addition to the Update() method).</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.Remove(Glib.XNA.ISprite)">
-            <summary>
-            Remove an ISprite from this SpriteWrapper.
-            </summary>
-            <param name="spr">The ISprite to remove.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.Update">
-            <summary>
-            Update all ISprites managed by this SpriteWrapper, in addition to using the Updater associated with this SpriteWrapper if applicable.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Update all ISprites managed by this SpriteWrapper, in addition to using the Updater associated with this SpriteWrapper if applicable.
-            This overload will also call the Update(GameTime) overload of ITimerSprite objects.
-            </summary>
-            <param name="gt">The GameTime object to use in updating ITimerSprites.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.Draw">
-            <summary>
-            Draws all sprites, and handles the SpriteBatch opening and closing.
-            This assumes the implementation of ISprite in use will not handle the SpriteBatch beginning/ending by itself.
-            If the type also implements ISpriteBatchManagerSprite, the DrawNonAuto() method will be called on the object instead of Draw().
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteWrapper.DrawNonAuto">
-            <summary>
-            Draw all sprites without handling the SpriteBatch for you.
-            If the type in use implements ISpriteBatchManagerSprite, the DrawNonAuto() method will be called on the object instead of Draw().
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteWrapper.Updater">
-            <summary>
-            The updater to use when updating ISprites in this SpriteWrapper.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteWrapper.Sprites">
-            <summary>
-            A collection of all ISprites managed by this SpriteWrapper.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.SpriteWrapper.Item(System.Int32)">
-            <summary>
-            Get or set the ISprite with the specified index in the Sprites collection.
-            </summary>
-            <param name="index">The index in the Sprites collection.</param>
-            <returns>The ISprite with the specified index in the Sprites collection.</returns>
-        </member>
         <member name="T:Glib.XNA.SpriteLib.SpriteSheet">
             <summary>
             A class representing a Sprite from a sprite sheet. Supports sprite sheet animation.
@@ -3131,11 +2997,6 @@
             Whether or not to reset the Text of this TextBoxSprite when the text is submitted.
             </summary>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.TextBoxSprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteFont)">
-            <summary>
-            Create a new TextBoxSprite.
-            </summary>
-        </member>
         <member name="M:Glib.XNA.SpriteLib.TextBoxSprite.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteFont)">
             <summary>
             Create a new TextBoxSprite using a white background.
@@ -3148,19 +3009,13 @@
             <summary>
             Create a new TextBoxSprite.
             </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.TextBoxSprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.UpdateParamaters,Microsoft.Xna.Framework.Graphics.SpriteFont)">
-            <summary>
-            Create a new TextBoxSprite.
-            </summary>
             <param name="texture">The texture to show beneath the text (must be scalable).</param>
             <param name="color">The color to tint the texture under the text.</param>
             <param name="pos">The position of the TextBoxSprite.</param>
             <param name="font">The SpriteFont to draw the text with.</param>
             <param name="sb">The SpriteBatch to draw to.</param>
-            <param name="up">The UpdateParameters to use when updating this Sprite.</param>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.TextBoxSprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.UpdateParamaters,Microsoft.Xna.Framework.Graphics.SpriteFont)">
+        <member name="M:Glib.XNA.SpriteLib.TextBoxSprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteFont)">
             <summary>
             Create a new TextBoxSprite.
             </summary>
@@ -3949,87 +3804,6 @@
             <summary>
             The <see cref="N:Glib.XNA.NetworkLib"/> namespace provides various XNA networking utilities.
             </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.MouseFollowParams">
-            <summary>
-            The parameters to use for automatically following the mouse every update.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.MouseFollowParams.MouseFollowSpeed">
-            <summary>
-            The speed of mouse following.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.MouseFollowParams.#ctor(System.Single)">
-            <summary>
-            Creates a new MouseFollowParams.
-            </summary>
-            <param name="speed">The speed of mouse following.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.MouseFollowParams.#ctor(System.Single,Glib.XNA.SpriteLib.SpriteRotation)">
-            <summary>
-            Creates a new MouseFollowParams.
-            </summary>
-            <param name="speed">The speed of mouse following.</param>
-            <param name="initialRotation">The initial rotation of the Sprite.</param>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.MouseFollowParams.InitialRotation">
-            <summary>
-            The initial rotation of the Sprite.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.MouseFollowParams.DoesFollow">
-            <summary>
-            Gets a boolean indicating whether or not the mouse is being followed.
-            </summary>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.UpdateParamaters">
-            <summary>
-            A structure representing things to automatically do when Update() is called on a Sprite.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.UpdateParamaters.UpdateX">
-            <summary>
-            Whether or not to acknowledge the XSpeed value.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.UpdateParamaters.MouseFollow">
-            <summary>
-            The parameters for automatic mouse following.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.UpdateParamaters.UpdateY">
-            <summary>
-            Whether or not to acknowledge the YSpeed value.
-            </summary>
-        </member>
-        <member name="F:Glib.XNA.SpriteLib.UpdateParamaters.FixEdgeOff">
-            <summary>
-            Whether or not to automatically fix the sprite from going off the edge based on XSpeed and YSpeed values.
-            </summary>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.UpdateParamaters.#ctor(System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Create a new UpdateParamaters with the values specified.
-            </summary>
-            <param name="UpdateXParam">Whether or not to acknowledge the XIncrease value.</param>
-            <param name="UpdateYParam">Whether or not to acknowledge the YIncrease value.</param>
-            <param name="FixEdgeOffParam">Whether or not to automatically fix the sprite from going off the edge.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.UpdateParamaters.#ctor(System.Boolean,System.Boolean,Glib.XNA.SpriteLib.MouseFollowParams)">
-            <summary>
-            Create a new UpdateParamaters with the values specified.
-            </summary>
-            <param name="UpdateXParam">Whether or not to acknowledge the XIncrease value.</param>
-            <param name="UpdateYParam">Whether or not to acknowledge the YIncrease value.</param>
-            <param name="followParams">The parameters for mouse following.</param>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.UpdateParamaters.#ctor(System.Boolean,System.Boolean)">
-            <summary>
-            Create a new UpdateParamaters with the values specified, and the default (false) for FixEdgeOff.
-            </summary>
-            <param name="UpdateXParam">Whether or not to acknowledge the XIncrease value.</param>
-            <param name="UpdateYParam">Whether or not to acknowledge the YIncrease value.</param>
         </member>
         <member name="T:Glib.XNA.SpriteLib.ProgressBar">
             <summary>

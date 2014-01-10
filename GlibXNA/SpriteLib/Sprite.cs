@@ -768,7 +768,7 @@ namespace Glib.XNA.SpriteLib
         }
 #endif
 
-        private Direction[] _pastDirections;
+        //private Direction[] _pastDirections;
 
         /// <summary>
         /// Logically update this sprite. This can also be done in the Updated event.
@@ -794,22 +794,22 @@ namespace Glib.XNA.SpriteLib
 //                    Speed.Y *= -1;
 //                }
 //            }
-//#if WINDOWS
-//            if (UpdateParams.MouseFollow.DoesFollow)
-//            {
-//                FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
-//            }
+#if WINDOWS
+            //if (UpdateParams.MouseFollow.DoesFollow)
+            //{
+            //    FollowMouse(UpdateParams.MouseFollow.InitialRotation, UpdateParams.MouseFollow.MouseFollowSpeed);
+            //}
 
-//            if (MouseEnter != null && Intersects(MouseManager.CurrentMouseState) && !Intersects(_lastMouseState))
-//            {
-//                MouseEnter(this, EventArgs.Empty);
-//            }
+            if (MouseEnter != null && Intersects(MouseManager.CurrentMouseState) && !Intersects(_lastMouseState))
+            {
+                MouseEnter(this, EventArgs.Empty);
+            }
 
-//            if (MouseLeave != null && !Intersects(MouseManager.CurrentMouseState) && Intersects(_lastMouseState))
-//            {
-//                MouseLeave(this, EventArgs.Empty);
-//            }
-//#endif
+            if (MouseLeave != null && !Intersects(MouseManager.CurrentMouseState) && Intersects(_lastMouseState))
+            {
+                MouseLeave(this, EventArgs.Empty);
+            }
+#endif
 
             if (Updated != null)
             {

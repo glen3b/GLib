@@ -123,12 +123,10 @@
     <Compile Include="SpriteLib\SpriteSheet.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SpriteLib\SpriteWrapper.cs" />
     <Compile Include="SpriteLib\TextBoxSprite.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SpriteLib\TextSprite.cs" />
-    <Compile Include="SpriteLib\Updater.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />
     <Compile Include="ThreeDimensional\NamespaceDoc.cs" />

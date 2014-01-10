@@ -90,11 +90,9 @@
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
     <Compile Include="SpriteLib\SpriteSheet.cs" />
-    <Compile Include="SpriteLib\SpriteWrapper.cs" />
     <Compile Include="SpriteLib\TextBoxSprite.cs" />
     <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\TextSprite.cs" />
-    <Compile Include="SpriteLib\Updater.cs" />
     <Compile Include="SpriteLib\VideoSprite.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />
