@@ -40,10 +40,17 @@ namespace Glib.XNA.SpriteLib
     public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable
 #endif
     {
+        private Vector2 _speed;
+
         /// <summary>
-        /// The speed of the sprite in X and Y.
+        /// Gets or sets the velocity of the sprite.
         /// </summary>
-        public Vector2 Speed = Vector2.Zero;
+        public Vector2 Speed
+        {
+            get { return _speed; }
+            set { _speed = value; }
+        }
+        
 
         private SpriteEffects _effect = SpriteEffects.None;
 
@@ -71,22 +78,6 @@ namespace Glib.XNA.SpriteLib
             set
             {
                 _effect = value;
-            }
-        }
-
-        /// <summary>
-        /// The speed of the sprite along the X axis.
-        /// </summary>
-        [Obsolete("This property will be removed.")]
-        public virtual float XSpeed
-        {
-            get
-            {
-                return Speed.X;
-            }
-            set
-            {
-                Speed.X = value;
             }
         }
 
@@ -152,22 +143,6 @@ namespace Glib.XNA.SpriteLib
 
 
         private event EventHandler moved = null;
-
-        /// <summary>
-        /// The speed of the sprite along the Y axis.
-        /// </summary>
-        [Obsolete("This property will be removed.")]
-        public virtual float YSpeed
-        {
-            get
-            {
-                return Speed.Y;
-            }
-            set
-            {
-                Speed.Y = value;
-            }
-        }
 
         /// <summary>
         /// An event called after every update of this sprite.

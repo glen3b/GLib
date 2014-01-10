@@ -422,11 +422,6 @@
             Gets or sets the texture of the ITexturable.
             </summary>
         </member>
-        <member name="F:Glib.XNA.SpriteLib.Sprite.Speed">
-            <summary>
-            The speed of the sprite in X and Y.
-            </summary>
-        </member>
         <member name="F:Glib.XNA.SpriteLib.Sprite.SpriteBatch">
             <summary>
             The SpriteBatch used for drawing the sprite.
@@ -559,6 +554,11 @@
             </summary>
             <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
         </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Speed">
+            <summary>
+            Gets or sets the velocity of the sprite.
+            </summary>
+        </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Visible">
             <summary>
             Gets or sets a boolean indicating whether the Sprite is visible.
@@ -567,11 +567,6 @@
         <member name="P:Glib.XNA.SpriteLib.Sprite.Effect">
             <summary>
             The effect to apply to the Sprite when drawn.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Sprite.XSpeed">
-            <summary>
-            The speed of the sprite along the X axis.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.OnlyDrawRegion">
@@ -587,11 +582,6 @@
         <member name="E:Glib.XNA.SpriteLib.Sprite.Moved">
             <summary>
             An EventHandler called after the successful movement of this Sprite.
-            </summary>
-        </member>
-        <member name="P:Glib.XNA.SpriteLib.Sprite.YSpeed">
-            <summary>
-            The speed of the sprite along the Y axis.
             </summary>
         </member>
         <member name="E:Glib.XNA.SpriteLib.Sprite.Updated">
