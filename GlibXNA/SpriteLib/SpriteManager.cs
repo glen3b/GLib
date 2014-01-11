@@ -89,17 +89,6 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Remove a <seealso cref="Sprite"/> from this SpriteManager.
-        /// Safe to call during Update or Draw (or from their corresponding events).
-        /// </summary>
-        /// <param name="spr">The <seealso cref="Sprite"/> to remove.</param>
-        internal void RemoveSelf(Sprite spr)
-        {
-            Remove(spr);
-            _i--;
-        }
-
-        /// <summary>
         /// Add a <seealso cref="Sprite"/> to this SpriteManager.
         /// </summary>
         /// <param name="spr">The <seealso cref="Sprite"/> to add.</param>
