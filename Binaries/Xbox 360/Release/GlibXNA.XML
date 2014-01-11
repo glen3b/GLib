@@ -457,9 +457,14 @@
             Disposes of this <see cref="T:Glib.XNA.SpriteLib.Sprite"/>.
             </summary>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.Sprite.Speed">
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Velocity">
             <summary>
             Gets or sets the velocity of the sprite.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.AngularVelocity">
+            <summary>
+            Gets or sets the angular velocity (change in rotation per update) of this <see cref="T:Glib.XNA.SpriteLib.Sprite"/>.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Visible">
@@ -2496,11 +2501,6 @@
             Should be greater than zero. The color is multiplied by this factor every frame, so this factor can be used for color deterioration.
             </remarks>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.RotationVelocity">
-            <summary>
-            Gets or sets the rotation, in degrees, by which the rotation will change each update.
-            </summary>
-        </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.TimeToLive">
             <summary>
             Gets or sets the remaining time to live.
@@ -3117,13 +3117,6 @@
             <param name="position">The position of the new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>.</param>
             <param name="texture">The texture of the new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>.</param>
             <returns>The created Sprite.</returns>
-        </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteManager.RemoveSelf(Glib.XNA.SpriteLib.Sprite)">
-            <summary>
-            Remove a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> from this SpriteManager.
-            Safe to call during Update or Draw (or from their corresponding events).
-            </summary>
-            <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.Add(Glib.XNA.SpriteLib.Sprite)">
             <summary>

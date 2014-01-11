@@ -3247,13 +3247,6 @@
             <param name="texture">The texture of the new <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>.</param>
             <returns>The created Sprite.</returns>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.SpriteManager.RemoveSelf(Glib.XNA.SpriteLib.Sprite)">
-            <summary>
-            Remove a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> from this SpriteManager.
-            Safe to call during Update or Draw (or from their corresponding events).
-            </summary>
-            <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
-        </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.Add(Glib.XNA.SpriteLib.Sprite)">
             <summary>
             Add a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to this SpriteManager.
