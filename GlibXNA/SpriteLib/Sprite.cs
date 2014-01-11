@@ -416,6 +416,17 @@ namespace Glib.XNA.SpriteLib
         public event EventHandler MouseLeave;
 #endif
 
+        ///// <summary>
+        ///// Create a <see cref="Sprite"/> with no information.
+        ///// </summary>
+        ///// <remarks>
+        ///// A sprite is unusable without a texture or SpriteBatch.
+        ///// </remarks>
+        //public Sprite()
+        //{
+
+        //}
+
         /// <summary>
         /// Create a new Sprite.
         /// </summary>

@@ -115,7 +115,7 @@ namespace Glib.XNA.SpriteLib
         {
             foreach (KeyValuePair<Vector2, SpriteEffects> bgItem in _bgList)
             {
-                SpriteBatch.Draw(Texture, bgItem.Key, null, TintColor, 0f, Vector2.Zero, Scale, bgItem.Value, 1);
+                SpriteBatch.Draw(Texture, bgItem.Key, null, TintColor, 0f, Vector2.Zero, Scale, bgItem.Value, LayerDepth);
                 //base.Draw(spriteBatch, bgItem.Key, bgItem.Value);
             }
             CallDrawn();

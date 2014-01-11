@@ -251,6 +251,9 @@ namespace Glib.XNA.SpriteLib
         /// Open the specified SpriteBatch with the settings required for drawing this Screen.
         /// </summary>
         /// <param name="sb">The SpriteBatch to open.</param>
+        /// <remarks>
+        /// When overriding this method, do not call the superclass implementation of this method.
+        /// </remarks>
         public virtual void OpenSpriteBatch(SpriteBatch sb)
         {
             sb.Begin();
