@@ -24,8 +24,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             LayerDepth = 1;
         }
 
-        private float _rotationVelocity;
-
         private float _colorVelocity = 1;
 
         /// <summary>
@@ -57,16 +55,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
                 _colorVelocity = value;
             }
-        }
-
-
-        /// <summary>
-        /// Gets or sets the rotation, in degrees, by which the rotation will change each update.
-        /// </summary>
-        public float RotationVelocity
-        {
-            get { return _rotationVelocity; }
-            set { _rotationVelocity = value; }
         }
 
         private TimeSpan _timeToLive;
@@ -115,7 +103,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         public override void Update()
         {
             base.Update();
-            Rotation += RotationVelocity;
             TintColor *= ColorChange;
 
             #region "Dead" particle condition checks

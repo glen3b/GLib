@@ -224,8 +224,8 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         {
             Particle particle = Pool.GetParticle(_textures[_random.Next(_textures.Count)], pos);
 
-            particle.Speed = _randomProperties.Speed.HasValue ? _randomProperties.Speed.Value : new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
-            particle.RotationVelocity = _randomProperties.RotationChange.HasValue ? _randomProperties.RotationChange.Value : MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f);
+            particle.Velocity = _randomProperties.Speed.HasValue ? _randomProperties.Speed.Value : new Vector2((_random.NextDouble() * 2 - 1).ToFloat(), (_random.NextDouble() * 2 - 1).ToFloat());
+            particle.AngularVelocity = SpriteRotation.FromDegrees(_randomProperties.RotationChange.HasValue ? _randomProperties.RotationChange.Value : MathHelper.ToDegrees(Convert.ToSingle(_random.NextDouble() * 2 - 1) / 10f));
             particle.TintColor = _randomProperties.Tint.HasValue ? _randomProperties.Tint.Value : new Color(_random.Next(255), _random.Next(255), _random.Next(255), _random.Next(255));
             particle.Scale = _randomProperties.Scale.HasValue ? _randomProperties.Scale.Value : new Vector2(_random.NextDouble().ToFloat() / ScaleFactor);
             particle.TimeToLive = _randomProperties.TimeToLive.HasValue ? _randomProperties.TimeToLive.Value : TimeSpan.FromTicks(_random.Next((int)_minTTL.Ticks, (int)_maxTTL.Ticks));

@@ -554,9 +554,14 @@
             </summary>
             <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.Sprite.Speed">
+        <member name="P:Glib.XNA.SpriteLib.Sprite.Velocity">
             <summary>
             Gets or sets the velocity of the sprite.
+            </summary>
+        </member>
+        <member name="P:Glib.XNA.SpriteLib.Sprite.AngularVelocity">
+            <summary>
+            Gets or sets the angular velocity (change in rotation per update) of this <see cref="T:Glib.XNA.SpriteLib.Sprite"/>.
             </summary>
         </member>
         <member name="P:Glib.XNA.SpriteLib.Sprite.Visible">
@@ -2625,11 +2630,6 @@
             Should be greater than zero. The color is multiplied by this factor every frame, so this factor can be used for color deterioration.
             </remarks>
         </member>
-        <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.RotationVelocity">
-            <summary>
-            Gets or sets the rotation, in degrees, by which the rotation will change each update.
-            </summary>
-        </member>
         <member name="P:Glib.XNA.SpriteLib.ParticleEngine.Particle.TimeToLive">
             <summary>
             Gets or sets the remaining time to live.
@@ -3570,11 +3570,14 @@
             If overriden in a subclass, performs miscellaneous processing logic while the RenderTarget2D is the active RenderTarget.
             </summary>
         </member>
-        <member name="M:Glib.XNA.SpriteLib.Screen.OpenSpriteBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch@)">
+        <member name="M:Glib.XNA.SpriteLib.Screen.OpenSpriteBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
             <summary>
             Open the specified SpriteBatch with the settings required for drawing this Screen.
             </summary>
             <param name="sb">The SpriteBatch to open.</param>
+            <remarks>
+            When overriding this method, do not call the superclass implementation of this method.
+            </remarks>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>

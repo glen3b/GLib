@@ -23,7 +23,7 @@ namespace Glib.XNA.ThreeDimensional
             set {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException();
                 }
                 _model = value;
             }

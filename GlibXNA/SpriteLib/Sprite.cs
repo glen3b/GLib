@@ -40,15 +40,26 @@ namespace Glib.XNA.SpriteLib
     public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable
 #endif
     {
-        private Vector2 _speed;
+        private Vector2 _velocity;
 
         /// <summary>
         /// Gets or sets the velocity of the sprite.
         /// </summary>
-        public Vector2 Speed
+        public Vector2 Velocity
         {
-            get { return _speed; }
-            set { _speed = value; }
+            get { return _velocity; }
+            set { _velocity = value; }
+        }
+
+        private SpriteRotation _angularVelocity = SpriteRotation.Zero;
+
+        /// <summary>
+        /// Gets or sets the angular velocity (change in rotation per update) of this <see cref="Sprite"/>.
+        /// </summary>
+        public SpriteRotation AngularVelocity
+        {
+            get { return _angularVelocity; }
+            set { _angularVelocity = value; }
         }
         
 
@@ -125,7 +136,7 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
                 if (value != null)
                 {
-                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this && value.Method.Name.ToLower().Trim().Equals("rectUpdate", StringComparison.InvariantCultureIgnoreCase))
+                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this && value.Method.Name.ToLower().Trim().Equals("rectUpdate", StringComparison.OrdinalIgnoreCase))
                     {
                         throw new InvalidOperationException("Cannot remove an internally used delegate handler.");
                     }
@@ -763,14 +774,8 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public virtual void Update()
         {
-            //            if (UpdateParams.UpdateX)
-            //            {
-            //                X += Speed.X;
-            //            }
-            //            if (UpdateParams.UpdateY)
-            //            {
-            //                Y += Speed.Y;
-            //            }
+            Position += Velocity;
+            Rotation += AngularVelocity;
             //            if (UpdateParams.FixEdgeOff)
             //            {
             //                _pastDirections = EdgesPast();

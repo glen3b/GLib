@@ -110,9 +110,9 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 particle.OnlyDrawRegion = false;
                 particle.Origin = Vector2.Zero;
                 particle.Position = Vector2.Zero;
-                particle.RotationVelocity = 0;
+                particle.AngularVelocity = SpriteRotation.Zero;
                 particle.Scale = Vector2.One;
-                particle.Speed = Vector2.Zero;
+                particle.Velocity = Vector2.Zero;
                 particle.SpriteBatch = _spriteBatch;
                 particle.Texture = null;
                 particle.TimeToLive = TimeSpan.Zero;
