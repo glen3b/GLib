@@ -390,7 +390,7 @@
             <remarks>
             Calls an event; call only when neccesary.
             </remarks>
-            <param name="newPos">The position to call the move event with.</param>
+            <param name="newPosition">The position to call the move event with.</param>
             <returns>Whether or not the called move event was cancelled.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteBatch)">
@@ -424,21 +424,21 @@
             <summary>
             Checks whether the given point intersects with the sprite.
             </summary>
-            <param name="pos">The position to check.</param>
+            <param name="position">The position to check.</param>
             <returns>Whether or not the specified position intersects with this Sprite.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.Intersects(Microsoft.Xna.Framework.Rectangle)">
             <summary>
             Checks whether the given rectangle intersects with this sprite.
             </summary>
-            <param name="r">The rectangle to check intersection against</param>
+            <param name="rectangleToCheck">The rectangle to check intersection against</param>
             <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.Intersects(Glib.XNA.SpriteLib.Sprite)">
             <summary>
             Checks whether the given sprite intersects with this sprite.
             </summary>
-            <param name="s">The sprite to check intersection against.</param>
+            <param name="sprite">The sprite to check intersection against.</param>
             <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Sprite.EdgesPast">
@@ -2044,20 +2044,6 @@
             Gets or sets the projection matrix to use when rendering.
             </summary>
         </member>
-        <member name="T:Glib.XNA.SpriteLib.SpriteMoveEventHandler">
-            <summary>
-            Handle when a sprite is going to be moved. This is a cancellable event.
-            </summary>
-            <param name="source">The sprite that is undergoing an attempt to be moved.</param>
-            <param name="e">The <seealso cref="T:Glib.XNA.SpriteMoveEventArgs">SpriteMoveEventArgs</seealso> for this event.</param>
-        </member>
-        <member name="T:Glib.XNA.SpriteLib.SpriteClickEventHandler">
-            <summary>
-            Handle when a sprite has been clicked on. Called immediately after Update() on a Sprite.
-            </summary>
-            <param name="source">The SpriteManager that is managing this sprite, or, if this event is being called by the sprite itself, the sprite being clicked on.</param>
-            <param name="e">The <seealso cref="T:Glib.XNA.SpriteMoveEventArgs">SpriteMoveEventArgs</seealso> for this event.</param>
-        </member>
         <member name="T:Glib.XNA.SpriteLib.ParticleEngine.ParticleEngine">
             <summary>
             A class that manages multiple particles.
@@ -2594,6 +2580,26 @@
             <param name="color">The color of the square.</param>
             <returns>A texture which is a square of the specified size and color.</returns>
         </member>
+        <member name="M:Glib.XNA.TextureFactory.CreateHollowRectangle(System.Int32,System.Int32,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a hollow rectangle of the specified color and size.
+            </summary>
+            <param name="width">The width of the new rectangular texture.</param>
+            <param name="height">The height of the new rectangular texture.</param>
+            <param name="color">The color of the rectangle border.</param>
+            <returns>A hollow rectangular with a "color" border and of the specified size.</returns>
+            <remarks>
+            The returned texture will have an equivalent height and width to the parameters passed in, not bordering (1 pixel greater size on each side) a rectangle of the specified size.
+            </remarks>
+        </member>
+        <member name="M:Glib.XNA.TextureFactory.CreateHollowRectangle(System.Int32,System.Int32)">
+            <summary>
+            Creates a hollow white rectangle of the specified size.
+            </summary>
+            <param name="width">The width of the new rectangular texture.</param>
+            <param name="height">The height of the new rectangular texture.</param>
+            <returns>A hollow rectangular with a white border color and of the specified size.</returns>
+        </member>
         <member name="M:Glib.XNA.TextureFactory.CreateRectangle(System.Int32,System.Int32)">
             <summary>
             Creates a white rectangle of the specified size.
@@ -3122,19 +3128,19 @@
             <summary>
             Add a <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to this SpriteManager.
             </summary>
-            <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to add.</param>
+            <param name="sprite">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to add.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.Remove(Glib.XNA.SpriteLib.Sprite)">
             <summary>
             Remove a given <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>, that is NOT the <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> being updated.
             </summary>
-            <param name="spr">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
+            <param name="sprite">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/> to remove.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Glib.XNA.SpriteLib.Sprite[])">
             <summary>
             Construct a new SpriteManager.
             </summary>
-            <param name="sb">The SpriteBatch to use.</param>
+            <param name="spriteBatch">The SpriteBatch to use.</param>
             <param name="sprites">The <seealso cref="T:Glib.XNA.SpriteLib.Sprite"/>s to add to the SpriteManager.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.SpriteManager.Draw">
@@ -3401,16 +3407,16 @@
             <summary>
             Create a new Screen with no Sprites by default.
             </summary>
-            <param name="sb">The SpriteBatch to draw.</param>
-            <param name="c">The color of the Screen.</param>
+            <param name="spriteBatch">The SpriteBatch to draw.</param>
+            <param name="color">The color of the Screen.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Graphics.Texture2D)">
             <summary>
             Create a new Screen with a background image.
             </summary>
-            <param name="sb">The SpriteBatch to draw.</param>
-            <param name="c">The color of the Screen.</param>
-            <param name="back">The background image of the Screen.</param>
+            <param name="spriteBatch">The SpriteBatch to draw.</param>
+            <param name="color">The color of the Screen.</param>
+            <param name="background">The background image of the Screen.</param>
         </member>
         <member name="F:Glib.XNA.SpriteLib.Screen.BackgroundSprite">
             <summary>
@@ -3422,7 +3428,7 @@
             Create a new screen.
             </summary>
             <param name="color">The color to clear the Screen as before Sprite drawing.</param>
-            <param name="mgr">The SpriteManager managing a SpriteBatch with a viewport to use as the Screen size.</param>
+            <param name="manager">The SpriteManager managing a SpriteBatch with a viewport to use as the Screen size.</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.Update">
             <summary>
@@ -3447,7 +3453,7 @@
             <summary>
             Update all Sprites on this Screen.
             </summary>
-            <param name="game">The active game time.</param>
+            <param name="gameTime">The current game time (which provides a snapshot of game timing values).</param>
         </member>
         <member name="M:Glib.XNA.SpriteLib.Screen.Dispose">
             <summary>
@@ -3693,6 +3699,10 @@
             <summary>
             Create a new ProgressBar.
             </summary>
+            <param name="position">The position of the progress bar.</param>
+            <param name="emptyColor">The color to represent "empty" sections of the progress bar.</param>
+            <param name="fillColor">The color to represent "filled" sections of the progress bar.</param>
+            <param name="spriteBatch">The SpriteBatch to render this progress bar to.</param>
         </member>
         <member name="F:Glib.XNA.SpriteLib.ProgressBar._textureNeedsCalculation">
             <summary>

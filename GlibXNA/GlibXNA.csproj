@@ -116,7 +116,6 @@
     <Compile Include="SpriteLib\Sprite.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SpriteLib\SpriteEvents.cs" />
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
     <Compile Include="SpriteLib\SpriteSheet.cs">

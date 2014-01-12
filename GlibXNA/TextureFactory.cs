@@ -76,6 +76,42 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Creates a hollow rectangle of the specified color and size.
+        /// </summary>
+        /// <param name="width">The width of the new rectangular texture.</param>
+        /// <param name="height">The height of the new rectangular texture.</param>
+        /// <param name="color">The color of the rectangle border.</param>
+        /// <returns>A hollow rectangular with a "color" border and of the specified size.</returns>
+        /// <remarks>
+        /// The returned texture will have an equivalent height and width to the parameters passed in, not bordering (1 pixel greater size on each side) a rectangle of the specified size.
+        /// </remarks>
+        public Texture2D CreateHollowRectangle(int width, int height, Color color)
+        {
+            Texture2D returnVal = new Texture2D(Graphics, width, height);
+            Color[] data = new Color[width * height];
+            for (int w_en = 0; w_en < width; w_en++)
+            {
+                for (int h_en = 0; h_en < height; h_en++)
+                {
+                    data[h_en * width + w_en] = w_en == 0 || w_en == width - 1 || h_en == 0 || h_en == height - 1 ? color : Color.Transparent;
+                }
+            }
+            returnVal.SetData(data);
+            return returnVal;
+        }
+
+        /// <summary>
+        /// Creates a hollow white rectangle of the specified size.
+        /// </summary>
+        /// <param name="width">The width of the new rectangular texture.</param>
+        /// <param name="height">The height of the new rectangular texture.</param>
+        /// <returns>A hollow rectangular with a white border color and of the specified size.</returns>
+        public Texture2D CreateHollowRectangle(int width, int height)
+        {
+            return CreateHollowRectangle(width, height, Color.White);
+        }
+
+        /// <summary>
         /// Creates a white rectangle of the specified size.
         /// </summary>
         /// <param name="width">The width of the new rectangular texture.</param>

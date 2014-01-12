@@ -168,7 +168,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// A cancellable event called before every change of this sprite's position.
         /// </summary>
-        public event SpriteMoveEventHandler Move = null;
+        public event EventHandler<SpriteMoveEventArgs> Move = null;
 
         /// <summary>
         /// The SpriteBatch used for drawing the sprite.
@@ -395,7 +395,7 @@ namespace Glib.XNA.SpriteLib
             if (Move != null)
             {
                 SpriteMoveEventArgs args = new SpriteMoveEventArgs(_pos, newPosition);
-                foreach (SpriteMoveEventHandler tmp in Move.GetInvocationList())
+                foreach (EventHandler<SpriteMoveEventArgs> tmp in Move.GetInvocationList())
                 {
                     tmp(this, args);
                     cancel = args.Cancel;
@@ -441,19 +441,20 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
-        public Sprite(Texture2D texture, Vector2 pos, SpriteBatch sb)
+        public Sprite(Texture2D texture, Vector2 position, SpriteBatch spriteBatch)
+            : this(texture, position, Color.White, spriteBatch)
         {
-            _pos = pos;
-            this.SpriteBatch = sb;
-            this.Texture = texture;
+            
         }
 
         /// <summary>
         /// Create a new Sprite.
         /// </summary>
-        public Sprite(Texture2D texture, Vector2 pos, Color color, SpriteBatch sb)
-            : this(texture, pos, sb)
+        public Sprite(Texture2D texture, Vector2 position, Color color, SpriteBatch spriteBatch)
         {
+            _pos = position;
+            this.SpriteBatch = spriteBatch;
+            this.Texture = texture;
             this.TintColor = color;
         }
 
