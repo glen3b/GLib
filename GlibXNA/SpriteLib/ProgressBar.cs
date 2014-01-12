@@ -57,8 +57,12 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new ProgressBar.
         /// </summary>
-        public ProgressBar(Vector2 pos, Color fillColor, Color emptyColor, SpriteBatch sb)
-            : base(null, pos, sb)
+        /// <param name="position">The position of the progress bar.</param>
+        /// <param name="emptyColor">The color to represent "empty" sections of the progress bar.</param>
+        /// <param name="fillColor">The color to represent "filled" sections of the progress bar.</param>
+        /// <param name="spriteBatch">The SpriteBatch to render this progress bar to.</param>
+        public ProgressBar(Vector2 position, Color fillColor, Color emptyColor, SpriteBatch spriteBatch)
+            : base(null, position, spriteBatch)
         {
             _fillColor = fillColor;
             _emptyColor = emptyColor;
@@ -182,15 +186,21 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                return _fillColor;
+                lock (syncLock)
+                {
+                    return _fillColor;
+                }
             }
 
             set
             {
-                if (value != _fillColor)
+                lock (syncLock)
                 {
-                    _fillColor = value;
-                    _textureNeedsCalculation = true;
+                    if (value != _fillColor)
+                    {
+                        _fillColor = value;
+                        _textureNeedsCalculation = true;
+                    }
                 }
             }
         }
@@ -305,18 +315,21 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public Color EmptyColor
         {
-            get { return _emptyColor; }
+            get { lock (syncLock) { return _emptyColor; } }
             set
             {
-                if (value != _emptyColor)
+                lock (syncLock)
                 {
-                    _emptyColor = value;
-                    _textureNeedsCalculation = true;
+                    if (value != _emptyColor)
+                    {
+                        _emptyColor = value;
+                        _textureNeedsCalculation = true;
+                    }
                 }
             }
         }
-        
-        
+
+
         private Color _emptyColor;
 
     }

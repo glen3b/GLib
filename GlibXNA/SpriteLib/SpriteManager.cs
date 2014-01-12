@@ -91,32 +91,32 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Add a <seealso cref="Sprite"/> to this SpriteManager.
         /// </summary>
-        /// <param name="spr">The <seealso cref="Sprite"/> to add.</param>
-        public void Add(Sprite spr)
+        /// <param name="sprite">The <seealso cref="Sprite"/> to add.</param>
+        public void Add(Sprite sprite)
         {
-            _sprites.Add(spr);
+            _sprites.Add(sprite);
         }
 
         /// <summary>
         /// Remove a given <seealso cref="Sprite"/>, that is NOT the <seealso cref="Sprite"/> being updated.
         /// </summary>
-        /// <param name="spr">The <seealso cref="Sprite"/> to remove.</param>
-        public bool Remove(Sprite spr)
+        /// <param name="sprite">The <seealso cref="Sprite"/> to remove.</param>
+        public bool Remove(Sprite sprite)
         {
-            return _sprites.Remove(spr);
+            return _sprites.Remove(sprite);
         }
 
         /// <summary>
         /// Construct a new SpriteManager.
         /// </summary>
-        /// <param name="sb">The SpriteBatch to use.</param>
+        /// <param name="spriteBatch">The SpriteBatch to use.</param>
         /// <param name="sprites">The <seealso cref="Sprite"/>s to add to the SpriteManager.</param>
-        public SpriteManager(SpriteBatch sb, params Sprite[] sprites)
+        public SpriteManager(SpriteBatch spriteBatch, params Sprite[] sprites)
         {
-            _sb = sb;
+            _sb = spriteBatch;
             foreach (Sprite s in sprites)
             {
-                s.SpriteBatch = sb;
+                s.SpriteBatch = spriteBatch;
                 _sprites.Add(s);
             }
         }

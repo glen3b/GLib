@@ -176,10 +176,10 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Screen with no Sprites by default.
         /// </summary>
-        /// <param name="sb">The SpriteBatch to draw.</param>
-        /// <param name="c">The color of the Screen.</param>
-        public Screen(SpriteBatch sb, Color c)
-            : this(new SpriteManager(sb), c)
+        /// <param name="spriteBatch">The SpriteBatch to draw.</param>
+        /// <param name="color">The color of the Screen.</param>
+        public Screen(SpriteBatch spriteBatch, Color color)
+            : this(new SpriteManager(spriteBatch), color)
         {
 
         }
@@ -187,13 +187,13 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new Screen with a background image.
         /// </summary>
-        /// <param name="sb">The SpriteBatch to draw.</param>
-        /// <param name="c">The color of the Screen.</param>
-        /// <param name="back">The background image of the Screen.</param>
-        public Screen(SpriteBatch sb, Color c, Texture2D back)
-            : this(new SpriteManager(sb), c)
+        /// <param name="spriteBatch">The SpriteBatch to draw.</param>
+        /// <param name="color">The color of the Screen.</param>
+        /// <param name="background">The background image of the Screen.</param>
+        public Screen(SpriteBatch spriteBatch, Color color, Texture2D background)
+            : this(new SpriteManager(spriteBatch), color)
         {
-            BackgroundSprite = new Sprite(back, Vector2.Zero, sb);
+            BackgroundSprite = new Sprite(background, Vector2.Zero, spriteBatch);
         }
 
         /// <summary>
@@ -205,9 +205,9 @@ namespace Glib.XNA.SpriteLib
         /// Create a new screen.
         /// </summary>
         /// <param name="color">The color to clear the Screen as before Sprite drawing.</param>
-        /// <param name="mgr">The SpriteManager managing a SpriteBatch with a viewport to use as the Screen size.</param>
-        public Screen(SpriteManager mgr, Color color)
-            : this(new RenderTarget2D(mgr.SpriteBatch.GraphicsDevice, mgr.SpriteBatch.GraphicsDevice.Viewport.Width, mgr.SpriteBatch.GraphicsDevice.Viewport.Height), color, mgr)
+        /// <param name="manager">The SpriteManager managing a SpriteBatch with a viewport to use as the Screen size.</param>
+        public Screen(SpriteManager manager, Color color)
+            : this(new RenderTarget2D(manager.SpriteBatch.GraphicsDevice, manager.SpriteBatch.GraphicsDevice.Viewport.Width, manager.SpriteBatch.GraphicsDevice.Viewport.Height), color, manager)
         {
         }
 
@@ -292,26 +292,26 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Update all Sprites on this Screen.
         /// </summary>
-        /// <param name="game">The active game time.</param>
-        public virtual void Update(GameTime game)
+        /// <param name="gameTime">The current game time (which provides a snapshot of game timing values).</param>
+        public virtual void Update(GameTime gameTime)
         {
             if (BackgroundSprite != null)
             {
                 if (BackgroundSprite is ITimerSprite)
                 {
-                    (BackgroundSprite as ITimerSprite).Update(game);
+                    (BackgroundSprite as ITimerSprite).Update(gameTime);
                 }
                 else
                 {
                     BackgroundSprite.Update();
                 }
             }
-            Sprites.Update(game);
+            Sprites.Update(gameTime);
             for (int i = 0; i < AdditionalSprites.Count; i++)
             {
                 if (AdditionalSprites[i] is ITimerSprite)
                 {
-                    (AdditionalSprites[i] as ITimerSprite).Update(game);
+                    (AdditionalSprites[i] as ITimerSprite).Update(gameTime);
                 }
                 else if (AdditionalSprites[i] is ISprite)
                 {

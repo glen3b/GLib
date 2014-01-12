@@ -387,14 +387,14 @@ namespace Glib.XNA.SpriteLib
         /// <remarks>
         /// Calls an event; call only when neccesary.
         /// </remarks>
-        /// <param name="newPos">The position to call the move event with.</param>
+        /// <param name="newPosition">The position to call the move event with.</param>
         /// <returns>Whether or not the called move event was cancelled.</returns>
-        protected bool IsMoveEventCanceled(Vector2 newPos)
+        protected bool IsMoveEventCanceled(Vector2 newPosition)
         {
             bool cancel = false;
             if (Move != null)
             {
-                SpriteMoveEventArgs args = new SpriteMoveEventArgs(_pos, newPos);
+                SpriteMoveEventArgs args = new SpriteMoveEventArgs(_pos, newPosition);
                 foreach (SpriteMoveEventHandler tmp in Move.GetInvocationList())
                 {
                     tmp(this, args);
@@ -621,11 +621,11 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Checks whether the user is clicking on the sprite.
         /// </summary>
-        /// <param name="ms">The current MouseState.</param>
+        /// <param name="mouseState">The current MouseState.</param>
         /// <returns>Whether or not the mouse, based on the given MouseState, is clicking on this Sprite.</returns>
-        public bool ClickCheck(MouseState ms)
+        public bool ClickCheck(MouseState mouseState)
         {
-            return Visible && ms.LeftButton == ButtonState.Pressed && Intersects(new Vector2(ms.X, ms.Y));
+            return Visible && mouseState.LeftButton == ButtonState.Pressed && Intersects(new Vector2(mouseState.X, mouseState.Y));
         }
 
         /// <summary>
@@ -642,9 +642,9 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Checks whether the given point intersects with the sprite.
         /// </summary>
-        /// <param name="pos">The position to check.</param>
+        /// <param name="position">The position to check.</param>
         /// <returns>Whether or not the specified position intersects with this Sprite.</returns>
-        public virtual bool Intersects(Vector2 pos)
+        public virtual bool Intersects(Vector2 position)
         {
             if (!Visible)
             {
@@ -655,39 +655,39 @@ namespace Glib.XNA.SpriteLib
             realX -= Origin.X * Scale.X;
             realY -= Origin.Y * Scale.Y;
 
-            return pos.X <= realX + Width && pos.X >= realX && pos.Y >= realY && pos.Y <= realY + Height;
+            return position.X <= realX + Width && position.X >= realX && position.Y >= realY && position.Y <= realY + Height;
         }
 
 #if WINDOWS
         /// <summary>
         /// Checks whether the specified MouseState's pointer intersects with this sprite.
         /// </summary>
-        /// <param name="ms">The MouseState to check intersection against.</param>
+        /// <param name="mouse">The MouseState to check intersection against.</param>
         /// <returns>Whether or not the specified mouse position intersects with this Sprite.</returns>
-        public bool Intersects(MouseState ms)
+        public bool Intersects(MouseState mouse)
         {
-            return Intersects(new Vector2(ms.X, ms.Y));
+            return Intersects(new Vector2(mouse.X, mouse.Y));
         }
 #endif
 
         /// <summary>
         /// Checks whether the given rectangle intersects with this sprite.
         /// </summary>
-        /// <param name="r">The rectangle to check intersection against</param>
+        /// <param name="rectangleToCheck">The rectangle to check intersection against</param>
         /// <returns>Whether or not the specified rectangle intersects with this Sprite.</returns>
-        public virtual bool Intersects(Rectangle r)
+        public virtual bool Intersects(Rectangle rectangleToCheck)
         {
-            return Visible && Rectangle.Intersects(r);
+            return Visible && Rectangle.Intersects(rectangleToCheck);
         }
 
         /// <summary>
         /// Checks whether the given sprite intersects with this sprite.
         /// </summary>
-        /// <param name="s">The sprite to check intersection against.</param>
+        /// <param name="sprite">The sprite to check intersection against.</param>
         /// <returns>Whether or not the rectangle of the specified Sprite intersects with this Sprite.</returns>
-        public virtual bool Intersects(Sprite s)
+        public virtual bool Intersects(Sprite sprite)
         {
-            return Visible && s.Visible && Intersects(s.Rectangle);
+            return Visible && sprite.Visible && Intersects(sprite.Rectangle);
         }
         #endregion
 
