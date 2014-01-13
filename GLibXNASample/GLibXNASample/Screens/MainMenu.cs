@@ -47,7 +47,7 @@ namespace GLibXNASample.Screens
             mouseCursor.Scale = new Vector2(.1f);
             mouseCursor.UseCenterAsOrigin = true;
 
-            mouseBoundingBox = new Sprite(factory.CreateHollowRectangle(mouseCursor.Width.Round() + 2, mouseCursor.Height.Round() + 2, Color.Navy), mouseCursor.TopLeft - Vector2.One, sb);
+            mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 
             //TextSprite: Displays text
             //Can be used for titles, descriptions, etc
@@ -173,7 +173,7 @@ namespace GLibXNASample.Screens
 
             //The mouse cursor follows the mouse
             mouseCursor.Position = MouseManager.MousePositionable.Position;
-            mouseBoundingBox.Position = mouseCursor.TopLeft - Vector2.One;
+            mouseBoundingBox.Position = mouseCursor.Position;
             mouseBoundingBox.Visible = KeyboardManager.State.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.B);
             progressBar.Value = progressBar.Value >= progressBar.Denominator ? progressBar.Denominator : progressBar.Value + GLibXNASampleGame.Random.Next(3);
             if (progressBar.Value >= progressBar.Denominator)

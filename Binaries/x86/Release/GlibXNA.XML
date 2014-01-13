@@ -2694,6 +2694,22 @@
             <param name="colorDetermine">The function to use for determining the color of the specified point in the texture.</param>
             <returns>A new texture with the specified colors at the specified points.</returns>
         </member>
+        <member name="M:Glib.XNA.TextureFactory.CreateHollowCircle(System.Single,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a hollow circle with the specified radius.
+            </summary>
+            <param name="radius">The radius of the circle.</param>
+            <param name="color">The circle color.</param>
+            <returns>A texture containing a hollow circle.</returns>
+        </member>
+        <member name="M:Glib.XNA.TextureFactory.CreateCircle(System.Single,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Creates a solid circle with the specified radius.
+            </summary>
+            <param name="radius">The radius of the circle.</param>
+            <param name="color">The circle color.</param>
+            <returns>A texture containing a solid circle.</returns>
+        </member>
         <member name="M:Glib.XNA.TextureFactory.CreateSquare(System.Int32)">
             <summary>
             Creates a white square of the specified size.
@@ -2708,6 +2724,24 @@
             <param name="size">The width and height of the square.</param>
             <param name="color">The color of the square.</param>
             <returns>A texture which is a square of the specified size and color.</returns>
+        </member>
+        <member name="M:Glib.XNA.TextureFactory.GetCirclePoints(Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">
+            <summary>
+            Gets the points making up the specified circle. 
+            </summary>
+            <param name="centerPosition">The center position of the circle.</param>
+            <param name="radius">The radius of the circle.</param>
+            <param name="step">The difference between X values within the circle. The higher this value, the more expensive this operation is and the more precise the circle is.</param>
+            <returns>A list of circle points.</returns>
+        </member>
+        <member name="M:Glib.XNA.TextureFactory.GetOuterCirclePoints(Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">
+            <summary>
+            Gets the points making up the circumference of the specified circle. 
+            </summary>
+            <param name="centerPosition">The center position of the circle.</param>
+            <param name="radius">The radius of the circle.</param>
+            <param name="step">The difference between X values within the circle. The higher this value, the more expensive this operation is and the more precise the circle is.</param>
+            <returns>A list of circle points.</returns>
         </member>
         <member name="M:Glib.XNA.TextureFactory.CreateHollowRectangle(System.Int32,System.Int32,Microsoft.Xna.Framework.Color)">
             <summary>
