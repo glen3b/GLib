@@ -8,7 +8,7 @@ namespace Glib
     /// <summary>
     /// A class providing extension methods that are present in the core library, which cannot be used on Xbox projects.
     /// </summary>
-    #if WINDOWS
+#if WINDOWS
     internal static class SupplementaryExtensions
 #else
     public static class SupplementaryExtensions

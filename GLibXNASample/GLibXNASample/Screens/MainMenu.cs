@@ -19,6 +19,7 @@ namespace GLibXNASample.Screens
     {
         ParticleEngine mouseParticleGen;
         Sprite mouseCursor;
+        Sprite mouseBoundingBox;
         TextSprite title;
         TextSprite desc;
         ProgressBar progressBar;
@@ -34,6 +35,9 @@ namespace GLibXNASample.Screens
         {
             Name = "MainMenu";
 
+            //TextureFactory: Creates textures at runtime
+            TextureFactory factory = new TextureFactory(sb.GraphicsDevice);
+
             //Sprite: A simple bitmap image, with convenient methods and properties
             //Yet it has so many possibilities...
             //Here it is used as a mouse cursor
@@ -42,6 +46,8 @@ namespace GLibXNASample.Screens
             mouseCursor = new Sprite(GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"), Vector2.Zero, sb);
             mouseCursor.Scale = new Vector2(.1f);
             mouseCursor.UseCenterAsOrigin = true;
+
+            mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 
             //TextSprite: Displays text
             //Can be used for titles, descriptions, etc
@@ -129,6 +135,7 @@ namespace GLibXNASample.Screens
 
             AdditionalSprites.Add(mouseParticleGen);
             AdditionalSprites.Add(mouseCursor);
+            AdditionalSprites.Add(mouseBoundingBox);
 
         }
 
@@ -166,6 +173,8 @@ namespace GLibXNASample.Screens
 
             //The mouse cursor follows the mouse
             mouseCursor.Position = MouseManager.MousePositionable.Position;
+            mouseBoundingBox.Position = mouseCursor.Position;
+            mouseBoundingBox.Visible = KeyboardManager.State.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.B);
             progressBar.Value = progressBar.Value >= progressBar.Denominator ? progressBar.Denominator : progressBar.Value + GLibXNASampleGame.Random.Next(3);
             if (progressBar.Value >= progressBar.Denominator)
             {

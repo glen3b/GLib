@@ -19,8 +19,13 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// <summary>
         /// Generates a new particle at the specified position.
         /// </summary>
-        /// <returns>A new particle.</returns>
+        /// <returns>An initialized particle from the pool.</returns>
         /// <param name="pos">The position of the object to create particles around.</param>
         Particle GenerateParticle(Vector2 pos);
+
+        /// <summary>
+        /// Gets the <see cref="ParticlePool"/> used as the source of particles for this <see cref="IParticleGenerator"/>.
+        /// </summary>
+        ParticlePool Pool { get; }
     }
 }

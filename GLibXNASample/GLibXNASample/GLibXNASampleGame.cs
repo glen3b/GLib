@@ -135,7 +135,7 @@ namespace GLibXNASample
 
             foreach (Screen screen in AllScreens)
             {
-                screen.Visible = screen.Name.Equals(newScreenName, StringComparison.InvariantCultureIgnoreCase);
+                screen.Visible = screen.Name.Equals(newScreenName, StringComparison.OrdinalIgnoreCase);
             }
         }
 

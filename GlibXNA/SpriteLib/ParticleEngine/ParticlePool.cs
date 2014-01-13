@@ -13,39 +13,50 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     /// <remarks>
     /// An attempt to avoid garbage collection. This class stores and manages all particles.
     /// </remarks>
-    public static class ParticlePool
+    public class ParticlePool
     {
-        private static SpriteBatch _spriteBatch;
-        private static Stack<Particle> _particleStack = new Stack<Particle>(ParticlesToGenerate);
+        private SpriteBatch _spriteBatch;
+        private Stack<Particle> _particleStack = new Stack<Particle>(ParticlesToGenerate);
 
         /// <summary>
         /// Generates a particle. This method should not be called to retrieve a particle for use, use <see cref="GetParticle"/> instead.
         /// </summary>
         /// <returns>A new particle.</returns>
-        private static Particle GenerateParticle()
+        private Particle GenerateParticle()
         {
             if (_spriteBatch == null)
             {
                 throw new InvalidOperationException("The particle pool has not been initialized.");
             }
-            return new Particle(null, Vector2.Zero, _spriteBatch);
+
+            Particle returnVal = new Particle(null, Vector2.Zero, _spriteBatch);
+            returnVal.ReviveParticle();
+
+            return returnVal;
         }
 
         /// <summary>
-        /// Initializes the <see cref="ParticlePool"/>, keeping existing particles.
+        /// Clears the <see cref="ParticlePool"/> of generated particles, and regenerates particles.
         /// </summary>
-        /// <param name="batch">The <see cref="SpriteBatch"/> to use for particle generation.</param>
-        public static void InitializePool(SpriteBatch batch)
+        public void ClearPool()
         {
-            InitializePool(batch, false);
+            if (_spriteBatch == null)
+            {
+                throw new InvalidOperationException("The particle pool has not been initialized.");
+            }
+
+            _particleStack.Clear();
+            for (int i = 0; i < ParticlesToGenerate; i++)
+            {
+                _particleStack.Push(GenerateParticle());
+            }
         }
 
         /// <summary>
-        /// Initializes the <see cref="ParticlePool"/>.
+        /// Creates a new <see cref="ParticlePool"/>.
         /// </summary>
         /// <param name="batch">The <see cref="SpriteBatch"/> to use for particle generation.</param>
-        /// <param name="clearPool">Whether to clear the <see cref="ParticlePool"/> of existing particles before initialization.</param>
-        public static void InitializePool(SpriteBatch batch, bool clearPool)
+        public ParticlePool(SpriteBatch batch)
         {
             lock (_particleStack)
             {
@@ -53,17 +64,10 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 {
                     throw new ArgumentNullException("batch");
                 }
-                if (clearPool)
-                {
-                    _particleStack.Clear();
-                }
-
+                
                 _spriteBatch = batch;
 
-                for (int i = 0; i < ParticlesToGenerate; i++)
-                {
-                    _particleStack.Push(GenerateParticle());
-                }
+                ClearPool();
             }
         }
 
@@ -86,7 +90,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// Returns a "dead" particle to the pool.
         /// </summary>
         /// <param name="particle">The particle to return.</param>
-        public static void ReturnParticle(Particle particle)
+        public void ReturnParticle(Particle particle)
         {
             lock (_particleStack)
             {
@@ -98,7 +102,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 {
                     throw new InvalidOperationException("The particle pool has not been initialized.");
                 }
-                particle.Color = Color.White;
+                particle.TintColor = Color.White;
                 particle.ColorChange = 1;
                 particle.DrawRegion = null;
                 particle.Effect = SpriteEffects.None;
@@ -106,17 +110,15 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 particle.OnlyDrawRegion = false;
                 particle.Origin = Vector2.Zero;
                 particle.Position = Vector2.Zero;
-                particle.RotationVelocity = 0;
+                particle.AngularVelocity = SpriteRotation.Zero;
                 particle.Scale = Vector2.One;
-                particle.Speed = Vector2.Zero;
+                particle.Velocity = Vector2.Zero;
                 particle.SpriteBatch = _spriteBatch;
-                particle.SpriteManager = null;
                 particle.Texture = null;
                 particle.TimeToLive = TimeSpan.Zero;
                 particle.TimeToLiveSettings = TimeToLiveSettings.StrictTTL;
-                particle.UpdateParams = new UpdateParamaters();
-                particle.UsedViewport = null;
                 particle.Visible = true;
+                particle.ReviveParticle();
 
                 _particleStack.Push(particle);
             }
@@ -128,7 +130,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         /// <param name="particleImg">The <see cref="Texture2D"/> to display on the particle.</param>
         /// <param name="particleLocation">The location of the particle.</param>
         /// <returns>A particle from the particle pool.</returns>
-        public static Particle GetParticle(Texture2D particleImg, Vector2 particleLocation)
+        public Particle GetParticle(Texture2D particleImg, Vector2 particleLocation)
         {
             lock (_particleStack)
             {
@@ -146,6 +148,9 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
 
                 Particle toReturn = _particleStack.Pop();
+
+                toReturn.Position = particleLocation;
+                toReturn.Texture = particleImg;
 
                 if (_particleStack.Count <= ParticleCountGenerate)
                 {

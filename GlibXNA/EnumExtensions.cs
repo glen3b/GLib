@@ -23,7 +23,10 @@ namespace Glib.XNA
         /// </summary>
         /// <param name="enumVal">The enum to test.</param>
         /// <param name="flag">The flag to check for.</param>
-        /// <returns>Whether a has flag.</returns>
+        /// <returns>Whether enumVal has flag.</returns>
+        /// <remarks>
+        /// Only works with unsigned underlying numerical types.
+        /// </remarks>
         public static bool HasFlag(this Enum enumVal, Enum flag)
         {
             ulong keysVal = Convert.ToUInt64(enumVal);

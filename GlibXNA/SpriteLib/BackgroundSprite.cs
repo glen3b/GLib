@@ -115,7 +115,7 @@ namespace Glib.XNA.SpriteLib
         {
             foreach (KeyValuePair<Vector2, SpriteEffects> bgItem in _bgList)
             {
-                SpriteBatch.Draw(Texture, bgItem.Key, null, Color, 0f, Vector2.Zero, Scale, bgItem.Value, 1);
+                SpriteBatch.Draw(Texture, bgItem.Key, null, TintColor, 0f, Vector2.Zero, Scale, bgItem.Value, LayerDepth);
                 //base.Draw(spriteBatch, bgItem.Key, bgItem.Value);
             }
             CallDrawn();
@@ -126,14 +126,14 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public void CenterViewport()
         {
-            if (Texture.Width > (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Width)
+            if (Texture.Width > SpriteBatch.GraphicsDevice.Viewport.Width)
             {
-                X = -(Texture.Width - (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Width) / 2;
+                X = -(Texture.Width - SpriteBatch.GraphicsDevice.Viewport.Width) / 2;
             }
 
-            if (Texture.Height > (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Height)
+            if (Texture.Height > SpriteBatch.GraphicsDevice.Viewport.Height)
             {
-                Y = -(Texture.Height - (UsedViewport.HasValue ? UsedViewport.Value : SpriteBatch.GraphicsDevice.Viewport).Height) / 2;
+                Y = -(Texture.Height - SpriteBatch.GraphicsDevice.Viewport.Height) / 2;
             }
         }
         }

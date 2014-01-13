@@ -69,7 +69,7 @@ namespace SpritePreviewer
             if(tintColorDialog.ShowDialog(((Button)sender).FindForm()) != DialogResult.Cancel){
                 System.Drawing.Color selected = tintColorDialog.Color;
                 Microsoft.Xna.Framework.Color tint = new Color(selected.R, selected.G, selected.B, 255);
-                arrows[0].Color = tint;
+                arrows[0].TintColor = tint;
             }
 
         }
@@ -164,7 +164,7 @@ namespace SpritePreviewer
                     try
                     {
                         Texture2D droppedImage = Texture2D.FromStream(GraphicsDevice, stream);
-                        Color tint = arrows[0].Color;
+                        Color tint = arrows[0].TintColor;
                         Vector2 scale = new Vector2(Convert.ToSingle(this.scale));
                         //arrows[0].Texture = droppedImage;
                         isSelecting = false;
@@ -173,7 +173,7 @@ namespace SpritePreviewer
                         arrows[0].Updated += new EventHandler(arrow_Updated);
                         arrows[0].UseCenterAsOrigin = true;
                         arrows[0].Scale = scale;
-                        arrows[0].Color = tint;
+                        arrows[0].TintColor = tint;
                         if (MessageBox.Show("Is this a sprite sheet?", "Sprite Sheet?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
 

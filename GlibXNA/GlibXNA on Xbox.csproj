@@ -56,7 +56,6 @@
     <Compile Include="InputLib\MouseManager.cs" />
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
-    <Compile Include="LeftRight.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />
@@ -86,17 +85,12 @@
     <Compile Include="SpriteLib\Screen.cs" />
     <Compile Include="SpriteLib\Shadow.cs" />
     <Compile Include="SpriteLib\Sprite.cs" />
-    <Compile Include="SpriteLib\SpriteEvents.cs" />
-    <Compile Include="SpriteLib\SpriteFactory.cs" />
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
     <Compile Include="SpriteLib\SpriteSheet.cs" />
-    <Compile Include="SpriteLib\SpriteWrapper.cs" />
     <Compile Include="SpriteLib\TextBoxSprite.cs" />
     <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\TextSprite.cs" />
-    <Compile Include="SpriteLib\UpdateParamaters.cs" />
-    <Compile Include="SpriteLib\Updater.cs" />
     <Compile Include="SpriteLib\VideoSprite.cs" />
     <Compile Include="SupplementaryExtensions.cs" />
     <Compile Include="TextureFactory.cs" />

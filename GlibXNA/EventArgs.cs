@@ -10,16 +10,16 @@ namespace Glib.XNA
     /// <summary>
     /// Handle when a keyboard event happens.
     /// </summary>
-    /// <param name="source">The SpriteManager that is intercepting the key event.</param>
+    /// <param name="sender">The SpriteManager that is intercepting the key event.</param>
     /// <param name="e">The <seealso cref="KeyEventArgs">KeyEventArgs</seealso> for this event.</param>
-    public delegate void KeyEventHandler(object source, KeyEventArgs e);
+    public delegate void KeyEventHandler(object sender, KeyEventArgs e);
 
     /// <summary>
     /// Handle when a keyboard event happens for a single key.
     /// </summary>
-    /// <param name="source">The source of the event.</param>
+    /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <seealso cref="SingleKeyEventArgs">SingleKeyEventArgs</seealso> for this event.</param>
-    public delegate void SingleKeyEventHandler(object source, SingleKeyEventArgs e);
+    public delegate void SingleKeyEventHandler(object sender, SingleKeyEventArgs e);
 
     /// <summary>
     /// Event arguments for a possible mouse drag.

@@ -24,9 +24,15 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             LayerDepth = 1;
         }
 
-        private float _rotationVelocity;
-
         private float _colorVelocity = 1;
+
+        /// <summary>
+        /// Revives this particle if it is dead.
+        /// </summary>
+        protected internal void ReviveParticle()
+        {
+            IsDead = false;
+        }
 
         /// <summary>
         /// Gets or sets the amount of the color to preserve every update.
@@ -49,16 +55,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 }
                 _colorVelocity = value;
             }
-        }
-
-
-        /// <summary>
-        /// Gets or sets the rotation, in degrees, by which the rotation will change each update.
-        /// </summary>
-        public float RotationVelocity
-        {
-            get { return _rotationVelocity; }
-            set { _rotationVelocity = value; }
         }
 
         private TimeSpan _timeToLive;
@@ -107,39 +103,38 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         public override void Update()
         {
             base.Update();
-            Rotation += RotationVelocity;
-            Color *= ColorChange;
+            TintColor *= ColorChange;
 
             #region "Dead" particle condition checks
             if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.StrictTTL) && TimeToLive.Ticks <= 0)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess25) && Color.A <= 25)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess25) && TintColor.A <= 25)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess50) && Color.A <= 50)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess50) && TintColor.A <= 50)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess75) && Color.A <= 75)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess75) && TintColor.A <= 75)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess100) && Color.A <= 100)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess100) && TintColor.A <= 100)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess125) && Color.A <= 125)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess125) && TintColor.A <= 125)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess150) && Color.A <= 150)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess150) && TintColor.A <= 150)
             {
                 IsDead = true;
             }
-            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess175) && Color.A <= 175)
+            if (this.TimeToLiveSettings.HasFlag(TimeToLiveSettings.AlphaLess175) && TintColor.A <= 175)
             {
                 IsDead = true;
             }

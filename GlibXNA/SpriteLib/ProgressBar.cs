@@ -57,11 +57,15 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Create a new ProgressBar.
         /// </summary>
-        public ProgressBar(Vector2 pos, Color fillColor, Color emptyColor, SpriteBatch sb)
-            : base(null, pos, sb)
+        /// <param name="position">The position of the progress bar.</param>
+        /// <param name="emptyColor">The color to represent "empty" sections of the progress bar.</param>
+        /// <param name="fillColor">The color to represent "filled" sections of the progress bar.</param>
+        /// <param name="spriteBatch">The SpriteBatch to render this progress bar to.</param>
+        public ProgressBar(Vector2 position, Color fillColor, Color emptyColor, SpriteBatch spriteBatch)
+            : base(null, position, spriteBatch)
         {
-            FillColor = fillColor;
-            EmptyColor = emptyColor;
+            _fillColor = fillColor;
+            _emptyColor = emptyColor;
         }
 
         private int _value;
@@ -136,7 +140,10 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
-        private bool _textureNeedsCalculation = true;
+        /// <summary>
+        /// A boolean indicating whether the texture needs to be recalculated.
+        /// </summary>
+        protected bool _textureNeedsCalculation = true;
         private Texture2D _cachedTexture = null;
 
         /// <summary>
@@ -173,9 +180,32 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// The color to show for portions of the progress bar that are full.
+        /// Gets or sets the color to show for portions of the progress bar that are full.
         /// </summary>
-        public Color FillColor;
+        public Color FillColor
+        {
+            get
+            {
+                lock (syncLock)
+                {
+                    return _fillColor;
+                }
+            }
+
+            set
+            {
+                lock (syncLock)
+                {
+                    if (value != _fillColor)
+                    {
+                        _fillColor = value;
+                        _textureNeedsCalculation = true;
+                    }
+                }
+            }
+        }
+
+        private Color _fillColor;
 
         /// <summary>
         /// An event fired when the progress bar is filled (value is set to denominator).
@@ -190,6 +220,7 @@ namespace Glib.XNA.SpriteLib
         /// It does not assume the same color scheme, but it does assume the same scale.
         /// If the bar is one color, the program will parse it as 0% unless the color is the FillColor of this ProgressBar.
         /// If the color scheme is inverted in the texture you are setting this ProgressBar to, you should be aware of this.
+        /// Parsing any non-null texture will not result in a change to <see cref="FillColor"/> and <see cref="EmptyColor"/>, but will instead set the appropriate values and cause a change in the values of this progress bar.
         /// </remarks>
         public override Texture2D Texture
         {
@@ -209,11 +240,11 @@ namespace Glib.XNA.SpriteLib
                     {
                         if (i % returnValue.Width < Value * _widthScale)
                         {
-                            data[i] = FillColor;
+                            data[i] = _fillColor;
                         }
                         else
                         {
-                            data[i] = EmptyColor;
+                            data[i] = _emptyColor;
                         }
                     }
 
@@ -243,7 +274,7 @@ namespace Glib.XNA.SpriteLib
                         {
                             //0% or 100%, let's check the data against our colors to see if full (we assume not inverted)
                             Denominator = value.Width / _widthScale;
-                            Value = textureData[0] == FillColor ? Denominator : 0;
+                            Value = textureData[0] == _fillColor ? Denominator : 0;
                         }
                         else
                         {
@@ -280,9 +311,26 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// The color to show for portions of the progress bar that are empty.
+        /// Gets or sets the color to show for portions of the progress bar that are empty.
         /// </summary>
-        public Color EmptyColor;
+        public Color EmptyColor
+        {
+            get { lock (syncLock) { return _emptyColor; } }
+            set
+            {
+                lock (syncLock)
+                {
+                    if (value != _emptyColor)
+                    {
+                        _emptyColor = value;
+                        _textureNeedsCalculation = true;
+                    }
+                }
+            }
+        }
+
+
+        private Color _emptyColor;
 
     }
 }

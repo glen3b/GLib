@@ -29,7 +29,7 @@ namespace Glib.XNA.SpriteLib
             {
                 if (value < 0 || value > 1)
                 {
-                    throw new ArgumentOutOfRangeException("LayerDepth");
+                    throw new ArgumentOutOfRangeException();
                 }
 
                 _layerDepth = value;

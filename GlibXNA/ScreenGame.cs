@@ -19,7 +19,7 @@ namespace Glib.XNA
         /// </summary>
         protected readonly GraphicsDeviceManager Graphics;
 
-        
+
         /// <summary>
         /// Gets or sets the root directory for loading ContentManager assets.
         /// </summary>
@@ -84,14 +84,7 @@ namespace Glib.XNA
         /// <returns>Whether or not to draw the frame.</returns>
         protected override bool BeginDraw()
         {
-            try
-            {
-                AllScreens.BeginDraw();
-            }
-            catch
-            {
-                return false;
-            }
+            AllScreens.BeginDraw();
             return base.BeginDraw();
         }
 
@@ -110,7 +103,7 @@ namespace Glib.XNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            
+
             this.AllScreens.Draw();
             base.Draw(gameTime);
         }
@@ -170,10 +163,10 @@ namespace Glib.XNA
             get { return _sb; }
 
         }
-        
-        
+
+
         private ScreenManager _allScreens;
-        
+
         /// <summary>
         /// Gets the collection of all existing <see cref="Glib.XNA.SpriteLib.Screen"/>s.
         /// </summary>

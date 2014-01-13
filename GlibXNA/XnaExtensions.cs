@@ -47,12 +47,12 @@ namespace Glib.XNA
         /// Get the average size per character for this SpriteFont.
         /// </summary>
         /// <param name="font">The font to measure the character size of.</param>
-        /// <param name="measurementString">The string to use for determining the average size of one character.</param>
+        /// <param name="measurer">The string to use for determining the average size of one character.</param>
         /// <returns>The average character size for this SpriteFont.</returns>
-        public static Vector2 GetCharSize(this SpriteFont font, string measurementString)
+        public static Vector2 GetCharSize(this SpriteFont font, string measurer)
         {
             if (font == null) throw new ArgumentNullException("font");
-            return new Vector2(font.MeasureString(measurementString).X / measurementString.Length, font.MeasureString(measurementString).Y / measurementString.Length);
+            return new Vector2(font.MeasureString(measurer).X / measurer.Length, font.MeasureString(measurer).Y / measurer.Length);
         }
 
         /// <summary>
@@ -115,34 +115,6 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Create a 2-color Texture2D on the specified graphics device of the specified size.
-        /// </summary>
-        /// <param name="graphics">The GraphicsDevice to create the Texture2D on.</param>
-        /// <param name="colorDetermine">The predicate to use for determining the color of every individual pixel in the texture.</param>
-        /// <param name="trueColor">The color to set a pixel to when the predicate returns true.</param>
-        /// <param name="falseColor">The color to set a pixel to when the predicate returns false.</param>
-        /// <param name="width">The width of the texture.</param>
-        /// <param name="height">The height of the texture.</param>
-        /// <returns>A 2-color Texture2D of the specified size.</returns>
-        [Obsolete("Please use a TextureFactory instead.")]
-        public static Texture2D CreateTexture(this GraphicsDevice graphics, Predicate<Point> colorDetermine, Color trueColor, Color falseColor, int width, int height)
-        {
-            Texture2D returnValue = new Texture2D(graphics, width, height);
-            Color[] data = new Color[width * height];
-            for (int w_en = 0; w_en < width; w_en++)
-            {
-                for (int h_en = 0; h_en < height; h_en++)
-                {
-                    data[h_en * width + w_en] = colorDetermine.Invoke(new Point(w_en, h_en)) ? trueColor : falseColor;
-                }
-            }
-
-            returnValue.SetData<Color>(data);
-
-            return returnValue;
-        }
-
-        /// <summary>
         /// Convert a vector to a rotation angle in radians.
         /// </summary>
         /// <param name="vector">Vector2 to translate to rotation angle.</param>
@@ -182,7 +154,7 @@ namespace Glib.XNA
         {
             if (sprToDraw.Visible)
             {
-                sb.Draw(sprToDraw.Texture, sprToDraw.Position, sprToDraw.DrawRegion, sprToDraw.Color, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, sprToDraw.LayerDepth);
+                sb.Draw(sprToDraw.Texture, sprToDraw.Position, sprToDraw.DrawRegion, sprToDraw.TintColor, sprToDraw.Rotation.Radians, sprToDraw.Origin, sprToDraw.Scale, sprToDraw.Effect, sprToDraw.LayerDepth);
             }
         }
 
@@ -200,12 +172,12 @@ namespace Glib.XNA
         /// Get the distance between two points.
         /// </summary>
         /// <param name="startPoint">The starting point.</param>
-        /// <param name="endPoint">The ending point.</param>
+        /// <param name="endpoint">The ending point.</param>
         /// <returns>The distance between these two Vector2 positions.</returns>
-        public static double GetDistance(this Vector2 startPoint, Vector2 endPoint)
+        public static double GetDistance(this Vector2 startPoint, Vector2 endpoint)
         {
-            double sideA = Math.Abs(startPoint.X - endPoint.X);
-            double sideB = Math.Abs(startPoint.Y - endPoint.Y);
+            double sideA = Math.Abs(startPoint.X - endpoint.X);
+            double sideB = Math.Abs(startPoint.Y - endpoint.Y);
 
             double hypotenuse = Math.Sqrt(sideA.RaiseToPower(2) + sideB.RaiseToPower(2));
 

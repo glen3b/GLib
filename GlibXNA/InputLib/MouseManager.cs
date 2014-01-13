@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using System.Collections.ObjectModel;
 
 namespace Glib.XNA.InputLib
 {
@@ -46,12 +47,12 @@ namespace Glib.XNA.InputLib
         /// </summary>
         public static event EventHandler Updated;
 
-        private static List<ScreenRegion> _allRegions = new List<ScreenRegion>();
+        private static Collection<ScreenRegion> _allRegions = new Collection<ScreenRegion>();
 
         /// <summary>
-        /// Gets a list of all known updated SreenRegion objects.
+        /// Gets a collection of all known updated SreenRegion objects.
         /// </summary>
-        public static List<ScreenRegion> AllRegions
+        public static Collection<ScreenRegion> AllRegions
         {
             get { return _allRegions; }
         }
