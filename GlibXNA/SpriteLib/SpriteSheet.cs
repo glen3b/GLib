@@ -179,22 +179,9 @@ namespace Glib.XNA.SpriteLib
         /// <param name="sheet">The Texture2D of the actual sprite sheet.</param>
         /// <param name="size">The size of one sprite (X and Y are ignored in this paramater).</param>
         /// <param name="position">The initial position of this SpriteSheet.</param>
-        /// <param name="sb">The SpriteBatch used for drawing.</param>
-        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb) : base(sheet, position, sb)
-        {
-            SpriteSize = size;
-        }
-
-        /// <summary>
-        /// Construct a new SpriteSheet.
-        /// </summary>
-        /// <param name="sheet">The Texture2D of the actual sprite sheet.</param>
-        /// <param name="size">The size of one sprite (X and Y are ignored in this paramater).</param>
-        /// <param name="position">The initial position of this SpriteSheet.</param>
-        /// <param name="sb">The SpriteBatch used for drawing.</param>
-        /// <param name="rows">The number of rows.</param>
-        /// <param name="columns">The number of columns.</param>
-        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch sb, int rows, int columns) : base(sheet, position, sb)
+        /// <param name="spriteBatch">The SpriteBatch used for drawing.</param>
+        public SpriteSheet(Texture2D sheet, Rectangle size, Vector2 position, SpriteBatch spriteBatch)
+            : base(sheet, position, spriteBatch)
         {
             SpriteSize = size;
         }
@@ -233,10 +220,10 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Call the Updated event of this SpriteSheet, and animate the SpriteSheet if applicable.
         /// </summary>
-        /// <param name="gt">The GameTime object passed to a Game's Update(GameTime) method.</param>
-        public void Update(GameTime gt)
+        /// <param name="gameTime">The GameTime object passed to a Game's Update(GameTime) method.</param>
+        public void Update(GameTime gameTime)
         {
-            elapsedTime += gt.ElapsedGameTime;
+            elapsedTime += gameTime.ElapsedGameTime;
             Update();
         }
 
