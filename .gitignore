@@ -44,6 +44,7 @@ local.properties
 # Build results
 
 Binaries/
+Binaries
 TestResults/
 Help/
 [Dd]ebug/
