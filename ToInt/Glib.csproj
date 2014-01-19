@@ -68,13 +68,12 @@
     <Compile Include="WinForms\Controls\NamespaceDoc.cs" />
     <Compile Include="WinForms\NamespaceDoc.cs" />
     <Compile Include="WinForms\Shapes\NamespaceDoc.cs" />
-    <Compile Include="Utilities.cs" />
     <Compile Include="WinForms\Controls\RequiredTextBoxes.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WinForms\FormValidator.cs" />
     <Compile Include="WinForms\Shapes\Triangle.cs" />
-    <Compile Include="SqlStuff.cs" />
+    <Compile Include="SQL.cs" />
     <Compile Include="WinForms\IRequiredField.cs" />
     <Compile Include="WinForms\Shapes\Circle.cs" />
     <Compile Include="WinForms\Shapes\Shape.cs" />
