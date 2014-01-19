@@ -70,6 +70,7 @@
     <Compile Include="SpriteInterfaces.cs" />
     <Compile Include="SpriteLib\BackgroundSprite.cs" />
     <Compile Include="SpriteLib\Direction.cs" />
+    <Compile Include="SpriteLib\HitboxVisualizer.cs" />
     <Compile Include="SpriteLib\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\IParticleGenerator.cs" />

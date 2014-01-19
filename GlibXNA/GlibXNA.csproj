@@ -72,6 +72,7 @@
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="RandomPositionGenerator.cs" />
+    <Compile Include="SpriteLib\HitboxVisualizer.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
     <Compile Include="SpriteLib\ParticleEngine\Particle.cs">
