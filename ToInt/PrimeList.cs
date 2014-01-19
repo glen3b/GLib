@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Glib
 {
@@ -9,7 +10,7 @@ namespace Glib
     /// A list of purely prime numbers.
     /// </summary>
     /// <typeparam name="T">A whole number numerical type.</typeparam>
-    public class PrimeList<T> : List<T>
+    public class PrimeList<T> : Collection<T>
     {
         /// <summary>
         /// Create a new prime number list.
