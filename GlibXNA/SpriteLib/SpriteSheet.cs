@@ -14,7 +14,33 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public class SpriteSheet : Sprite, ITimerSprite
     {
-        private FrameCollection _frames = new FrameCollection();
+        /// <summary>
+        /// Creates a <see cref="SpriteSheet"/>.
+        /// </summary>
+        /// <param name="position">The position of the <see cref="SpriteSheet"/>.</param>
+        /// <param name="batch">The <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render to.</param>
+        /// <param name="frames">The collection of frames that makes up this <see cref="SpriteSheet"/>.</param>
+        public SpriteSheet(Vector2 position, SpriteBatch batch, params Frame[] frames) : base(null, position, batch)
+        {
+            if (frames == null)
+            {
+                throw new ArgumentNullException("frames");
+            }
+
+            _frames = new FrameCollection();
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                if (frames[i] == null)
+                {
+                    throw new ArgumentException("The frames array cannot contain null elements.");
+                }
+
+                Frames.Add(frames[i]);
+            }
+        }
+
+        private FrameCollection _frames;
 
         /// <summary>
         /// Gets the collection of frames to display.
@@ -31,6 +57,11 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
+                if (_frames == null)
+                {
+                    return null;
+                }
+
                 if (Frames.Count <= 0)
                 {
                     throw new InvalidOperationException("There are no frames in this SpriteSheet.");
@@ -48,6 +79,11 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
+                if (_frames == null)
+                {
+                    return -1;
+                }
+
                 if (_currentFrameIndex >= _frames.Count)
                 {
                     _currentFrameIndex = _frames.Count - 1;
@@ -62,6 +98,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
+                if (_frames == null)
+                {
+                    return;
+                }
+
                 if (value < 0 || value >= _frames.Count)
                 {
                     throw new ArgumentOutOfRangeException("CurrentFrameIndex");
@@ -81,6 +122,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
+                if (_frames == null)
+                {
+                    return;
+                }
+
                 CurrentFrame.DrawRegion = value;
             }
         }
@@ -96,6 +142,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
+                if (_frames == null)
+                {
+                    return;
+                }
+
                 CurrentFrame.Texture = value;
             }
         }
@@ -111,6 +162,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
+                if (_frames == null)
+                {
+                    return;
+                }
+
                 CurrentFrame.Scale = value;
             }
         }
@@ -126,6 +182,11 @@ namespace Glib.XNA.SpriteLib
             }
             set
             {
+                if (_frames == null)
+                {
+                    return;
+                }
+
                 CurrentFrame.Origin = value;
             }
         }
