@@ -129,6 +129,7 @@ namespace Glib.XNA
         /// <summary>
         /// Update the ITimerSprite as applicable (do logic here), using a GameTime object.
         /// </summary>
-        void Update(GameTime gt);
+        /// <param name="gameTime">A snapshot of game timing values.</param>
+        void Update(GameTime gameTime);
     }
 }

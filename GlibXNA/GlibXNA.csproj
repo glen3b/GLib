@@ -72,6 +72,8 @@
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="RandomPositionGenerator.cs" />
+    <Compile Include="SpriteLib\Frame.cs" />
+    <Compile Include="SpriteLib\FrameCollection.cs" />
     <Compile Include="SpriteLib\HitboxVisualizer.cs" />
     <Compile Include="SpriteLib\ParticleEngine\AbstractParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\NamespaceDoc.cs" />
@@ -85,6 +87,9 @@
     <Compile Include="SpriteLib\ParticleEngine\RandomParticleGenerator.cs" />
     <Compile Include="SpriteLib\ParticleEngine\TimeToLiveSettings.cs" />
     <Compile Include="SpriteLib\Shadow.cs" />
+    <Compile Include="SpriteLib\SpriteSheet.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpriteLib\TextShadow.cs" />
     <Compile Include="SpriteLib\VideoSprite.cs">
       <SubType>Component</SubType>
@@ -119,9 +124,6 @@
     </Compile>
     <Compile Include="SpriteLib\SpriteManager.cs" />
     <Compile Include="SpriteLib\SpriteRotation.cs" />
-    <Compile Include="SpriteLib\SpriteSheet.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SpriteLib\TextBoxSprite.cs">
       <SubType>Component</SubType>
     </Compile>
