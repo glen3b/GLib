@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -11,6 +13,38 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     public sealed class FrameCollection : Collection<Frame>
     {
+        /// <summary>
+        /// Generates a collection of frames from a sprite sheet with identical sprite sizes.
+        /// </summary>
+        /// <param name="size">The size of a single sprite.</param>
+        /// <param name="spritesheet">The sprite sheet to load from.</param>
+        /// <returns>A frame collection.</returns>
+        public static FrameCollection FromSpriteSheet(Texture2D spritesheet, Point size)
+        {
+            if (spritesheet == null)
+            {
+                throw new ArgumentNullException("spritesheet");
+            }
+
+            if (size.X <= 0 || size.Y <= 0)
+            {
+                throw new ArgumentException("The size of a sprite must be positive.");
+            }
+
+            FrameCollection collection = new FrameCollection();
+
+            for (int y = 0; y + size.Y <= spritesheet.Height; y += size.Y)
+            {
+                for (int x = 0; x + size.X <= spritesheet.Width; x += size.X)
+                {
+                    collection.Add(new Frame(spritesheet, new Rectangle(x, y, size.X, size.Y)));
+                }
+            }
+
+
+            return collection;
+        }
+
         /// <summary>
         /// Replaces the element at the specified index.
         /// </summary>
