@@ -155,7 +155,21 @@ namespace Glib.XNA
         /// <param name="colors">A dictionary specifying colors to replace and what colors to use instead.</param>
         public void ReplaceColors(Texture2D image, IDictionary<Color, Color> colors)
         {
-            throw new NotImplementedException();
+            Color[] data = new Color[image.Width * image.Height];
+            image.GetData(data);
+
+            foreach (var colorMatch in colors)
+            {
+                for (int i = 0; i < data.Length; i++)
+                {
+                    if (colorMatch.Key == data[i])
+                    {
+                        data[i] = colorMatch.Value;
+                    }
+                }
+            }
+
+            image.SetData(data);
         }
 
         /// <summary>
