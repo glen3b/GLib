@@ -20,7 +20,7 @@ namespace Glib.XNA.SpriteLib
         /// <param name="position">The position of the <see cref="SpriteSheet"/>.</param>
         /// <param name="batch">The <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render to.</param>
         /// <param name="frames">The collection of frames that makes up this <see cref="SpriteSheet"/>.</param>
-        public SpriteSheet(Vector2 position, SpriteBatch batch, params Frame[] frames) : base(null, position, batch)
+        public SpriteSheet(Vector2 position, SpriteBatch batch, IEnumerable<Frame> frames) : base(null, position, batch)
         {
             if (frames == null)
             {
@@ -29,14 +29,14 @@ namespace Glib.XNA.SpriteLib
 
             _frames = new FrameCollection();
 
-            for (int i = 0; i < frames.Length; i++)
+            foreach (Frame frame in frames)
             {
-                if (frames[i] == null)
+                if (frame == null)
                 {
                     throw new ArgumentException("The frames array cannot contain null elements.");
                 }
 
-                Frames.Add(frames[i]);
+                Frames.Add(frame);
             }
         }
 

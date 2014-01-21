@@ -14,6 +14,35 @@ namespace Glib.XNA.SpriteLib
     public sealed class FrameCollection : Collection<Frame>
     {
         /// <summary>
+        /// Generates a collection of frames from a sprite sheet.
+        /// </summary>
+        /// <param name="sprites">The bounding boxes of the sprites within the sprite sheet.</param>
+        /// <param name="spritesheet">The sprite sheet to load from.</param>
+        /// <returns>A frame collection.</returns>
+        public static FrameCollection FromSpriteSheet(Texture2D spritesheet, params Rectangle[] sprites)
+        {
+            if (spritesheet == null)
+            {
+                throw new ArgumentNullException("spritesheet");
+            }
+
+            if (sprites == null)
+            {
+                throw new ArgumentNullException("sprites");
+            }
+
+            FrameCollection collection = new FrameCollection();
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                collection.Add(new Frame(spritesheet, sprites[i]));
+            }
+
+            return collection;
+        }
+
+
+        /// <summary>
         /// Generates a collection of frames from a sprite sheet with identical sprite sizes.
         /// </summary>
         /// <param name="size">The size of a single sprite.</param>
