@@ -33,6 +33,127 @@ namespace Glib.XNA
         }
 
         /// <summary>
+        /// Crops the whitespace off of the specified image.
+        /// Whitespace is treated as bounding transparency and other colors.
+        /// </summary>
+        /// <param name="original">The image to crop.</param>
+        /// <param name="cropWhite">Whether to crop surrounding white colored pixels as well as transparent pixels.</param>
+        /// <returns>A cropped texture.</returns>
+        public Texture2D CropWhitespace(Texture2D original, params Color[] whitespaceColors)
+        {
+            if (original == null)
+            {
+                throw new ArgumentNullException("original");
+            }
+
+            if (whitespaceColors == null)
+            {
+                whitespaceColors = new Color[0];
+            }
+
+            Color[] data = new Color[original.Height * original.Width];
+            
+            original.GetData(data);
+
+            int whiterowsTop = 0;
+
+            for (int y = 0; y < original.Height; y++)
+            {
+                bool fail = false;
+                for (int x = 0; x < original.Width; x++)
+                {
+                    if (data[y * original.Width + x] == Color.Transparent || whitespaceColors.Contains(data[y * original.Width + x]))
+                    {
+                        fail = true;
+                        break;
+                    }
+                }
+                if (fail)
+                {
+                    break;
+                }
+                whiterowsTop++;
+            }
+
+            int whiterowsBottom = 0;
+
+            for (int y = 0; y < original.Height; y++)
+            {
+                bool fail = false;
+                for (int x = original.Width - 1; x >= 0; x--)
+                {
+                    if (data[y * original.Width + x] == Color.Transparent || whitespaceColors.Contains(data[y * original.Width + x]))
+                    {
+                        fail = true;
+                        break;
+                    }
+                }
+                if (fail)
+                {
+                    break;
+                }
+                whiterowsBottom++;
+            }
+
+            if (whiterowsTop + whiterowsBottom >= original.Height)
+            {
+                throw new ArgumentException("The specified image contains only whitespace.");
+            }
+
+            int whitecolumnsLeft = 0;
+
+            for (int x = 0; x < original.Width; x++)
+            {
+                bool fail = false;
+                for (int y = 0; y < original.Height; y++)
+                {
+                    if (data[y * original.Width + x] == Color.Transparent || whitespaceColors.Contains(data[y * original.Width + x]))
+                    {
+                        fail = true;
+                        break;
+                    }
+                }
+                if (fail)
+                {
+                    break;
+                }
+                whitecolumnsLeft++;
+            }
+
+            int whitecolumnsRight = 0;
+
+            for (int x = 0; x < original.Width; x++)
+            {
+                bool fail = false;
+                for (int y = original.Height - 1; y >= 0; y--)
+                {
+                    if (data[y * original.Width + x] == Color.Transparent || whitespaceColors.Contains(data[y * original.Width + x]))
+                    {
+                        fail = true;
+                        break;
+                    }
+                }
+                if (fail)
+                {
+                    break;
+                }
+                whitecolumnsRight++;
+            }
+
+            Texture2D newImg = new Texture2D(Graphics, original.Width - (whitecolumnsLeft + whitecolumnsRight), original.Height - (whiterowsTop + whiterowsBottom));
+            Color[] dataFromOld = new Color[newImg.Width * newImg.Height];
+            original.GetData<Color>(dataFromOld, whitecolumnsLeft * original.Width + whiterowsTop, newImg.Height * newImg.Width);
+            newImg.SetData(dataFromOld);
+
+            return newImg;
+        }
+
+        public void ReplaceColors(Texture2D image, IDictionary<Color, Color> colors)
+        {
+
+        }
+
+        /// <summary>
         /// Creates a texture using the specified function.
         /// </summary>
         /// <param name="width">The width of the new texture.</param>

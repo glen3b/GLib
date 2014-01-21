@@ -155,10 +155,12 @@ namespace Glib.XNA.SpriteLib
             if (Texture != null)
             {
                 _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), Width.Round(), Height.Round());
+                _nonscaleCenter = new Vector2(Texture.Width / 2f, Texture.Height / 2f);
             }
             else
             {
                 _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), 0, 0);
+                _nonscaleCenter = Vector2.Zero;
             }
         }
 
@@ -533,6 +535,9 @@ namespace Glib.XNA.SpriteLib
             set { _originType = value; OnRectangleUpdate(); }
         }
 
+        // The unscaled center of the sprite, intended to be returned as the origin when OriginType is Center
+        private Vector2 _nonscaleCenter;
+
         /// <summary>
         /// Gets or sets the origin of the Sprite.
         /// </summary>
@@ -546,7 +551,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    return _originType == SpriteOriginType.Center ? Texture == null ? Vector2.Zero : new Vector2(Texture.Width / 2, Texture.Height / 2) : Vector2.Zero;
+                    return _originType == SpriteOriginType.Center ? Texture == null ? Vector2.Zero : _nonscaleCenter : Vector2.Zero;
                 }
             }
             set
@@ -555,7 +560,7 @@ namespace Glib.XNA.SpriteLib
                 {
                     _originType = SpriteOriginType.Zero;
                 }
-                else if (value == new Vector2(Texture.Width / 2, Texture.Height / 2))
+                else if (value == _nonscaleCenter)
                 {
                     _originType = SpriteOriginType.Center;
                 }
