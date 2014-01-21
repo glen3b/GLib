@@ -148,9 +148,14 @@ namespace Glib.XNA
             return newImg;
         }
 
+        /// <summary>
+        /// Replaces the specified colors in the specified image with other colors.
+        /// </summary>
+        /// <param name="image">The image to replace the colors in (done in place).</param>
+        /// <param name="colors">A dictionary specifying colors to replace and what colors to use instead.</param>
         public void ReplaceColors(Texture2D image, IDictionary<Color, Color> colors)
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
