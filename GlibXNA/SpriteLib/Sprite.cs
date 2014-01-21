@@ -187,7 +187,7 @@ namespace Glib.XNA.SpriteLib
         private SpriteBatch _spriteBatch;
 
         /// <summary>
-        /// Gets or sets the <see cref="Microsoft.Xna.Framework.SpriteBatch"/> to render the sprite to.
+        /// Gets or sets the <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the sprite to.
         /// </summary>
         public SpriteBatch SpriteBatch
         {
