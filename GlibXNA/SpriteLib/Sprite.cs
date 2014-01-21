@@ -61,7 +61,7 @@ namespace Glib.XNA.SpriteLib
             get { return _angularVelocity; }
             set { _angularVelocity = value; }
         }
-        
+
 
         private SpriteEffects _effect = SpriteEffects.None;
 
@@ -147,9 +147,19 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
-        private void rectUpdate(object o, EventArgs e)
+        /// <summary>
+        /// The method called upon a hitbox update.
+        /// </summary>
+        protected virtual void OnRectangleUpdate()
         {
-            _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), Width.Round(), Height.Round());
+            if (Texture != null)
+            {
+                _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), Width.Round(), Height.Round());
+            }
+            else
+            {
+                _boundingRect = new Rectangle(TopLeft.X.Round(), TopLeft.Y.Round(), 0, 0);
+            }
         }
 
 
@@ -173,7 +183,24 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The SpriteBatch used for drawing the sprite.
         /// </summary>
-        public SpriteBatch SpriteBatch;
+
+        private SpriteBatch _spriteBatch;
+
+        /// <summary>
+        /// Gets or sets the <see cref="Microsoft.Xna.Framework.SpriteBatch"/> to render the sprite to.
+        /// </summary>
+        public SpriteBatch SpriteBatch
+        {
+            get { return _spriteBatch; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new NullReferenceException();
+                }
+                _spriteBatch = value;
+            }
+        }
 
         private Vector2 _scale = Vector2.One;
 
@@ -222,7 +249,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The current X coordinate of the sprite.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704", Justification="The member name represents the X coordinate of the sprite.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704", Justification = "The member name represents the X coordinate of the sprite.")]
         public virtual float X
         {
             get
@@ -343,13 +370,17 @@ namespace Glib.XNA.SpriteLib
         public virtual Texture2D Texture
         {
             get { return _texture; }
-            set { _texture = value; }
+            set
+            {
+                _texture = value;
+                OnRectangleUpdate();
+            }
         }
 
         private Vector2 _pos;
 
         /// <summary>
-        /// The current position of the sprite.
+        /// Gets or sets the current position of the sprite on the screen.
         /// </summary>
         public virtual Vector2 Position
         {
@@ -375,7 +406,7 @@ namespace Glib.XNA.SpriteLib
             _pos = newPos;
             if (moved == null)
             {
-                Moved += new EventHandler(rectUpdate);
+                Moved += new EventHandler((o, ea) => OnRectangleUpdate());
             }
             moved(this, EventArgs.Empty);
 
@@ -444,7 +475,7 @@ namespace Glib.XNA.SpriteLib
         public Sprite(Texture2D texture, Vector2 position, SpriteBatch spriteBatch)
             : this(texture, position, Color.White, spriteBatch)
         {
-            
+
         }
 
         /// <summary>
@@ -452,6 +483,11 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public Sprite(Texture2D texture, Vector2 position, Color color, SpriteBatch spriteBatch)
         {
+            if (spriteBatch == null)
+            {
+                throw new ArgumentNullException("spriteBatch");
+            }
+
             _pos = position;
             this.SpriteBatch = spriteBatch;
             this.Texture = texture;
@@ -494,9 +530,8 @@ namespace Glib.XNA.SpriteLib
         public SpriteOriginType OriginType
         {
             get { return _originType; }
-            set { _originType = value; rectUpdate(this, EventArgs.Empty); }
+            set { _originType = value; OnRectangleUpdate(); }
         }
-
 
         /// <summary>
         /// Gets or sets the origin of the Sprite.
@@ -511,7 +546,7 @@ namespace Glib.XNA.SpriteLib
                 }
                 else
                 {
-                    return _originType == SpriteOriginType.Center ? new Vector2(Texture.Width / 2, Texture.Height / 2) : Vector2.Zero;
+                    return _originType == SpriteOriginType.Center ? Texture == null ? Vector2.Zero : new Vector2(Texture.Width / 2, Texture.Height / 2) : Vector2.Zero;
                 }
             }
             set
@@ -529,7 +564,7 @@ namespace Glib.XNA.SpriteLib
                     _originType = SpriteOriginType.Custom;
                     _customOrigin = value;
                 }
-                rectUpdate(this, EventArgs.Empty);
+                OnRectangleUpdate();
             }
         }
 
