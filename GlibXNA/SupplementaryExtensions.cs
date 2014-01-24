@@ -42,6 +42,21 @@ namespace Glib
         /// <returns>All elements of the array delimited by delimiter in a string.</returns>
         public static string ToArrayString(this Array array, string delimiter)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException("array");
+            }
+
+            if (delimiter == null)
+            {
+                throw new ArgumentNullException("delimiter");
+            }
+
+            if (array.Length == 0)
+            {
+                return string.Empty;
+            }
+
             StringBuilder builder = new StringBuilder();
             /*
             int dim = 0;

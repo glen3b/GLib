@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using Glib.Exceptions;
 
 namespace Glib.SQL
 {
@@ -76,6 +77,7 @@ namespace Glib.SQL
     /// <summary>
     /// A class representing a SQL stored procedure.
     /// </summary>
+    [Obsolete()]
     public class StoredProcedure
     {
         private SqlConnection _connection;
@@ -276,7 +278,7 @@ namespace Glib.SQL
     /// <summary>
     /// A wrapper class around a SqlCommand, defaulting to a stored procedure.
     /// </summary>
-    [Obsolete("Use StoredProcedure instead, however this class still functions.")]
+    [Obsolete()]
     public class CommandWrapper
     {
         /// <summary>
@@ -359,17 +361,20 @@ namespace Glib.SQL
         /// <exception cref="System.Exception">Thrown if a disallowed sharacter sequence is detected.</exception>
         /// <param name="input">The user input to append to the SQL command.</param>
         /// <param name="allowQuotes">Whether or not to allow quotes in the user input string.</param>
-        /// <param name="allowOr">Whether or not to allow the world "OR" in the user input string.</param>
+        /// <param name="allowOr">Whether or not to allow the word "OR" in the user input string.</param>
         public void AppendUntrustedInputToCommand(string input, bool allowQuotes, bool allowOr)
         {
             if ((input.Contains(@"'") || input.Contains("\"")) && !allowQuotes)
             {
-                throw new Exception("User input string contains disallowed quotes.");
+                //throw new Exception("User input string contains disallowed quotes.");
+                throw new SecurityException(SecurityRiskType.SQLInject);
             }
             if ((input.ToUpper().Contains(@"OR")) && !allowOr)
             {
-                throw new Exception("User input string contains disallowed SQL keyword OR.");
+                //throw new Exception("User input string contains disallowed SQL keyword OR.");
+                throw new SecurityException(SecurityRiskType.SQLInject);
             }
+            
             Command.CommandText += input;
         }
 
