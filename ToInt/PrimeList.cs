@@ -9,15 +9,14 @@ namespace Glib
     /// <summary>
     /// A list of purely prime numbers.
     /// </summary>
-    /// <typeparam name="T">A whole number numerical type.</typeparam>
-    public class PrimeList<T> : Collection<T>
+    public class PrimeList : Collection<ulong>
     {
         /// <summary>
         /// Insterts an item at the specified index.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="item">The item.</param>
-        protected override void InsertItem(int index, T item)
+        protected override void InsertItem(int index, ulong item)
         {
             if (IsPrime(item))
             {
@@ -30,7 +29,7 @@ namespace Glib
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="item">The item.</param>
-        protected override void SetItem(int index, T item)
+        protected override void SetItem(int index, ulong item)
         {
             if (IsPrime(item))
             {
@@ -44,14 +43,14 @@ namespace Glib
         public PrimeList()
             : base()
         {
-            if (typeof(T) == typeof(ulong) || typeof(T) == typeof(uint) || typeof(T) == typeof(ushort))
-            {
+            //if (! (typeof(T) == typeof(ulong) || typeof(T) == typeof(uint) || typeof(T) == typeof(ushort)) )
+            //{
 
-            }
-            else
-            {
-                throw new ArgumentException("Please use a UINT, ULONG, or USHORT type.");
-            }
+            //}
+            //else
+            //{
+            //    throw new ArgumentException("Please use a UINT, ULONG, or USHORT type.");
+            //}
 
         }
 
@@ -60,12 +59,12 @@ namespace Glib
         /// </summary>
         /// <param name="startpoint">The inclusive lower number.</param>
         /// <param name="endpoint">The exclusive upper number.</param>
-        public PrimeList(T startpoint, T endpoint)
+        public PrimeList(ulong startpoint, ulong endpoint)
             : this()
         {
-            for (ulong si = ulong.Parse(startpoint.ToString()); si < ulong.Parse(endpoint.ToString()); si++)
+            for (ulong si = startpoint; si < endpoint; si++)
             {
-                Add(si.Cast<T>());
+                Add(si);
             }
 
         }
@@ -73,22 +72,13 @@ namespace Glib
         /// <summary>
         /// Returns whether or not the specified number is prime.
         /// </summary>
-        /// <param name="value">The number to check primeness.</param>
+        /// <param name="value">The number to check primeness of.</param>
         /// <exception cref="ArgumentException">Thrown if value is not a valid number.</exception>
         /// <returns>Whether or not the specified number is prime</returns>
-        public static bool IsPrime(object value)
+        public static bool IsPrime(ulong checkValue)
         {
-            ulong checkValue;
-            ulong sqrt;
-            try
-            {
-                checkValue = ulong.Parse(value.ToString());
-                sqrt = Math.Sqrt(checkValue).ToUnsignedLong();
-            }
-            catch
-            {
-                throw new ArgumentException("'value' is an invalid number.");
-            }
+            ulong sqrt = Math.Sqrt(checkValue).ToUnsignedLong();
+
 
             if (checkValue == 0 || checkValue == 1)
             {
