@@ -83,7 +83,7 @@ namespace Glib.XNA
         /// <returns>The position which would be required to center the specified sizable object.</returns>
         public static Vector2 GetCenterPosition(this ISizable obj, Viewport centerTo)
         {
-            return obj.GetCenterPosition(centerTo, Vector2.Zero);
+            return obj.GetCenterPosition(centerTo, (obj is IOriginPositionable ? (obj as IOriginPositionable).Origin : Vector2.Zero));
         }
 
         /// <summary>
@@ -101,14 +101,14 @@ namespace Glib.XNA
         /// </summary>
         /// <param name="obj">The sizable object to center.</param>
         /// <param name="centerToViewport">The viewport to center the ISizable to.</param>
-        /// <param name="origin">The origin of the ISizable.</param>
+        /// <param name="origin">The origin of the ISizable, unscaled.</param>
         /// <returns>The position which would be required to center the specified sizable object.</returns>
         public static Vector2 GetCenterPosition(this ISizable obj, Viewport centerToViewport, Vector2 origin)
         {
             Vector2 centerOfViewport = new Vector2(centerToViewport.Width / 2, centerToViewport.Height / 2);
 
-            centerOfViewport.X -= (obj.Width / 2f) - origin.X;
-            centerOfViewport.Y -= (obj.Height / 2f) - origin.Y;
+            centerOfViewport.X -= (obj.Width / 2f) - origin.X * (obj is IScaled ? (obj as IScaled).Scale.X : 1);
+            centerOfViewport.Y -= (obj.Height / 2f) - origin.Y * (obj is IScaled ? (obj as IScaled).Scale.Y : 1);
 
 
             return centerOfViewport;

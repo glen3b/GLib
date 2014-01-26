@@ -35,9 +35,9 @@ namespace Glib.XNA.SpriteLib
     /// </summary>
     [DebuggerDisplay("Position = {Position}")]
 #if WINDOWS
-    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable
+    public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IOriginPositionable, IScaled
 #else
-    public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable
+    public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable, IOriginPositionable, IScaled
 #endif
     {
         private Vector2 _velocity;

@@ -24,7 +24,16 @@ namespace Glib.XNA.SpriteLib
             {
                 return;
             }
-            SpriteBatch.Draw(Texture, Object.Position - Vector2.One, Color.White);
+            SpriteBatch.Draw(Texture, GetTopLeft() - Vector2.One, Color.White);
+        }
+
+        /// <summary>
+        /// Gets the top left corner of the tracked object.
+        /// </summary>
+        /// <returns>The top left hand corner of the tracked object.</returns>
+        protected Vector2 GetTopLeft()
+        {
+            return Object.Position - ( (Object is IOriginPositionable ? (Object as IOriginPositionable).Origin : Vector2.Zero) * (Object is IScaled ? (Object as IScaled).Scale : Vector2.One) );
         }
 
         /// <summary>

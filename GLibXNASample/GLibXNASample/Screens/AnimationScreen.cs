@@ -33,12 +33,14 @@ namespace GLibXNASample.Screens
             new Rectangle(495, 8, 45, 45),
             new Rectangle(552, 7, 45, 45)));
 
+            animated.UseCenterAsOrigin = true;
             animated.Position = animated.GetCenterPosition(b.GraphicsDevice.Viewport);
             //FrameTime: The amount of time to spend on each frame
             animated.FrameTime = new TimeSpan(GLibXNASampleGame.Instance.TargetElapsedTime.Ticks * 5L);
             //FrameChanged: An event fired upon frame change
             animated.FrameChanged += new EventHandler(animated_FrameChanged);
 
+            AdditionalSprites.Add(new HitboxVisualizer(animated, b));
             Sprites.Add(animated);
         }
 

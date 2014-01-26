@@ -31,6 +31,28 @@ namespace Glib.XNA
     }
 
     /// <summary>
+    /// A scalable object.
+    /// </summary>
+    public interface IScaled
+    {
+        /// <summary>
+        /// Gets or sets the scale of this object.
+        /// </summary>
+        Vector2 Scale { get; set; }
+    }
+
+    /// <summary>
+    /// A positionable object with an origin.
+    /// </summary>
+    public interface IOriginPositionable : IPositionable
+    {
+        /// <summary>
+        /// Gets or sets the origin of this object.
+        /// </summary>
+        Vector2 Origin { get; set; }
+    }
+
+    /// <summary>
     /// Represents a sizable, positionable, screen object.
     /// </summary>
     public interface ISizedScreenObject : ISizable, IPositionable
