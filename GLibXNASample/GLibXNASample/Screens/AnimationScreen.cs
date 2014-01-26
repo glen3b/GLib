@@ -36,7 +36,7 @@ namespace GLibXNASample.Screens
             animated.UseCenterAsOrigin = true;
             animated.Position = animated.GetCenterPosition(b.GraphicsDevice.Viewport);
             //FrameTime: The amount of time to spend on each frame
-            animated.FrameTime = new TimeSpan(GLibXNASampleGame.Instance.TargetElapsedTime.Ticks * 5L);
+            animated.FrameTime = TimeSpan.FromMilliseconds(50);
             //FrameChanged: An event fired upon frame change
             animated.FrameChanged += new EventHandler(animated_FrameChanged);
 
