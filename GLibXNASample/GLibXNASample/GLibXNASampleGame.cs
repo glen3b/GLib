@@ -158,6 +158,7 @@ namespace GLibXNASample
             AllScreens.Add(new MultiplayerScreen(SpriteBatch));
             AllScreens.Add(new LoadingScreen(SpriteBatch));
             AllScreens.Add(new GameLobbyScreen(SpriteBatch));
+            AllScreens.Add(new AnimationScreen(SpriteBatch));
         }
     }
 }

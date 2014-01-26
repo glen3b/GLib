@@ -68,10 +68,12 @@ namespace GLibXNASample.Screens
 
             AdditionalSprites.Add(desc);
 
-            #region Generation of buttons systematically
+            //Add items to the buttons dictionary
             buttons.Add("Video Player", "VideoPlayer");
             buttons.Add("Multiplayer", "MultiPlayer");
+            buttons.Add("Animated Sprite", "AnimatedScreen");
 
+            #region Generation of buttons systematically
             float yCoord = desc.Y + desc.Height + 10;
 
             foreach (var element in buttons)

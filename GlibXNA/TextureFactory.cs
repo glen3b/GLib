@@ -37,7 +37,7 @@ namespace Glib.XNA
         /// Whitespace is treated as bounding transparency and other colors.
         /// </summary>
         /// <param name="original">The image to crop.</param>
-        /// <param name="cropWhite">Whether to crop surrounding white colored pixels as well as transparent pixels.</param>
+        /// <param name="whitespaceColors">Colors (other than transparency) to treat as whitespace.</param>
         /// <returns>A cropped texture.</returns>
         public Texture2D CropWhitespace(Texture2D original, params Color[] whitespaceColors)
         {

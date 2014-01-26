@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using System.Collections.ObjectModel;
 using Microsoft.Xna.Framework.Graphics;
+using System.ComponentModel;
 
 namespace Glib.XNA.SpriteLib
 {
@@ -15,12 +16,43 @@ namespace Glib.XNA.SpriteLib
     public class SpriteSheet : Sprite, ITimerSprite
     {
         /// <summary>
+        /// Gets or sets the height of the current frame.
+        /// </summary>
+        public override float Height
+        {
+            get
+            {
+                return CurrentFrame == null ? 0 : (DrawRegion.HasValue ? CurrentFrame.DrawRegion.Value.Height * CurrentFrame.Scale.Y : CurrentFrame.Texture.Height * CurrentFrame.Scale.Y);
+            }
+            set
+            {
+                CurrentFrame.Scale = new Vector2(CurrentFrame.Scale.X, (value * (CurrentFrame.DrawRegion.HasValue ? CurrentFrame.Texture.Height.ToFloat() / CurrentFrame.DrawRegion.Value.Height.ToFloat() : 1)) / Texture.Height);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the width of the current frame.
+        /// </summary>
+        public override float Width
+        {
+            get
+            {
+                return CurrentFrame == null ? 0 : (DrawRegion.HasValue ? CurrentFrame.DrawRegion.Value.Width * CurrentFrame.Scale.X : CurrentFrame.Texture.Width * CurrentFrame.Scale.X);
+            }
+            set
+            {
+                CurrentFrame.Scale = new Vector2((value * (CurrentFrame.DrawRegion.HasValue ? CurrentFrame.Texture.Width.ToFloat() / CurrentFrame.DrawRegion.Value.Width.ToFloat() : 1)) / Texture.Width, CurrentFrame.Scale.Y);
+            }
+        }
+
+        /// <summary>
         /// Creates a <see cref="SpriteSheet"/>.
         /// </summary>
         /// <param name="position">The position of the <see cref="SpriteSheet"/>.</param>
         /// <param name="batch">The <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render to.</param>
         /// <param name="frames">The collection of frames that makes up this <see cref="SpriteSheet"/>.</param>
-        public SpriteSheet(Vector2 position, SpriteBatch batch, IEnumerable<Frame> frames) : base(null, position, batch)
+        public SpriteSheet(Vector2 position, SpriteBatch batch, IEnumerable<Frame> frames)
+            : base(null, position, batch)
         {
             if (frames == null)
             {
@@ -38,6 +70,20 @@ namespace Glib.XNA.SpriteLib
 
                 Frames.Add(frame);
             }
+        }
+
+        /// <summary>
+        /// A delegate method intended to center a sprite upon an event firing.
+        /// </summary>
+        /// <param name="sender">The sprite that fired the event.</param>
+        /// <param name="args">The event arguments.</param>
+        public static void CenterSprite(object sender, EventArgs args)
+        {
+            if (!(sender is Sprite))
+            {
+                throw new InvalidOperationException("Cannot center something that is not an instance of sprite.");
+            }
+            ((ISizedScreenObject)sender).Position = ((ISizedScreenObject)sender).GetCenterPosition(((Sprite)sender).SpriteBatch.GraphicsDevice.Viewport, ((Sprite)sender).Origin);
         }
 
         private FrameCollection _frames;
@@ -103,11 +149,19 @@ namespace Glib.XNA.SpriteLib
                     return;
                 }
 
-                if (value < 0 || value >= _frames.Count)
+
+                if (value != _currentFrameIndex)
                 {
-                    throw new ArgumentOutOfRangeException("CurrentFrameIndex");
+                    if (value < 0 || value >= _frames.Count)
+                    {
+                        throw new ArgumentOutOfRangeException("CurrentFrameIndex");
+                    }
+                    _currentFrameIndex = value;
+                    if (FrameChanged != null)
+                    {
+                        FrameChanged(this, EventArgs.Empty);
+                    }
                 }
-                _currentFrameIndex = value;
             }
         }
 
@@ -214,6 +268,17 @@ namespace Glib.XNA.SpriteLib
             }
         }
 
+        /// <summary>
+        /// An event fired when the animation has finished one cycle.
+        /// If this event is cancelled the animation will pause.
+        /// </summary>
+        public event EventHandler<CancelEventArgs> AnimationCompleted;
+
+        /// <summary>
+        /// An event fired after the current frame changes.
+        /// </summary>
+        public event EventHandler FrameChanged;
+
         private bool _isPaused;
 
         /// <summary>
@@ -243,7 +308,22 @@ namespace Glib.XNA.SpriteLib
 
                 if (CurrentFrameIndex + 1 >= Frames.Count)
                 {
-                    CurrentFrameIndex = 0;
+                    if (AnimationCompleted != null)
+                    {
+                        CancelEventArgs args = new CancelEventArgs();
+                        AnimationCompleted(this, args);
+                        if (args.Cancel)
+                        {
+                            IsPaused = true;
+                        }
+                    }
+
+                    //Check again because event could cause a pause mid-frame
+                    if (!IsPaused)
+                    {
+                        CurrentFrameIndex = 0;
+                    }
+
                 }
                 else
                 {

@@ -351,7 +351,7 @@ namespace Glib.XNA.SpriteLib
     /// <summary>
     /// Represents a set of Screens to manage.
     /// </summary>
-    public class ScreenManager : ISprite, IEnumerable<Screen>, ICollection<Screen>
+    public class ScreenManager : ISprite, IEnumerable<Screen>, ICollection<Screen>, IDisposable
     {
         /// <summary>
         /// All the Screen objects managed by this ScreenManager.
@@ -623,6 +623,17 @@ namespace Glib.XNA.SpriteLib
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return _allScreens.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Disposes of the screen.
+        /// </summary>
+        public void Dispose()
+        {
+            foreach (var scr in this)
+            {
+                scr.Dispose();
+            }
         }
     }
 }

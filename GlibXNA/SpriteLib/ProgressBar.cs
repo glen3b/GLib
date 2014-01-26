@@ -228,6 +228,18 @@ namespace Glib.XNA.SpriteLib
             {
                 lock (syncLock)
                 {
+                    if (SpriteBatch == null || SpriteBatch.IsDisposed)
+                    {
+                        return null;
+                        //throw new ObjectDisposedException("SpriteBatch");
+                    }
+
+                    if (SpriteBatch.GraphicsDevice == null || SpriteBatch.GraphicsDevice.IsDisposed)
+                    {
+                        return null;
+                        //throw new ObjectDisposedException("SpriteBatch.GraphicsDevice");
+                    }
+
                     if (_cachedTexture != null && !_textureNeedsCalculation)
                     {
                         return _cachedTexture;

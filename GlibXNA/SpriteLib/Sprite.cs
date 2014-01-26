@@ -136,7 +136,7 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
                 if (value != null)
                 {
-                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this && value.Method.Name.ToLower().Trim().Equals("rectUpdate", StringComparison.OrdinalIgnoreCase))
+                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this)
                     {
                         throw new InvalidOperationException("Cannot remove an internally used delegate handler.");
                     }
@@ -869,7 +869,8 @@ namespace Glib.XNA.SpriteLib
             if (Texture != null && !Texture.IsDisposed)
             {
                 Texture.Dispose();
-                Texture = null;
+                //Although the default implementation of sprite may tolerate null textures, some subclass implementations do not
+                //Texture = null;
             }
             if (SpriteBatch != null && !SpriteBatch.IsDisposed)
             {
