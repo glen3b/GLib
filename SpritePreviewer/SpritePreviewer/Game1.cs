@@ -18,6 +18,7 @@ namespace SpritePreviewer
     /// <summary>
     /// This is the main type for your game
     /// </summary>
+    [Obsolete()]
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -230,9 +231,8 @@ namespace SpritePreviewer
                 {
                     Texture2D use = arrows[0].Texture;
                     arrows.Clear();
-                    arrows.Add(new SpriteSheet(use, new Rectangle(0, 0, Convert.ToInt32(mousePos.X - relativeSelectStart.Value.X), Convert.ToInt32(mousePos.Y - relativeSelectStart.Value.Y)), new Vector2(25), spriteBatch));
+                    arrows.Add(new SpriteSheet(new Vector2(25), spriteBatch, FrameCollection.FromSpriteSheet(use, new Point(Convert.ToInt32(mousePos.X - relativeSelectStart.Value.X), Convert.ToInt32(mousePos.Y - relativeSelectStart.Value.Y)))));
                     arrows[0].Updated += new EventHandler(arrow_Updated);
-                    ((SpriteSheet)arrows[0]).IsAnimated = true;
                     arrows[0].UseCenterAsOrigin = true;
                     isSelecting = false;
                 }

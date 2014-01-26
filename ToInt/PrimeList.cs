@@ -72,7 +72,7 @@ namespace Glib
         /// <summary>
         /// Returns whether or not the specified number is prime.
         /// </summary>
-        /// <param name="value">The number to check primeness of.</param>
+        /// <param name="checkValue">The number to check primeness of.</param>
         /// <exception cref="ArgumentException">Thrown if value is not a valid number.</exception>
         /// <returns>Whether or not the specified number is prime</returns>
         public static bool IsPrime(ulong checkValue)
