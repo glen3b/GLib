@@ -3,35 +3,38 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <title>GlenLibrary by glen3b</title>
   </head>
 
   <body>
+    <div id="container">
+      <div class="inner">
 
-    <header>
-      <div class="container">
-        <h1>GlenLibrary</h1>
-        <h2>A simple general purpose C# library covering windows forms, XNA, extension methods, and more.</h2>
+        <header>
+          <h1>GlenLibrary</h1>
+          <h2>A simple general purpose C# library covering windows forms, XNA, extension methods, and more.</h2>
+        </header>
 
-        <section id="downloads">
-          <a href="https://github.com/glen3b/GLib/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/glen3b/GLib/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/glen3b/GLib" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/glen3b/GLib/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/glen3b/GLib/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/glen3b/GLib" id="view-on-github" class="button"><span>View on GitHub</span></a>
         </section>
-      </div>
-    </header>
 
-    <div class="container">
-      <section id="main_content">
-        <h2>
+        <hr>
+
+        <section id="main_content">
+          <h2>
 <a name="welcome-to-glib" class="anchor" href="#welcome-to-glib"><span class="octicon octicon-link"></span></a>Welcome to GLib</h2>
 
-<p>This library simplifies usage of various APIs available in C#, such as XNA, Windows Forms, and conversions to common types, such as integer. For example, to parse a string as an integer, you can just run: <code>"Your string".ToInt()</code>. <strong>If you find a bug, <em>please</em> report it on the <a href="https://github.com/glen3b/Glib/issues?state=open">issues page</a>.</strong></p>
+<p>This library simplifies usage of various APIs available in the .NET framework, such as XNA, Windows Forms, and various other utilities including conversions to common types, such as integer. For example, to parse a string as an integer, you can just run: <code>"Your string".ToInt()</code> (extension method). <strong>If you find a bug, <em>please</em> report it on the <a href="https://github.com/glen3b/Glib/issues?state=open">issues page</a>.</strong></p>
 
 <h2>
 <a name="users-of-our-library" class="anchor" href="#users-of-our-library"><span class="octicon octicon-link"></span></a>Users of our library</h2>
@@ -48,47 +51,23 @@
 <p>Downloads of GLib can be obtained from the <a href="https://github.com/glen3b/Glib/releases">releases page</a>.</p>
 
 <h2>
-<a name="development-builds" class="anchor" href="#development-builds"><span class="octicon octicon-link"></span></a>Development Builds</h2>
-
-<p><strong>These builds are the latest compiled builds from the source tree. They are NOT supported in any way, shape, or form; however reports for bugs found on these builds are appreciated.</strong></p>
-
-<h3>
-<a name="windows-binaries" class="anchor" href="#windows-binaries"><span class="octicon octicon-link"></span></a>Windows binaries</h3>
-
-<p>These binaries contain all of the non-XNA components, and only work on windows.</p>
-
-<ul>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/Release/GlenLibrary.dll">DLL</a></li>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/Release/GlenLibrary.xml">Documentation</a></li>
-</ul><h3>
-<a name="xna-binaries" class="anchor" href="#xna-binaries"><span class="octicon octicon-link"></span></a>XNA binaries</h3>
-
-<p>These binaries contain XNA components.</p>
-
-<h4>
-<a name="windows" class="anchor" href="#windows"><span class="octicon octicon-link"></span></a>Windows</h4>
-
-<ul>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/Release/GlibXNA.dll">DLL</a></li>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/x86/Release/GlibXNA.XML">Documentation</a></li>
-</ul><h4>
-<a name="xbox-360" class="anchor" href="#xbox-360"><span class="octicon octicon-link"></span></a>Xbox 360</h4>
-
-<ul>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/Xbox%20360/Release/GlibXNA.dll">DLL</a></li>
-<li><a href="https://github.com/glen3b/Glib/raw/master/Binaries/Xbox%20360/Release/GlibXNA.XML">Documentation</a></li>
-</ul><h2>
 <a name="building-from-source" class="anchor" href="#building-from-source"><span class="octicon octicon-link"></span></a>Building from source</h2>
 
-<p>To build this library from source, you need a C# compiler at least (I recommend getting the IDE <a href="http://go.microsoft.com/?linkid=9709939">Visual C# express 2010</a>) and, to build the XNA library, <a href="http://www.microsoft.com/en-us/download/confirmation.aspx?id=23714">XNA game studio 4.0</a> or <a href="http://www.microsoft.com/en-us/download/confirmation.aspx?id=27599">later</a>. This project includes a Visual Studio 2010 solution file. If you cannot force-open this file in the express version, open the project files directly.</p>
+<p>To build this library from source, you need a C# compiler, preferably Visual Studio 2010, and, to build the XNA library, <a href="http://www.microsoft.com/en-us/download/confirmation.aspx?id=23714">XNA game studio 4.0</a> or <a href="http://www.microsoft.com/en-us/download/confirmation.aspx?id=27599">later</a>. This project includes a Visual Studio 2010 solution file. If you want to use Visual Studio C# express, some projects will fail to load, but you can use <a href="http://stackoverflow.com/questions/2682308/opening-non-express-vs-projects-with-visual-studio-2010-express">these instructions</a>.</p>
 
 <h2>
 <a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
 
-<p>Docs are available as XML documentation when you build the project, or outdated versions are available on <a href="http://glen3b.pagekite.me/glibDoc/">my website</a>.</p>
-      </section>
-    </div>
+<p>Docs are available as XML documentation when you build the project, or (often outdated) versions are available on <a href="http://glen3b.pagekite.me/glibDoc/">my website</a>.</p>
+        </section>
 
-    
+        <footer>
+          GlenLibrary is maintained by <a href="https://github.com/glen3b">glen3b</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
   </body>
 </html>
