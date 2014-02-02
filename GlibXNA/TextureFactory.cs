@@ -67,7 +67,7 @@ namespace Glib.XNA
                 currentData[i] = initialData[i].ToVector4();
             }
 
-            
+
             for (int frame = 0; frame < frameCount; frame++)
             {
                 Texture2D image = new Texture2D(Graphics, first.Width, first.Height);
@@ -94,6 +94,51 @@ namespace Glib.XNA
         public TextureFactory(GraphicsDevice device)
         {
             _graphics = device;
+        }
+
+        /// <summary>
+        /// Overlays an image onto another image.
+        /// </summary>
+        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="overlay">The image to overlay.</param>
+        /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
+        public Texture2D OverlayImage(Texture2D main, Texture2D overlay)
+        {
+            if (main == null)
+            {
+                throw new ArgumentNullException("main");
+            }
+
+            if (overlay == null)
+            {
+                throw new ArgumentNullException("overlay");
+            }
+
+            if (overlay.Width > main.Width || overlay.Height > main.Height)
+            {
+                throw new ArgumentException("The overlay image must be smaller or the same size as the main image.");
+            }
+
+            Color[] mainData = new Color[main.Width * main.Height];
+            Color[] overlayData = new Color[overlay.Width * overlay.Height];
+            main.GetData(mainData);
+            overlay.GetData(overlayData);
+            for (int w = 0; w < main.Width; w++)
+            {
+                for (int h = 0; h < main.Height; h++)
+                {
+                    if (h < overlay.Height && w < overlay.Width && h * overlay.Width + w < overlayData.Length && overlayData[h * overlay.Width + w] != Color.Transparent)
+                    {
+                        mainData[h * main.Width + w] = overlayData[h * overlay.Width + w];
+                    }
+                }
+            }
+            
+            //Create new texture so operation is not done in place
+            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height);
+            newImage.SetData(mainData);
+
+            return newImage;
         }
 
         /// <summary>
