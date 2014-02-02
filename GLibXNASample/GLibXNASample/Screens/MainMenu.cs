@@ -24,6 +24,11 @@ namespace GLibXNASample.Screens
         TextSprite desc;
         ProgressBar progressBar;
 
+        Sprite fadingImage;
+        Texture2D[] fades;
+        int fadeIndex = 0;
+        int fadeIndexChange = 1;
+
         Dictionary<String, String> buttons = new Dictionary<string, string>();
 
         /// <summary>
@@ -34,7 +39,7 @@ namespace GLibXNASample.Screens
             : base(sb, Color.Lime)
         {
             Name = "MainMenu";
-
+            
             //TextureFactory: Creates textures at runtime
             TextureFactory factory = new TextureFactory(sb.GraphicsDevice);
 
@@ -47,6 +52,12 @@ namespace GLibXNASample.Screens
             mouseCursor.Scale = new Vector2(.1f);
             mouseCursor.UseCenterAsOrigin = true;
 
+            fadingImage = new Sprite(factory.CreateRectangle(15, 15, Color.DarkGray * 0.45F), Vector2.Zero, sb);
+            fadingImage.Position = new Vector2(15, 25);
+            //The CreateFade method creates an array of textures, each one closer to the final texture than the last
+            //It is used for fades
+            fades = factory.CreateFade(fadingImage.Texture, factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), 300);
+            
             mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 
             //TextSprite: Displays text
@@ -112,13 +123,14 @@ namespace GLibXNASample.Screens
             //ProgressBar: A dynamically generated progress bar, could be used to represent asset loading progress
             //Here it is just used for effects :)
             progressBar = new ProgressBar(Vector2.Zero, _filledColors[0], _emptyColors[0], sb);
-            //HeightScale: The progress bar shall be 5 high
-            progressBar.HeightScale = 5;
+            //HeightScale: The progress bar shall be 7 pixels high
+            progressBar.HeightScale = 7;
             progressBar.Denominator = Graphics.Viewport.Width - 20;
             progressBar.Value = 0;
             progressBar.X = progressBar.GetCenterPosition(sb.GraphicsDevice.Viewport).X;
             progressBar.Y = Graphics.Viewport.Height - progressBar.Height - 5;
             Sprites.Add(progressBar);
+            
 
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
@@ -138,6 +150,8 @@ namespace GLibXNASample.Screens
             AdditionalSprites.Add(mouseParticleGen);
             AdditionalSprites.Add(mouseCursor);
             AdditionalSprites.Add(mouseBoundingBox);
+
+            Sprites.Add(fadingImage);
 
         }
 
@@ -194,6 +208,19 @@ namespace GLibXNASample.Screens
                 }
                 progressBar.Value = 0;
             }
+
+            if (fadeIndex >= fades.Length - 1 && fadeIndexChange == 1)
+            {
+                fadeIndexChange = -1;
+            }
+            if (fadeIndex <= 0 && fadeIndexChange == -1)
+            {
+                fadeIndexChange = 1;
+            }
+
+            fadeIndex += fadeIndexChange;
+            fadingImage.Texture = fades[fadeIndex];
+
         }
     }
 }

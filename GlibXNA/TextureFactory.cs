@@ -22,6 +22,70 @@ namespace Glib.XNA
             get { return _graphics; }
         }
 
+        /// <summary>
+        /// Creates a set of textures that represents a fade between two images.
+        /// </summary>
+        /// <param name="first">The first image.</param>
+        /// <param name="last">The last image.</param>
+        /// <param name="frameCount">The number of frames to include in the phase.</param>
+        /// <returns>An array of textures which can be used to create a phase effect.</returns>
+        public Texture2D[] CreateFade(Texture2D first, Texture2D last, int frameCount)
+        {
+            if (first == null)
+            {
+                throw new ArgumentNullException("first");
+            }
+
+            if (last == null)
+            {
+                throw new ArgumentNullException("last");
+            }
+
+            if (frameCount < 1)
+            {
+                throw new ArgumentOutOfRangeException("frameCount");
+            }
+
+            if (last.Width != first.Width || last.Height != first.Height)
+            {
+                throw new ArgumentException("The images must be the same size.");
+            }
+
+            Texture2D[] frames = new Texture2D[frameCount];
+            Color[] initialData = new Color[first.Width * first.Height];
+            Color[] finalData = new Color[last.Width * last.Height];
+            first.GetData(initialData);
+            last.GetData(finalData);
+
+            //initialdata + difference = finaldata
+            Vector4[] differences = new Vector4[initialData.Length];
+            Vector4[] currentData = new Vector4[initialData.Length];
+
+            for (int i = 0; i < differences.Length; i++)
+            {
+                differences[i] = finalData[i].ToVector4() - initialData[i].ToVector4();
+                currentData[i] = initialData[i].ToVector4();
+            }
+
+            
+            for (int frame = 0; frame < frameCount; frame++)
+            {
+                Texture2D image = new Texture2D(Graphics, first.Width, first.Height);
+                Color[] imageData = new Color[image.Width * image.Height];
+
+                for (int i = 0; i < initialData.Length; i++)
+                {
+                    imageData[i] = Color.FromNonPremultiplied(currentData[i]);
+                    currentData[i] += differences[i] / frameCount.ToFloat();
+                }
+
+                image.SetData(imageData);
+
+                frames[frame] = image;
+            }
+
+            return frames;
+        }
 
         /// <summary>
         /// Creates a new TextureFactory with the specified GraphicsDevice.
@@ -52,7 +116,7 @@ namespace Glib.XNA
             }
 
             Color[] data = new Color[original.Height * original.Width];
-            
+
             original.GetData(data);
 
             int whiterowsTop = 0;
@@ -214,7 +278,7 @@ namespace Glib.XNA
                     foreach (Vector2 point in points)
                     {
                         //(Math.Ceiling(point.X).Round() == w_en && Math.Ceiling(point.Y).Round() == h_en) ||
-                        if (  (Math.Floor(point.X).Round() == w_en && Math.Floor(point.Y).Round() == h_en))
+                        if ((Math.Floor(point.X).Round() == w_en && Math.Floor(point.Y).Round() == h_en))
                         {
                             data[h_en * diameter + w_en] = color;
                         }
