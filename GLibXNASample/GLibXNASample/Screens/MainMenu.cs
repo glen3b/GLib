@@ -54,7 +54,12 @@ namespace GLibXNASample.Screens
             mouseCursor.UseCenterAsOrigin = true;
 
             //OverlayImage overlays the second image onto the first (not in place)
-            fadingImage = new Sprite(factory.OverlayImage(factory.CreateSquare(15, Color.DarkGray * 0.45F), factory.CreateSquare(11, Color.Black), new Point(2, 2), TextureFactory.OverlayType.Replace), Vector2.Zero, sb);
+            Texture2D imageOverlay = factory.CreateSquare(15, Color.DarkGray * 0.65F);
+            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(11, Color.Black * 0.75F), new Point(2, 2));
+            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(7, Color.DarkOrange * 0.85F), new Point(4, 4));
+            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(3, Color.DarkRed * 0.95F), new Point(6, 6));
+
+            fadingImage = new Sprite(imageOverlay, Vector2.Zero, sb);
             fadingImage.Position = new Vector2(15, 25);
             //The CreateFade method creates an array of textures, each one closer to the final texture than the last
             //It is used for fades
@@ -230,7 +235,7 @@ namespace GLibXNASample.Screens
 
             if (fadingImage.Intersects(MouseManager.CurrentMouseState))
             {
-                caption.Text = "These are 300 images created\nfrom 2. The 2 rectangles are\none image made from two.";
+                caption.Text = "These are 300 images created\nfrom 2. The 4 rectangles are\nimages overlayed onto other\nimages to produce one image.";
                 ShowCaption();
             }
             else if (progressBar.Intersects(MouseManager.CurrentMouseState))
