@@ -53,7 +53,7 @@ namespace GLibXNASample.Screens
             mouseCursor.UseCenterAsOrigin = true;
 
             //OverlayImage overlays the second image onto the first (not in place)
-            fadingImage = new Sprite(factory.OverlayImage(factory.CreateSquare(15, Color.DarkGray * 0.45F), factory.CreateSquare(10, Color.Black)), Vector2.Zero, sb);
+            fadingImage = new Sprite(factory.OverlayImage(factory.CreateSquare(15, Color.DarkGray * 0.45F), factory.CreateSquare(10, Color.Black), new Point(2, 2)), Vector2.Zero, sb);
             fadingImage.Position = new Vector2(15, 25);
             //The CreateFade method creates an array of textures, each one closer to the final texture than the last
             //It is used for fades

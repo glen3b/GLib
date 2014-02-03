@@ -104,6 +104,18 @@ namespace Glib.XNA
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
         public Texture2D OverlayImage(Texture2D main, Texture2D overlay)
         {
+            return OverlayImage(main, overlay, Point.Zero);
+        }
+
+        /// <summary>
+        /// Overlays an image onto another image.
+        /// </summary>
+        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="overlay">The image to overlay.</param>
+        /// <param name="origin">The position of the overlay.</param>
+        /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
+        public Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin)
+        {
             if (main == null)
             {
                 throw new ArgumentNullException("main");
@@ -112,6 +124,11 @@ namespace Glib.XNA
             if (overlay == null)
             {
                 throw new ArgumentNullException("overlay");
+            }
+
+            if (origin.X < 0 || origin.Y < 0)
+            {
+                throw new ArgumentException("The origin position must be at positive coordinates.");
             }
 
             if (overlay.Width > main.Width || overlay.Height > main.Height)
@@ -127,15 +144,15 @@ namespace Glib.XNA
             {
                 for (int h = 0; h < main.Height; h++)
                 {
-                    if (h < overlay.Height && w < overlay.Width && h * overlay.Width + w < overlayData.Length && overlayData[h * overlay.Width + w] != Color.Transparent)
+                    if (h < overlay.Height && w < overlay.Width && h + origin.Y < main.Height && w + origin.X < main.Width && h * overlay.Width + w < overlayData.Length && overlayData[h * overlay.Width + w] != Color.Transparent)
                     {
-                        mainData[h * main.Width + w] = overlayData[h * overlay.Width + w];
+                        mainData[(h + origin.Y) * main.Width + (w + origin.X)] = overlayData[h * overlay.Width + w];
                     }
                 }
             }
             
             //Create new texture so operation is not done in place
-            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height);
+            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height); 
             newImage.SetData(mainData);
 
             return newImage;
