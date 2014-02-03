@@ -39,7 +39,7 @@ namespace GLibXNASample.Screens
             : base(sb, Color.Lime)
         {
             Name = "MainMenu";
-            
+
             //TextureFactory: Creates textures at runtime
             TextureFactory factory = new TextureFactory(sb.GraphicsDevice);
 
@@ -53,12 +53,12 @@ namespace GLibXNASample.Screens
             mouseCursor.UseCenterAsOrigin = true;
 
             //OverlayImage overlays the second image onto the first (not in place)
-            fadingImage = new Sprite(factory.OverlayImage(factory.CreateSquare(15, Color.DarkGray * 0.45F), factory.CreateSquare(10, Color.Black), new Point(2, 2)), Vector2.Zero, sb);
+            fadingImage = new Sprite(factory.OverlayImage(factory.CreateSquare(15, Color.DarkGray * 0.45F), factory.CreateSquare(11, Color.Black), new Point(2, 2), TextureFactory.OverlayType.Replace), Vector2.Zero, sb);
             fadingImage.Position = new Vector2(15, 25);
             //The CreateFade method creates an array of textures, each one closer to the final texture than the last
             //It is used for fades
             fades = factory.CreateFade(fadingImage.Texture, factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), 300);
-            
+
             mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 
             //TextSprite: Displays text
@@ -131,7 +131,7 @@ namespace GLibXNASample.Screens
             progressBar.X = progressBar.GetCenterPosition(sb.GraphicsDevice.Viewport).X;
             progressBar.Y = Graphics.Viewport.Height - progressBar.Height - 5;
             Sprites.Add(progressBar);
-            
+
 
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));

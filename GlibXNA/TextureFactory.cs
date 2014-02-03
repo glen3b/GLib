@@ -97,7 +97,22 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Overlays an image onto another image.
+        /// Represents an effect of an image overlay.
+        /// </summary>
+        public enum OverlayType
+        {
+            /// <summary>
+            /// Replaces pixels of the main image completely with overlay image pixels.
+            /// </summary>
+            Replace,
+            /// <summary>
+            /// Uses the average of the ARGB value of the pixels of the main image and of the overlay image.
+            /// </summary>
+            Merge
+        }
+
+        /// <summary>
+        /// Overlays an image onto another image, positioning the overlay at the top left corner.
         /// </summary>
         /// <param name="main">The image to overlay on to.</param>
         /// <param name="overlay">The image to overlay.</param>
@@ -108,13 +123,26 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Overlays an image onto another image.
+        /// Overlays an image onto another image, positioning the overlay at the top left corner.
         /// </summary>
         /// <param name="main">The image to overlay on to.</param>
         /// <param name="overlay">The image to overlay.</param>
         /// <param name="origin">The position of the overlay.</param>
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
         public Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin)
+        {
+            return OverlayImage(main, overlay, origin, OverlayType.Replace);
+        }
+
+        /// <summary>
+        /// Overlays an image onto another image.
+        /// </summary>
+        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="overlay">The image to overlay.</param>
+        /// <param name="origin">The position of the overlay.</param>
+        /// <param name="overlayType">The effect of the overlay</param>
+        /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image modifying pixels of the main image.</returns>
+        public Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin, OverlayType overlayType)
         {
             if (main == null)
             {
@@ -146,13 +174,18 @@ namespace Glib.XNA
                 {
                     if (h < overlay.Height && w < overlay.Width && h + origin.Y < main.Height && w + origin.X < main.Width && h * overlay.Width + w < overlayData.Length && overlayData[h * overlay.Width + w] != Color.Transparent)
                     {
-                        mainData[(h + origin.Y) * main.Width + (w + origin.X)] = overlayData[h * overlay.Width + w];
+                        Color targetColor = overlayData[h * overlay.Width + w];
+                        if (overlayType == OverlayType.Merge)
+                        {
+                            targetColor = Color.FromNonPremultiplied((targetColor.ToVector4() + mainData[(h + origin.Y) * main.Width + (w + origin.X)].ToVector4()) / 2.0F);
+                        }
+                        mainData[(h + origin.Y) * main.Width + (w + origin.X)] = targetColor;
                     }
                 }
             }
-            
+
             //Create new texture so operation is not done in place
-            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height); 
+            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height);
             newImage.SetData(mainData);
 
             return newImage;
