@@ -701,7 +701,7 @@ namespace Glib.XNA.SpriteLib
 
 #if WINDOWS
         /// <summary>
-        /// Checks whether the specified MouseState's pointer intersects with this sprite.
+        /// Checks whether the specified MouseState's pointer intersects with this sprite, not checking for a click.
         /// </summary>
         /// <param name="mouse">The MouseState to check intersection against.</param>
         /// <returns>Whether or not the specified mouse position intersects with this Sprite.</returns>

@@ -28,6 +28,7 @@ namespace GLibXNASample.Screens
         Texture2D[] fades;
         int fadeIndex = 0;
         int fadeIndexChange = 1;
+        TextSprite caption;
 
         Dictionary<String, String> buttons = new Dictionary<string, string>();
 
@@ -132,6 +133,11 @@ namespace GLibXNASample.Screens
             progressBar.Y = Graphics.Viewport.Height - progressBar.Height - 5;
             Sprites.Add(progressBar);
 
+            caption = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("Details"), "A caption!");
+            caption.X = caption.GetCenterPosition(Graphics.Viewport).X;
+            caption.Y = progressBar.Y - caption.Height - 2;
+            caption.Visible = false;
+            AdditionalSprites.Add(caption);
 
             //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
@@ -222,6 +228,27 @@ namespace GLibXNASample.Screens
             fadeIndex += fadeIndexChange;
             fadingImage.Texture = fades[fadeIndex];
 
+            if (fadingImage.Intersects(MouseManager.CurrentMouseState))
+            {
+                caption.Text = "These are 300 images created\nfrom 2. The 2 rectangles are\none image made from two.";
+                ShowCaption();
+            }
+            else if (progressBar.Intersects(MouseManager.CurrentMouseState))
+            {
+                caption.Text = "A progress bar, which can be used to indicate the\ndynamically changing progress of an operation.";
+                ShowCaption();
+            }
+            else
+            {
+                caption.Visible = false;
+            }
+        }
+
+        private void ShowCaption()
+        {
+            caption.X = caption.GetCenterPosition(Graphics.Viewport).X;
+            caption.Y = progressBar.Y - caption.Height - 2;
+            caption.Visible = true;
         }
     }
 }
