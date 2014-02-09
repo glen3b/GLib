@@ -63,7 +63,7 @@ namespace GLibXNASample.Screens
             fadingImage.Position = new Vector2(15, 25);
             //The CreateFade method creates an array of textures, each one closer to the final texture than the last
             //It is used for fades
-            fades = factory.CreateFade(fadingImage.Texture, factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), 300);
+            fades = factory.CreateFade(fadingImage.Texture, factory.OverlayImage(factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), factory.CreateCircle(((float)(fadingImage.Texture.Width - 2) + (float)(fadingImage.Texture.Height - 2)) / 4F, Color.DarkRed), new Point(1,1)), 300);
 
             mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 

@@ -372,7 +372,7 @@ namespace Glib.XNA
             int diameter = Math.Ceiling(radius * 2).ToInt();
             Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
-            List<Vector2> points = GetOuterCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.5f);
+            List<Vector2> points = GetOuterCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, MathHelper.Clamp(0.5f - (radius / 3.5F), 0.05F, 0.6F));
 
             for (int w_en = 0; w_en < diameter; w_en++)
             {
@@ -381,7 +381,7 @@ namespace Glib.XNA
                     foreach (Vector2 point in points)
                     {
                         //(Math.Ceiling(point.X).Round() == w_en && Math.Ceiling(point.Y).Round() == h_en) ||
-                        if ((Math.Floor(point.X).Round() == w_en && Math.Floor(point.Y).Round() == h_en))
+                        if ((Math.Floor(point.X).Round() == w_en && (point.Y >= 0 ? Math.Floor(point.Y).Round() == h_en : Math.Ceiling(point.Y).Round() == h_en)))
                         {
                             data[h_en * diameter + w_en] = color;
                         }
@@ -405,7 +405,7 @@ namespace Glib.XNA
             int diameter = Math.Ceiling(radius * 2).ToInt();
             Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
-            List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.95f);
+            List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, MathHelper.Clamp(0.95f - (radius / 5), 0.125f, 1));
 
             for (int w_en = 0; w_en < diameter; w_en++)
             {
@@ -418,7 +418,7 @@ namespace Glib.XNA
                             continue;
                         }
 
-                        if ((Math.Floor(point.X).Round() == w_en && Math.Floor(point.Y).Round() == h_en))
+                        if ((Math.Floor(point.X).Round() == w_en && (point.Y >= 0 ? Math.Floor(point.Y).Round() == h_en : Math.Ceiling(point.Y).Round() == h_en)))
                         {
                             data[h_en * diameter + w_en] = color;
                         }
