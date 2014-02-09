@@ -362,11 +362,6 @@ namespace Glib.XNA.SpriteLib
         private List<Screen> _allScreens = new List<Screen>();
 
         /// <summary>
-        /// The graphics device to draw to.
-        /// </summary>
-        public GraphicsDevice Graphics;
-
-        /// <summary>
         /// The SpriteBatch to draw to.
         /// </summary>
         public SpriteBatch SpriteBatch;
@@ -381,7 +376,6 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         public ScreenManager(SpriteBatch spriteBatch, Color clearColor, params Screen[] screens)
         {
-            Graphics = spriteBatch.GraphicsDevice;
             this.SpriteBatch = spriteBatch;
             this.Background = clearColor;
             _allScreens = screens.ToList();
@@ -445,8 +439,8 @@ namespace Glib.XNA.SpriteLib
             {
                 if (s.Visible)
                 {
-                    Graphics.SetRenderTarget(s.Target);
-                    Graphics.Clear(s.ClearColor);
+                    SpriteBatch.GraphicsDevice.SetRenderTarget(s.Target);
+                    SpriteBatch.GraphicsDevice.Clear(s.ClearColor);
                     s.OpenSpriteBatch(SpriteBatch);
                     if (s.BackgroundSprite != null)
                     {
@@ -475,8 +469,8 @@ namespace Glib.XNA.SpriteLib
                     s.MiscellaneousProcessing();
                 }
             }
-            Graphics.SetRenderTarget(null);
-            Graphics.Clear(Background);
+            SpriteBatch.GraphicsDevice.SetRenderTarget(null);
+            SpriteBatch.GraphicsDevice.Clear(Background);
             SpriteBatch.Begin();
         }
 
@@ -526,7 +520,7 @@ namespace Glib.XNA.SpriteLib
         {
             get
             {
-                int? index = null;
+                int index = -1;
                 int numFound = 0;
                 for (int i = 0; i < Count; i++)
                 {
@@ -538,13 +532,13 @@ namespace Glib.XNA.SpriteLib
                 }
                 if (numFound > 1)
                 {
-                    throw new InvalidOperationException(string.Format("Requested Screen is ambiguous between the {0} Screens with the specified name.", numFound));
+                    throw new InvalidOperationException(string.Format("Requested screen is ambiguous between the {0} screens with the specified name.", numFound));
                 }
                 else if (numFound == 1)
                 {
-                    return this[index.Value];
+                    return this[index];
                 }
-                throw new IndexOutOfRangeException("A Screen with the specified name was not found in this ScreenManager.");
+                throw new IndexOutOfRangeException("A screen with the specified name was not found in this ScreenManager.");
             }
         }
 
