@@ -108,7 +108,11 @@ namespace Glib.XNA
             /// <summary>
             /// Uses the average of the ARGB value of the pixels of the main image and of the overlay image.
             /// </summary>
-            Merge
+            Merge,
+            /// <summary>
+            /// Uses the sum of the ARGB value of the pixels of the main image and of the overlay image.
+            /// </summary>
+            AddMerge
         }
 
         /// <summary>
@@ -178,6 +182,10 @@ namespace Glib.XNA
                         if (overlayType == OverlayType.Merge)
                         {
                             targetColor = Color.FromNonPremultiplied((targetColor.ToVector4() + mainData[(h + origin.Y) * main.Width + (w + origin.X)].ToVector4()) / 2.0F);
+                        }
+                        else if (overlayType == OverlayType.AddMerge)
+                        {
+                            targetColor = Color.FromNonPremultiplied(mainData[(h + origin.Y) * main.Width + (w + origin.X)].ToVector4() + targetColor.ToVector4());
                         }
                         mainData[(h + origin.Y) * main.Width + (w + origin.X)] = targetColor;
                     }
