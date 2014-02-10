@@ -372,7 +372,7 @@ namespace Glib.XNA
             int diameter = Math.Ceiling(radius * 2).ToInt();
             Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
-            List<Vector2> points = GetOuterCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, MathHelper.Clamp(0.5f - (radius / 3.5F), 0.05F, 0.6F));
+            List<Vector2> points = GetOuterCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.08F);
 
             for (int w_en = 0; w_en < diameter; w_en++)
             {
@@ -405,7 +405,7 @@ namespace Glib.XNA
             int diameter = Math.Ceiling(radius * 2).ToInt();
             Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
-            List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, MathHelper.Clamp(0.95f - (radius / 6), 0.23f, 1));
+            List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.8f);
 
             for (int w_en = 0; w_en < diameter; w_en++)
             {
