@@ -400,35 +400,30 @@ namespace Glib.XNA
         /// <param name="radius">The radius of the circle.</param>
         /// <param name="color">The circle color.</param>
         /// <returns>A texture containing a solid circle.</returns>
-        public Texture2D CreateCircle(float radius, Color color)
+        public Texture2D CreateCircle(int radius, Color color)
         {
-            int diameter = Math.Ceiling(radius * 2).ToInt();
-            Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
-            Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
-            List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.8f);
-
-            for (int w_en = 0; w_en < diameter; w_en++)
+            VertexPositionColor[] vertices = new VertexPositionColor[radius];
+            for (int i = 0; i < radius - 1; i++)
             {
-                for (int h_en = 0; h_en < diameter; h_en++)
-                {
-                    foreach (Vector2 point in points)
-                    {
-                        if (float.IsNaN(point.X) || float.IsNaN(point.Y))
-                        {
-                            continue;
-                        }
-
-                        if ((Math.Floor(point.X).Round() == w_en && Math.Floor(point.Y).Round() == h_en))
-                        {
-                            data[h_en * diameter + w_en] = color;
-                        }
-                    }
-                }
+                float angle = (float)(i / radius.ToDouble() * Math.PI * 2);
+                vertices[i].Position = new Vector3((radius * 2) + (float)Math.Cos(angle) * radius, (radius * 2) + (float)Math.Sin(angle) * radius, 0);
+                vertices[i].Color = color;
             }
+            vertices[radius - 1] = vertices[0];
 
-            retVal.SetData(data);
+            RenderTarget2D target = new RenderTarget2D(Graphics, radius * 2, radius * 2);
+            Graphics.SetRenderTarget(target);
+            BasicEffect basicEffect = new BasicEffect(Graphics);
+            basicEffect.VertexColorEnabled = true;
+            basicEffect.Projection = Matrix.CreateOrthographicOffCenter
+               (0, Graphics.Viewport.Width,     // left, right
+                Graphics.Viewport.Height, 0,    // bottom, top
+                0, 1);                          // near, far plane
 
-            return retVal;
+            basicEffect.CurrentTechnique.Passes[0].Apply();
+            Graphics.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineStrip, vertices, 0, radius - 1);
+            Graphics.SetRenderTarget(null);
+            return target;
         }
 
         /// <summary>
