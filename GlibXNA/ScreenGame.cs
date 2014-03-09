@@ -120,7 +120,7 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Gets or sets the desired height of the Game.
+        /// Gets or sets the desired height of the Game. Requires a subsequent call to <see cref="ApplyWindowSize"/> to take affect.
         /// </summary>
         protected int Height
         {
@@ -130,14 +130,12 @@ namespace Glib.XNA
             }
             set
             {
-
                 Graphics.PreferredBackBufferHeight = value;
-                Graphics.ApplyChanges();
             }
         }
 
         /// <summary>
-        /// Gets or sets the desired width of the Game.
+        /// Gets or sets the desired width of the Game. Requires a subsequent call to <see cref="ApplyWindowSize"/> to take affect.
         /// </summary>
         protected int Width
         {
@@ -147,10 +145,16 @@ namespace Glib.XNA
             }
             set
             {
-
                 Graphics.PreferredBackBufferWidth = value;
-                Graphics.ApplyChanges();
             }
+        }
+
+        /// <summary>
+        /// Applies any updates to the window size.
+        /// </summary>
+        protected void ApplyWindowSize()
+        {
+            Graphics.ApplyChanges();
         }
 
         private SpriteBatch _sb;
