@@ -121,37 +121,35 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Overlays an image onto another image, positioning the overlay at the top left corner.
+        /// Overlays an image onto another image, positioning the overlay at the top left corner. The image overlay is done in-place.
         /// </summary>
-        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="main">The image to overlay on to (in-place operation).</param>
         /// <param name="overlay">The image to overlay.</param>
-        /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
-        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay)
+        public static void OverlayImage(Texture2D main, Texture2D overlay)
         {
-            return OverlayImage(main, overlay, Point.Zero);
+            OverlayImage(main, overlay, Point.Zero);
         }
 
         /// <summary>
-        /// Overlays an image onto another image, positioning the overlay at the top left corner.
+        /// Overlays an image onto another image, positioning the overlay at the top left corner. The image overlay is done in-place.
         /// </summary>
-        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="main">The image to overlay on to (in-place operation).</param>
         /// <param name="overlay">The image to overlay.</param>
         /// <param name="origin">The position of the overlay.</param>
-        /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
-        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin)
+        public static void OverlayImage(Texture2D main, Texture2D overlay, Point origin)
         {
-            return OverlayImage(main, overlay, origin, OverlayType.Replace);
+            OverlayImage(main, overlay, origin, OverlayType.Replace);
         }
 
         /// <summary>
-        /// Overlays an image onto another image.
+        /// Overlays an image onto another image. The image overlay is done in-place.
         /// </summary>
-        /// <param name="main">The image to overlay on to.</param>
+        /// <param name="main">The image to overlay on to (in-place operation).</param>
         /// <param name="overlay">The image to overlay.</param>
         /// <param name="origin">The position of the overlay.</param>
         /// <param name="overlayType">The effect of the overlay</param>
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image modifying pixels of the main image.</returns>
-        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin, OverlayType overlayType)
+        public static void OverlayImage(Texture2D main, Texture2D overlay, Point origin, OverlayType overlayType)
         {
             if (main == null)
             {
@@ -202,11 +200,7 @@ namespace Glib.XNA
                 }
             }
 
-            //Create new texture so operation is not done in place
-            Texture2D newImage = new Texture2D(main.GraphicsDevice, main.Width, main.Height);
-            newImage.SetData(mainData);
-
-            return newImage;
+            main.SetData(mainData);
         }
 
         /// <summary>
@@ -215,7 +209,7 @@ namespace Glib.XNA
         /// </summary>
         /// <param name="original">The image to crop.</param>
         /// <param name="whitespaceColors">Colors (other than transparency) to treat as whitespace.</param>
-        /// <returns>A cropped texture.</returns>
+        /// <returns>A cropped texture of potentially smaller dimensions.</returns>
         public static Texture2D CropWhitespace(Texture2D original, params Color[] whitespaceColors)
         {
             if (original == null)
