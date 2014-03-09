@@ -41,6 +41,11 @@ namespace Glib.XNA
                 throw new ArgumentNullException("last");
             }
 
+            if (!first.GraphicsDevice.Equals(last.GraphicsDevice))
+            {
+                throw new ArgumentException("The GraphicsDevice is not consistent between the provided textures.");
+            }
+
             if (frameCount < 1)
             {
                 throw new ArgumentOutOfRangeException("frameCount");
@@ -156,6 +161,11 @@ namespace Glib.XNA
             if (overlay == null)
             {
                 throw new ArgumentNullException("overlay");
+            }
+
+            if (!main.GraphicsDevice.Equals(overlay.GraphicsDevice))
+            {
+                throw new ArgumentException("The GraphicsDevice is not consistent between the provided textures.");
             }
 
             if (origin.X < 0 || origin.Y < 0)
@@ -572,17 +582,37 @@ namespace Glib.XNA
             return CreateRectangle(width, height, Color.White);
         }
 
+        private Texture2D _whitePixel;
+
         /// <summary>
         /// Gets a one by one texture which is a white pixel.
         /// </summary>
-        /// <remarks>
-        /// This operation is expensive, so make minimal calls to it.
-        /// </remarks>
         public Texture2D WhitePixel
         {
             get
             {
-                return CreateSquare(1);
+                if (_whitePixel == null)
+                {
+                    _whitePixel = CreateSquare(1, Color.White);
+                }
+                return _whitePixel;
+            }
+        }
+
+        private Texture2D _transparentPixel;
+
+        /// <summary>
+        /// Gets a one by one texture which is a transparent pixel.
+        /// </summary>
+        public Texture2D TransparentPixel
+        {
+            get
+            {
+                if (_transparentPixel == null)
+                {
+                    _transparentPixel = CreateSquare(1, Color.Transparent);
+                }
+                return _transparentPixel;
             }
         }
 
