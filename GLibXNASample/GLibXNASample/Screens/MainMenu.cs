@@ -55,15 +55,15 @@ namespace GLibXNASample.Screens
 
             //OverlayImage overlays the second image onto the first (not in place)
             Texture2D imageOverlay = factory.CreateSquare(15, Color.DarkGray * 0.65F);
-            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(11, Color.Black * 0.75F), new Point(2, 2));
-            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(7, Color.DarkOrange * 0.85F), new Point(4, 4));
-            imageOverlay = factory.OverlayImage(imageOverlay, factory.CreateSquare(3, Color.DarkRed * 0.95F), new Point(6, 6));
+            imageOverlay = TextureFactory.OverlayImage(imageOverlay, factory.CreateSquare(11, Color.Black * 0.75F), new Point(2, 2));
+            imageOverlay = TextureFactory.OverlayImage(imageOverlay, factory.CreateSquare(7, Color.DarkOrange * 0.85F), new Point(4, 4));
+            imageOverlay = TextureFactory.OverlayImage(imageOverlay, factory.CreateSquare(3, Color.DarkRed * 0.95F), new Point(6, 6));
 
             fadingImage = new Sprite(imageOverlay, Vector2.Zero, sb);
             fadingImage.Position = new Vector2(15, 25);
             //The CreateFade method creates an array of textures, each one closer to the final texture than the last
             //It is used for fades
-            fades = factory.CreateFade(fadingImage.Texture, factory.OverlayImage(factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), factory.CreateHollowRectangle(fadingImage.Texture.Width - 4, fadingImage.Texture.Height - 4, Color.DarkRed), new Point(2,2)), 300);
+            fades = TextureFactory.CreateFade(fadingImage.Texture, TextureFactory.OverlayImage(factory.CreateRectangle(fadingImage.Texture.Width, fadingImage.Texture.Height, Color.Red), factory.CreateHollowRectangle(fadingImage.Texture.Width - 4, fadingImage.Texture.Height - 4, Color.DarkRed), new Point(2, 2)), 300);
 
             mouseBoundingBox = new Sprite(factory.CreateHollowCircle((mouseCursor.Width / 2).Round(), Color.Navy), mouseCursor.Position, sb) { UseCenterAsOrigin = true };
 

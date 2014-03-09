@@ -29,7 +29,7 @@ namespace Glib.XNA
         /// <param name="last">The last image.</param>
         /// <param name="frameCount">The number of frames to include in the phase.</param>
         /// <returns>An array of textures which can be used to create a phase effect.</returns>
-        public Texture2D[] CreateFade(Texture2D first, Texture2D last, int frameCount)
+        public static Texture2D[] CreateFade(Texture2D first, Texture2D last, int frameCount)
         {
             if (first == null)
             {
@@ -75,7 +75,7 @@ namespace Glib.XNA
 
             for (int frame = 0; frame < frameCount; frame++)
             {
-                Texture2D image = new Texture2D(Graphics, first.Width, first.Height);
+                Texture2D image = new Texture2D(first.GraphicsDevice, first.Width, first.Height);
                 Color[] imageData = new Color[image.Width * image.Height];
 
                 for (int i = 0; i < initialData.Length; i++)
@@ -126,7 +126,7 @@ namespace Glib.XNA
         /// <param name="main">The image to overlay on to.</param>
         /// <param name="overlay">The image to overlay.</param>
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
-        public Texture2D OverlayImage(Texture2D main, Texture2D overlay)
+        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay)
         {
             return OverlayImage(main, overlay, Point.Zero);
         }
@@ -138,7 +138,7 @@ namespace Glib.XNA
         /// <param name="overlay">The image to overlay.</param>
         /// <param name="origin">The position of the overlay.</param>
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image replacing pixels of the main image.</returns>
-        public Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin)
+        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin)
         {
             return OverlayImage(main, overlay, origin, OverlayType.Replace);
         }
@@ -151,7 +151,7 @@ namespace Glib.XNA
         /// <param name="origin">The position of the overlay.</param>
         /// <param name="overlayType">The effect of the overlay</param>
         /// <returns>An image of the same dimensions as the main image with all non-transparent pixels of the overlay image modifying pixels of the main image.</returns>
-        public Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin, OverlayType overlayType)
+        public static Texture2D OverlayImage(Texture2D main, Texture2D overlay, Point origin, OverlayType overlayType)
         {
             if (main == null)
             {
@@ -203,7 +203,7 @@ namespace Glib.XNA
             }
 
             //Create new texture so operation is not done in place
-            Texture2D newImage = new Texture2D(Graphics, main.Width, main.Height);
+            Texture2D newImage = new Texture2D(main.GraphicsDevice, main.Width, main.Height);
             newImage.SetData(mainData);
 
             return newImage;
@@ -216,7 +216,7 @@ namespace Glib.XNA
         /// <param name="original">The image to crop.</param>
         /// <param name="whitespaceColors">Colors (other than transparency) to treat as whitespace.</param>
         /// <returns>A cropped texture.</returns>
-        public Texture2D CropWhitespace(Texture2D original, params Color[] whitespaceColors)
+        public static Texture2D CropWhitespace(Texture2D original, params Color[] whitespaceColors)
         {
             if (original == null)
             {
@@ -317,7 +317,7 @@ namespace Glib.XNA
                 whitecolumnsRight++;
             }
 
-            Texture2D newImg = new Texture2D(Graphics, original.Width - (whitecolumnsLeft + whitecolumnsRight), original.Height - (whiterowsTop + whiterowsBottom));
+            Texture2D newImg = new Texture2D(original.GraphicsDevice, original.Width - (whitecolumnsLeft + whitecolumnsRight), original.Height - (whiterowsTop + whiterowsBottom));
             Color[] dataFromOld = new Color[newImg.Width * newImg.Height];
             original.GetData<Color>(dataFromOld, whitecolumnsLeft * original.Width + whiterowsTop, newImg.Height * newImg.Width);
             newImg.SetData(dataFromOld);
@@ -327,6 +327,7 @@ namespace Glib.XNA
 
         /// <summary>
         /// Replaces the specified colors in the specified image with other colors.
+        /// The color replacement is done in-place.
         /// </summary>
         /// <param name="image">The image to replace the colors in (done in place).</param>
         /// <param name="colors">A dictionary specifying colors to replace and what colors to use instead.</param>
