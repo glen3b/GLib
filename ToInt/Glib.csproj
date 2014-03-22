@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,6 +13,7 @@
     <AssemblyName>GlenLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LicensePath>..</LicensePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\GlenLibrary.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -93,4 +96,19 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
+  <!-- Create production ZIP -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <ItemGroup>
+      <ApplicationFiles Include="$(OutputPath)\*.*;$(LicensePath)\COPY*;$(LicensePath)\READ*" Exclude="$(OutputPath)\*.pdb" />
+    </ItemGroup>
+    <MakeDir Directories="$(OutputPath)" />
+    <MakeDir Directories="$(OutputPath)\ZipWD" />
+    <Zip Files="@(ApplicationFiles)" WorkingDirectory="$(OutputPath)\ZipWD" ZipFileName="$(OutputPath)\GLibDesktop.zip" ZipLevel="9" />
+    <RemoveDir Directories="$(OutputPath)\ZipWD" />
+  </Target>
+  
+  <Target Name = "Clean">
+        <RemoveDir Directories="$(OutputPath)" />
+    </Target>
 </Project>

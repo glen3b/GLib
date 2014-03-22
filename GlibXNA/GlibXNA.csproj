@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
     <ProjectGuid>{CE0948B0-4DD8-4841-A163-BD79C03D52EB}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -8,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Glib.XNA</RootNamespace>
-    <AssemblyName>GlibXNA</AssemblyName>
+    <AssemblyName>GLibXNA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
@@ -16,6 +17,7 @@
     <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>0651756d-63c3-48a2-8122-975ada9953e8</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
+    <LicensePath>..</LicensePath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +31,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>false</XnaCompressContent>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +45,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
-    <DocumentationFile>..\Binaries\x86\Release\GlibXNA.XML</DocumentationFile>
+    <DocumentationFile>..\Binaries\x86\Release\GLibXNA.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -143,4 +147,18 @@
       <Target Name="AfterBuild">
       </Target>
     -->
+  <!-- Create production ZIP -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <ItemGroup>
+      <ApplicationFiles Include="$(OutputPath)\*.*;$(LicensePath)\COPY*;$(LicensePath)\READ*" Exclude="$(OutputPath)\*.pdb" />
+    </ItemGroup>
+    <MakeDir Directories="$(OutputPath)" />
+    <MakeDir Directories="$(OutputPath)\ZipWD" />
+    <Zip Files="@(ApplicationFiles)" WorkingDirectory="$(OutputPath)\ZipWD" ZipFileName="$(OutputPath)\GLibXNAWindows.zip" ZipLevel="9" />
+    <RemoveDir Directories="$(OutputPath)\ZipWD" />
+  </Target>
+  
+  <Target Name = "Clean">
+        <RemoveDir Directories="$(OutputPath)" />
+    </Target>
 </Project>
