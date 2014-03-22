@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
     <ProjectGuid>{CE0948B0-4DD8-4841-A163-BD79C03D52EB}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -149,6 +148,7 @@
     -->
   <!-- Create production ZIP -->
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
     <ItemGroup>
       <ApplicationFiles Include="$(OutputPath)\*.*;$(LicensePath)\COPY*;$(LicensePath)\READ*" Exclude="$(OutputPath)\*.pdb" />
     </ItemGroup>

@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -99,6 +98,7 @@
   
   <!-- Create production ZIP -->
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
     <ItemGroup>
       <ApplicationFiles Include="$(OutputPath)\*.*;$(LicensePath)\COPY*;$(LicensePath)\READ*" Exclude="$(OutputPath)\*.pdb" />
     </ItemGroup>
