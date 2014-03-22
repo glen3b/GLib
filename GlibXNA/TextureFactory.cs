@@ -580,7 +580,7 @@ namespace Glib.XNA
         private Texture2D _whitePixel;
 
         /// <summary>
-        /// Gets a one by one texture which is a white pixel.
+        /// Gets a one by one texture which is a white pixel. Cached internally, so it is only created once.  It is not safe to modify this texture reference without breaking other code.
         /// </summary>
         public Texture2D WhitePixel
         {
@@ -594,10 +594,32 @@ namespace Glib.XNA
             }
         }
 
+        /// <summary>
+        /// Returns a new <see cref="Texture2D"/> object with the same color data as the original.
+        /// </summary>
+        /// <param name="original">The original texture which should be cloned.</param>
+        /// <returns>A new <see cref="Texture2D"/> instance with the same color data as the original.</returns>
+        public static Texture2D Clone(Texture2D original)
+        {
+            if (original == null)
+            {
+                throw new ArgumentNullException("original");
+            }
+
+            // Mipmap defaults to false
+            Texture2D clone = new Texture2D(original.GraphicsDevice, original.Width, original.Height, false, original.Format);
+            clone.Tag = original.Tag;
+            Color[] data = new Color[clone.Width * clone.Height];
+            original.GetData(data);
+            clone.SetData(data);
+
+            return clone;
+        }
+
         private Texture2D _transparentPixel;
 
         /// <summary>
-        /// Gets a one by one texture which is a transparent pixel.
+        /// Gets a one by one texture which is a transparent pixel. Cached internally, so it is only created once. It is not safe to modify this texture reference without breaking other code.
         /// </summary>
         public Texture2D TransparentPixel
         {

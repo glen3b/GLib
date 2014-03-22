@@ -103,18 +103,19 @@ namespace GLibXNASample.Screens
                 TextSprite button = new TextSprite(sb, GLibXNASampleGame.Instance.Content.Load<SpriteFont>("MenuItem"), element.Key);
                 //Allows hovering (and therefore clicking) on a sprite
                 button.IsHoverable = true;
-                //These are the colors that are displayed at the various hovering states
+                // These are the colors that are displayed at the various hovering states
                 button.HoverColor = Color.DarkCyan;
                 button.NonHoverColor = Color.Black;
-                //"Pressed" event handler lambda expression
+                // "Pressed" event handler lambda expression
                 button.Pressed += (src, args) => GLibXNASampleGame.Instance.SetScreen(buttons[((TextSprite)src).Text]);
-                //Setting width and height on a Sprite scales it
+                // Setting width and height on a Sprite scales it
                 buttonSprite.Width = button.Width + 6;
                 buttonSprite.Height = button.Height + 4;
                 buttonSprite.Position = new Vector2(buttonSprite.GetCenterPosition(sb.GraphicsDevice.Viewport).X, yCoord);
-                //ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
+                // ParentSprite: Allows for a "button" behind a clickable TextSprite (or not clickable), all collision and position logic done with this sprite
                 button.ParentSprite = buttonSprite;
 
+                // Round to look better
                 button.Scale.X = button.Scale.X.Round();
                 button.Scale.Y = button.Scale.Y.Round();
                 button.X = button.X.Round();
@@ -129,8 +130,8 @@ namespace GLibXNASample.Screens
             }
             #endregion
 
-            //ProgressBar: A dynamically generated progress bar, could be used to represent asset loading progress
-            //Here it is just used for effects :)
+            // ProgressBar: A dynamically generated progress bar, could be used to represent asset loading progress
+            // Here it is just used for effects :-)
             progressBar = new ProgressBar(Vector2.Zero, _filledColors[0], _emptyColors[0], sb);
             //HeightScale: The progress bar shall be 7 pixels high
             progressBar.HeightScale = 7;
@@ -146,17 +147,17 @@ namespace GLibXNASample.Screens
             caption.Visible = false;
             AdditionalSprites.Add(caption);
 
-            //Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
+            // Random Particle Generator: A particle generator that uses a Random instance to set properties of the generated particles
             RandomParticleGenerator particlegen = new RandomParticleGenerator(sb, GLibXNASampleGame.Instance.Content.Load<Texture2D>("Star"));
             particlegen.MinimumParticleColorChangeRate = 0.925f;
             particlegen.MinimumTimeToLive = TimeSpan.FromMilliseconds(400);
             particlegen.MaximumTimeToLive = TimeSpan.FromMilliseconds(780);
             particlegen.ParticlesToGenerate = 1;
             particlegen.ScaleFactor = 15;
-            //TimeToLiveSettings: When to make a particle expire, binary flaggable enumerator
+            // TimeToLiveSettings: When to make a particle expire, binary flaggable enumerator
             particlegen.TTLSettings = TimeToLiveSettings.AlphaLess100 | TimeToLiveSettings.StrictTTL;
 
-            //Particle engine: Generates particles using the specified particle generator
+            // Particle engine: Generates particles using the specified particle generator
             mouseParticleGen = new ParticleEngine(particlegen);
             mouseParticleGen.FramesPerGeneration = 3;
             mouseParticleGen.Tracked = mouseCursor;
@@ -196,6 +197,9 @@ namespace GLibXNASample.Screens
         /// Since this is being updated through a <see cref="ScreenGame"/>, a <see cref="GameTime"/> will be provided, so this method will be called.
         /// Override whichever method is used by your game.
         /// </summary>
+        /// <remarks>
+        /// At some point or another, I want to redo this "2 overloads one called" system while still providing support for environments without <see cref="GameTime"/>.
+        /// </remarks>
         /// <param name="game">The current <see cref="GameTime"/> object, which provides a snapshot of game timing values.</param>
         public override void Update(GameTime game)
         {
