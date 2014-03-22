@@ -22,8 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\Debug\GlenLibrary.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -95,7 +94,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
   <!-- Create production ZIP -->
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
     <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
@@ -107,8 +105,7 @@
     <Zip Files="@(ApplicationFiles)" WorkingDirectory="$(OutputPath)\ZipWD" ZipFileName="$(OutputPath)\GLibDesktop.zip" ZipLevel="9" />
     <RemoveDir Directories="$(OutputPath)\ZipWD" />
   </Target>
-  
-  <Target Name = "Clean">
-        <RemoveDir Directories="$(OutputPath)" />
-    </Target>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(OutputPath)" />
+  </Target>
 </Project>

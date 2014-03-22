@@ -30,8 +30,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>false</XnaCompressContent>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\x86\Debug\GLibXNA.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -157,8 +156,7 @@
     <Zip Files="@(ApplicationFiles)" WorkingDirectory="$(OutputPath)\ZipWD" ZipFileName="$(OutputPath)\GLibXNAWindows.zip" ZipLevel="9" />
     <RemoveDir Directories="$(OutputPath)\ZipWD" />
   </Target>
-  
-  <Target Name = "Clean">
-        <RemoveDir Directories="$(OutputPath)" />
-    </Target>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(OutputPath)" />
+  </Target>
 </Project>
