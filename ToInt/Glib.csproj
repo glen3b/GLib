@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Alphabet.cs" />
     <Compile Include="Collections\CollectionExtensions.cs" />
+    <Compile Include="Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="ColoredConsoleWriter.cs" />
     <Compile Include="Conversions.cs" />
     <Compile Include="Cryptography\CryptoExtensions.cs" />
     <Compile Include="Cryptography\NamespaceDoc.cs" />
