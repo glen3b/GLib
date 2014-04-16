@@ -164,19 +164,19 @@ namespace Glib
         {
             get
             {
-                return new bool[5, 5]
+                return new bool[5, 6]
                 {
-                    /*  ^^^^
+                    /*  ^^^^^
                      * ^  
-                     * ^ ^^^
-                     * ^  ^
-                     *  ^^^
+                     * ^  ^^^
+                     * ^   ^
+                     *  ^^^^
                      */
-                    { false, true, true, true, true },
-                    { true, false, false, false, false },
-                    { true, false, true, true, true },
-                    { true,false, false, true, false },
-                    { false, true, true, true, false }
+                    { false, true, true, true, true, true },
+                    { true, false, false, false, false, false },
+                    { true, false, false, true, true, true },
+                    { true, false, false, false, true, false },
+                    { false, true,true, true, true, false }
                 };
             }
         }
@@ -467,8 +467,8 @@ namespace Glib
             }
         }
 
-        
-        
+
+
         /// <summary>
         /// The character T.
         /// </summary>
@@ -722,7 +722,7 @@ namespace Glib
             }
         }
 
-        private List<KeyValuePair<string, bool[,]>> _customChars  = new List<KeyValuePair<string, bool[,]>>();
+        private List<KeyValuePair<string, bool[,]>> _customChars = new List<KeyValuePair<string, bool[,]>>();
 
         /// <summary>
         /// The number four.
@@ -1026,7 +1026,7 @@ namespace Glib
                                 break;
                             }
                         }
-                        throw new NotSupportedException("The specified word contains an unsupported character '"+letter.ToString().ToUpper()+"'.");
+                        throw new NotSupportedException("The specified word contains an unsupported character '" + letter.ToString().ToUpper() + "'.");
                 }
 
                 for (int row = 0; row < printArray.GetLength(0); row++)

@@ -14,7 +14,7 @@ namespace ConsoleTest
             new AlphabetPrinter('%').Print("Glen!");
             Console.ReadKey(true);
 
-            ColoredConsoleWriter.WriteLine(ColoredConsoleWriter.TranslateAlternateColorCodes('&', "&8Hello &aglen3b&8, I see your rank is &eserver owner&8."));
+            ColoredConsoleWriter.WriteLine(ColoredConsoleWriter.TranslateAlternateColorCodes('&', "&00&11&22&33&44&55&66&77&88&99&aa&bb&cc&dd&ee&ff"));
             Console.ReadKey(true);
         }
     }

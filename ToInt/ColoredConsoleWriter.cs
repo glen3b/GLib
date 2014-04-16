@@ -35,7 +35,7 @@ namespace Glib
         {
             _colors = new Dictionary<char, ConsoleColor>();
             _colors.Add('A', ConsoleColor.Green);
-            _colors.Add('B', ConsoleColor.Blue);
+            _colors.Add('B', ConsoleColor.Cyan);
             _colors.Add('C', ConsoleColor.Red);
             _colors.Add('D', ConsoleColor.Magenta);
             _colors.Add('E', ConsoleColor.Yellow);
@@ -50,6 +50,7 @@ namespace Glib
             _colors.Add('7', ConsoleColor.Gray);
             _colors.Add('8', ConsoleColor.DarkGray);
             _colors.Add('9', ConsoleColor.Blue);
+            _colors.Add('R', ConsoleColor.Gray);
             _publicColors = new ReadOnlyDictionary<char, ConsoleColor>(_colors);
         }
 
