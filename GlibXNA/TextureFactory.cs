@@ -610,7 +610,7 @@ namespace Glib.XNA
 
             // Mipmap defaults to false
             Texture2D clone = new Texture2D(original.GraphicsDevice, original.Width, original.Height, false, original.Format);
-            clone.Tag = original.Tag;
+            clone.Tag = original.Tag is ICloneable ? ((ICloneable)original.Tag).Clone() : original.Tag;
             Color[] data = new Color[clone.Width * clone.Height];
             original.GetData(data);
             clone.SetData(data);
