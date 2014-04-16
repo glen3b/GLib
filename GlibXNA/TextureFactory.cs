@@ -596,6 +596,8 @@ namespace Glib.XNA
 
         /// <summary>
         /// Returns a new <see cref="Texture2D"/> object with the same color data as the original.
+        /// Mipmap values are not copied over. Null arguments are handled, and passing null will result in returning a null value.
+        /// If the tag object on the original texture implements <see cref="IClonable"/>, it will be cloned as well.
         /// </summary>
         /// <param name="original">The original texture which should be cloned.</param>
         /// <returns>A new <see cref="Texture2D"/> instance with the same color data as the original.</returns>
@@ -603,7 +605,7 @@ namespace Glib.XNA
         {
             if (original == null)
             {
-                throw new ArgumentNullException("original");
+                return null;
             }
 
             // Mipmap defaults to false
