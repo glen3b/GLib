@@ -86,7 +86,7 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Creates a frame.
+        /// Creates a frame that renders all of the specified image with a scale of one for 500 milliseconds.
         /// </summary>
         /// <param name="image">The image which is this frame.</param>
         public Frame(Texture2D image)
@@ -96,18 +96,19 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// Creates a frame.
+        /// Creates a frame with a scale of one that appears for 500 milliseconds.
         /// </summary>
         /// <param name="image">The image which contains this frame.</param>
         /// <param name="drawRegion">The region of the image to render as this frame.</param>
         public Frame(Texture2D image, Rectangle? drawRegion) : this(image, drawRegion, Vector2.One) { }
 
         /// <summary>
-        /// Creates a frame.
+        /// Creates a frame that appears for 500 milliseconds.
         /// </summary>
         /// <param name="image">The image which contains this frame.</param>
+        /// <param name="scale">The scale of the frame.</param>
         /// <param name="drawRegion">The region of the image to render as this frame.</param>
-        public Frame(Texture2D image, Rectangle? drawRegion, Vector2 scale) : this(image, drawRegion, Vector2.One, TimeSpan.Zero) { }
+        public Frame(Texture2D image, Rectangle? drawRegion, Vector2 scale) : this(image, drawRegion, scale, TimeSpan.Zero) { }
 
         /// <summary>
         /// Creates a frame.

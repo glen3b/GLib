@@ -316,12 +316,45 @@ namespace Glib.XNA.SpriteLib
                     if (!IsPaused)
                     {
                         CurrentFrameIndex = 0;
+                        while (Frames[CurrentFrameIndex].Time <= TimeSpan.Zero)
+                        {
+                            if (CurrentFrameIndex + 1 >= Frames.Count)
+                            {
+                                CurrentFrameIndex = 0;
+                            }
+                            else
+                            {
+                                CurrentFrameIndex++;
+                            }
+
+                            if (CurrentFrameIndex == 0)
+                            {
+                                throw new InvalidOperationException("Cannot advance the frame when no additional frames exist that are rendered.");
+                            }
+                        }
                     }
 
                 }
                 else
                 {
-                    CurrentFrameIndex++;
+                    int initialCFrame = ++CurrentFrameIndex;
+
+                    while (Frames[CurrentFrameIndex].Time <= TimeSpan.Zero)
+                    {
+                        if (CurrentFrameIndex + 1 >= Frames.Count)
+                        {
+                            CurrentFrameIndex = 0;
+                        }
+                        else
+                        {
+                            CurrentFrameIndex++;
+                        }
+
+                        if (CurrentFrameIndex == initialCFrame)
+                        {
+                            throw new InvalidOperationException("Cannot advance the frame when no additional frames exist that are rendered.");
+                        }
+                    }
                 }
             }
 

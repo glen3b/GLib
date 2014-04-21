@@ -110,6 +110,11 @@ namespace Glib.XNA.SpriteLib
         /// <param name="time">The amount of time to display each frame in this collection for, when read by a <see cref="SpriteSheet"/>.</param>
         public void SetTimeAll(TimeSpan time)
         {
+            if (time < TimeSpan.Zero)
+            {
+                throw new ArgumentOutOfRangeException("time");
+            }
+
             foreach (Frame obj in this)
             {
                 obj.Time = time;
