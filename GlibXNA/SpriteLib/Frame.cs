@@ -41,6 +41,25 @@ namespace Glib.XNA.SpriteLib
             set { _origin = value; }
         }
 
+        private TimeSpan _time;
+
+        /// <summary>
+        /// Gets or sets the amount of time to spend on this frame before transitioning.
+        /// </summary>
+        public TimeSpan Time
+        {
+            get { return _time; }
+            set
+            {
+                if (value < TimeSpan.Zero)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                _time = value;
+            }
+        }
+        
+
         private Vector2 _scale = Vector2.One;
 
         /// <summary>
@@ -88,8 +107,16 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         /// <param name="image">The image which contains this frame.</param>
         /// <param name="drawRegion">The region of the image to render as this frame.</param>
+        public Frame(Texture2D image, Rectangle? drawRegion, Vector2 scale) : this(image, drawRegion, Vector2.One, TimeSpan.Zero) { }
+
+        /// <summary>
+        /// Creates a frame.
+        /// </summary>
+        /// <param name="image">The image which contains this frame.</param>
+        /// <param name="drawRegion">The region of the image to render as this frame.</param>
         /// <param name="scale">The scale of the frame.</param>
-        public Frame(Texture2D image, Rectangle? drawRegion, Vector2 scale)
+        /// <param name="time">The amount of time to spend on this frame before transitioning.</param>
+        public Frame(Texture2D image, Rectangle? drawRegion, Vector2 scale, TimeSpan time)
         {
             if (image == null)
             {
@@ -98,6 +125,11 @@ namespace Glib.XNA.SpriteLib
             _texture = image;
             _drawRegion = drawRegion;
             _scale = scale;
+            if (time < TimeSpan.Zero)
+            {
+                throw new ArgumentOutOfRangeException("time");
+            }
+            _time = time;
         }
     }
 }

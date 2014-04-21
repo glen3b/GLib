@@ -250,21 +250,15 @@ namespace Glib.XNA.SpriteLib
         /// </summary>
         protected TimeSpan _elapsedFrameTime;
 
-        private TimeSpan _frameTime;
-
         /// <summary>
-        /// Gets or sets the amount of time to spend on each frame.
+        /// Gets or sets the amount of time to spend on the current frame.
         /// </summary>
         public TimeSpan FrameTime
         {
-            get { return _frameTime; }
+            get { return Frames[CurrentFrameIndex].Time; }
             set
             {
-                if (value < TimeSpan.Zero)
-                {
-                    throw new ArgumentOutOfRangeException("FrameTime");
-                }
-                _frameTime = value;
+                Frames[CurrentFrameIndex].Time = value;
             }
         }
 

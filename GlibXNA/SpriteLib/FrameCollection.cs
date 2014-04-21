@@ -103,5 +103,17 @@ namespace Glib.XNA.SpriteLib
 
             base.InsertItem(index, item);
         }
+
+        /// <summary>
+        /// Set <see cref="Frame.Time"/> for all members of this collection.
+        /// </summary>
+        /// <param name="time">The amount of time to display each frame in this collection for, when read by a <see cref="SpriteSheet"/>.</param>
+        public void SetTimeAll(TimeSpan time)
+        {
+            foreach (Frame obj in this)
+            {
+                obj.Time = time;
+            }
+        }
     }
 }
