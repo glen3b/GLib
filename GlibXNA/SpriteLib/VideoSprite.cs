@@ -121,33 +121,5 @@ namespace Glib.XNA.SpriteLib
         //    //}
         //    Update();
         //}
-
-#if WINDOWS
-        /// <summary>
-        /// Disposes of this <see cref="VideoSprite"/>.
-        /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (Video != null && !Video.IsDisposed)
-            {
-                Video.Dispose();
-            }
-        }
-#else
-        /// <summary>
-        /// Disposes of this <see cref="VideoSprite"/>.
-        /// </summary>
-        public override void Dispose()
-        {
-            base.Dispose();
-            if (Video != null && !Video.IsDisposed)
-            {
-                Video.Dispose();
-            }
-        }
-#endif
     }
 }
