@@ -13,25 +13,8 @@ namespace Glib.XNA.SpriteLib
     /// Manages multiple <seealso cref="Sprite"/> objects on the same SpriteBatch.
     /// </summary>
     [DebuggerDisplay("Count = {Count}")]
-#if WINDOWS
-    public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite, ICollection<Sprite>, IDisposable
-#else
     public class SpriteManager : ISprite, ISpriteBatchManagerSprite, ITimerSprite, ICollection<Sprite>
-#endif
     {
-        ///// <summary>
-        ///// Gets the list of <seealso cref="Sprite"/>s managed by this SpriteManager.
-        ///// </summary>
-        //[Obsolete("SpriteManager now implements ICollection, please use that instead.")]
-        //public List<Sprite> Sprites
-        //{
-        //    get
-        //    {
-        //        return _sprites;
-        //    }
-        //}
-
-
         private List<Sprite> _sprites = new List<Sprite>();
         private SpriteBatch _sb = null;
 
@@ -242,23 +225,6 @@ namespace Glib.XNA.SpriteLib
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return _sprites.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Disposes of owned <see cref="Sprite"/>s.
-        /// </summary>
-        public void Dispose()
-        {
-            if (_sprites != null)
-            {
-                foreach (Sprite s in _sprites)
-                {
-                    if (s != null)
-                    {
-                        s.Dispose();
-                    }
-                }
-            }
         }
     }
 }
