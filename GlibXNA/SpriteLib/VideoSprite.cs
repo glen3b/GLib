@@ -14,7 +14,7 @@ namespace Glib.XNA.SpriteLib
     /// <remarks>
     /// This class performs calculations that assume that the game operates at a constant framerate.
     /// </remarks>
-    public class VideoSprite : Sprite, IDisposable
+    public class VideoSprite : Sprite
     {
         private static TextureFactory _textureCreator;
 

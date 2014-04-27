@@ -599,6 +599,8 @@ namespace Glib.XNA
         /// Mipmap values are not copied over. Null arguments are handled, and passing null will result in returning a null value.
         /// If the tag object on the original texture implements <see cref="System.ICloneable"/>, it will be cloned as well.
         /// Event registrations from the original object are not copied to the clone.
+        /// 
+        /// On Xbox 360 systems, the tag object of the clone will reference the tag object of the original in all bases.
         /// </summary>
         /// <param name="original">The original texture which should be cloned.</param>
         /// <returns>A new <see cref="Texture2D"/> instance with the same color data as the original.</returns>
@@ -611,7 +613,11 @@ namespace Glib.XNA
 
             // Mipmap defaults to false
             Texture2D clone = new Texture2D(original.GraphicsDevice, original.Width, original.Height, false, original.Format);
+#if WINDOWS
             clone.Tag = original.Tag is ICloneable ? ((ICloneable)original.Tag).Clone() : original.Tag;
+#else
+            clone.Tag = original.Tag;
+#endif
             Color[] data = new Color[clone.Width * clone.Height];
             original.GetData(data);
             clone.SetData(data);
