@@ -12,7 +12,7 @@ namespace Glib.XNA.SpriteLib
     /// Represents a RenderTarget2D which is a screen.
     /// </summary>
     [DebuggerDisplay("Name = {Name}")]
-    public class Screen : IPositionable, IDisposable
+    public class Screen : IPositionable
     {
         private float _layerDepth = 0;
 
@@ -319,39 +319,12 @@ namespace Glib.XNA.SpriteLib
                 }
             }
         }
-
-        /// <summary>
-        /// Disposes of all <see cref="Sprites"/> (and other assorted managed assets) owned by this <see cref="Screen"/>.
-        /// </summary>
-        public void Dispose()
-        {
-            foreach(IDrawableComponent obj in AdditionalSprites){
-                if(obj != null && obj is IDisposable){
-                    ((IDisposable)obj).Dispose();
-                }
-            }
-
-            if (Sprites != null)
-            {
-                this.Sprites.Dispose();
-            }
-
-            if (Target != null && !Target.IsDisposed)
-            {
-                this.Target.Dispose();
-            }
-
-            if (Graphics != null && !Graphics.IsDisposed)
-            {
-                Graphics.Dispose();
-            }
-        }
     }
 
     /// <summary>
     /// Represents a set of Screens to manage.
     /// </summary>
-    public class ScreenManager : ISprite, IEnumerable<Screen>, ICollection<Screen>, IDisposable
+    public class ScreenManager : ISprite, IEnumerable<Screen>, ICollection<Screen>
     {
         /// <summary>
         /// All the Screen objects managed by this ScreenManager.
@@ -617,17 +590,6 @@ namespace Glib.XNA.SpriteLib
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return _allScreens.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Disposes of the screen.
-        /// </summary>
-        public void Dispose()
-        {
-            foreach (var scr in this)
-            {
-                scr.Dispose();
-            }
         }
     }
 }
