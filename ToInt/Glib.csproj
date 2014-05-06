@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"
-        Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Commu‌​nity.Tasks.Targets')" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" Condition="Exists('$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Commu‌​nity.Tasks.Targets')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -54,6 +53,7 @@
     <Compile Include="Collections\CollectionExtensions.cs" />
     <Compile Include="Collections\ReadOnlyDictionary.cs" />
     <Compile Include="ColoredConsoleWriter.cs" />
+    <Compile Include="ConsoleReader.cs" />
     <Compile Include="Conversions.cs" />
     <Compile Include="Cryptography\CryptoExtensions.cs" />
     <Compile Include="Cryptography\NamespaceDoc.cs" />
