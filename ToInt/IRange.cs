@@ -54,6 +54,27 @@ namespace Glib
             }
         }
 
+        private int _start;
+
+        /// <summary>
+        /// Gets the inclusive start of the range.
+        /// </summary>
+        public int Start
+        {
+            get { return _start; }
+        }
+
+        private int _end;
+
+        /// <summary>
+        /// Gets the exclusive end of the range.
+        /// </summary>
+        public int End
+        {
+            get { return _end; }
+            set { _end = value; }
+        }
+
         /// <summary>
         /// Creates a range of integers.
         /// </summary>
@@ -61,22 +82,13 @@ namespace Glib
         /// <param name="end">The ending value.</param>
         public IntegerRange(int start, int end)
         {
-            if (Start >= End)
+            if (start >= end)
             {
                 throw new ArgumentException("The start time is not compatible with the end time.");
             }
-            Start = start;
-            End = end;
+            _start = start;
+            _end = end;
         }
-
-        /// <summary>
-        /// Gets the inclusive start of the range.
-        /// </summary>
-        public int Start { get; private set; }
-        /// <summary>
-        /// Gets the exclusive end of the range.
-        /// </summary>
-        public int End { get; private set; }
 
         /// <summary>
         /// Determines whether the specified value is included within this range.
@@ -136,12 +148,12 @@ namespace Glib
         /// <param name="end">The ending date.</param>
         public DateRange(DateTime start, DateTime end)
         {
-            if (Start >= End)
+            if (start >= end)
             {
                 throw new ArgumentException("The start time is not compatible with the end time.");
             }
-            Start = start;
-            End = end;
+            _start = start;
+            _end = end;
         }
 
         /// <summary>
@@ -160,14 +172,26 @@ namespace Glib
             }
         }
 
+        private DateTime _start;
+
         /// <summary>
         /// Gets the inclusive start of the range.
         /// </summary>
-        public DateTime Start { get; private set; }
+        public DateTime Start
+        {
+            get { return _start; }
+        }
+
+        private DateTime _end;
+
         /// <summary>
         /// Gets the exclusive end of the range.
         /// </summary>
-        public DateTime End { get; private set; }
+        public DateTime End
+        {
+            get { return _end; }
+            set { _end = value; }
+        }
 
         /// <summary>
         /// Determines whether the specified value is included within this range.
