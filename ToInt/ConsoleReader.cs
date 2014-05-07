@@ -11,6 +11,14 @@ namespace Glib
     public static class ConsoleReader
     {
         /// <summary>
+        /// Does not return before the user presses a key.
+        /// </summary>
+        public static void WaitResponse()
+        {
+            Console.ReadKey(true);
+        }
+
+        /// <summary>
         /// Prompts for a string from the console. This is done by printing the prompt, no newline added, and reading in the resulting user input. The characters typed by the user are not displayed to the console.
         /// </summary>
         /// <param name="prompt">The prompt to display to the user. Null is interpreted as the empty string.</param>
