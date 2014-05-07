@@ -59,6 +59,7 @@
     <Compile Include="Cryptography\NamespaceDoc.cs" />
     <Compile Include="Exceptions\NamespaceDoc.cs" />
     <Compile Include="Exceptions\SecurityException.cs" />
+    <Compile Include="IRange.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="Networking\NamespaceDoc.cs" />
     <Compile Include="Networking\NetworkUtils.cs" />

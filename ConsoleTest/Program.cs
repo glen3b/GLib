@@ -11,7 +11,7 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             Console.BufferWidth = 150;
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             new AlphabetPrinter('%').Print("Glen!");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ReadKey(true);
