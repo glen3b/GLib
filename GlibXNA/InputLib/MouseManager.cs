@@ -45,6 +45,7 @@ namespace Glib.XNA.InputLib
         /// <summary>
         /// An event fired after the update of the MouseManager, but before the assignment of LastMouseState.
         /// </summary>
+        [Obsolete("This event is no longer fired between the sets of the current and last mouse states. New update logic renders this event unneeded.")]
         public static event EventHandler Updated;
 
         private static Collection<ScreenRegion> _allRegions = new Collection<ScreenRegion>();
@@ -62,22 +63,22 @@ namespace Glib.XNA.InputLib
         /// </summary>
         internal static void Update()
         {
-            _currentMs = Microsoft.Xna.Framework.Input.Mouse.GetState();
-
-            foreach (ScreenRegion s in _allRegions)
-            {
-                s.Update();
-            }
-
-            _mousePositionable.X = _currentMs.X;
-            _mousePositionable.Y = _currentMs.Y;
+            LastMouseState = _currentMs;
 
             if (Updated != null)
             {
                 Updated(null, EventArgs.Empty);
             }
 
-            LastMouseState = _currentMs;
+            foreach (ScreenRegion s in _allRegions)
+            {
+                s.Update();
+            }
+
+            _currentMs = Microsoft.Xna.Framework.Input.Mouse.GetState();
+
+            _mousePositionable.X = _currentMs.X;
+            _mousePositionable.Y = _currentMs.Y;
         }
         
         
