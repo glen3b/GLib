@@ -70,13 +70,7 @@ namespace Glib.XNA.SpriteLib
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hash = 17;
-
-                //All point to same thing, just hash it all.
-                hash = hash * 23 + this.Degrees.GetHashCode();
-                hash = hash * 23 + this.Radians.GetHashCode();
-                hash = hash * 23 + this.Gradians.GetHashCode();
-                return hash;
+                return 17 * 23 + this.Degrees.GetHashCode();
             }
         }
 
@@ -102,6 +96,11 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public static bool operator !=(SpriteRotation a, SpriteRotation b)
         {
+            if (a == null)
+            {
+                return b != null;
+            }
+
             return !a.Equals(b);
         }
 
@@ -116,6 +115,11 @@ namespace Glib.XNA.SpriteLib
         /// </remarks>
         public static bool operator ==(SpriteRotation a, SpriteRotation b)
         {
+            if (a == null)
+            {
+                return b == null;
+            }
+
             return a.Equals(b);
         }
 

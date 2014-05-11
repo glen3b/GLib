@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Glib
 {
@@ -36,8 +37,47 @@ namespace Glib
     /// <summary>
     /// Represents a range of integers.
     /// </summary>
+    [DebuggerDisplay("Start = {Start}, End = {End}")]
     public struct IntegerRange : IRange<int>
     {
+        /// <summary>
+        /// Returns a value indicating whether two integer ranges are not equal.
+        /// </summary>
+        /// <param name="left">The first range to compare.</param>
+        /// <param name="right">The second range to compare.</param>
+        /// <returns>A value indicating whether the two integer ranges are not equal.</returns>
+        /// <remarks>
+        /// Doesn't compare types of the variables. Implementation of IRange is sufficient (assuming Start and End are equal) to call two instances equal.
+        /// </remarks>
+        public static bool operator !=(IntegerRange left, IRange<int> right)
+        {
+            if (left == null)
+            {
+                return right != null;
+            }
+
+            return !left.Equals(right);
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether two integer ranges are equal.
+        /// </summary>
+        /// <param name="left">The first range to compare.</param>
+        /// <param name="right">The second range to compare.</param>
+        /// <returns>A value indicating whether the two integer ranges are equal.</returns>
+        /// <remarks>
+        /// Doesn't compare types of the variables. Implementation of IRange is sufficient (assuming Start and End are equal) to call two instances equal.
+        /// </remarks>
+        public static bool operator ==(IntegerRange left, IRange<int> right)
+        {
+            if (left == null)
+            {
+                return right == null;
+            }
+
+            return left.Equals(right);
+        }
+
         /// <summary>
         /// Computes the hash code of this object.
         /// </summary>
@@ -139,8 +179,47 @@ namespace Glib
     /// <summary>
     /// Represents a range of <see cref="DateTime"/> instances.
     /// </summary>
+    [DebuggerDisplay("Start = {Start}, End = {End}")]
     public struct DateRange : IRange<DateTime>
     {
+        /// <summary>
+        /// Returns a value indicating whether two date ranges are not equal.
+        /// </summary>
+        /// <param name="left">The first range to compare.</param>
+        /// <param name="right">The second range to compare.</param>
+        /// <returns>A value indicating whether the two date ranges are not equal.</returns>
+        /// <remarks>
+        /// Doesn't compare types of the variables. Implementation of IRange is sufficient (assuming Start and End are equal) to call two instances equal.
+        /// </remarks>
+        public static bool operator !=(DateRange left, IRange<DateTime> right)
+        {
+            if (left == null)
+            {
+                return right != null;
+            }
+
+            return !left.Equals(right);
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether two date ranges are equal.
+        /// </summary>
+        /// <param name="left">The first range to compare.</param>
+        /// <param name="right">The second range to compare.</param>
+        /// <returns>A value indicating whether the two date ranges are equal.</returns>
+        /// <remarks>
+        /// Doesn't compare types of the variables. Implementation of IRange is sufficient (assuming Start and End are equal) to call two instances equal.
+        /// </remarks>
+        public static bool operator ==(DateRange left, IRange<DateTime> right)
+        {
+            if (left == null)
+            {
+                return right == null;
+            }
+
+            return left.Equals(right);
+        }
+
         /// <summary>
         /// Creates a range of dates.
         /// </summary>
