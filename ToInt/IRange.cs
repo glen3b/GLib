@@ -16,7 +16,7 @@ namespace Glib
         /// </summary>
         T Start { get; }
         /// <summary>
-        /// Represents the exclusive end of the range.
+        /// Represents the inclusive end of the range.
         /// </summary>
         T End { get; }
         /// <summary>
@@ -67,7 +67,7 @@ namespace Glib
         private int _end;
 
         /// <summary>
-        /// Gets the exclusive end of the range.
+        /// Gets the inclusive end of the range.
         /// </summary>
         public int End
         {
@@ -97,7 +97,7 @@ namespace Glib
         /// <returns>Whether value is within the bounds of this range.</returns>
         public bool Includes(int value)
         {
-            return value >= Start && value < End;
+            return value >= Start && value <= End;
         }
         /// <summary>
         /// Determines whether the specified range of values is included within this range.
@@ -185,7 +185,7 @@ namespace Glib
         private DateTime _end;
 
         /// <summary>
-        /// Gets the exclusive end of the range.
+        /// Gets the inclusive end of the range.
         /// </summary>
         public DateTime End
         {
@@ -200,7 +200,7 @@ namespace Glib
         /// <returns>Whether value is within the bounds of this range.</returns>
         public bool Includes(DateTime value)
         {
-            return value >= Start && value < End;
+            return value >= Start && value <= End;
         }
         /// <summary>
         /// Determines whether the specified range of values is included within this range.
