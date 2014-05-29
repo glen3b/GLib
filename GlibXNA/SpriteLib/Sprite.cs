@@ -185,7 +185,6 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// The SpriteBatch used for drawing the sprite.
         /// </summary>
-
         private SpriteBatch _spriteBatch;
 
         /// <summary>
