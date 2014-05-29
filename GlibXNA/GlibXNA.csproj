@@ -75,6 +75,7 @@
     <Compile Include="NetworkLib\NetworkWatcherComponent.cs" />
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="RandomPositionGenerator.cs" />
+    <Compile Include="RelativeCoordinateManager.cs" />
     <Compile Include="SpriteLib\Frame.cs" />
     <Compile Include="SpriteLib\FrameCollection.cs" />
     <Compile Include="SpriteLib\HitboxVisualizer.cs" />
