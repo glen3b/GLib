@@ -17,7 +17,7 @@ namespace Glib.XNA
         /// <summary>
         /// Gets the GraphicsDevice used for creating textures.
         /// </summary>
-        protected GraphicsDevice Graphics
+        public GraphicsDevice GraphicsDevice
         {
             get { return _graphics; }
         }
@@ -98,6 +98,14 @@ namespace Glib.XNA
         /// <param name="device">The GraphicsDevice this TextureFactory will use to create Texture2D objects.</param>
         public TextureFactory(GraphicsDevice device)
         {
+            if (device == null)
+            {
+                throw new ArgumentNullException("device");
+            }
+            if (device.IsDisposed)
+            {
+                throw new ObjectDisposedException("device");
+            }
             _graphics = device;
         }
 
@@ -353,7 +361,7 @@ namespace Glib.XNA
         /// <returns>A new texture with the specified colors at the specified points.</returns>
         public Texture2D CreateTexture(int width, int height, Func<Point, Color> colorDetermine)
         {
-            Texture2D retVal = new Texture2D(Graphics, width, height);
+            Texture2D retVal = new Texture2D(GraphicsDevice, width, height);
             Color[] data = new Color[width * height];
             for (int w_en = 0; w_en < width; w_en++)
             {
@@ -375,7 +383,7 @@ namespace Glib.XNA
         public Texture2D CreateHollowCircle(float radius, Color color)
         {
             int diameter = Math.Ceiling(radius * 2).ToInt();
-            Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
+            Texture2D retVal = new Texture2D(GraphicsDevice, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
             List<Vector2> points = GetOuterCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.08F);
 
@@ -408,7 +416,7 @@ namespace Glib.XNA
         public Texture2D CreateCircle(float radius, Color color)
         {
             int diameter = Math.Ceiling(radius * 2).ToInt();
-            Texture2D retVal = new Texture2D(Graphics, diameter, diameter);
+            Texture2D retVal = new Texture2D(GraphicsDevice, diameter, diameter);
             Color[] data = Enumerable.Repeat<Color>(Color.Transparent, retVal.Width * retVal.Height).ToArray();
             List<Vector2> points = GetCirclePoints(new Vector2(Math.Ceiling(radius).ToFloat(), Math.Ceiling(radius).ToFloat()), radius, 0.8f);
 
@@ -542,7 +550,7 @@ namespace Glib.XNA
         /// </remarks>
         public Texture2D CreateHollowRectangle(int width, int height, Color color)
         {
-            Texture2D returnVal = new Texture2D(Graphics, width, height);
+            Texture2D returnVal = new Texture2D(GraphicsDevice, width, height);
             Color[] data = new Color[width * height];
             for (int w_en = 0; w_en < width; w_en++)
             {
@@ -651,7 +659,7 @@ namespace Glib.XNA
         /// <returns>A rectangular texture of the specified size and color.</returns>
         public Texture2D CreateRectangle(int width, int height, Color color)
         {
-            Texture2D returnVal = new Texture2D(Graphics, width, height);
+            Texture2D returnVal = new Texture2D(GraphicsDevice, width, height);
             Color[] whiteColors = new Color[width * height];
             for (int i = 0; i < whiteColors.Length; i++)
             {

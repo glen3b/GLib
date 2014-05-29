@@ -111,7 +111,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets the dictionary mapping integral sizes of the tracked object to outline images.
         /// </summary>
-        public Dictionary<Point, Texture2D> Outlines { get; private set; }
+        public IDictionary<Point, Texture2D> Outlines { get; private set; }
 
         private SpriteBatch _spriteBatch;
 
@@ -127,8 +127,16 @@ namespace Glib.XNA.SpriteLib
                 {
                     throw new NullReferenceException();
                 }
+                if (value.IsDisposed)
+                {
+                    throw new ObjectDisposedException("SpriteBatch");
+                }
                 _spriteBatch = value;
-                _textureCreator = new TextureFactory(value.GraphicsDevice);
+                if (!_textureCreator.GraphicsDevice.Equals(_spriteBatch.GraphicsDevice))
+                {
+                    // Only recreate the factory if need be
+                    _textureCreator = new TextureFactory(value.GraphicsDevice);
+                }
             }
         }
 
@@ -145,6 +153,10 @@ namespace Glib.XNA.SpriteLib
                 if (value == null)
                 {
                     throw new NullReferenceException();
+                }
+                if (value is GraphicsResource && (value as GraphicsResource).IsDisposed)
+                {
+                    throw new ObjectDisposedException("Object");
                 }
                 _object = value;
             }
