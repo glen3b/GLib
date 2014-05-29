@@ -129,6 +129,7 @@ namespace Glib.XNA.SpriteLib
         /// <remarks>
         /// Returns a value from 0 to 100.
         /// </remarks>
+        [Obsolete("Please use the 'FillAmount' property.")]
         public float Percentage
         {
             get
@@ -136,6 +137,35 @@ namespace Glib.XNA.SpriteLib
                 lock (syncLock)
                 {
                     return 100f * (Value.ToFloat() / Denominator.ToFloat());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the percentage of the progress bar that is represented by the rendered value; that is, the amount filled.
+        /// </summary>
+        /// <remarks>
+        /// Returns a decimal value from 0 to 1.
+        /// Setting this property will result in the value being changed, not the denominator. Rounding will be performed.
+        /// </remarks>
+        public float FillAmount
+        {
+            get
+            {
+                lock (syncLock)
+                {
+                    return Value.ToFloat() / Denominator.ToFloat();
+                }
+            }
+            set
+            {
+                lock (syncLock)
+                {
+                    if (value < 0 || value > 1)
+                    {
+                        throw new ArgumentOutOfRangeException("The provided value is out of range. Value: " + value +", Minimum: 0.0, Maximum: 1.0");
+                    }
+                    Value = (Denominator.ToFloat() * value).Round();
                 }
             }
         }
