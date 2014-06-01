@@ -116,6 +116,7 @@ namespace Glib.XNA
         {
             Graphics = new GraphicsDeviceManager(this);
             ContentRootDirectory = "Content";
+            CoordinateManager = new RelativeCoordinateManager(Graphics.GraphicsDevice.Viewport);
 
         }
 
@@ -150,12 +151,18 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Applies any updates to the window size.
+        /// Applies any updates to the window size, adjusting the coordinate manager accordingly.
         /// </summary>
         protected void ApplyWindowSize()
         {
             Graphics.ApplyChanges();
+            CoordinateManager.SetSize(Width, Height);
         }
+
+        /// <summary>
+        /// Gets the internally used coordinate manager instance, which is mapped to the size of the current window.
+        /// </summary>
+        protected RelativeCoordinateManager CoordinateManager { get; private set; }
 
         private SpriteBatch _sb;
 
