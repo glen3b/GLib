@@ -58,6 +58,27 @@ namespace Glib.XNA
         /// <summary>
         /// Creates a relative coordinate manager instance.
         /// </summary>
+        /// <param name="size">The vector containing dimensions of the managed screen.</param>
+        public RelativeCoordinateManager(Vector2 size)
+            : this(size.X, size.Y)
+        {
+        }
+
+        private Vector2 _offset = Vector2.Zero;
+
+        /// <summary>
+        /// Gets or sets the offset in generated positions. Changes to this value will not affect/reposition tracked objects.
+        /// </summary>
+        public Vector2 PositionOffset
+        {
+            get { return _offset; }
+            set { _offset = value; }
+        }
+        
+
+        /// <summary>
+        /// Creates a relative coordinate manager instance.
+        /// </summary>
         /// <param name="viewport">The viewport containing dimensions of the managed screen.</param>
         public RelativeCoordinateManager(Viewport viewport) : this(viewport.Width, viewport.Height)
         {
@@ -71,7 +92,7 @@ namespace Glib.XNA
         /// <returns>A vector representing the absolute position with the specified relative coordinates with the width and height as known by this managed instance.</returns>
         public Vector2 GetAbsolutePosition(float x, float y)
         {
-            return new Vector2(MathHelper.Clamp(x, 0, 1) * Width, MathHelper.Clamp(y, 0, 1) * Height);
+            return PositionOffset + new Vector2(MathHelper.Clamp(x, 0, 1) * Width, MathHelper.Clamp(y, 0, 1) * Height);
         }
 
         /// <summary>
@@ -92,7 +113,7 @@ namespace Glib.XNA
         /// <returns>A vector representing the relative position with the specified absolute coordinates with the width and height as known by this managed instance.</returns>
         public Vector2 GetRelativePosition(float x, float y)
         {
-            return new Vector2(MathHelper.Clamp(x, 0, Width) / Width, MathHelper.Clamp(y, 0, Height) / Height);
+            return new Vector2(MathHelper.Clamp(x, 0, Width) / Width, MathHelper.Clamp(y, 0, Height) / Height) - PositionOffset;
         }
 
         /// <summary>
