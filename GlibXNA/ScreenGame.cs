@@ -116,7 +116,7 @@ namespace Glib.XNA
         {
             Graphics = new GraphicsDeviceManager(this);
             ContentRootDirectory = "Content";
-            CoordinateManager = new RelativeCoordinateManager(Graphics.GraphicsDevice.Viewport);
+            CoordinateManager = new RelativeCoordinateManager(Graphics.PreferredBackBufferWidth, Graphics.PreferredBackBufferHeight);
 
         }
 
