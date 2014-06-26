@@ -37,7 +37,7 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
     public class Sprite : Component, ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IOriginPositionable, IScaled
 #else
-    public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IOriginPositionable, IScaled
+    public class Sprite : ISprite, ISpriteBatchManagerSprite, ITexturable, IPositionable, ISizedScreenObject, ISizable, IDisposable, IOriginPositionable, IScaled
 #endif
     {
         private Vector2 _velocity;
@@ -854,5 +854,44 @@ namespace Glib.XNA.SpriteLib
             _lastMouseState = MouseManager.CurrentMouseState;
 #endif
         }
+
+#if WINDOWS
+        /// <summary>
+        /// Disposes of this <see cref="Sprite"/>.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release just unmanaged resources.</param>
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            //Dispose only does unmanaged on Texture2D and SpriteBatch
+            if (Texture != null && !Texture.IsDisposed)
+            {
+                Texture.Dispose();
+                //Although the default implementation of sprite may tolerate null textures, some subclass implementations do not
+                //Texture = null;
+            }
+            if (SpriteBatch != null && !SpriteBatch.IsDisposed)
+            {
+                SpriteBatch.Dispose();
+            }
+        }
+#else
+        /// <summary>
+        /// Disposes of this <see cref="Sprite"/>.
+        /// </summary>
+        public virtual void Dispose()
+        {
+            if (Texture != null && !Texture.IsDisposed)
+            {
+                Texture.Dispose();
+                Texture = null;
+            }
+            if (SpriteBatch != null && !SpriteBatch.IsDisposed)
+            {
+                SpriteBatch.Dispose();
+            }
+        }
+#endif
     }
 }
