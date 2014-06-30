@@ -539,6 +539,98 @@ namespace Glib
         }
 
         /// <summary>
+        /// The character W.
+        /// </summary>
+        public static bool[,] W
+        {
+            get
+            {
+                /* |^   ^   ^
+                 * |^   ^   ^
+                 * | ^ ^ ^ ^
+                 * | ^ ^ ^ ^
+                 * |  ^   ^
+                 */
+                return new bool[5, 9]{
+                    {true,false,false,false,true,false,false,false,true},
+                    {true,false,false,false,true,false,false,false,true},
+                    {false,true,false,true,false,true,false,true,false},
+                    {false,true,false,true,false,true,false,true,false},
+                    {false,false,true,false,false,false,true,false,false}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character X.
+        /// </summary>
+        public static bool[,] X
+        {
+            get
+            {
+                /* |^     ^
+                 * | ^   ^
+                 * |  ^ ^
+                 * | ^   ^ 
+                 * |^     ^
+                 */
+                return new bool[5, 7]{
+                    {true,false,false,false,false,false,true},
+                    {false,true,false,false,false,true,false},
+                    {false,false,true,false,true,false,false},
+                    {false,true,false,false,false,true,false},
+                    {true,false,false,false,false,false,true}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character Y.
+        /// </summary>
+        public static bool[,] Y
+        {
+            get
+            {
+                /* |^     ^
+                 * | ^   ^
+                 * |  ^ ^
+                 * |   ^
+                 * |   ^
+                 */
+                return new bool[5, 7]{
+                    {true,false,false,false,false,false,true},
+                    {false,true,false,false,false,true,false},
+                    {false,false,true,false,true,false,false},
+                    {false,false,false,true,false,false,false},
+                    {false,false,false,true,false,false,false}
+                };
+            }
+        }
+
+        /// <summary>
+        /// The character Z.
+        /// </summary>
+        public static bool[,] Z
+        {
+            get
+            {
+                /* |^^^^^
+                 * |   ^ 
+                 * |  ^
+                 * | ^
+                 * |^^^^^
+                 */
+                return new bool[5, 5]{
+                    {true,true,true,true,true},
+                    {false,false,false,true,false},
+                    {false,false,true,false,false},
+                    {false,true,false,false,false},
+                    {true,true,true,true,true}
+                };
+            }
+        }
+
+        /// <summary>
         /// A space character.
         /// </summary>
         public static bool[,] Space
@@ -712,9 +804,10 @@ namespace Glib
         }
 
         /// <summary>
-        /// Gets a list of custom characters specific to this instance, in the format of key: input letter, value: bool[,] representing the letter.
+        /// Gets a mapping of custom characters specific to this instance, in the format of key: input letter, value: bool[,] representing the letter.
+        /// The keys are compared in a case-insensitive manner.
         /// </summary>
-        public List<KeyValuePair<string, bool[,]>> CustomChars
+        public IDictionary<string, bool[,]> CustomChars
         {
             get
             {
@@ -722,7 +815,7 @@ namespace Glib
             }
         }
 
-        private List<KeyValuePair<string, bool[,]>> _customChars = new List<KeyValuePair<string, bool[,]>>();
+        private Dictionary<string, bool[,]> _customChars = new Dictionary<string, bool[,]>(CaseInsensitiveStringComparison.Instance);
 
         /// <summary>
         /// The number four.
@@ -900,133 +993,144 @@ namespace Glib
                 char letter = word[letterCount];
 
                 bool[,] printArray = new bool[5, 5];
-                switch (letter.ToString().ToUpper())
+                if (CustomChars.ContainsKey(letter.ToString()))
                 {
-                    case "A":
-                        printArray = A;
-                        break;
+                    printArray = CustomChars[letter.ToString()];
+                }
+                else
+                {
+                    switch (letter.ToString().ToUpper())
+                    {
+                        case "A":
+                            printArray = A;
+                            break;
 
-                    case "B":
-                        printArray = B;
-                        break;
-                    case "C":
-                        printArray = C;
-                        break;
-                    case "D":
-                        printArray = D;
-                        break;
-                    case "E":
-                        printArray = E;
-                        break;
-                    case "F":
-                        printArray = F;
-                        break;
-                    case "G":
-                        printArray = G;
-                        break;
-                    case "H":
-                        printArray = H;
-                        break;
-                    case "I":
-                        printArray = I;
-                        break;
-                    case "J":
-                        printArray = J;
-                        break;
-                    case "K":
-                        printArray = K;
-                        break;
-                    case "L":
-                        printArray = L;
-                        break;
-                    case "M":
-                        printArray = M;
-                        break;
-                    case "N":
-                        printArray = N;
-                        break;
-                    case "O":
-                        printArray = O;
-                        break;
-                    case "P":
-                        printArray = P;
-                        break;
-                    case "Q":
-                        printArray = Q;
-                        break;
-                    case "R":
-                        printArray = R;
-                        break;
-                    case "S":
-                        printArray = S;
-                        break;
-                    case "T":
-                        printArray = T;
-                        break;
-                    case "U":
-                        printArray = U;
-                        break;
-                    case "V":
-                        printArray = V;
-                        break;
-                    case "0":
-                        printArray = Zero;
-                        break;
-                    case "1":
-                        printArray = One;
-                        break;
-                    case "2":
-                        printArray = Two;
-                        break;
-                    case "3":
-                        printArray = Three;
-                        break;
-                    case "4":
-                        printArray = Four;
-                        break;
-                    case "5":
-                        printArray = Five;
-                        break;
-                    case "6":
-                        printArray = Six;
-                        break;
-                    case "7":
-                        printArray = Seven;
-                        break;
-                    case "8":
-                        printArray = Eight;
-                        break;
-                    case "9":
-                        printArray = Nine;
-                        break;
-                    case "(":
-                        printArray = LeftParentheses;
-                        break;
-                    case ")":
-                        printArray = RightParentheses;
-                        break;
-                    case " ":
-                        printArray = Space;
-                        break;
-                    case "-":
-                        printArray = Hyphen;
-                        break;
-                    case "!":
-                        printArray = ExclamationMark;
-                        break;
-                    case "#":
-                        printArray = Pound;
-                        break;
-                    default:
-                        foreach (KeyValuePair<string, bool[,]> kvp in CustomChars)
-                        {
-                            if (kvp.Key.ToUpper() == letter.ToString().ToUpper())
-                            {
-                                printArray = kvp.Value;
-                                break;
-                            }
-                        }
-                        throw new NotSupportedException("The specified word contains an unsupported character '" + letter.ToString().ToUpper() + "'.");
+                        case "B":
+                            printArray = B;
+                            break;
+                        case "C":
+                            printArray = C;
+                            break;
+                        case "D":
+                            printArray = D;
+                            break;
+                        case "E":
+                            printArray = E;
+                            break;
+                        case "F":
+                            printArray = F;
+                            break;
+                        case "G":
+                            printArray = G;
+                            break;
+                        case "H":
+                            printArray = H;
+                            break;
+                        case "I":
+                            printArray = I;
+                            break;
+                        case "J":
+                            printArray = J;
+                            break;
+                        case "K":
+                            printArray = K;
+                            break;
+                        case "L":
+                            printArray = L;
+                            break;
+                        case "M":
+                            printArray = M;
+                            break;
+                        case "N":
+                            printArray = N;
+                            break;
+                        case "O":
+                            printArray = O;
+                            break;
+                        case "P":
+                            printArray = P;
+                            break;
+                        case "Q":
+                            printArray = Q;
+                            break;
+                        case "R":
+                            printArray = R;
+                            break;
+                        case "S":
+                            printArray = S;
+                            break;
+                        case "T":
+                            printArray = T;
+                            break;
+                        case "U":
+                            printArray = U;
+                            break;
+                        case "V":
+                            printArray = V;
+                            break;
+                        case "W":
+                            printArray = W;
+                            break;
+                        case "X":
+                            printArray = X;
+                            break;
+                        case "Y":
+                            printArray = Y;
+                            break;
+                        case "Z":
+                            printArray = Z;
+                            break;
+                        case "0":
+                            printArray = Zero;
+                            break;
+                        case "1":
+                            printArray = One;
+                            break;
+                        case "2":
+                            printArray = Two;
+                            break;
+                        case "3":
+                            printArray = Three;
+                            break;
+                        case "4":
+                            printArray = Four;
+                            break;
+                        case "5":
+                            printArray = Five;
+                            break;
+                        case "6":
+                            printArray = Six;
+                            break;
+                        case "7":
+                            printArray = Seven;
+                            break;
+                        case "8":
+                            printArray = Eight;
+                            break;
+                        case "9":
+                            printArray = Nine;
+                            break;
+                        case "(":
+                            printArray = LeftParentheses;
+                            break;
+                        case ")":
+                            printArray = RightParentheses;
+                            break;
+                        case " ":
+                            printArray = Space;
+                            break;
+                        case "-":
+                            printArray = Hyphen;
+                            break;
+                        case "!":
+                            printArray = ExclamationMark;
+                            break;
+                        case "#":
+                            printArray = Pound;
+                            break;
+                        default:
+                            throw new NotSupportedException("The specified word contains an unsupported character '" + letter.ToString().ToUpper() + "'.");
+                    }
                 }
 
                 for (int row = 0; row < printArray.GetLength(0); row++)

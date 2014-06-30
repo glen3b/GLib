@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alphabet.cs" />
+    <Compile Include="CaseInsensitiveStringComparison.cs" />
     <Compile Include="Collections\CollectionExtensions.cs" />
     <Compile Include="Collections\ReadOnlyDictionary.cs" />
     <Compile Include="ColoredConsoleWriter.cs" />

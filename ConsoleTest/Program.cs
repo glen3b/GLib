@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Glib;
+using System.Threading;
 
 namespace ConsoleTest
 {
@@ -10,11 +11,26 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            Console.BufferWidth = 150;
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            new AlphabetPrinter('%').Print("Glen!");
+            Console.WriteLine("What qualifies as useful?");
+            ConsoleReader.WaitResponse();
+            Console.Clear();
+            Console.BufferWidth = 500;
+            Console.ForegroundColor = ConsoleColor.Green;
+            AlphabetPrinter prntr = new AlphabetPrinter('%');
+            prntr.Print("Absolutely");
+            Console.WriteLine();
+            Thread.Sleep(750);
+            prntr.Print("Next To");
+            Console.WriteLine();
+            Thread.Sleep(1000);
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            new AlphabetPrinter('*').Print("Nothing!");
             Console.ForegroundColor = ConsoleColor.Gray;
             ConsoleReader.WaitResponse();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
 
             ColoredConsoleWriter.WriteLine(ColoredConsoleWriter.TranslateAlternateColorCodes('&', "&00&11&22&33&44&55&66&77&88&99&aa&bb&cc&dd&ee&ff"));
             ConsoleReader.WaitResponse();
