@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="InputLib\JoystickMovedEventArgs.cs" />
+    <Compile Include="IResettable.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />
     <Compile Include="NetworkLib\NetworkInformationReceivedEventArgs.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="NetworkLib\SessionManagerComponent.cs" />
     <Compile Include="RandomPositionGenerator.cs" />
     <Compile Include="RelativeCoordinateManager.cs" />
+    <Compile Include="SimplePool.cs" />
     <Compile Include="SpriteLib\Frame.cs" />
     <Compile Include="SpriteLib\FrameCollection.cs" />
     <Compile Include="SpriteLib\HitboxVisualizer.cs" />

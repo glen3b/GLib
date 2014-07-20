@@ -59,6 +59,7 @@
     <Compile Include="InputLib\MouseManager.cs" />
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
+    <Compile Include="IResettable.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="RandomPositionGenerator.cs" />
     <Compile Include="RelativeCoordinateManager.cs" />
     <Compile Include="ScreenGame.cs" />
+    <Compile Include="SimplePool.cs" />
     <Compile Include="SpriteInterfaces.cs" />
     <Compile Include="SpriteLib\BackgroundSprite.cs" />
     <Compile Include="SpriteLib\Direction.cs" />
