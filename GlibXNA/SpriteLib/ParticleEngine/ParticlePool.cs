@@ -30,7 +30,6 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             }
 
             Particle returnVal = new Particle(null, Vector2.Zero, _spriteBatch);
-            returnVal.ReviveParticle();
 
             return returnVal;
         }
@@ -102,23 +101,9 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
                 {
                     throw new InvalidOperationException("The particle pool has not been initialized.");
                 }
-                particle.TintColor = Color.White;
-                particle.ColorChange = 1;
-                particle.DrawRegion = null;
-                particle.Effect = SpriteEffects.None;
-                particle.LayerDepth = 0;
-                particle.OnlyDrawRegion = false;
-                particle.Origin = Vector2.Zero;
-                particle.Position = Vector2.Zero;
-                particle.AngularVelocity = SpriteRotation.Zero;
-                particle.Scale = Vector2.One;
-                particle.Velocity = Vector2.Zero;
+
+                particle.Reset();
                 particle.SpriteBatch = _spriteBatch;
-                particle.Texture = null;
-                particle.TimeToLive = TimeSpan.Zero;
-                particle.TimeToLiveSettings = TimeToLiveSettings.StrictTTL;
-                particle.Visible = true;
-                particle.ReviveParticle();
 
                 _particleStack.Push(particle);
             }

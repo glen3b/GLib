@@ -62,7 +62,7 @@ namespace Glib.XNA
         /// <returns>The average character size for this SpriteFont.</returns>
         public static Vector2 GetCharSize(this SpriteFont font)
         {
-            return font.GetCharSize("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789!@#$%^&*()-_=+[]{}\|/?,.<>");
+            return font.GetCharSize("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789!@#$%^&*()-_=+[]{}\\|/?,.<>");
         }
 
         /// <summary>

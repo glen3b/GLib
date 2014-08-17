@@ -12,6 +12,8 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     /// </summary>
     public class Particle : Sprite, ITimerSprite, IResettable
     {
+        private WeakReference _originalSpriteBatch;
+
         /// <summary>
         /// Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
         /// </summary>
@@ -22,17 +24,11 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
             : base(texture, pos, batch)
         {
             LayerDepth = 1;
+            IsDead = false;
+            _originalSpriteBatch = new WeakReference(batch, true);
         }
 
         private float _colorVelocity = 1;
-
-        /// <summary>
-        /// Revives this particle if it is dead.
-        /// </summary>
-        protected internal void ReviveParticle()
-        {
-            IsDead = false;
-        }
 
         /// <summary>
         /// Gets or sets the amount of the color to preserve every update.
@@ -152,11 +148,32 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         }
 
         /// <summary>
-        /// Resets the particle to its non-dead state. This does not restore original properties.
+        /// Resets the particle to its non-dead state. This restores default properties.
         /// </summary>
-        void IResettable.Reset()
+        public virtual void Reset()
         {
-            ReviveParticle();
+            if (!_originalSpriteBatch.IsAlive)
+            {
+                throw new InvalidOperationException("The original SpriteBatch has been disposed.");
+            }
+
+            TintColor = Color.White;
+            ColorChange = 1;
+            DrawRegion = null;
+            Effect = SpriteEffects.None;
+            LayerDepth = 0;
+            OnlyDrawRegion = false;
+            Origin = Vector2.Zero;
+            Position = Vector2.Zero;
+            AngularVelocity = SpriteRotation.Zero;
+            Scale = Vector2.One;
+            Velocity = Vector2.Zero;
+            SpriteBatch = (SpriteBatch)_originalSpriteBatch.Target;
+            Texture = null;
+            TimeToLive = TimeSpan.Zero;
+            TimeToLiveSettings = TimeToLiveSettings.StrictTTL;
+            Visible = true;
+            IsDead = false;
         }
     }
 }
