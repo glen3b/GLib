@@ -10,7 +10,7 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
     /// <summary>
     /// A basic particle for the particle engine.
     /// </summary>
-    public class Particle : Sprite, ITimerSprite
+    public class Particle : Sprite, ITimerSprite, IResettable
     {
         /// <summary>
         /// Creates a particle with the specified texture at the specified position to be drawn on the specified <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/>.
@@ -149,6 +149,14 @@ namespace Glib.XNA.SpriteLib.ParticleEngine
         {
             _timeToLive -= gt.ElapsedGameTime;
             Update();
+        }
+
+        /// <summary>
+        /// Resets the particle to its non-dead state. This does not restore original properties.
+        /// </summary>
+        void IResettable.Reset()
+        {
+            ReviveParticle();
         }
     }
 }

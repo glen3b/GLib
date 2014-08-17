@@ -62,7 +62,7 @@ namespace Glib.XNA
         /// <returns>The average character size for this SpriteFont.</returns>
         public static Vector2 GetCharSize(this SpriteFont font)
         {
-            return font.GetCharSize("~1234567890~AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz~1234567890~");
+            return font.GetCharSize("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789!@#$%^&*()-_=+[]{}\|/?,.<>");
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Glib.XNA
         }
 
         /// <summary>
-        /// Calculates the inverse of the specified vector (where new.X = orig.Y and new.Y = orig.X).
+        /// Calculates the inverse of the axes of the specified vector (where new.X = orig.Y and new.Y = orig.X).
         /// </summary>
         /// <param name="vector">The vector to invert.</param>
         /// <returns>The inverse of the specified vector.</returns>
