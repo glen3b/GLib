@@ -57,7 +57,7 @@ namespace Glib.WinForms
         /// <param name="button">The button whose UAC state is being toggled.</param>
         /// <param name="shieldStatus">The new status of the UAC shield.</param>
         /// <exception cref="ArgumentException">If the Button does not have the appropriate FlatStyle.</exception>
-        public static void SetUACShield(this Button button, Boolean shieldStatus)
+        public static void SetUACShield(this ButtonBase button, Boolean shieldStatus)
         {
             if (button.FlatStyle != FlatStyle.System)
             {
