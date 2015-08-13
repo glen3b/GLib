@@ -29,6 +29,7 @@ namespace WinFormsTest
             gfx = this.CreateGraphics();
             t = new Triangle(new Point(3, 3), new Point(40, 40), new Point(3, 56), Color.Black);
             t.Draw(gfx);
+            timer1.Start();
         }
 
         private void requiredTextBox1_TextChanged(object sender, EventArgs e)
@@ -45,6 +46,15 @@ namespace WinFormsTest
         private void requiredTextBox_Validated(object sender, EventArgs e)
         {
             t.Draw(gfx);
+        }
+
+        private int progStat = 0;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            progStat++;
+            progStat = (progStat % 3) + 1;
+            progressBar1.SetState((ProgressBarState)(progStat));
         }
     }
 }
