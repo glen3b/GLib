@@ -30,6 +30,7 @@ namespace WinFormsTest
             t = new Triangle(new Point(3, 3), new Point(40, 40), new Point(3, 56), Color.Black);
             t.Draw(gfx);
             timer1.Start();
+            uacButton.SetUACShield(true);
         }
 
         private void requiredTextBox1_TextChanged(object sender, EventArgs e)
