@@ -136,7 +136,7 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
                 if (value != null)
                 {
-                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && value.Target == this)
+                    if (value.Method.Attributes.HasFlag(System.Reflection.MethodAttributes.Private) && Object.ReferenceEquals(value.Target,this))
                     {
                         throw new InvalidOperationException("Cannot remove an internally used delegate handler.");
                     }

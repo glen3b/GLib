@@ -90,7 +90,7 @@ namespace Glib.XNA
         /// <summary>
         /// A delegate method which is used for the creation of pooled objects.
         /// </summary>
-        /// <typeparam name="T">The type of the objects in the pool.</typeparam>
+        /// <typeparam name="TPooled">The type of the objects in the pool.</typeparam>
         /// <param name="pool">The pool which will contain the object.</param>
         /// <returns>The new object.</returns>
         public delegate TPooled ObjectFactory(SimplePool<TPooled> pool);
