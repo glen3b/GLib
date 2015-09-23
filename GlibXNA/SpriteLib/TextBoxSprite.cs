@@ -199,11 +199,13 @@ namespace Glib.XNA.SpriteLib
         }
 
         /// <summary>
-        /// A read-only collection of all keys ignored for input.
+        /// A collection of all keys ignored for input.
         /// </summary>
-        public static readonly ReadOnlyCollection<Keys> IgnoredKeys = new ReadOnlyCollection<Keys>(
-            new Keys[] { Keys.CapsLock, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.LeftWindows, Keys.RightWindows, Keys.LeftControl, Keys.RightControl, Keys.RightAlt, Keys.LeftAlt }
-);
+        public static Keys IgnoredKeys = Keys.CapsLock | Keys.Up | Keys.Down | Keys.Left | Keys.Right | Keys.LeftWindows
+            | Keys.RightWindows | Keys.LeftControl | Keys.RightControl | Keys.RightAlt | Keys.LeftAlt | Keys.Tab
+            | Keys.Home | Keys.BrowserHome | Keys.End | Keys.PageUp | Keys.PageDown | Keys.Escape | Keys.Insert
+            | Keys.F1 | Keys.F2 | Keys.F3 | Keys.F4 | Keys.F5 | Keys.F6 | Keys.F7 | Keys.F8 | Keys.F9 | Keys.F10
+            | Keys.F11 | Keys.F12 | Keys.Pause | Keys.PrintScreen;   
 
         private Keys[] _pressedKeys;
         private bool _shift;
@@ -230,7 +232,7 @@ namespace Glib.XNA.SpriteLib
                     _shift = _pressedKeys.Contains(Keys.LeftShift) || _pressedKeys.Contains(Keys.RightShift);
                     foreach (Keys k in _pressedKeys)
                     {
-                        if (IgnoredKeys.Contains(k))
+                        if (IgnoredKeys.HasFlag(k))
                         {
                             // Do nothing with ignored keys
                         }
@@ -245,7 +247,7 @@ namespace Glib.XNA.SpriteLib
                                 _realTxt = "";
                             }
                         }
-                        else if (k == Keys.Back)
+                        else if (k == Keys.Back || k == Keys.Delete)
                         {
                             _realTxt = _realTxt.Substring(0, _realTxt.Length <= 0 ? 0 : _realTxt.Length - 1);
                         }
@@ -300,10 +302,41 @@ namespace Glib.XNA.SpriteLib
                             _realTxt += _shift ? ")" : "0";
 
                         }
+                        else if (k == Keys.OemSemicolon)
+                        {
+                            _realTxt += _shift ? ":" : ";";
+                        }
+                        else if (k == Keys.OemPlus)
+                        {
+                            _realTxt += _shift ? "+" : "=";
+                        }
+                        else if (k == Keys.OemPipe)
+                        {
+                            _realTxt += _shift ? "|" : "\\";
+                        }
+                        else if (k == Keys.OemQuestion)
+                        {
+                            _realTxt += _shift ? "?" : "/";
+                        }
+                        else if (k == Keys.OemTilde)
+                        {
+                            _realTxt += _shift ? "~" : "`";
+                        }
+                        else if (k == Keys.OemOpenBrackets)
+                        {
+                            _realTxt += _shift ? "{" : "[";
+                        }
+                        else if (k == Keys.OemCloseBrackets)
+                        {
+                            _realTxt += _shift ? "}" : "]";
+                        }
+                        else if (k == Keys.OemComma)
+                        {
+                            _realTxt += _shift ? "<" : ",";
+                        }
                         else if (k == Keys.Space)
                         {
                             _realTxt += " ";
-
                         }
                         else if (k != Keys.LeftShift && k != Keys.RightShift)
                         {
