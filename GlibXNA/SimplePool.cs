@@ -11,7 +11,7 @@ namespace Glib.XNA
     /// The pool will never shrink, but will enlarge if needed.
     /// </summary>
     /// <typeparam name="TPooled">The type of the objects contained in the pool.</typeparam>
-    public class SimplePool<TPooled> where TPooled : IResettable
+    public class SimplePool<TPooled> : Glib.XNA.IObjectPool<TPooled> where TPooled : IResettable
     {
         private Queue<TPooled> _backingCollection;
 
@@ -61,7 +61,7 @@ namespace Glib.XNA
         /// Gets an object from the pool.
         /// </summary>
         /// <returns>An object from the pool.</returns>
-        public TPooled GetObject()
+        public virtual TPooled GetObject()
         {
             if (_backingCollection.Count == 1)
             {
@@ -81,7 +81,7 @@ namespace Glib.XNA
         /// The results are undefined if the element was not created by the pool.
         /// </summary>
         /// <param name="element">The element to return to the pool.</param>
-        public void ReturnObject(TPooled element)
+        public virtual void ReturnObject(TPooled element)
         {
             element.Reset();
             _backingCollection.Enqueue(element);
@@ -90,7 +90,6 @@ namespace Glib.XNA
         /// <summary>
         /// A delegate method which is used for the creation of pooled objects.
         /// </summary>
-        /// <typeparam name="TPooled">The type of the objects in the pool.</typeparam>
         /// <param name="pool">The pool which will contain the object.</param>
         /// <returns>The new object.</returns>
         public delegate TPooled ObjectFactory(SimplePool<TPooled> pool);
@@ -100,7 +99,7 @@ namespace Glib.XNA
         /// <summary>
         /// Gets or sets the method which is used for the creation of pooled objects.
         /// </summary>
-        public ObjectFactory Factory
+        public virtual ObjectFactory Factory
         {
             get { return _factory; }
             set

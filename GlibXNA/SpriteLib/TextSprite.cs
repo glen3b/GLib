@@ -209,16 +209,16 @@ namespace Glib.XNA.SpriteLib
         /// If not null, all selection, click, and positioning logic logic will be performed relative to this Sprite.
         /// This includes centering this TextSprite to the specified ParentSprite upon set.
         /// </summary>
-        public Sprite ParentSprite
+        public virtual Sprite ParentSprite
         {
             get { return _parentSprite; }
             set
             {
-                if (value != _parentSprite)
+                if (value != ParentSprite)
                 {
                     if (value == null)
                     {
-                        Position = _parentSprite.Position;
+                        Position = ParentSprite.Position;
                     }
                     else
                     {
@@ -226,12 +226,12 @@ namespace Glib.XNA.SpriteLib
                         Position = new Vector2((value.X - (value.Origin.X * value.Scale.X)) + (value.Width / 2 - Width / 2), (value.Y - (value.Origin.Y * value.Scale.Y)) + (value.Height / 2 - Height / 2));
                     }
 
-                    if (_parentSprite != null)
+                    if (ParentSprite != null)
                     {
-                        _parentSprite.Moved -= _parentSprMoved;
+                        ParentSprite.Moved -= _parentSprMoved;
                     }
 
-                    _parentSprite = value;
+                    ParentSprite = value;
                 }
             }
         }
@@ -256,12 +256,12 @@ namespace Glib.XNA.SpriteLib
             float actualY = Y;
             float actualW = Width;
             float actualH = Height;
-            if (_parentSprite != null)
+            if (ParentSprite != null)
             {
-                actualX = _parentSprite.X - (_parentSprite.Origin.X * _parentSprite.Scale.X);
-                actualY = _parentSprite.Y - (_parentSprite.Origin.Y * _parentSprite.Scale.Y);
-                actualW = _parentSprite.Width;
-                actualH = _parentSprite.Height;
+                actualX = ParentSprite.X - (ParentSprite.Origin.X * ParentSprite.Scale.X);
+                actualY = ParentSprite.Y - (ParentSprite.Origin.Y * ParentSprite.Scale.Y);
+                actualW = ParentSprite.Width;
+                actualH = ParentSprite.Height;
             }
 
 #if WINDOWS
@@ -284,7 +284,7 @@ namespace Glib.XNA.SpriteLib
                 else
                 {
 #if WINDOWS
-                    if ((_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
+                    if ((ParentSprite != null ? ParentSprite.Visible && ParentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
                     {
                         //Intersecting.
                         IsSelected = true;
@@ -305,7 +305,7 @@ namespace Glib.XNA.SpriteLib
 #if WINDOWS
             if (IsDraggable)
             {
-                if (currentMouseState.LeftButton == ButtonState.Pressed && _lastMouseState.LeftButton == ButtonState.Released && (_parentSprite != null ? _parentSprite.Visible && _parentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
+                if (currentMouseState.LeftButton == ButtonState.Pressed && _lastMouseState.LeftButton == ButtonState.Released && (ParentSprite != null ? ParentSprite.Visible && ParentSprite.Intersects(msPos) : (msPos.X >= X && msPos.X <= X + Width && msPos.Y >= Y && msPos.Y <= Y + Height) && Visible) && !XnaExtensions.IsGuideVisible)
                 {
                     //Dragging mouse, need to calculate mouse position difference from our position.
                     mousePosDiff = MouseManager.MousePositionable.Position - new Vector2(actualX, actualY);
@@ -412,9 +412,9 @@ namespace Glib.XNA.SpriteLib
             _parentSprMoved = new EventHandler(
             delegate(object src, EventArgs e)
             {
-                if (_parentSprite != null)
+                if (ParentSprite != null)
                 {
-                    Position = new Vector2((_parentSprite.X - (_parentSprite.Origin.X * _parentSprite.Scale.X)) + (_parentSprite.Width / 2 - Width / 2), (_parentSprite.Y - (_parentSprite.Origin.Y * _parentSprite.Scale.Y)) + (_parentSprite.Height / 2 - Height / 2));
+                    Position = new Vector2((ParentSprite.X - (ParentSprite.Origin.X * ParentSprite.Scale.X)) + (ParentSprite.Width / 2 - Width / 2), (ParentSprite.Y - (ParentSprite.Origin.Y * ParentSprite.Scale.Y)) + (ParentSprite.Height / 2 - Height / 2));
                 }
             }
             );

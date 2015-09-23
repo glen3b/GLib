@@ -45,7 +45,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the velocity of the sprite.
         /// </summary>
-        public Vector2 Velocity
+        public virtual Vector2 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
@@ -56,7 +56,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the angular velocity (change in rotation per update) of this <see cref="Sprite"/>.
         /// </summary>
-        public SpriteRotation AngularVelocity
+        public virtual SpriteRotation AngularVelocity
         {
             get { return _angularVelocity; }
             set { _angularVelocity = value; }
@@ -70,7 +70,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets a boolean indicating whether the Sprite is visible.
         /// </summary>
-        public bool Visible
+        public virtual bool Visible
         {
             get { return _visible; }
             set { _visible = value; }
@@ -190,7 +190,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> to render the sprite to.
         /// </summary>
-        public SpriteBatch SpriteBatch
+        public virtual SpriteBatch SpriteBatch
         {
             get { return _spriteBatch; }
             set
@@ -441,7 +441,7 @@ namespace Glib.XNA.SpriteLib
         /// <summary>
         /// Gets or sets the color to tint the sprite. Defaults to white.
         /// </summary>
-        public Color TintColor
+        public virtual Color TintColor
         {
             get { return _tintColor; }
             set { _tintColor = value; }
@@ -735,7 +735,7 @@ namespace Glib.XNA.SpriteLib
         /// Determines the edges which this sprite has points past, if any.
         /// </summary>
         /// <returns>An array of directions representing the edges this sprite is past. Empty if none.</returns>
-        public Direction[] EdgesPast()
+        public virtual Direction[] EdgesPast()
         {
             Viewport vp = SpriteBatch.GraphicsDevice.Viewport;
             List<Direction> allEdges = new List<Direction>();

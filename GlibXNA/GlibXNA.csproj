@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="InputLib\JoystickMovedEventArgs.cs" />
+    <Compile Include="IObjectPool.cs" />
     <Compile Include="IResettable.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NetworkData.cs" />

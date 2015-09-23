@@ -59,6 +59,7 @@
     <Compile Include="InputLib\MouseManager.cs" />
     <Compile Include="InputLib\NamespaceDoc.cs" />
     <Compile Include="InputLib\ScreenRegion.cs" />
+    <Compile Include="IObjectPool.cs" />
     <Compile Include="IResettable.cs" />
     <Compile Include="NamespaceDoc.cs" />
     <Compile Include="NetworkLib\NamespaceDoc.cs" />
